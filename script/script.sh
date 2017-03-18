@@ -17,7 +17,7 @@ echo "Ruby instaled: DONE"
 
 echo "Installing rails: starting"
 gem install bundler
-gem install rails -v 4.2.4
+gem install rails -v 5.0.0
 echo "Installing rails: DONE"
 
 echo "instalation gems and create db: starting"
