@@ -11,3 +11,4 @@ include system-update
 include rails
 include curl
 include postgresql
+include git
