@@ -21,7 +21,7 @@ gem install rails -v 5.0.0
 echo "Installing rails: DONE"
 
 echo "instalation gems and create db: starting"
-cd /vagrant
+cd /vagrant/SIGS
 bundle install
 rake db:create db:migrate
 echo "success"
