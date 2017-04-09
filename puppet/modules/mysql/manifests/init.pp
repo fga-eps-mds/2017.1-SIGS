@@ -1,6 +1,6 @@
 class mysql {
 
-  package { "mysql-server":
+  package { ["mysql-server","libmysqlclient-dev"]:
     ensure  => present,
     require => Class["system-update"],
   }
