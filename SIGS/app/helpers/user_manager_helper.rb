@@ -1,0 +1,2 @@
+module UserManagerHelper
+end
