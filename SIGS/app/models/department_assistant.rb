@@ -1,0 +1,2 @@
+class DepartmentAssistant < ApplicationRecord
+end
