@@ -3,6 +3,9 @@ class DepartmentAssistantController < ApplicationController
   end
 
   def index
+    @department_assistant = DepartmentAssistant.find(params[:id])
+    @user = User.find(@department_assistant.user_id)
+  end
 
   def edit
   end
@@ -11,6 +14,9 @@ class DepartmentAssistantController < ApplicationController
   end
 
   def show
+    @department_assistant = DepartmentAssistant.find(params[:id])
+    @department = Department.find(@department_assistant.department_id)
+    @user = User.find(@department_assistant.user_id)
   end
 
   def destroy
