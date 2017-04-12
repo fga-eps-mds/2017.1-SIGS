@@ -33,8 +33,10 @@ ActiveRecord::Schema.define(version: 20170412131327) do
   create_table "courses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "code"
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "department_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["department_id"], name: "index_courses_on_department_id", using: :btree
   end
 
   create_table "department_assistants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -67,6 +69,7 @@ ActiveRecord::Schema.define(version: 20170412131327) do
   add_foreign_key "coordinators", "courses"
   add_foreign_key "coordinators", "departments"
   add_foreign_key "coordinators", "users"
+  add_foreign_key "courses", "departments"
   add_foreign_key "department_assistants", "departments"
   add_foreign_key "department_assistants", "users"
 end
