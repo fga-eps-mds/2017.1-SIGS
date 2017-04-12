@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  get 'user/update'
+
+  get 'user/new'
+
+  get 'user/create'
+
+  get 'user/edit'
+
 ### Department Assistant - ROUTES
   get 'department_assistant/registration_request' => 'department_assistant#registration_request'
 
