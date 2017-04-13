@@ -10,7 +10,6 @@ class SessionsController < ApplicationController
         sign_in(@user)
         redirect_to current_user
       else
-        flash.now[:notice] = 'Email ou senha inválidos'
         render 'new'
       end
   end

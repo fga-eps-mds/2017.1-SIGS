@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-<<<<<<< HEAD
-
   root 'sessions#new'
 
 ### Coordinator - ROUTES
