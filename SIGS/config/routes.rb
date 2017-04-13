@@ -1,6 +1,20 @@
 Rails.application.routes.draw do
 
+
   get 'sessions/new'
+
+### Coordinator - ROUTES
+  get 'coordinator/registration_request'
+
+  get 'coordinator/edit'
+
+  get 'coordinator/update'
+
+  get 'coordinator/show'
+
+  get 'coordinator/destroy'
+
+  get 'coordinator/enable'
 
   get 'user/update'
 
