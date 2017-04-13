@@ -13,7 +13,7 @@ class AdministrativeAssistantController < ApplicationController
     @user = User.find(@administrative_assistant.user_id)
   end
 
-  def remove
+  def destroy
     @administrative_assistant = AdministrativeAssistant.find(params[:id])
     @user = User.find(@administrative_assistant.user_id)
     @user.destroy
