@@ -9,9 +9,14 @@ class AdministrativeAssistantController < ApplicationController
   end
 
   def show
+    @administrative_assistant = AdministrativeAssistant.find(params[:id])
+    @user = User.find(@administrative_assistant.user_id)
   end
 
   def remove
+    @administrative_assistant = AdministrativeAssistant.find(params[:id])
+    @user = User.find(@administrative_assistant.user_id)
+    @user.destroy
   end
 
   def enable
@@ -24,6 +29,7 @@ class AdministrativeAssistantController < ApplicationController
   end
 
   def index_users
+    @users = User.all
   end
 
   def view_users

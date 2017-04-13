@@ -1,2 +1,16 @@
-<h1>AdministrativeAssistant#index_users</h1>
-<p>Find me in app/views/administrative_assistant/index_users.html.erb</p>
+<table>
+  <tr>
+    <th>Nome</th>
+    <th>Email</th>
+    <th>CPF</th>
+    <th>Matricula</th>
+  </tr>
+<% @users.each do |user| %>
+  <tr>
+    <td><%= user.name%></td>
+    <td><%= user.email%></td>
+    <td><%= user.cpf %></td>
+    <td><%= user.registration %></td>
+  </tr>
+<% end %>
+</table>

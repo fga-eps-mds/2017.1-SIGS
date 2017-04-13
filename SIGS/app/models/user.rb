@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_one :coordinator
-  has_one :administrative_assistant
-  has_one :department_assistant
+  has_one :coordinator, dependent: :destroy
+  has_one :administrative_assistant, dependent: :destroy
+  has_one :department_assistant, dependent: :destroy
 end

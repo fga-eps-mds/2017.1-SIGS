@@ -26,5 +26,10 @@ Rails.application.routes.draw do
   get 'department_assistant/enable' => 'department_assistant#enable'
 ###
 
+### Administrative Assistant - ROUTES
+  get 'administrative_assistant/show/:id' => 'administrative_assistant#show', as: 'adm_show'
+  get 'administrative_assistant/remove/:id' => 'administrative_assistant#remove', as: 'adm_remove'
+  get 'administrative_assistant/index_users' => 'administrative_assistant#index_users'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
