@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   get 'coordinator/update'
 
-  get 'coordinator/show'
+  get 'coordinator/show:id' => 'coordinator#show', as: 'coordinator_show'
 
   get 'coordinator/destroy'
 
