@@ -16,12 +16,12 @@ Rails.application.routes.draw do
 
   get 'coordinator/enable'
 
-=======
   #login
   get 'sign_in' => 'sessions#new'
   post 'sign_in' => 'sessions#create'
-  get 'sign_out' => 'sessions#destroy'
+  delete 'sign_out' => 'sessions#destroy'
   ###
+  
   get 'user/update'
 
   get 'user/new' => 'user#new' , as: 'new_user'
