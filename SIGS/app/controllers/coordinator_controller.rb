@@ -16,11 +16,19 @@ class CoordinatorController < ApplicationController
   end
 
   def destroy
-  end
+    @coordinator = Coordinator.find(params[:id])
+    @user = User.find(@coordinator.user_id)
 
-  def enable
+    @coordinator = Coordinator.all
+    if @coordinator.count > 1
+      @coordinator.destroy
+      @user.destroy
+      redirect_to destroy_path
+    else
+      redirect_to index_path(@coordinator.id)
+    end
   end
-
+  
   def index
     @coordinators = Coordinator.all
   end
