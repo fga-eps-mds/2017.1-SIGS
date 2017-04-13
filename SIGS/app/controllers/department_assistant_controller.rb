@@ -33,9 +33,6 @@ class DepartmentAssistantController < ApplicationController
     end
   end
 
-  def enable
-  end
-
   private
   def department_assistant_params
     params[:department_assistant].permit(:user_id,:department_id)
