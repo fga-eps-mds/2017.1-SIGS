@@ -19,10 +19,11 @@ Rails.application.routes.draw do
   #login
   get 'sign_in' => 'sessions#new'
   post 'sign_in' => 'sessions#create'
-  get 'sign_out' => 'sessions#destroy'
+  delete 'sign_out' => 'sessions#destroy'
   ###
 
-  get '/user/:id' => 'user#show', :as => 'user_show'
+  #user
+  get '/user/:id' => 'user#show', :as => 'user'
 
   get 'user/update'
 

@@ -1,21 +1,22 @@
 module SessionsHelper
   def sign_in(user)
     session[:user_id] = user.id
-    if user.Coordinator?
+    coordinator = Coordinator.find_by(user_id: session[:user_id])
+    department_assistant = DepartmentAssistant.find_by(user_id: session[:user_id])
+    administrative_assistant = AdministrativeAssistant.find_by(user_id: session[:user_id])
+    if coordinator
       @nvl = 2
     end
-    if user.Department_assitant?
+    if department_assistant
       @nvl = 2
     end
-    if user.Administrative_assistant?
+    if administrative_assistant
       @nvl = 1
     end
   end
-
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])
   end
-
   def block_access
     if current_user.present?
       redirect_to current_user
@@ -25,9 +26,10 @@ module SessionsHelper
     permission ||= @nvl
   end
   def logged_in?
-      !current_user.nil?
+      if current_user.nil?
+        redirect_to sign_in_path
+      end
   end
-
   def sign_out
     session.delete(:user_id)
     @current_user = nil
