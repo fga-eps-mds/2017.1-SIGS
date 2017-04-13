@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   #login
   get 'sign_in' => 'sessions#new'
+  post 'sign_in' => 'sessions#create'
   ###
   get 'user/update'
 
