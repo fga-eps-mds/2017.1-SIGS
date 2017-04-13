@@ -1,11 +1,11 @@
 class CoordinatorController < ApplicationController
-  def registration_request
+  def new
+    @coordinator = Coordinator.new
   end
 
-  def edit
-  end
-
-  def update
+  def create
+    @coordinator = Coordinator.create(coordinator_params)
+    if @coordinator.save
   end
 
   def show
@@ -24,4 +24,7 @@ class CoordinatorController < ApplicationController
   def index
     @coordinators = Coordinator.all
   end
+  private
+  def coordinator_params
+    params[:coordinator].permit(:user_id, :course_id)
 end
