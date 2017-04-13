@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   get 'department_assistant/show/:id' => 'department_assistant#show', as: 'show'
 
-  get 'department_assistant/destroy' => 'department_assistant#destroy'
+  get 'department_assistant/destroy/:id' => 'department_assistant#destroy', as: 'destroy'
 
   get 'department_assistant/enable' => 'department_assistant#enable'
 ###

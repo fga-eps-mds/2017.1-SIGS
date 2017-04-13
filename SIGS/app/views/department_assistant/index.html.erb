@@ -1,3 +1,4 @@
 <h1>Página de Perfil - Assistente de Departamento</h1>
 <h2><%= @user.name %></h2>
-<p><%= link_to 'Detalhar', show_path(@user.id) %></p>
+<p><%= link_to 'Detalhar', show_path(@department_assistant.id) %></p>
+<p><%= link_to 'Excluir', destroy_path(@department_assistant.id) %></p>
