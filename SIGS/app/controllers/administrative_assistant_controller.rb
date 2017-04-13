@@ -1,11 +1,11 @@
 class AdministrativeAssistantController < ApplicationController
-  def registration_request
+  def new
+    @administrative_assistant = AdministrativeAssistant.new
   end
 
-  def edit
-  end
-
-  def update
+  def create
+    @administrative_assistant = AdministrativeAssistant.create(administrative_assistant_params)
+    if @administrative_assistant.save    
   end
 
   def show
@@ -40,4 +40,8 @@ class AdministrativeAssistantController < ApplicationController
 
   def remove_users
   end
+
+  private
+  def administrative_assistant_params
+    params[:administrative_assistant].permit(:user_id)
 end
