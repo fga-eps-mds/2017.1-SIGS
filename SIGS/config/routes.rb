@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
 
-  get 'sessions/new'
-
+  #login
+  get 'sign_in' => 'sessions#new'
+  ###
   get 'user/update'
 
-  get 'user/new'
+  get 'user/new' => 'user#new' , as: 'new_user'
 
   get 'user/create'
 
