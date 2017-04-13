@@ -1,6 +1,15 @@
 module SessionsHelper
   def sign_in(user)
     session[:user_id] = user.id
+    if user.Coordinator?
+      @nvl = 2
+    end
+    if user.Department_assitant?
+      @nvl = 2
+    end
+    if user.Administrative_assistant?
+      @nvl = 1
+    end
   end
 
   def current_user
@@ -12,7 +21,9 @@ module SessionsHelper
       redirect_to current_user
     end
   end
-
+  def permission
+    permission ||= @nvl
+  end
   def logged_in?
       !current_user.nil?
   end
