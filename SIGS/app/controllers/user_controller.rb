@@ -3,6 +3,10 @@ class UserController < ApplicationController
     @user = User.new
   end
 
+  def show
+      @user = User.find(params[:id])
+  end
+
   #Creating a new user
   def create
   	@user = User.new(user_params)
@@ -29,4 +33,5 @@ class UserController < ApplicationController
   private
   def user_params
     params[:user].permit(:name, :email, :password, :registration, :cpf, :active)
+  end
 end
