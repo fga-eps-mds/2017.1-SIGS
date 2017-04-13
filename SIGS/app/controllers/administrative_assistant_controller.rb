@@ -16,13 +16,24 @@ class AdministrativeAssistantController < ApplicationController
   def destroy
     @administrative_assistant = AdministrativeAssistant.find(params[:id])
     @user = User.find(@administrative_assistant.user_id)
-    @user.destroy
+
+    @administrative_assistant = AdministrativeAssistant.all
+    if @administrative_assistant.count > 1
+      @administrative_assistant.destroy
+      @user.destroy
+      redirect_to destroy_path
+    else
+      redirect_to index_path(@administrative_assistant.id)
+    end
   end
 
   def enable
+    @user = User.find(:id)
+    @user.active = true
   end
 
   def approve_registration
+    @user = User.find_by(active: false)
   end
 
   def approve_allocation
@@ -33,6 +44,7 @@ class AdministrativeAssistantController < ApplicationController
   end
 
   def view_users
+
   end
 
   def edit_users
