@@ -5,3 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+buildings = Building.create([{code: 'code001', name: 'bsa', wing: 'sul'},
+          {code: 'code221', name: 'bsaNorte', wing: 'norte'}])
