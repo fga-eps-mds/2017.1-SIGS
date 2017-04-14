@@ -1,16 +1,16 @@
 class DepartmentAssistantController < ApplicationController
-  def registration_request
+  def new
+    @department_assistant = DepartmentAssistant.new
+  end
+
+  def create
+    @department_assistant = DepartmentAssistant.create(department_assistant_params)
+    if @department_assistant.save
   end
 
   def index
     @department_assistant = DepartmentAssistant.find(params[:id])
     @user = User.find(@department_assistant.user_id)
-  end
-
-  def edit
-  end
-
-  def update
   end
 
   def show
@@ -33,8 +33,7 @@ class DepartmentAssistantController < ApplicationController
     end
   end
 
-  def enable
-  end
-
   private
+  def department_assistant_params
+    params[:department_assistant].permit(:user_id,:department_id)
 end

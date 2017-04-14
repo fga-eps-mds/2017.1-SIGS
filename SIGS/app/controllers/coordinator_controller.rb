@@ -1,11 +1,11 @@
 class CoordinatorController < ApplicationController
-  def registration_request
+  def new
+    @coordinator = Coordinator.new
   end
 
-  def edit
-  end
-
-  def update
+  def create
+    @coordinator = Coordinator.create(coordinator_params)
+    if @coordinator.save
   end
 
   def show
@@ -16,12 +16,23 @@ class CoordinatorController < ApplicationController
   end
 
   def destroy
-  end
+    @coordinator = Coordinator.find(params[:id])
+    @user = User.find(@coordinator.user_id)
 
-  def enable
+    @coordinator = Coordinator.all
+    if @coordinator.count > 1
+      @coordinator.destroy
+      @user.destroy
+      redirect_to destroy_path
+    else
+      redirect_to index_path(@coordinator.id)
+    end
   end
-
+  
   def index
     @coordinators = Coordinator.all
   end
+  private
+  def coordinator_params
+    params[:coordinator].permit(:user_id, :course_id)
 end
