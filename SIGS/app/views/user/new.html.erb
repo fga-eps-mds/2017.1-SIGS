@@ -1,2 +1,10 @@
-<h1>User#new</h1>
-<p>Find me in app/views/user/new.html.erb</p>
+<h1>Solicitação de Cadastro</h1>
+<%= form_for @user do |f| %>
+  <p><b></b><%=  %></p>
+  <p><b>Nome: </b><%= f.text_field :name %></p>
+  <p><b>Email: </b><%= f.text_field :email %></p>
+  <p><b>CPF: </b><%= f.text_field :cpf %></p>
+  <p><b>Matricula: </b><%= f.text_field :registration %></p>
+  <p><b>Tipo</b><%= f.hidden_field :active, :value => 'false' %></p>
+  
+<% end %>
