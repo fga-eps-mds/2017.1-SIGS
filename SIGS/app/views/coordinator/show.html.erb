@@ -1,0 +1,16 @@
+<h1>Minha Conta</h1>
+
+<table>
+  <tr><th>Nome Completo</th><td><%= @user.name %></td></tr>
+  <tr><th>CPF</th><td><%= @user.cpf %></td></tr>
+  <tr><th>Registro UnB</th><td><%= @user.registration %></td></tr>
+  <tr><th>Email</th><td><%= @user.email %></td></tr>
+  <tr><th>Cargo</th><td>Coordenador</td></tr>
+  <tr>Curso<th></th><td><%= @course.name %></td></tr>
+  <tr><th>Departamento</th><td><%= @department.name%></td></tr>
+</table>
+  <% if @user.active %>
+    <p>Conta Ativa</p>
+  <% else %>
+    <p>Conta Desativada</p>
+  <% end %>

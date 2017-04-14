@@ -1,0 +1,16 @@
+<h1><%= @user.name %></h1>
+
+<p><b>Tipo de Conta:</b> Assistente de Departamento</p>
+<p><b>CPF: </b><%= @user.cpf %></p>
+<p><b>Email: </b><%= @user.email %></p>
+<p><b>Registro: </b><%= @user.registration %></p>
+<% if @user.active %>
+  <p><b>Status:</b> Aprovado</p>
+<% else %>
+  <p><b>Status:</b> Não Aprovado</p>
+<% end %>
+<br>
+<p><b>Departamento: </b><%= @department.name %></p>
+<p><b>Cód. Departamento: </b><%= @department.code %></p>
+<br>
+<p><%= link_to 'Voltar', index_path %></p>
