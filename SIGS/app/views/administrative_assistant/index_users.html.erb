@@ -11,6 +11,9 @@
     <td><%= user.email%></td>
     <td><%= user.cpf %></td>
     <td><%= user.registration %></td>
+    <td><%= link_to 'editar' , edit_users_path(user.id)%> </td>
+    <td><%= link_to 'apagar' , destroy_users_path(user.id)%> </td>
+
   </tr>
 <% end %>
 </table>

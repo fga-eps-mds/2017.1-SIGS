@@ -1,0 +1,12 @@
+<%= form_for @user, url: update_users_path, method: :post do |f| %>
+  <%= f.label  'Nome' %>
+  <%= f.text_field(:name,size: 20) %><br>
+  <%= f.label 'Email' %>
+  <%= f.text_field(:email,size: 20) %><br>
+  <%= f.label 'CPF' %>
+  <%= f.text_field(:cpf,size:11) %> <br>
+  <%= f.label 'Matrícula' %>
+  <%= f.text_field(:registration,size:20) %> <br>
+    <%= f.submit 'enviar'%>
+
+<% end %>

@@ -6,6 +6,7 @@ class AdministrativeAssistantController < ApplicationController
   end
 
   def update
+
   end
 
   def show
@@ -36,8 +37,31 @@ class AdministrativeAssistantController < ApplicationController
   end
 
   def edit_users
+    @user = User.find(params[:id])
   end
 
-  def remove_users
+  def update_users
+    @user = User.find(params[:id])
+    @user.update(
+                name:users_update_params[:name],
+                email:users_update_params[:email],
+                cpf:users_update_params[:cpf],
+                registration:users_update_params[:registration]
+                )
+    redirect_to index_users_path
+  end
+
+  def destroy_users
+    @user = User.find(params[:id])
+    @user.destroy
+    redirect_to index_users_path
+  end
+
+
+
+
+
+  def users_update_params
+    permitted = params.require(:user).permit(:name, :email, :cpf, :registration)
   end
 end

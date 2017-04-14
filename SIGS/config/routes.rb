@@ -42,8 +42,16 @@ Rails.application.routes.draw do
 
 ### Administrative Assistant - ROUTES
   get 'administrative_assistant/show/:id' => 'administrative_assistant#show', as: 'adm_show'
-  get 'administrative_assistant/remove/:id' => 'administrative_assistant#remove', as: 'adm_remove'
-  get 'administrative_assistant/index_users' => 'administrative_assistant#index_users'
+
+  get 'administrative_assistant/destroy/:id' => 'administrative_assistant#destroy', as: 'adm_remove'
+
+  get 'administrative_assistant/index_users' => 'administrative_assistant#index_users' ,as: 'index_users'
+
+  get 'administrative_assistant/edit_users/:id' => 'administrative_assistant#edit_users', as:'edit_users'
+
+  post 'administrative_assistant/update_users/:id' => 'administrative_assistant#update_users' , as:'update_users'
+
+  get 'administrative_assistant/destroy_users/:id' => 'administrative_assistant#destroy_users' , as: 'destroy_users'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
