@@ -1,10 +1,9 @@
 class UserController < ApplicationController
   def new
 		@user = User.new
-
-      @user.build_department_assistant
-      @user.build_coordinator
-      @user.build_administrator_assistant
+    @user.build_department_assistant
+    @user.build_coordinator
+    @user.build_administrative_assistant
 	end
 
   #Creating a new user
@@ -38,8 +37,8 @@ class UserController < ApplicationController
   private
   def user_params
     params[:user].permit(:name, :email, :password, :registration, :cpf, :active,
-                          :coordinator_attributes => [:department_id,:course_id],
-                          :administrative_assistant_attributes => [],
+                          :coordinator_attributes => [:department_id,:course_id,:user_id],
+                          :administrative_assistant_attributes => [:user_id,:user_id],
                           :department_assistant_attributes => [:department_id])
   end
 end
