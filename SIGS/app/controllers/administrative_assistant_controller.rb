@@ -1,4 +1,6 @@
 class AdministrativeAssistantController < ApplicationController
+
+  # Funções de edição do próprio usuário
   def new
     @administrative_assistant = AdministrativeAssistant.new
   end
@@ -6,6 +8,7 @@ class AdministrativeAssistantController < ApplicationController
   def create
     @administrative_assistant = AdministrativeAssistant.create(administrative_assistant_params)
     if @administrative_assistant.save
+    end
   end
 
   def show
@@ -39,6 +42,8 @@ class AdministrativeAssistantController < ApplicationController
   def approve_allocation
   end
 
+  #Funções de edição de outros usuários
+
   def index_users
     @users = User.all
   end
@@ -68,15 +73,12 @@ class AdministrativeAssistantController < ApplicationController
     redirect_to index_users_path
   end
 
-
-
-
   private
   def users_update_params
-    permitted = params.require(:user).permit(:name, :email, :cpf, :registration)
+    params.require(:user).permit(:name, :email, :cpf, :registration)
   end
 
-  private
   def administrative_assistant_params
     params[:administrative_assistant].permit(:user_id)
+  end
 end
