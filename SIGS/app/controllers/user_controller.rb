@@ -1,10 +1,15 @@
 class UserController < ApplicationController
+  before_action :logged_in?, except: [:new,:create,:user_params]
   def new
 		@user = User.new
     @user.build_department_assistant
     @user.build_coordinator
     @user.build_administrative_assistant
 	end
+
+  def show
+      @user = User.find(params[:id])
+  end
 
   #Creating a new user
   def create
@@ -40,5 +45,6 @@ class UserController < ApplicationController
                           :coordinator_attributes => [:department_id,:course_id,:user_id],
                           :administrative_assistant_attributes => [:user_id,:user_id],
                           :department_assistant_attributes => [:department_id])
+
   end
 end

@@ -39,8 +39,12 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     arel (7.1.4)
+<<<<<<< HEAD
     autoprefixer-rails (6.7.7.2)
       execjs
+=======
+    bcrypt (3.1.11)
+>>>>>>> c3beb32b9496c3c9649c7f49c74c17d6826fa23d
     bindex (0.5.0)
     bootstrap-sass (3.2.0.2)
       sass (~> 3.2)
@@ -54,6 +58,8 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
+    diff-lcs (1.3)
+    docile (1.1.5)
     erubis (2.7.0)
     execjs (2.7.0)
     ffi (1.9.18)
@@ -67,6 +73,7 @@ GEM
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
+    json (2.0.4)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -116,6 +123,23 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.8)
       ffi (>= 0.5.0)
+    rspec-core (3.5.4)
+      rspec-support (~> 3.5.0)
+    rspec-expectations (3.5.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.5.0)
+    rspec-mocks (3.5.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.5.0)
+    rspec-rails (3.5.2)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (~> 3.5.0)
+      rspec-expectations (~> 3.5.0)
+      rspec-mocks (~> 3.5.0)
+      rspec-support (~> 3.5.0)
+    rspec-support (3.5.0)
     sass (3.4.23)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
@@ -123,6 +147,11 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    simplecov (0.14.1)
+      docile (~> 1.1.0)
+      json (>= 1.8, < 3)
+      simplecov-html (~> 0.10.0)
+    simplecov-html (0.10.0)
     spring (2.0.1)
       activesupport (>= 4.2)
     spring-watcher-listen (2.0.1)
@@ -158,8 +187,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+<<<<<<< HEAD
   autoprefixer-rails
   bootstrap-sass (~> 3.2.0)
+=======
+  bcrypt (~> 3.1.7)
+>>>>>>> c3beb32b9496c3c9649c7f49c74c17d6826fa23d
   byebug
   coffee-rails (~> 4.2)
   jbuilder (~> 2.5)
@@ -168,7 +201,9 @@ DEPENDENCIES
   mysql2 (>= 0.3.18, < 0.5)
   puma (~> 3.0)
   rails (~> 5.0.2)
+  rspec-rails
   sass-rails (~> 5.0)
+  simplecov
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)

@@ -1,0 +1,7 @@
+<h1>Suba o arquivo CSV!</h1>
+
+	<%= form_tag upload_path, multipart: true do  %>
+	<%= file_field_tag 'document', accept: '.csv'%>
+	<%= submit_tag 'Enviar'%>
+
+<% end %>
