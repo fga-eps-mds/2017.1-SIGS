@@ -1,37 +1,58 @@
-<h1>Solicitação de Cadastro</h1>
-<%= form_for user_new_path do |f| %>
-  <%= f.hidden_field :active, :value => 'false' %>
-  <!-- <p><b></b><%=  %></p> -->
+<div class="col-sm-8">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Solicitação de Cadastro</div>
+    <div class="panel-body">
+      <%= form_for user_new_path, :html => {:role => 'form'} do |f| %>
+        <%= f.hidden_field :active, :value => 'false' %>
+        <div class="col-sm-6">
 
-  <%= f.label :name, "Nome: " %>
-  <%= f.text_field :name %>
+          <div class="form-group">
+            <%= f.label :name, "Nome: " %>
+            <%= f.text_field :name, class: 'form-control', placeholder: 'Digite seu nome completo' %>
+          </div>
 
-  <%= f.label :email, "E-mail: " %>
-  <%= f.text_field :email %>
+          <div class="form-group">
+            <%= f.label :email, "E-mail: " %>
+            <%= f.text_field :email, class: 'form-control', placeholder: 'Digite seu e-mail' %>
+          </div>
 
-  <%= f.label :confirm_email, "Confirmar e-mail: " %>
-  <%= f.text_field :confirm_email %>
+          <div class="form-group">
+            <%= f.label :confirm_email, "Confirmar e-mail: " %>
+            <%= f.text_field :confirm_email, class: 'form-control', placeholder: 'Confirme seu e-mail' %>
+          </div>
 
-  <%= f.label :cpf, "CPF: " %>
-  <%= f.text_field :cpf %>
+          <div class="form-group">
+            <%= f.label :cpf, "CPF: " %>
+            <%= f.text_field :cpf, class: 'form-control', placeholder: 'Digite seu CPF' %>
+          </div>
 
-  <%= f.label :registration, "Matrícula: " %>
-  <%= f.text_field :registration %>
+        </div>
+        <div class="col-sm-6">
 
-  <%= f.label "Tipo: " %>
-  <%= radio_button_tag(:type, "coordinator") %>
-  <%= label_tag(:type_coordinator, "Coordenador") %>
-  <%= radio_button_tag(:type, "administrative_assistant") %>
-  <%= label_tag(:type_administrative_assistant, "Assistente Administrativo") %>
-  <%= radio_button_tag(:type, "department_assistant") %>
-  <%= label_tag(:type_administrative_assistant, "Assistente de Departamento") %>
+          <div class="form-group">
+            <%= f.label :registration, "Matrícula: " %>
+            <%= f.text_field :registration, class: 'form-control', placeholder: 'Digite sua matrícula' %>
+          </div>
 
-  <%= f.label :password, "Senha: " %>
-  <%= f.password_field :password %>
+          <div class="form-group">
+            <%= f.label "Tipo: " %>
+            <%= f.select :tipo, [['Coordenador', 'coordinator'], ['Assistente Administrativo', 'administrative_assistant'], ['Assistente do Departamento', 'department_assistant']], {}, { :class => 'form-control' } %>
+          </div>
 
-  <%= f.label :confirm_password, "Confirmar Senha: " %>
-  <%= f.password_field :confirm_password %>
+          <div class="form-group">
+            <%= f.label :password, "Senha: " %>
+            <%= f.password_field :password, class: 'form-control', placeholder: 'Digite sua senha' %>
+          </div>
 
-  <%= f.submit "Enviar" %>
+          <div class="form-group">
+            <%= f.label :confirm_password, "Confirmar Senha: " %>
+            <%= f.password_field :confirm_password, class: 'form-control', placeholder: 'Confirme sua senha' %>
+          </div>
 
-<% end %>
+          <%= f.submit "Enviar", class: 'pull-right btn btn-default btn-success' %>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>
