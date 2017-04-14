@@ -5,8 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>SIGS</title>
-    <!-- <link href="../img/favicon.ico" rel="shortcut icon" type="image/ico"> -->
+    <%= favicon_link_tag %>
     <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Sistema de Alocação de Salas Inteligente da UnB.">
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -14,12 +15,46 @@
   </head>
 
   <body>
-    <div id="main-container" class="container-fluid">
+
+    <!-- Nav Bar -->
+    <nav class="navbar navbar-default myNav">
+			<div class="container container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand">
+            <%= image_tag("logo", class: "pull-left") %>
+            <h1 class="pull-right text-justify">Sistema<br>Inteligente<br>de Gestão<br> de Salas</h1>
+          </a>
+				</div>
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right">
+						<!-- <li><a href="pages/cadastro.html">Cadastro</a></li> -->
+					</ul>
+				</div><!-- /.navbar-collapse -->
+			</div><!-- /.container-fluid -->
+		</nav>
+    <div id="main-container" class="container-fluid myContainer">
       <div class="row">
         <div id="content" class="col-xs-12">
           <%= yield %>
         </div>
       </div>
     </div>
+
+    <!-- Footer -->
+		<footer class="footer">
+			<div class="container">
+        <%= image_tag("unb") %>
+			</div>
+		</footer>
+
   </body>
 </html>

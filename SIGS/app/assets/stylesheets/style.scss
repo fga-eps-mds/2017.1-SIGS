@@ -1,0 +1,119 @@
+/* NAV BAR COLORS
+ #57C13D: navbar background
+ #57C13D;/**/ /* navbar border
+ #FFF: default color
+ #EEE: hover color (#FFFFFF for .nav-brand)
+ #555: active color
+ #D5D5D5: active background
+*/
+/* navbar */
+.navbar-default.myNav {
+    background-color: #57C13D;
+    border-color: #57C13D;/**/
+}
+/* Title */
+.navbar-default.myNav .navbar-brand {
+    color: #FFF;
+    font-weight: bold;
+    font-size: 30px;
+    height: auto;
+}
+.navbar-default.myNav .navbar-brand:hover,
+.navbar-default.myNav .navbar-brand:focus {
+    color: #FFFFFF;
+}
+/* Link */
+.navbar-default.myNav .navbar-nav > li > a {
+    color: #FFF;
+}
+.navbar-default.myNav .navbar-nav > li > a:hover,
+.navbar-default.myNav .navbar-nav > li > a:focus {
+    color: #EEE;
+}
+.navbar-default.myNav .navbar-nav > .active > a,
+.navbar-default.myNav .navbar-nav > .active > a:hover,
+.navbar-default.myNav .navbar-nav > .active > a:focus {
+    color: #555;
+    background-color: #57C13D;/**/
+}
+.navbar-default.myNav .navbar-nav > .open > a,
+.navbar-default.myNav .navbar-nav > .open > a:hover,
+.navbar-default.myNav .navbar-nav > .open > a:focus {
+    color: #555;
+    background-color: #D5D5D5;
+}
+/* Caret */
+.navbar-default.myNav .navbar-nav > .dropdown > a .caret {
+    border-top-color: #FFF;
+    border-bottom-color: #FFF;
+}
+.navbar-default.myNav .navbar-nav > .dropdown > a:hover .caret,
+.navbar-default.myNav .navbar-nav > .dropdown > a:focus .caret {
+    border-top-color: #EEE;
+    border-bottom-color: #EEE;
+}
+.navbar-default.myNav .navbar-nav > .open > a .caret,
+.navbar-default.myNav .navbar-nav > .open > a:hover .caret,
+.navbar-default.myNav .navbar-nav > .open > a:focus .caret {
+    border-top-color: #555;
+    border-bottom-color: #555;
+}
+/* Mobile version */
+.navbar-default.myNav .navbar-toggle {
+    border-color: #EEE;
+}
+.navbar-default.myNav .navbar-toggle:hover,
+.navbar-default.myNav .navbar-toggle:focus {
+    background-color: #EEE;
+}
+.navbar-default.myNav .navbar-toggle .icon-bar {
+    background-color: #CCC;
+}
+@media (max-width: 767px) {
+    .navbar-default.myNav .navbar-nav .open .dropdown-menu > li > a {
+        color: #FFF;
+    }
+    .navbar-default.myNav .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-default.myNav .navbar-nav .open .dropdown-menu > li > a:focus {
+          color: #EEE;
+    }
+}
+/* NAV BAR COLORS END*/
+
+/**/
+.myContainer {
+  margin-top: 40px;
+  margin-bottom: 100px;
+}
+
+.imgBanner {
+  margin-bottom: 40px;
+}
+.imgBannerBottom {
+  margin-top: 40px;
+}
+
+/* Sticky footer styles*/
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #57585a;
+  padding-top: 12px;
+  text-align: center;
+}
+
+/**/
+.marginRight {
+    margin-right: 15px;
+}
