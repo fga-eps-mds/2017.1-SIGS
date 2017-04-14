@@ -1,12 +1,35 @@
-<%= form_for @user, :url => {:action=> "update"} do |user| %>
-  <%= user.label 'Nome' %>
-  <%= user.text_field(:name) %><br>
-  <%= user.label 'Email' %>
-  <%= user.text_field(:email) %><br>
-  <%= user.label 'CPF' %>
-  <%= user.text_field(:cpf) %> <br>
-  <%= user.label 'Matrícula' %>
-  <%= user.text_field(:registration) %> <br>
-    <%= user.submit 'enviar'%>
+<div class="col-sm-6">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Alteração de Cadastro</div>
+    <div class="panel-body">
+      <%= form_for @user, :url => {:action=> "update"} do |user| %>
+      <div class="col-sm-12">
 
-<% end %>
+        <div class="form-group">
+          <%= user.label :name, "Nome: " %>
+          <%= user.text_field :name, class: "form-control", placeholder: "Digite seu nome completo" %><br>
+        </div>
+
+        <div class="form-group">
+          <%= user.label :email, "E-mail: " %>
+          <%= user.text_field :email, class: "form-control", placeholder: "Digite seu e-mail" %><br>
+        </div>
+
+        <div class="form-group">
+          <%= user.label :password, "Senha: " %>
+          <%= user.password_field :password, class: "form-control", placeholder: "Digite sua senha" %><br>
+        </div>
+
+        <!-- Input HTML -->
+        <div class="form-group">
+          <label for="confirm_password">Confirmar Senha: </label>
+          <input type="text" name="confirm_password" id="confirm_password" class= "form-control" placeholder= "Digite sua senha"/>
+        </div>
+        <!-- Input HTML -->
+
+        <%= user.submit "enviar", class: "pull-right btn btn-default btn-success" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
