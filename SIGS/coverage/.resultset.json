@@ -9,6 +9,11 @@
         1,
         1,
         1,
+        1,
+        null,
+        1,
+        1,
+        1,
         null,
         null,
         null
@@ -261,7 +266,6 @@
       ],
       "/vagrant/SIGS/config/routes.rb": [
         1,
-        null,
         1,
         null,
         null,
@@ -322,6 +326,14 @@
         1,
         1,
         null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        1,
+        1,
+        1,
         null,
         null
       ],
@@ -338,6 +350,10 @@
         null
       ],
       "/vagrant/SIGS/app/helpers/department_assistant_helper.rb": [
+        1,
+        null
+      ],
+      "/vagrant/SIGS/app/helpers/parsers_helper.rb": [
         1,
         null
       ],
@@ -432,6 +448,6 @@
         null
       ]
     },
-    "timestamp": 1492195066
+    "timestamp": 1492200837
   }
 }
