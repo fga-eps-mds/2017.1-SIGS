@@ -1,10 +1,37 @@
 <h1>Solicitação de Cadastro</h1>
-<%= form_for @user do |f| %>
-  <p><b></b><%=  %></p>
-  <p><b>Nome: </b><%= f.text_field :name %></p>
-  <p><b>Email: </b><%= f.text_field :email %></p>
-  <p><b>CPF: </b><%= f.text_field :cpf %></p>
-  <p><b>Matricula: </b><%= f.text_field :registration %></p>
-  <p><b>Tipo</b><%= f.hidden_field :active, :value => 'false' %></p>
-  
+<%= form_for user_new_path do |f| %>
+  <%= f.hidden_field :active, :value => 'false' %>
+  <!-- <p><b></b><%=  %></p> -->
+
+  <%= f.label :name, "Nome: " %>
+  <%= f.text_field :name %>
+
+  <%= f.label :email, "E-mail: " %>
+  <%= f.text_field :email %>
+
+  <%= f.label :confirm_email, "Confirmar e-mail: " %>
+  <%= f.text_field :confirm_email %>
+
+  <%= f.label :cpf, "CPF: " %>
+  <%= f.text_field :cpf %>
+
+  <%= f.label :registration, "Matrícula: " %>
+  <%= f.text_field :registration %>
+
+  <%= f.label "Tipo: " %>
+  <%= radio_button_tag(:type, "coordinator") %>
+  <%= label_tag(:type_coordinator, "Coordenador") %>
+  <%= radio_button_tag(:type, "administrative_assistant") %>
+  <%= label_tag(:type_administrative_assistant, "Assistente Administrativo") %>
+  <%= radio_button_tag(:type, "department_assistant") %>
+  <%= label_tag(:type_administrative_assistant, "Assistente de Departamento") %>
+
+  <%= f.label :password, "Senha: " %>
+  <%= f.password_field :password %>
+
+  <%= f.label :confirm_password, "Confirmar Senha: " %>
+  <%= f.password_field :confirm_password %>
+
+  <%= f.submit "Enviar" %>
+
 <% end %>
