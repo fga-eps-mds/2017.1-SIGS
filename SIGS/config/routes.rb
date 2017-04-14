@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   root 'sessions#new'
 
 ### Coordinator - ROUTES
@@ -60,5 +59,13 @@ Rails.application.routes.draw do
   get 'administrative_assistant/remove/:id' => 'administrative_assistant#remove', as: 'adm_remove'
   get 'administrative_assistant/index_users' => 'administrative_assistant#index_users'
 
+# Parsers
+  get 'parsers/upload'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  post "/upload", controller: 'parsers', action: 'upload'
+  post "/parsers", controller: 'parsers', action: 'index', :as => "index_parser"
+  resources :parsers
+
 end
