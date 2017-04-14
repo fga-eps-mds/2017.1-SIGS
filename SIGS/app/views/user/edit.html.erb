@@ -1,2 +1,12 @@
-<h1>User#edit</h1>
-<p>Find me in app/views/user/edit.html.erb</p>
+<%= form_for @user, :url => {:action=> "update"} do |user| %>
+  <%= user.label 'Nome' %>
+  <%= user.text_field(:name) %><br>
+  <%= user.label 'Email' %>
+  <%= user.text_field(:email) %><br>
+  <%= user.label 'CPF' %>
+  <%= user.text_field(:cpf) %> <br>
+  <%= user.label 'Matrícula' %>
+  <%= user.text_field(:registration) %> <br>
+    <%= user.submit 'enviar'%>
+
+<% end %>
