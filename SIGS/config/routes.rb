@@ -16,13 +16,13 @@ Rails.application.routes.draw do
 
   get 'coordinator/enable'
 
-  get 'user/update'
+  patch 'user/update/:id', controller: 'user', action: 'update', as: 'user_update'
 
   get 'user/new' => 'user#new' , as: 'user_new'
 
   post 'user/create' => 'user#create' , as: 'user_create'
 
-  get 'user/edit'
+  get 'user/edit/:id' => 'user#edit', as: 'user_edit'
 
 ### Department Assistant - ROUTES
   get 'department_assistant/registration_request' => 'department_assistant#registration_request'

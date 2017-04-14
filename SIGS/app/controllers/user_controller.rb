@@ -17,16 +17,19 @@ class UserController < ApplicationController
 
   # Editing the user profile
   def edit
-    if @user != current_user
-    end
+    @user = User.find(params[:id])
+    #if @user != current_user
+    #end
   end
 
   #Update User
   def update
-    if @user.update(user_params)
+    @user = User.find(params[:id])
+    if @user.update_attributes(user_params)
       flash[:success] = t(:sucessful_profile_update)
-      redirect_to @user
+      # Mandar para Show do tipo de usuário
     else
+      redirect_to user_edit_path
       flash[:warning] = t(:error_profile_update)
     end
   end

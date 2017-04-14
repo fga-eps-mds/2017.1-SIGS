@@ -2,8 +2,6 @@ class AdministrativeAssistantController < ApplicationController
 
   # Funções de edição do próprio usuário
 
-
-
   def show
     @administrative_assistant = AdministrativeAssistant.find(params[:id])
     @user = User.find(@administrative_assistant.user_id)

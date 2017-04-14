@@ -1,7 +1,12 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>SIGS</title>
+    <!-- <link href="../img/favicon.ico" rel="shortcut icon" type="image/ico"> -->
+    <meta name="robots" content="noindex, nofollow">
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +14,12 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div id="main-container" class="container-fluid">
+      <div class="row">
+        <div id="content" class="col-xs-12">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
