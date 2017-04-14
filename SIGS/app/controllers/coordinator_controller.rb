@@ -1,12 +1,5 @@
 class CoordinatorController < ApplicationController
-  def new
-    @coordinator = Coordinator.new
-  end
 
-  def create
-    @coordinator = Coordinator.create(coordinator_params)
-    if @coordinator.save
-  end
 
   def show
     @coordinator = Coordinator.find(params[:id])
@@ -28,7 +21,7 @@ class CoordinatorController < ApplicationController
       redirect_to index_path(@coordinator.id)
     end
   end
-  
+
   def index
     @coordinators = Coordinator.all
   end

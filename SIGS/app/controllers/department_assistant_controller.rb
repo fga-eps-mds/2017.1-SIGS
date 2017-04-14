@@ -1,12 +1,7 @@
 class DepartmentAssistantController < ApplicationController
-  def new
-    @department_assistant = DepartmentAssistant.new
-  end
 
-  def create
-    @department_assistant = DepartmentAssistant.create(department_assistant_params)
-    if @department_assistant.save
-  end
+
+  
 
   def index
     @department_assistant = DepartmentAssistant.find(params[:id])

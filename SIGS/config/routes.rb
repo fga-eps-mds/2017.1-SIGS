@@ -18,9 +18,9 @@ Rails.application.routes.draw do
 
   get 'user/update'
 
-  get 'user/new'
+  get 'user/new' => 'user#new' , as: 'user_new'
 
-  get 'user/create'
+  post 'user/create' => 'user#create' , as: 'user_create'
 
   get 'user/edit'
 
@@ -41,6 +41,8 @@ Rails.application.routes.draw do
 ###
 
 ### Administrative Assistant - ROUTES
+  post 'administrative_assistant/create' => 'administrative_assistant#create',  as: 'adm_create'
+
   get 'administrative_assistant/show/:id' => 'administrative_assistant#show', as: 'adm_show'
 
   get 'administrative_assistant/destroy/:id' => 'administrative_assistant#destroy', as: 'adm_remove'

@@ -1,15 +1,8 @@
 class AdministrativeAssistantController < ApplicationController
 
   # Funções de edição do próprio usuário
-  def new
-    @administrative_assistant = AdministrativeAssistant.new
-  end
 
-  def create
-    @administrative_assistant = AdministrativeAssistant.create(administrative_assistant_params)
-    if @administrative_assistant.save
-    end
-  end
+
 
   def show
     @administrative_assistant = AdministrativeAssistant.find(params[:id])
