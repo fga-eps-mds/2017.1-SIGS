@@ -1,7 +1,17 @@
 <h1>Suba o arquivo CSV!</h1>
 
+	<h3> Parser para as salas de aula </h3>
 	<%= form_tag upload_path, multipart: true do  %>
-	<%= file_field_tag 'document', accept: '.csv'%>
-	<%= submit_tag 'Enviar'%>
+		<%= file_field_tag 'document', accept: '.csv'%>
+		<%= submit_tag 'Enviar'%>
 
-<% end %>
+	<% end %>
+
+<br><br><br>
+
+	<h3> Parser para os prédios </h3>
+	<%= form_tag upload_buildings_path, multipart: true do  %>
+		<%= file_field_tag 'document', accept: '.csv'%>
+		<%= submit_tag 'Enviar'%>
+
+	<% end %>
