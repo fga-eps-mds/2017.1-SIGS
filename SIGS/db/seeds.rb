@@ -6,5 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-buildings = Building.create([{code: 'code001', name: 'bsa', wing: 'sul'},
-          {code: 'code221', name: 'bsaNorte', wing: 'norte'}])
+buildings = Building.create([
+  {code: 'pjc', name: 'Pavilhão João Calmon', wing: 'Norte'},
+  {code: 'PAT', name: 'Pavilhão Anísio Teixeira', wing: 'norte'},
+  {code: 'BSAS', name: 'Bloco de Salas da Ala Sul', wing: 'sul'},
+  {code: 'BSAN', name: 'Bloco de Salas da Ala Norte', wing: 'norte'},          
+          ])
