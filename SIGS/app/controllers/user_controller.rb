@@ -40,6 +40,18 @@ class UserController < ApplicationController
     end
   end
 
+  def destroy
+    @user = User.find(params[:id])
+
+    @users = User.all
+    if @users.count > 1
+      @user.destroy
+      redirect_to root_path
+    else
+      redirect_to current_user
+    end
+  end
+
   private
   def user_params
     params[:user].permit(:name, :email, :password, :registration, :cpf, :active,
