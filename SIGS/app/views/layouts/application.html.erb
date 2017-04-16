@@ -16,45 +16,23 @@
 
   <body>
 
-    <!-- Nav Bar -->
-    <nav class="navbar navbar-default myNav">
-			<div class="container container-fluid">
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand">
-            <%= image_tag("logo", class: "pull-left") %>
-            <h1 class="pull-right text-justify">Sistema<br>Inteligente<br>de Gestão<br> de Salas</h1>
-          </a>
-				</div>
+    <% if current_user %>
+      <main class="col-sm-9" style="background-color:blue">
+        <%= yield %>
+      </main>
 
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav navbar-right">
-						<!-- <li><a href="pages/cadastro.html">Cadastro</a></li> -->
-					</ul>
-				</div><!-- /.navbar-collapse -->
-			</div><!-- /.container-fluid -->
-		</nav>
-    <div id="main-container" class="container-fluid myContainer">
-      <div class="row">
-        <div id="content" class="col-xs-12">
-          <%= yield %>
-        </div>
-      </div>
-    </div>
-
-    <!-- Footer -->
-		<footer class="footer">
-			<div class="container">
-        <%= image_tag("unb") %>
-			</div>
-		</footer>
+    <% else %>
+      <main class="container container-fluid" id="signIn">
+        <div class="login">
+          <div><figure><%= image_tag("sigs_logo") %></figure></div>
+          <div>
+            <%= yield %>
+          </div>
+          <div><figure><a href="http://www.unb.br"><%= image_tag("rodape_unb") %></a></figure></div>
+        </div><!-- ./login -->
+        <div><h1>Sistema Inteligente de Gestão de Salas</h1></div>
+      </main>
+    <% end %>
 
   </body>
 </html>

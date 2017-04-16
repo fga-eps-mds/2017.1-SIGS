@@ -1,0 +1,17 @@
+input {
+  width: 100%;
+  margin: 10px;
+}
+
+input[type="submit"] {
+  width: auto;
+  float: right;
+}
+
+.btn {
+  border-radius: 50%;
+}
+
+.actions {
+  margin-top: 10px;
+}

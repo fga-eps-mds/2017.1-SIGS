@@ -1,0 +1,92 @@
+#signIn {
+
+  background-image: image-url("background_unb.jpg");
+  background-position: 0 0;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-repeat:no-repeat;
+  background-color: #000;
+
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100vw;
+  min-height: 100vh;
+
+  .login {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 400px;
+    min-height: 100vh;
+    padding: 30px;
+    padding-top: 50px;
+    margin:auto;
+    background-color: rgba(0,0,0,0.9);
+    text-align: center;
+  }
+
+  h1 {
+    font-family: 'Sawasdee';
+    color: #FFF;
+    text-shadow: 2px 2px 3px #000;
+    margin-left: 30px;
+    display: none;
+  }
+
+  figure:last-child {
+    margin:auto;
+  }
+
+  form {
+    margin:auto;
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input[type="email"]{
+    margin: 10px 0;
+    background: transparent;
+    border:none;
+    border-bottom: solid 1px #FFF;
+    color: #FFF;
+    -webkit-text-fill-color: #FFF !important; //Muda a cor do texto do formulário em autocomplete
+
+  }
+
+  .login input:-webkit-autofill,
+  .login input:-webkit-autofill:hover,
+  .login input:-webkit-autofill:focus,
+  .login input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    box-shadow: 0px 0px;
+    -webkit-writing-mode: none;
+  }
+
+  input[type="submit"].btn-login {
+    background: #37c945;
+    color: #FFF;
+  }
+
+  input[type="submit"].btn-login:hover {
+    background: #37b345;
+    box-shadow: 2px 2px 10px #000;
+  }
+
+  @media only screen and (min-width:840px){
+    .login {
+      position: absolute;
+      right: 0;
+    }
+  }
+
+  @media only screen and (min-width:1010px){
+    h1{
+      display: block;
+      position: absolute;
+      bottom: 10px;
+    }
+  }
+}
