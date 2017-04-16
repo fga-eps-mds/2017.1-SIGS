@@ -1,63 +1,67 @@
-<div class="col-sm-8">
-  <div class="panel panel-primary">
-    <div class="panel-heading">Solicitação de Cadastro</div>
-    <div class="panel-body">
-      <%= form_for @user, url: user_create_path,  :html => {:role => 'form'} do |f| %>
-        <%= f.hidden_field :active, :value => 'false' %>
-        <div class="col-sm-6">
-
-          <div class="form-group">
-            <%= f.label :name, "Nome: " %>
-            <%= f.text_field :name, class: 'form-control', placeholder: 'Digite seu nome completo' %>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :email, "E-mail: " %>
-            <%= f.text_field :email, class: 'form-control', placeholder: 'Digite seu e-mail' %>
-          </div>
-
-          <!-- Input HTML -->
-          <div class="form-group">
-            <label for="confirm_email">Confirmar E-mail: </label>
-            <input type="text" name="confirm_email" id="confirm_email" class= "form-control" placeholder= "Digite seu e-mail novamente"/>
-          </div>
-          <!-- Input HTML -->
-
-          <div class="form-group">
-            <%= f.label :cpf, "CPF: " %>
-            <%= f.text_field :cpf, class: 'form-control', placeholder: 'Digite seu CPF' %>
-          </div>
-
-
-        </div>
-        <div class="col-sm-6">
-
-          <div class="form-group">
-            <%= f.label :registration, "Matrícula: " %>
-            <%= f.text_field :registration, class: 'form-control', placeholder: 'Digite sua matrícula' %>
-          </div>
-
-          <!-- <div class="form-group">
-            <%#= f.label "Tipo: " %>
-            <%#= f.select :tipo, [['Coordenador', 'coordinator'], ['Assistente Administrativo', 'administrative_assistant'], ['Assistente do Departamento', 'department_assistant']], {}, { :class => 'form-control' } %>
-          </div> -->
-
-          <div class="form-group">
-            <%= f.label :password, "Senha: " %>
-            <%= f.password_field :password, class: 'form-control', placeholder: 'Digite sua senha' %>
-          </div>
-
-          <!-- Input HTML -->
-          <div class="form-group">
-            <%= f.label :password, "Confirmar senha: " %>
-            <%= f.password_field :password_confirmation, class: 'form-control' , placeholder: 'Confirme a senha'%>
-          </div>
-          <!-- Input HTML -->
-
-          <%= f.submit "Enviar", class: 'pull-right btn btn-default btn-success' %>
-        </div>
-
-      <% end %>
-    </div>
+<section id="section-form">
+  <div id="erro-message">
+    <% @user.errors.messages.values.each do |msg| %>
+    <% msg.each do |m| %>
+    <li id="error_message"><%= m %></li>
+    <%end %>
+  <% end %>
+  <% if flash[:error] -%>
+    <p class="error"><%= flash[:error] %></p>
+  <% end -%>
   </div>
-</div>
+  <div id="form-new-user">
+  
+  <%= form_for @user, url: user_create_path,  :html => {:role => 'form'} do |f| %>
+    <%= f.hidden_field :active, :value => 'false' %>
+    <div class="col-sm-6">
+
+      <div class="form-group">
+        <%= f.label :name, "Nome: " %>
+        <%= f.text_field :name, class: 'form-control', placeholder: 'Digite seu nome completo' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :email, "E-mail: " %>
+        <%= f.text_field :email, class: 'form-control', placeholder: 'Digite seu e-mail' %>
+      </div>
+
+      <!-- Input HTML -->
+      <!-- Input HTML -->
+
+      <div class="form-group">
+        <%= f.label :cpf, "CPF: " %>
+        <%= f.text_field :cpf, class: 'form-control', placeholder: 'Digite seu CPF' %>
+      </div>
+
+
+    </div>
+    <div class="col-sm-6">
+
+      <div class="form-group">
+        <%= f.label :registration, "Matrícula: " %>
+        <%= f.text_field :registration, class: 'form-control', placeholder: 'Digite sua matrícula' %>
+      </div>
+
+      <!-- <div class="form-group">
+        <%#= f.label "Tipo: " %>
+        <%#= f.select :tipo, [['Coordenador', 'coordinator'], ['Assistente Administrativo', 'administrative_assistant'], ['Assistente do Departamento', 'department_assistant']], {}, { :class => 'form-control' } %>
+      </div> -->
+
+      <div class="form-group">
+        <%= f.label :password, "Senha: " %>
+        <%= f.password_field :password, class: 'form-control', placeholder: 'Digite sua senha' %>
+      </div>
+
+      <!-- Input HTML -->
+      <div class="form-group">
+        <%= f.label :password, "Confirmar senha: " %>
+        <%= f.password_field :password_confirmation, class: 'form-control' , placeholder: 'Confirme a senha'%>
+      </div>
+      <!-- Input HTML -->
+
+      <%= f.submit "Enviar", class: 'pull-right btn btn-default btn-success' %>
+    </div>
+
+  <% end %>
+  </div>
+</section>
