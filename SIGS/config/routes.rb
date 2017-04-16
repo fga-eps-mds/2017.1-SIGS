@@ -23,13 +23,6 @@ Rails.application.routes.draw do
   #user
   get '/user/:id' => 'user#show', :as => 'user'
 
-  root 'sessions#new'
-  #login
-  get 'sign_in' => 'sessions#new'
-  post 'sign_in' => 'sessions#create'
-  get 'sign_out' => 'sessions#destroy'
-  ###
-
   get 'user/update'
 
   get 'user/new' => 'user#new' , as: 'new_user'

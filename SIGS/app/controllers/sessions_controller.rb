@@ -7,13 +7,13 @@ class SessionsController < ApplicationController
   def create
     @user = User.find_by(email: params[:session][:email].downcase)
       if @user && @user.authenticate(params[:session][:password])
-        if @user.active = true
+        if @user.active == true
           sign_in(@user)
           flash.now[:notice] = 'Login realizado com sucesso'
           redirect_to current_user
         else
           flash.now[:error] =  'Sua conta não está ativa'
-          redirect_to sign_in
+          render 'new'
         end
       else
         flash.now[:error] =  'Email ou senha incorretos'
