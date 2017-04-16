@@ -49,8 +49,8 @@
 
           <!-- Input HTML -->
           <div class="form-group">
-            <label for="confirm_password">Confirmar Senha: </label>
-            <input type="text" name="confirm_password" id="confirm_password" class= "form-control" placeholder= "Confirme sua senha"/>
+            <%= f.label :password, "Confirmar senha: " %>
+            <%= f.password_field :password_confirmation, class: 'form-control' , placeholder: 'Confirme a senha'%>
           </div>
           <!-- Input HTML -->
 
