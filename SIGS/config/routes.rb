@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   root 'sessions#new'
 
 ### Coordinator - ROUTES
@@ -13,12 +14,6 @@ Rails.application.routes.draw do
   get 'coordinator/destroy'
 
   get 'coordinator/enable'
-
-  #login
-  get 'sign_in' => 'sessions#new'
-  post 'sign_in' => 'sessions#create'
-  delete 'sign_out' => 'sessions#destroy'
-  ###
 
   #user
   get '/user/:id' => 'user#show', :as => 'user'
@@ -59,12 +54,11 @@ Rails.application.routes.draw do
   get 'administrative_assistant/remove/:id' => 'administrative_assistant#remove', as: 'adm_remove'
   get 'administrative_assistant/index_users' => 'administrative_assistant#index_users'
 
-# Parsers
-  get 'parsers/upload'
-
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  post "/upload", controller: 'parsers', action: 'upload'
+# Parsers
+  post "/upload_buildings", controller: 'parsers', action: 'upload_buildings'
+  post "/upload", controller: 'parsers', action: 'upload_rooms'
   post "/parsers", controller: 'parsers', action: 'index', :as => "index_parser"
   resources :parsers
 

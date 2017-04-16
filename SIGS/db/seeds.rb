@@ -33,3 +33,11 @@ coordinator_1.department_id = department_1.id
 coordinator_1.course_id = course_1.id
 coordinator_1.user_id = user_1.id
 coordinator_1.save!
+
+buildings = Building.create([
+  {code: 'pjc', name: 'Pavilhão João Calmon', wing: 'Norte'},
+  {code: 'PAT', name: 'Pavilhão Anísio Teixeira', wing: 'norte'},
+  {code: 'BSAS', name: 'Bloco de Salas da Ala Sul', wing: 'sul'},
+  {code: 'BSAN', name: 'Bloco de Salas da Ala Norte', wing: 'norte'},          
+          ])
+
