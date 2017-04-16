@@ -27,7 +27,7 @@ module SessionsHelper
   end
 
   def permission
-    permission ||= @nvl
+    @permission ||= @nvl
   end
 
   def logged_in?
@@ -40,5 +40,6 @@ module SessionsHelper
   def sign_out
     session.delete(:user_id)
     @current_user = nil
+    @permission = nil
   end
 end

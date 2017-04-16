@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe SessionsController, type: :controller do
+  
   describe "Test methods of Controller Sessions" do
+
     before(:each) do
       @user = User.create(name: 'teste', email: 'test@test.com', password: '123', active: true)
       @user1 = User.create(name: 'teste1', email: 'test1@test.com', password: '123', active: false)
