@@ -1,27 +1,17 @@
 Rails.application.routes.draw do
   root 'sessions#new'
 
-  #login
+### Sessions - Routes
   get 'sign_in' => 'sessions#new'
   post 'sign_in' => 'sessions#create'
   get 'sign_out' => 'sessions#destroy'
-  ###
-  
+###
+
 ### Coordinator - ROUTES
-  get 'coordinator/registration_request'
-
-  get 'coordinator/edit'
-
-  get 'coordinator/update'
-
   get 'coordinator/show:id' => 'coordinator#show', as: 'coordinator_show'
+###
 
-  get 'coordinator/destroy'
-
-  get 'coordinator/enable'
-
-  #user
-
+### User - ROUTES
   patch 'user/update/:id', controller: 'user', action: 'update', as: 'user_update'
 
   get 'user/new' => 'user#new' , :as => 'user_new'
@@ -32,21 +22,13 @@ Rails.application.routes.draw do
 
   get 'user/edit/:id' => 'user#edit', as: 'user_edit'
 
-  ### Department Assistant - ROUTES
+  get 'user/destroy/:id' => 'user#destroy', as: 'user_destroy'
+###
 
-  get 'department_assistant/registration_request' => 'department_assistant#registration_request'
-
+### Department Assistant - ROUTES
   get 'department_assistant/index/:id' => 'department_assistant#index', as: 'index'
 
-  get 'department_assistant/edit' => 'department_assistant#edit'
-
-  get 'department_assistant/update' => 'department_assistant#update'
-
   get 'department_assistant/show/:id' => 'department_assistant#show', as: 'show'
-
-  get 'department_assistant/destroy/:id' => 'department_assistant#destroy', as: 'destroy'
-
-  get 'department_assistant/enable' => 'department_assistant#enable'
 ###
 
 ### Administrative Assistant - ROUTES
@@ -63,14 +45,15 @@ Rails.application.routes.draw do
   post 'administrative_assistant/update_users/:id' => 'administrative_assistant#update_users' , as:'update_users'
 
   get 'administrative_assistant/destroy_users/:id' => 'administrative_assistant#destroy_users' , as: 'destroy_users'
+###
 
-# Parsers
+### Parsers
   get 'parsers/upload'
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
   post "/upload", controller: 'parsers', action: 'upload'
   post "/parsers", controller: 'parsers', action: 'index', :as => "index_parser"
   resources :parsers
+###
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
 
 end
