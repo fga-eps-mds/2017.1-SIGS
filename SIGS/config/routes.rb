@@ -20,15 +20,15 @@ Rails.application.routes.draw do
 
   get 'coordinator/enable'
 
-  #user routes
+  #user
 
   patch 'user/update/:id', controller: 'user', action: 'update', as: 'user_update'
 
-  get 'user/new' => 'user#new' , as: 'user_new'
+  get 'user/new' => 'user#new' , :as => 'user_new'
 
   get '/user/:id' => 'user#show', :as => 'user'
 
-  post 'user/create' => 'user#create' , as: 'user_create'
+  post 'user/new' => 'user#create' , :as =>'user_create'
 
   get 'user/edit/:id' => 'user#edit', as: 'user_edit'
 
