@@ -55,10 +55,13 @@
   justify-content: space-between;
 }
 
+.flexColumn {
+  flex-direction: column;
+}
+
 .alignEnd {
   align-items: flex-end;
 }
-
 
 /* Fontes */
 

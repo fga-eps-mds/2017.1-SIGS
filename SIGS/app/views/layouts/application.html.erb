@@ -22,15 +22,8 @@
       </main>
 
     <% else %>
-      <main class="container container-fluid" id="signIn">
-        <div class="login">
-          <div><figure><%= image_tag("sigs_logo") %></figure></div>
-          <div>
-            <%= yield %>
-          </div>
-          <div><figure><a href="http://www.unb.br"><%= image_tag("rodape_unb") %></a></figure></div>
-        </div><!-- ./login -->
-        <div><h1>Sistema Inteligente de Gestão de Salas</h1></div>
+      <main class="container container-fluid myContainer" id="signIn">
+        <%= yield %>
       </main>
     <% end %>
 
