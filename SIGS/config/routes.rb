@@ -45,6 +45,12 @@ Rails.application.routes.draw do
   post 'administrative_assistant/update_users/:id' => 'administrative_assistant#update_users' , as:'update_users'
 
   get 'administrative_assistant/destroy_users/:id' => 'administrative_assistant#destroy_users' , as: 'destroy_users'
+
+  get 'administrative_assistant/registration_request' => 'administrative_assistant#registration_request', as: 'registration_request'
+
+  get 'administrative_assistant/enable_registration/:id' => 'administrative_assistant#enable_registration', as: 'enable_registration'
+
+  get 'administrative_assistant/decline_registration/:id' => 'administrative_assistant#decline_registration', as: 'decline_registration'
 ###
 
 ### Parsers

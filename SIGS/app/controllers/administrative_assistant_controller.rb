@@ -7,20 +7,22 @@ class AdministrativeAssistantController < ApplicationController
     @user = User.find(@administrative_assistant.user_id)
   end
 
-  def enable
-    @user = User.find(:id)
-    @user.active = true
+  def registration_request
+    @users = User.where(active: false)
   end
 
-  def approve_registration
-    @user = User.find_by(active: false)
+  def enable_registration
+    @user = User.find(params[:id])
+    @user.update_attributes(active: true)
+    redirect_to registration_request_path
   end
 
-  def approve_allocation
+  def decline_registration
+    @user = User.find(params[:id])
+    @user.destroy
   end
 
   #Funções de edição de outros usuários
-
   def index_users
     @users = User.all
   end
