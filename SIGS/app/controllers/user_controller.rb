@@ -15,7 +15,7 @@ class UserController < ApplicationController
   def create
   	@user = User.new(user_params)
     if @user.save
-      if params[:tipo] == "adm"
+      if params[:type] == "administrative_assistant"
         @administrative_assistant = AdministrativeAssistant.create(user_id: @user.id)
       end
       flash[:notice] = 'Cadastro efetuado com sucesso!'
@@ -57,10 +57,15 @@ class UserController < ApplicationController
 
   private
   def user_params
-    params[:user].permit(:name, :email, :password, :registration, :cpf, :active,
-                          :coordinator_attributes => [:department_id,:course_id,:user_id],
-                          :administrative_assistant_attributes => [:user_id,:user_id],
-                          :department_assistant_attributes => [:department_id])
-
+    if params[:type] == "coordinator"
+      params[:user].permit(:name, :email, :password,:registration, :cpf, :active,
+                            :coordinator_attributes =>[:course_id,:user_id])
+    elsif params[:type] == "department_assistant"
+      params[:user].permit(:name, :email, :password,:registration, :cpf, :active,
+                          :department_assistant_attributes => [:department_id,:user_id])
+    else
+      params[:user].permit(:name, :email, :password,:registration, :cpf, :active,
+                          :administrative_assistant_attributes => [:user_id])
+    end
   end
 end

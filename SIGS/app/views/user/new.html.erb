@@ -25,18 +25,18 @@
         <%= f.text_field :email, class: 'form-control', placeholder: 'Digite seu e-mail' %>
       </div>
 
-      <!-- Input HTML -->
-      <!-- Input HTML -->
-
       <div class="form-group">
         <%= f.label :cpf, "CPF: " %>
         <%= f.text_field :cpf, class: 'form-control', placeholder: 'Digite seu CPF' %>
       </div>
 
       <div id="type">
-          <input type="radio" name="tipo"value="adm" checked> Assistente administrativo <br>
-          <input type="radio" name="tipo"value="aux"> Auxiliar de departamento <br>
-          <input type="radio" name="tipo"value="cord"> Coordenador de curso <br>
+        <input type="radio" name="type" value="administrative_assistant" checked class="office">
+        <label>Assistente Administrativo</label> <br>
+        <input type="radio" name="type" value="department_assistant" class="office">
+        <label> Auxiliar de Departamento</label> <br>
+        <input type="radio" name="type" value="coordinator" class="office">
+        <label>Coordenador de curso</label><br>
       </div>
 
 
@@ -79,7 +79,6 @@
 
       <%= f.submit "Enviar", class: 'pull-right btn btn-default btn-success' %>
     </div>
-
   <% end %>
   </div>
 </section>
