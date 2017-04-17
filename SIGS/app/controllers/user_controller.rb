@@ -15,6 +15,9 @@ class UserController < ApplicationController
   def create
   	@user = User.new(user_params)
     if @user.save
+      if params[:tipo] == "adm"
+        @administrative_assistant = AdministrativeAssistant.create(user_id: @user.id)
+      end
       flash[:notice] = 'Cadastro efetuado com sucesso!'
     else
       render :new
