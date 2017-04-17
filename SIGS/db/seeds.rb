@@ -22,10 +22,10 @@ course_1.save!
 # ========== User - Coordinator ==============
 user_1 = User.new
 user_1.name = 'Caio Filipe'
-user_1.email = 'caio@gmail.com'
+user_1.email = 'caio@unb.br'
 user_1.password = '123456'
 user_1.cpf = '05012345678'
-user_1.registration = '123456789'
+user_1.registration = '1234567'
 user_1.save!
 
 coordinator_1 = Coordinator.new
@@ -37,10 +37,10 @@ coordinator_1.save!
 # ========== User - DepartmentAssistant =================
 user_1 = User.new
 user_1.name = 'João Pedro'
-user_1.email = 'joao@gmail.com'
+user_1.email = 'joao@unb.br'
 user_1.password = '123456'
 user_1.cpf = '05012349999'
-user_1.registration = '123459999'
+user_1.registration = '1234599'
 user_1.save!
 
 department_assistant_1 = DepartmentAssistant.new
@@ -51,10 +51,10 @@ department_assistant_1.save!
 # ========== User - AdministrativeAssistant =================
 user_1 = User.new
 user_1.name = 'Wallacy Braz'
-user_1.email = 'wallacy@gmail.com'
+user_1.email = 'wallacy@unb.br'
 user_1.password = '123456'
 user_1.cpf = '05012348888'
-user_1.registration = '123458888'
+user_1.registration = '1234588'
 user_1.save!
 
 administrative_assistant_1 = AdministrativeAssistant.new
