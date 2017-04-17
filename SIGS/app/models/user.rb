@@ -22,7 +22,7 @@ validates :email, :presence => { :message => 'Email não pode ser vazio' },
 	format: { with: VALID_EMAIL_REGEX, :message => 'Insira um e-mail válido'}
 
 # password
-validates :password, length: { minimum: 6, maximum: 20, :message => 'Senha deve possuir o mínimo 4 e máximo de 16 caracteres' }, confirmation: true, on: :create
+validates :password, length: { minimum: 6, maximum: 20, :message => 'Senha deve possuir o mínimo 6 e máximo de 20 caracteres' }, confirmation: true, on: :create		  			
 
 # cpf
 VALID_CPF_REGEX = /\A[0-9]{3}?[0-9]{3}?[0-9]{3}?[0-9]{2}\z/i

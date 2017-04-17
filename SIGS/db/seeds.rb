@@ -8,6 +8,7 @@
 
 # ======= Departament =========
 department_1 = Department.new
+department_1.code = '789'
 department_1.name = 'Engenharia'
 department_1.save!
 
@@ -18,18 +19,44 @@ course_1.name = 'Engenharia de Software'
 course_1.department_id = department_1.id
 course_1.save!
 
-# ========== Users ==============
+# ========== User - Coordinator ==============
 user_1 = User.new
-user_1.name = 'Caio'
+user_1.name = 'Caio Filipe'
 user_1.email = 'caio@gmail.com'
-user_1.password = '12345'
-user_1.cpf = '111-111-111.11'
-user_1.registration = 'matricula1'
+user_1.password = '123456'
+user_1.cpf = '05012345678'
+user_1.registration = '123456789'
 user_1.save!
 
-# ========== Coordinator =================
 coordinator_1 = Coordinator.new
-coordinator_1.department_id = department_1.id
-coordinator_1.course_id = course_1.id
 coordinator_1.user_id = user_1.id
+coordinator_1.course_id = course_1.id
+coordinator_1.department_id = department_1.id
 coordinator_1.save!
+
+# ========== User - DepartmentAssistant =================
+user_1 = User.new
+user_1.name = 'João Pedro'
+user_1.email = 'joao@gmail.com'
+user_1.password = '123456'
+user_1.cpf = '05012349999'
+user_1.registration = '123459999'
+user_1.save!
+
+department_assistant_1 = DepartmentAssistant.new
+department_assistant_1.user_id = user_1.id
+department_assistant_1.department_id = department_1.id
+department_assistant_1.save!
+
+# ========== User - AdministrativeAssistant =================
+user_1 = User.new
+user_1.name = 'Wallacy Braz'
+user_1.email = 'wallacy@gmail.com'
+user_1.password = '123456'
+user_1.cpf = '05012348888'
+user_1.registration = '123458888'
+user_1.save!
+
+administrative_assistant_1 = AdministrativeAssistant.new
+administrative_assistant_1.user_id = user_1.id
+administrative_assistant_1.save!
