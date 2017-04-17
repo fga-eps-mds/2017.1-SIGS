@@ -9,8 +9,7 @@ class SessionsController < ApplicationController
       if @user && @user.authenticate(params[:session][:password])
         if @user.active == true
           sign_in(@user)
-          flash.now[:notice] = 'Login realizado com sucesso'
-          redirect_to current_user
+          redirect_to current_user , notice: 'Login realizado com sucesso'
         else
           flash.now[:error] =  'Sua conta não está ativa'
           render 'new'

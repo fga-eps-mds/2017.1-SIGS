@@ -21,7 +21,7 @@ module SessionsHelper
 
   def block_access
     if current_user.present?
-      redirect_to current_user
+      redirect_to current_user , notice: 'Você já está logado'
     end
   end
 

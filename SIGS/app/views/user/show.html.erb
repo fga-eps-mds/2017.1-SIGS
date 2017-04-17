@@ -1,2 +1,3 @@
-<h1>Bem vindo <%= @user.name %>
+<h1>Bem vindo <%= @user.name %><br>
+<%= flash_message %><br>
 <%= link_to 'Logout', sign_out_path, method: "delete" %>
