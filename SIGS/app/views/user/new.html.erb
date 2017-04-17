@@ -10,7 +10,7 @@
   <% end -%>
   </div>
   <div id="form-new-user">
-  
+
   <%= form_for @user, url: user_create_path,  :html => {:role => 'form'} do |f| %>
     <%= f.hidden_field :active, :value => 'false' %>
     <div class="col-sm-6">
@@ -33,6 +33,12 @@
         <%= f.text_field :cpf, class: 'form-control', placeholder: 'Digite seu CPF' %>
       </div>
 
+      <div id="type">
+          <input type="radio" name="tipo"value="adm" checked> Assistente administrativo <br>
+          <input type="radio" name="tipo"value="aux"> Auxiliar de departamento <br>
+          <input type="radio" name="tipo"value="cord"> Coordenador de curso <br>
+      </div>
+
 
     </div>
     <div class="col-sm-6">
@@ -42,22 +48,34 @@
         <%= f.text_field :registration, class: 'form-control', placeholder: 'Digite sua matrícula' %>
       </div>
 
-      <!-- <div class="form-group">
-        <%#= f.label "Tipo: " %>
-        <%#= f.select :tipo, [['Coordenador', 'coordinator'], ['Assistente Administrativo', 'administrative_assistant'], ['Assistente do Departamento', 'department_assistant']], {}, { :class => 'form-control' } %>
-      </div> -->
 
       <div class="form-group">
         <%= f.label :password, "Senha: " %>
         <%= f.password_field :password, class: 'form-control', placeholder: 'Digite sua senha' %>
       </div>
 
-      <!-- Input HTML -->
+
       <div class="form-group">
         <%= f.label :password, "Confirmar senha: " %>
         <%= f.password_field :password_confirmation, class: 'form-control' , placeholder: 'Confirme a senha'%>
       </div>
-      <!-- Input HTML -->
+
+      <div id="dropdown-department-assistant">
+          <%= f.fields_for :department_assistant do |ff| %>
+              <p> Departamento </p>
+              <%= ff.collection_select(:department_id,Department.all,:id,:name,include_blank: true) %>
+          <% end %>
+      </div>
+
+
+      <div id="dropdown-coordinator">
+            <%= f.fields_for :coordinator do |ff| %>
+              <p> Curso </p>
+              <%=ff.collection_select(:course_id,Course.all,:id,:name, include_blank: true)%>
+            <% end %>
+      </div>
+
+
 
       <%= f.submit "Enviar", class: 'pull-right btn btn-default btn-success' %>
     </div>
