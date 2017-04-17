@@ -21,7 +21,6 @@ module SessionsHelper
 
   def block_access
     if current_user.present?
-      flash.now[:error] =  'Você já está logado'
       redirect_to current_user
     end
   end
@@ -33,7 +32,7 @@ module SessionsHelper
   def logged_in?
       if current_user.nil?
         flash.now[:notice] =  'Você precisa estar logado'
-        redirect_to sign_in_path
+        render 'sessions/new'
       end
   end
 

@@ -22,11 +22,11 @@ RSpec.describe SessionsHelper, type: :helper do
       expect(@current_user).to eq(@user)
     end
 
-    #it "Should prevent that a current_user can make a login again" do
-      #block_access
-      #expect(flash.now[:error]).to eq('Você já está logado')
-      #except(response).to redirect_to(current_user_path)
-    #end
-
+    it "Should unassign a current_user, user_id and permission from session " do
+      sign_out
+      expect(session[:user_id]).to eq(nil)
+      expect(@current_user).to eq(nil)
+      expect(@permission).to eq(nil)
+    end
  end
 end

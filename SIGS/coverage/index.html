@@ -14,26 +14,26 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2017-04-16T21:15:34+00:00">2017-04-16T21:15:34+00:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2017-04-17T15:26:37+00:00">2017-04-17T15:26:37+00:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="green">90.22%</span></span>
+    (<span class="covered_percent"><span class="green">90.27%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         1.26
+         1.25
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>36</b> files in total.
-    <b>225</b> relevant lines. 
-    <span class="green"><b>203</b> lines covered</span> and
+    <b>226</b> relevant lines. 
+    <span class="green"><b>204</b> lines covered</span> and
     <span class="red"><b>22</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -132,11 +132,11 @@
       
       <tr>
         <td class="strong"><a href="#779b9e2cc44d09ae47eba8f285c5839ddb64f09a" class="src_link" title="app/helpers/sessions_helper.rb">app/helpers/sessions_helper.rb</a></td>
-        <td class="red strong">78.57 %</td>
-        <td>45</td>
-        <td>28</td>
-        <td>22</td>
-        <td>6</td>
+        <td class="red strong">74.07 %</td>
+        <td>44</td>
+        <td>27</td>
+        <td>20</td>
+        <td>7</td>
         <td>2.4</td>
       </tr>
       
@@ -392,11 +392,11 @@
       
       <tr>
         <td class="strong"><a href="#0d52393d011dd79b354574fdcb94f2ad66587cb5" class="src_link" title="spec/helpers/sessions_helper_spec.rb">spec/helpers/sessions_helper_spec.rb</a></td>
-        <td class="green strong">94.44 %</td>
+        <td class="green strong">100.0 %</td>
         <td>32</td>
-        <td>18</td>
-        <td>17</td>
-        <td>1</td>
+        <td>20</td>
+        <td>20</td>
+        <td>0</td>
         <td>1.5</td>
       </tr>
       
@@ -1119,11 +1119,11 @@
         <div class="source_table" id="779b9e2cc44d09ae47eba8f285c5839ddb64f09a">
   <div class="header">
     <h3>app/helpers/sessions_helper.rb</h3>
-    <h4><span class="red">78.57 %</span> covered</h4>
+    <h4><span class="red">74.07 %</span> covered</h4>
     <div>
-      <b>28</b> relevant lines. 
-      <span class="green"><b>22</b> lines covered</span> and
-      <span class="red"><b>6</b> lines missed.</span>
+      <b>27</b> relevant lines. 
+      <span class="green"><b>20</b> lines covered</span> and
+      <span class="red"><b>7</b> lines missed.</span>
     </div>
   </div>
   
@@ -1238,8 +1238,8 @@
           <code class="ruby">  def current_user</code>
         </li>
       
-        <li class="covered" data-hits="11" data-linenumber="19">
-          <span class="hits">11</span>
+        <li class="covered" data-hits="9" data-linenumber="19">
+          <span class="hits">9</span>
           
           <code class="ruby">    @current_user ||= User.find_by(id: session[:user_id])</code>
         </li>
@@ -1262,139 +1262,133 @@
           <code class="ruby">  def block_access</code>
         </li>
       
-        <li class="covered" data-hits="7" data-linenumber="23">
-          <span class="hits">7</span>
+        <li class="covered" data-hits="6" data-linenumber="23">
+          <span class="hits">6</span>
           
           <code class="ruby">    if current_user.present?</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="24">
-          <span class="hits">1</span>
+        <li class="missed" data-hits="0" data-linenumber="24">
           
-          <code class="ruby">      flash.now[:error] =  &#39;Você já está logado&#39;</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="25">
-          <span class="hits">1</span>
           
           <code class="ruby">      redirect_to current_user</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="26">
+        <li class="never" data-hits="" data-linenumber="25">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="27">
+        <li class="never" data-hits="" data-linenumber="26">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="28">
+        <li class="never" data-hits="" data-linenumber="27">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="29">
+        <li class="covered" data-hits="1" data-linenumber="28">
           <span class="hits">1</span>
           
           <code class="ruby">  def permission</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="30">
+        <li class="missed" data-hits="0" data-linenumber="29">
           
           
           <code class="ruby">    @permission ||= @nvl</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="31">
+        <li class="never" data-hits="" data-linenumber="30">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="32">
+        <li class="never" data-hits="" data-linenumber="31">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="33">
+        <li class="covered" data-hits="1" data-linenumber="32">
           <span class="hits">1</span>
           
           <code class="ruby">  def logged_in?</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="34">
+        <li class="missed" data-hits="0" data-linenumber="33">
           
           
           <code class="ruby">      if current_user.nil?</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="35">
+        <li class="missed" data-hits="0" data-linenumber="34">
           
           
           <code class="ruby">        flash.now[:notice] =  &#39;Você precisa estar logado&#39;</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="36">
+        <li class="missed" data-hits="0" data-linenumber="35">
           
           
-          <code class="ruby">        redirect_to sign_in_path</code>
+          <code class="ruby">        render &#39;sessions/new&#39;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="37">
+        <li class="never" data-hits="" data-linenumber="36">
           
           
           <code class="ruby">      end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="38">
+        <li class="never" data-hits="" data-linenumber="37">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="39">
+        <li class="never" data-hits="" data-linenumber="38">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="40">
+        <li class="covered" data-hits="1" data-linenumber="39">
           <span class="hits">1</span>
           
           <code class="ruby">  def sign_out</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="41">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="2" data-linenumber="40">
+          <span class="hits">2</span>
           
           <code class="ruby">    session.delete(:user_id)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="42">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="2" data-linenumber="41">
+          <span class="hits">2</span>
           
           <code class="ruby">    @current_user = nil</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="43">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="2" data-linenumber="42">
+          <span class="hits">2</span>
           
           <code class="ruby">    @permission = nil</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="44">
+        <li class="never" data-hits="" data-linenumber="43">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="45">
+        <li class="never" data-hits="" data-linenumber="44">
           
           
           <code class="ruby">end</code>
@@ -3693,11 +3687,11 @@
         <div class="source_table" id="0d52393d011dd79b354574fdcb94f2ad66587cb5">
   <div class="header">
     <h3>spec/helpers/sessions_helper_spec.rb</h3>
-    <h4><span class="green">94.44 %</span> covered</h4>
+    <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>18</b> relevant lines. 
-      <span class="green"><b>17</b> lines covered</span> and
-      <span class="red"><b>1</b> lines missed.</span>
+      <b>20</b> relevant lines. 
+      <span class="green"><b>20</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
   
@@ -3851,37 +3845,37 @@
         <li class="covered" data-hits="1" data-linenumber="25">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &quot;Should prevent that a current_user can make a login again&quot; do</code>
+          <code class="ruby">    it &quot;Should unassign a current_user, user_id and permission from session &quot; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="26">
           <span class="hits">1</span>
           
-          <code class="ruby">      block_access</code>
+          <code class="ruby">      sign_out</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="27">
+        <li class="covered" data-hits="1" data-linenumber="27">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">      expect(flash.now[:error]).to eq(&#39;Você já está logado&#39;)</code>
+          <code class="ruby">      expect(session[:user_id]).to eq(nil)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="28">
+        <li class="covered" data-hits="1" data-linenumber="28">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">      #except(response).to redirect_to(current_user_path)</code>
+          <code class="ruby">      expect(@current_user).to eq(nil)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="29">
+        <li class="covered" data-hits="1" data-linenumber="29">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">    end</code>
+          <code class="ruby">      expect(@permission).to eq(nil)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="30">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="31">
