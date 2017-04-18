@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
     @user = User.find_by(email: params[:session][:email].downcase)
       if @user && @user.authenticate(params[:session][:password]) && @user.active == true
         sign_in(@user)
+        flash[:success] = 'Login efetuado com sucesso!'
         redirect_to current_user
       else
         render 'new'
