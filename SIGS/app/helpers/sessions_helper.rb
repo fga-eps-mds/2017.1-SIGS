@@ -5,13 +5,11 @@ module SessionsHelper
     department_assistant = DepartmentAssistant.find_by(user_id: session[:user_id])
     administrative_assistant = AdministrativeAssistant.find_by(user_id: session[:user_id])
     if coordinator
-      @nvl = 1
-    end
-    if department_assistant
-      @nvl = 2
-    end
-    if administrative_assistant
-      @nvl = 3
+      @level = 1
+    elsif department_assistant
+      @level = 2
+    elsif administrative_assistant
+      @level = 3
     end
   end
 
@@ -26,7 +24,7 @@ module SessionsHelper
   end
 
   def permission
-    permission ||= @nvl
+    @permission ||= @nvl
   end
 
   def logged_in?

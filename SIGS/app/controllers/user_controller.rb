@@ -1,5 +1,9 @@
 class UserController < ApplicationController
   before_action :logged_in?, except: [:new,:create,:user_params]
+
+
+
+
   def new
 		@user = User.new
     @user.build_department_assistant
@@ -8,7 +12,17 @@ class UserController < ApplicationController
 	end
 
   def show
-      @user = User.find(params[:id])
+    @user = User.find(params[:id])
+    if (@user.id != current_user.id && (type(current_user)[:level]) != 3)
+      redirect_back fallback_location: {action: "show", id:current_user.id}
+    end
+  end
+
+  def index
+    @users = User.where('id !=?', current_user.id)
+    if (type(current_user)[:level] != 3)
+      redirect_back fallback_location: {action: "show", id:current_user.id}
+    end
   end
 
   #Creating a new user
@@ -18,6 +32,7 @@ class UserController < ApplicationController
       if params[:type] == "administrative_assistant"
         @administrative_assistant = AdministrativeAssistant.create(user_id: @user.id)
       end
+      redirect_to sign_in_path
       flash[:notice] = 'Cadastro efetuado com sucesso!'
     else
       render :new
@@ -27,6 +42,9 @@ class UserController < ApplicationController
   # Editing the user profile
   def edit
     @user = User.find(params[:id])
+    if (@user.id != current_user.id && (type(current_user)[:level]) != 3)
+      redirect_back fallback_location: {action: "show", id:current_user.id}
+    end
     #if @user != current_user
     #end
   end
@@ -45,13 +63,11 @@ class UserController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-
-    @users = User.all
-    if @users.count > 1
-      @user.destroy
-      redirect_to root_path
+    if (@user.id != current_user.id && (type(current_user)[:level]) != 3)
+      redirect_back fallback_location: {action: "show", id:current_user.id}
     else
-      redirect_to current_user
+      @user.destroy
+      redirect_to sign_in_path
     end
   end
 
@@ -68,4 +84,7 @@ class UserController < ApplicationController
                           :administrative_assistant_attributes => [:user_id])
     end
   end
+
+
+
 end
