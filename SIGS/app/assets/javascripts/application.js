@@ -47,6 +47,9 @@ $(document).ready(function(){
     $(".enterForm").unbind('submit').submit();
   })
 
+  $(".alert").hide().fadeIn(3000);
+  setTimeout("$(\".alert-sucess\").show().fadeOut(3000);", 10000);
+  setTimeout("$(\".alert-notice\").show().fadeOut(3000);", 10000);
 
 });
 

@@ -45,6 +45,11 @@
 
           <figure class="unbLogo"><a href="http://www.unb.br"><%= image_tag("rodape_unb") %></a></figure>
         </header>
+        <div class="alertContainer">
+          <% flash.each do |key, value| %>
+            <div class="alert alert-<%= key %>"><%= value %></div>
+          <% end %>
+        </div>
         <main class="mainConteiner">
           <%= yield %>
         </main>
