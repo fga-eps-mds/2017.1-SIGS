@@ -13,36 +13,10 @@
   padding:0;
 }
 
-/* navbar */
-.navbar-default.myNav {
-  background-color: #1c1c20;
-  border-color: #1c1c20;
-  padding: 10px;
-
-  img {
-    max-height: 80px;
-    width:auto;
-  }
-}
-
-@media only screen and (min-width:840px){
-
-  .navbar-default.myNav {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 0;
-    left: 0;
-    text-align: center;
-    padding-top: 50px;
-
-    img {
-      max-height: 180px;
-      margin:auto;
-      margin-bottom: 40px;
-    }
-  }
+.mainContainer h1,
+.mainContainer h2,
+.mainContainer h3 {
+  font-family: 'Sawasdee';
 }
 
 ::selection {
