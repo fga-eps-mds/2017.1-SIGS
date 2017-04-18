@@ -2,19 +2,19 @@
 
   <div class="flexContainer">
     <figure class="logo"><%= image_tag("sigs_logo") %></figure>
-    <h1>Novo Usuário</h1>
+    <div>
+      <h1>Novo Usuário</h1>
+    </div>
   </div>
   <!-- <section id="section-form"> -->
-  <div id="erro-message">
+
+  <ul id="erro-message">
     <% @user.errors.messages.values.each do |msg| %>
       <% msg.each do |m| %>
-        <li id="error_message"><%= m %></li>
+        <li><%= m %></li>
       <%end %>
     <% end %>
-    <% if flash[:error] -%>
-      <p class="error"><%= flash[:error] %></p>
-    <% end %>
-  </div>
+  </ul>
 
   <div id="form-new-user">
 
@@ -58,6 +58,7 @@
           <%= f.label :password, "Confirmar senha: " %>
           <%= f.password_field :password_confirmation, class: 'form-control'%>
 
+        <div id="dropdown-group">
           <div id="dropdown-department-assistant">
               <%= f.fields_for :department_assistant do |ff| %>
                 <p> Departamento </p>
@@ -71,6 +72,7 @@
               <%=ff.collection_select(:course_id,Course.all,:id,:name, include_blank: true)%>
             <% end %>
           </div>
+        </div>
 
         <div class="actions">
           <%= f.submit "Enviar", class: 'pull-right btn btn-default btn-success' %>
