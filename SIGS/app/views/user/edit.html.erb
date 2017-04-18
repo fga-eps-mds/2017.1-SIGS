@@ -1,35 +1,29 @@
-<div class="col-sm-6">
-  <div class="panel panel-primary">
-    <div class="panel-heading">Alteração de Cadastro</div>
-    <div class="panel-body">
+<h1>Minha Conta</h1>
+
+
       <%= form_for @user, :url => {:action=> "update"} do |user| %>
-      <div class="col-sm-12">
 
-        <div class="form-group">
-          <%= user.label :name, "Nome: " %>
-          <%= user.text_field :name, class: "form-control", placeholder: "Digite seu nome completo" %><br>
+        <%= user.label :name, "E-mail" %>
+        <%= user.text_field :name, class: "form-control", value: @user.email, :disabled => true %><br>
+
+        <%= user.label :name, "CPF" %>
+        <%= user.text_field :name, class: "form-control", value: @user.cpf, :disabled => true %><br>
+
+        <%= user.label :name, "Registro UnB" %>
+        <%= user.text_field :name, class: "form-control", value: @user.registration, :disabled => true %><br>
+
+        <%= user.label :name, "Nome: " %>
+        <%= user.text_field :name, class: "form-control", placeholder: "Digite seu nome completo" %><br>
+
+        <%= user.label :password, "Senha: " %>
+        <%= user.password_field :password, class: "form-control", placeholder: "Digite sua senha" %><br>
+
+        <label for="confirm_password">Confirmar Senha: </label>
+        <input type="text" name="confirm_password" id="confirm_password" class= "form-control" placeholder= "Digite sua senha"/>
+
+        <div class="actions">
+          <%= user.submit "Salvar", class: "pull-right btn btn-default btn-success" %>
+          <%= link_to "Excluir Conta", user_destroy_path, class: "btn btn-default btn-danger" %>
         </div>
-
-        <div class="form-group">
-          <%= user.label :email, "E-mail: " %>
-          <%= user.text_field :email, class: "form-control", placeholder: "Digite seu e-mail" %><br>
-        </div>
-
-        <div class="form-group">
-          <%= user.label :password, "Senha: " %>
-          <%= user.password_field :password, class: "form-control", placeholder: "Digite sua senha" %><br>
-        </div>
-
-        <!-- Input HTML -->
-        <div class="form-group">
-          <label for="confirm_password">Confirmar Senha: </label>
-          <input type="text" name="confirm_password" id="confirm_password" class= "form-control" placeholder= "Digite sua senha"/>
-        </div>
-        <!-- Input HTML -->
-
-        <%= user.submit "enviar", class: "pull-right btn btn-default btn-success" %>
       </div>
       <% end %>
-    </div>
-  </div>
-</div>

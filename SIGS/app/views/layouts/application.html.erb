@@ -17,20 +17,46 @@
   <body>
 
     <% if current_user %>
-      <main class="col-sm-9" style="background-color:blue">
-        <%= yield %>
-      </main>
+      <div class="container container-fluid myContainer">
+        <header class="navbar-default myNav">
+          <figure class="logo"><%= image_tag("sigs_logo") %></figure>
 
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+
+          <ul class="nav navbar-nav">
+            <li><%= link_to "Minha Conta", user_edit_path(current_user) %></li>
+            <li><%= link_to 'Logout', sign_out_path, method: "delete" %></li>
+            <li><a href="#">Turmas</a></li>
+            <li><a href="#">Salas</a></li>
+            <li class="dropdown">
+              <a data-toggle="collapse" href="#demo">Usuários
+                <ul class="collapse" id="demo">
+                  <li><a href="#">Cadastros Pendentes</a></li>
+                  <li><%= link_to "Usuários Registrados", user_index_path(current_user.id) %></li>
+                </ul>
+              </li>
+            <li><a href="#">Alocações</a></li>
+          </ul>
+
+          <figure class="unbLogo"><a href="http://www.unb.br"><%= image_tag("rodape_unb") %></a></figure>
+        </header>
+        <div class="alertContainer">
+          <% flash.each do |key, value| %>
+            <div class="alert alert-<%= key %>"><%= value %></div>
+          <% end %>
+        </div>
+        <main class="mainConteiner">
+          <%= yield %>
+        </main>
+      </div>
     <% else %>
-      <main class="container container-fluid" id="signIn">
-        <div class="login">
-          <div><figure><%= image_tag("sigs_logo") %></figure></div>
-          <div>
-            <%= yield %>
-          </div>
-          <div><figure><a href="http://www.unb.br"><%= image_tag("rodape_unb") %></a></figure></div>
-        </div><!-- ./login -->
-        <div><h1>Sistema Inteligente de Gestão de Salas</h1></div>
+      <main class="container container-fluid myContainer" id="signIn">
+        <%= yield %>
       </main>
     <% end %>
 
