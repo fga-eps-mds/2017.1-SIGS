@@ -1,7 +1,10 @@
 class SessionsController < ApplicationController
-  before_action :block_access, except: [:destroy]
   def new
-    render 'new'
+    if current_user.present?
+      redirect_to current_user , notice: 'Você já está logado'
+    else
+      render 'new'
+    end
   end
 
   def create

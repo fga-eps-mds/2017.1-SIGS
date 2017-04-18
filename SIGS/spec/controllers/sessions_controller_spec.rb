@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe SessionsController, type: :controller do
-  
+
   describe "Test methods of Controller Sessions" do
 
     before(:each) do
@@ -41,7 +41,13 @@ RSpec.describe SessionsController, type: :controller do
       delete :destroy
       expect(session[:user_id]).to eq(nil)
       expect(@current_user).to eq(nil)
+      expect(@level).to eq(nil)
       expect(response).to redirect_to(root_url)
+    end
+    it "Should not create a session if user is logged in" do
+      post :create ,params: {session: {email: 'test@test.com',password: '123'}}
+      get :new
+      expect(flash.now[:notice]).to eq('Você já está logado')
     end
 
   end
