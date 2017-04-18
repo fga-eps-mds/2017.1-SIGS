@@ -1,3 +1,3 @@
 class Discipline < ApplicationRecord
-  belongs_to :departament
+  belongs_to :department
 end

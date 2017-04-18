@@ -26,14 +26,14 @@ class ParsersController < ApplicationController
     end
   end
 
-  def upload_departaments
+  def upload_departments
     document = params[:document]
     if document
-      File.open(Rails.root.join('public', 'csv', 'file_departaments.csv'), 'wb') do |file|
+      File.open(Rails.root.join('public', 'csv', 'file_departments.csv'), 'wb') do |file|
         file.write(document.read)
       end
 
-      Parser.save_data_departaments('public/csv/file_departaments.csv')
+      Parser.save_data_departments('public/csv/file_departments.csv')
       redirect_to 'http://192.168.2.15:3000/'
 
     else

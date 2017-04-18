@@ -24,13 +24,13 @@ ActiveRecord::Schema.define(version: 20170418005650) do
     t.string   "code"
     t.string   "name"
     t.integer  "shift"
-    t.integer  "departament_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.index ["departament_id"], name: "index_courses_on_departament_id", using: :btree
+    t.integer  "department_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["department_id"], name: "index_courses_on_department_id", using: :btree
   end
 
-  create_table "departaments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "departments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "code"
     t.string   "name"
     t.string   "acronym"
@@ -41,10 +41,10 @@ ActiveRecord::Schema.define(version: 20170418005650) do
   create_table "disciplines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "code"
     t.string   "name"
-    t.integer  "departament_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.index ["departament_id"], name: "index_disciplines_on_departament_id", using: :btree
+    t.integer  "department_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["department_id"], name: "index_disciplines_on_department_id", using: :btree
   end
 
   create_table "parsers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -64,6 +64,6 @@ ActiveRecord::Schema.define(version: 20170418005650) do
     t.index ["building_id"], name: "index_rooms_on_building_id", using: :btree
   end
 
-  add_foreign_key "courses", "departaments"
-  add_foreign_key "disciplines", "departaments"
+  add_foreign_key "courses", "departments"
+  add_foreign_key "disciplines", "departments"
 end

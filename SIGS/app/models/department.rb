@@ -1,4 +1,4 @@
-class Departament < ApplicationRecord
+class Department < ApplicationRecord
 	has_many :courses
 	has_many :disciplines
 end

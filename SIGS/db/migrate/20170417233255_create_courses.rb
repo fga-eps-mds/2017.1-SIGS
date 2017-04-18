@@ -4,7 +4,7 @@ class CreateCourses < ActiveRecord::Migration[5.0]
       t.string :code
       t.string :name
       t.integer :shift
-      t.references :departament, foreign_key: true
+      t.references :department, foreign_key: true
 
       t.timestamps
     end
