@@ -1,0 +1,93 @@
+/* NAV BAR COLORS
+ #1c1c20: navbar background
+ #1c1c20;/**/ /* navbar border
+ #FFF: default color
+ #EEE: hover color (#FFFFFF for .nav-brand)
+ #555: active color
+ #D5D5D5: active background
+ #37c945: Verde Logo
+*/
+
+.container.container-fluid{
+  margin:0;
+  padding:0;
+}
+
+.container.container-fluid h1,
+.container.container-fluid h2,
+.container.container-fluid h3 {
+  font-family: 'Sawasdee';
+}
+
+.container.container-fluid  h1{
+  margin: 60px 0;
+}
+
+.container {
+  width: 98vw !important;
+}
+
+.container.container-fluid .mainConteiner {
+  color: #1c1c20;
+  margin-bottom: 100px;
+}
+
+::selection {
+  background-color: #009c4d;
+  color: #FFF;
+}
+
+.flexContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flexColumn {
+  flex-direction: column;
+}
+
+.alignEnd {
+  align-items: flex-end;
+}
+
+.alertContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  float: right;
+}
+.alert.alert-success,
+.alert.alert-notice,
+.alert.alert-error{
+  border-radius:0;
+  color:#FFF;
+  box-shadow: 2px 2px 10px #777;
+  padding:10px;
+  margin: 0;
+  margin-bottom: 10px;
+  border: none;
+}
+
+.alert.alert-success {
+  background: #73d97d;
+}
+
+.alert.alert-notice {
+  background: #388de2;
+}
+
+.alert.alert-error {
+  background: #e23838;
+}
+
+.container.container-fluid .mainConteiner.table {
+  width: 100%;
+}
+
+/* Fontes */
+@font-face {
+  font-family: 'Sawasdee';
+  src:url('Sawasdee.ttf');
+  font-weight: normal;
+  font-style: normal;
+}

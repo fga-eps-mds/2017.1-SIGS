@@ -1,16 +1,25 @@
-<table>
-  <tr>
-    <th>Nome</th>
-    <th>Email</th>
-    <th>CPF</th>
-    <th>Matricula</th>
-  </tr>
-<% @users.each do |user| %>
-  <tr>
-    <td><%= user.name%></td>
-    <td><%= user.email%></td>
-    <td><%= user.cpf %></td>
-    <td><%= user.registration %></td>
-  </tr>
+<h1>Solicitações Pendentes</h1>
+<% if @users.count == 0 %>
+  <h3>Não há nenhuma solitação pendente no momento.</h3>
+<% else %>
+  <table border="1" class="table">
+    <tr>
+      <th>Nome</th>
+      <th>Registro</th>
+      <th>CPF</th>
+      <th>E-mail</th>
+      <th>Ações</th>
+      <th></th>
+    </tr>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.name %></td>
+      <td><%= user.registration %></td>
+      <td><%= user.cpf %></td>
+      <td><%= user.email %></td>
+      <td><%= link_to 'Aprovar', enable_registration_path(user.id) %></td>
+      <td><%= link_to 'Recusar', decline_registration_path(user.id) %></td>
+    </tr>
+  <% end %>
+  </table>
 <% end %>
-</table>

@@ -1,17 +1,33 @@
-<h1>Login</h1>
+  <div class="login">
+    <div><figure><%= image_tag("sigs_logo") %></figure></div>
+    <div>
+      <%= form_for :session, url: sign_in_path, html: {class: "enterForm"} do |f| %>
+          <div class="field">
+            <%= f.email_field :email, autofocus: true, placeholder: "E-mail" %>
+          </div>
 
-<%= form_for :session, url: sign_in_path do |f| %>
-    <div class="field">
-      <p>Email</p>
-      <%= f.email_field :email, autofocus: true %>
+          <div class="field">
+            <%= f.password_field :password, autocomplete: "off", placeholder: "Senha" %>
+          </div>
+          <div class="actions flexContainer alignEnd">
+            <%= link_to "Solicitar Cadastro", user_new_path %>
+            <%= f.submit "Entrar", class: "btn btn-login btnEnter" %>
+          </div>
+        <% end %>
     </div>
-
-    <div class="field">
-      <p>Senha</p>
-      <%= f.password_field :password, autocomplete: "off" %>
+    <!-- Error Modal -->
+    <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="alert alert-warning errorTxt" role="alert"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="actions">
-      <br><%= f.submit "Entrar" %>
-    </div>
-  <p>Não está cadastrado? Se cadastre <%= link_to "aqui", new_user_path %></p>
-  <% end %>
+    <div><figure><%= link_to image_tag("rodape_unb"), 'http://www.unb.br' %></figure></div>
+  </div><!-- ./login -->
+  <div><h1 class="titleSigs">Sistema Inteligente de Gestão de Salas</h1></div>

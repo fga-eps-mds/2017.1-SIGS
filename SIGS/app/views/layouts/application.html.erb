@@ -1,7 +1,13 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>SIGS</title>
+    <%= favicon_link_tag %>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Sistema de Alocação de Salas Inteligente da UnB.">
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +15,50 @@
   </head>
 
   <body>
-    <%= yield %>
+
+    <% if current_user %>
+      <div class="container container-fluid myContainer">
+        <header class="navbar-default myNav">
+          <figure class="logo"><%= image_tag("sigs_logo") %></figure>
+
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+
+          <ul class="nav navbar-nav">
+            <li><%= link_to "Minha Conta", user_edit_path(current_user) %></li>
+            <li><%= link_to 'Logout', sign_out_path, method: "delete" %></li>
+            <li><a href="#">Turmas</a></li>
+            <li><a href="#">Salas</a></li>
+            <li class="dropdown">
+              <a data-toggle="collapse" href="#demo">Usuários
+                <ul class="collapse" id="demo">
+                  <li><a href="#">Cadastros Pendentes</a></li>
+                  <li><%= link_to "Usuários Registrados", user_index_path(current_user.id) %></li>
+                </ul>
+              </li>
+            <li><a href="#">Alocações</a></li>
+          </ul>
+
+          <figure class="unbLogo"><a href="http://www.unb.br"><%= image_tag("rodape_unb") %></a></figure>
+        </header>
+        <div class="alertContainer">
+          <% flash.each do |key, value| %>
+            <div class="alert alert-<%= key %>"><%= value %></div>
+          <% end %>
+        </div>
+        <main class="mainConteiner">
+          <%= yield %>
+        </main>
+      </div>
+    <% else %>
+      <main class="container container-fluid myContainer" id="signIn">
+        <%= yield %>
+      </main>
+    <% end %>
+
   </body>
 </html>

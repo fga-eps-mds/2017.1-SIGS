@@ -2,64 +2,51 @@ Rails.application.routes.draw do
 
   root 'sessions#new'
 
-### Coordinator - ROUTES
-  get 'coordinator/registration_request'
-
-  get 'coordinator/edit'
-
-  get 'coordinator/update'
-
-  get 'coordinator/show:id' => 'coordinator#show', as: 'coordinator_show'
-
-  get 'coordinator/destroy'
-
-  get 'coordinator/enable'
-
-  #user
-  get '/user/:id' => 'user#show', :as => 'user'
+  # Sessions
 
   root 'sessions#new'
+
   #login
   get 'sign_in' => 'sessions#new'
   post 'sign_in' => 'sessions#create'
-  get 'sign_out' => 'sessions#destroy'
-  ###
+  delete 'sign_out' => 'sessions#destroy'
 
-  get 'user/update'
+  # User
+  get 'user/index' => 'user#index', :as => 'user_index'
 
-  get 'user/new' => 'user#new' , as: 'new_user'
+  get 'user/new' => 'user#new' , :as => 'user_new'
 
-  get 'user/create'
+  post 'user/new' => 'user#create' , :as =>'user_create'
 
-  get 'user/edit'
+  get '/user/:id' => 'user#show', :as => 'user'
 
-### Department Assistant - ROUTES
-  get 'department_assistant/registration_request' => 'department_assistant#registration_request'
+  get 'user/edit/:id' => 'user#edit', as: 'user_edit'
 
-  get 'department_assistant/index/:id' => 'department_assistant#index', as: 'index'
+  patch 'user/update/:id', controller: 'user', action: 'update', as: 'user_update'
 
-  get 'department_assistant/edit' => 'department_assistant#edit'
+  get 'user/destroy/:id' => 'user#destroy', as: 'user_destroy'
 
-  get 'department_assistant/update' => 'department_assistant#update'
+  # Administrative Assistant
 
-  get 'department_assistant/show/:id' => 'department_assistant#show', as: 'show'
+  # Coordinator
 
-  get 'department_assistant/destroy/:id' => 'department_assistant#destroy', as: 'destroy'
+  # Department Assistant
 
-  get 'department_assistant/enable' => 'department_assistant#enable'
+  get 'administrative_assistant/enable_registration/:id' => 'administrative_assistant#enable_registration', as: 'enable_registration'
+  get 'administrative_assistant/registration_request' => 'administrative_assistant#registration_request', as: 'registration_request'
+  get 'administrative_assistant/decline_registration/:id' => 'administrative_assistant#decline_registration', as: 'decline_registration'
 ###
-
-### Administrative Assistant - ROUTES
-  get 'administrative_assistant/show/:id' => 'administrative_assistant#show', as: 'adm_show'
-  get 'administrative_assistant/remove/:id' => 'administrative_assistant#remove', as: 'adm_remove'
-  get 'administrative_assistant/index_users' => 'administrative_assistant#index_users'
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 # Parsers
   post "/upload_buildings", controller: 'parsers', action: 'upload_buildings'
   post "/upload", controller: 'parsers', action: 'upload_rooms'
   post "/parsers", controller: 'parsers', action: 'index', :as => "index_parser"
+  post "/upload_departament", controller: 'parsers', action: 'upload_departaments'
+  post "/upload_courses", controller: 'parsers', action: 'upload_courses'
+  post "/upload_disciplines", controller: 'parsers', action: 'upload_disciplines'
   resources :parsers
+
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
 
 end

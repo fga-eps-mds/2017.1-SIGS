@@ -6,34 +6,23 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# ======= Departament =========
-department_1 = Department.new
-department_1.name = 'Engenharia'
-department_1.save!
+# Departaments
+department = Department.create(code: '789', name: 'Engenharia')
 
-# ========= Courses ===============
-course_1 = Course.new
-course_1.code = '10'
-course_1.name = 'Engenharia de Software'
-course_1.department_id = department_1.id
-course_1.save!
+# Courses
+course = Course.create(code: '10', name: 'Engenharia de Software', department: department)
 
-# ========== Users ==============
-user_1 = User.new
-user_1.name = 'Caio'
-user_1.email = 'caio@gmail.com'
-user_1.password = '12345'
-user_1.cpf = '111-111-111.11'
-user_1.registration = 'matricula1'
-user_1.save!
+# Users - Coordinator
+user_1 = User.create(name: 'Caio Filipe', email: 'caio@unb.br', cpf: '05012345678', registration: '1234567', active: true, password: '123456')
+coordinator = Coordinator.create(user: user_1, course: course, department_id: department.id)
 
-# ========== Coordinator =================
-coordinator_1 = Coordinator.new
-coordinator_1.department_id = department_1.id
-coordinator_1.course_id = course_1.id
-coordinator_1.user_id = user_1.id
-coordinator_1.save!
+# Users - DepartmentAssistant
+user_2 = User.create(name: 'João Pedro', email: 'joao@unb.br', cpf: '05012349999', registration: '1234599', active: true, password: '123456')
+department_assistant = DepartmentAssistant.create(user: user_2, department: department)
 
+# Users - AdministrativeAssistant
+user_3 = User.create(name: 'Wallacy Braz', email: 'wallacy@unb.br', cpf: '05012348888', registration: '1234588', active: true, password: '123456')
+administrative_assistant = AdministrativeAssistant.create(user: user_3)
 buildings = Building.create([
   {code: 'pjc', name: 'Pavilhão João Calmon', wing: 'Norte'},
   {code: 'PAT', name: 'Pavilhão Anísio Teixeira', wing: 'norte'},

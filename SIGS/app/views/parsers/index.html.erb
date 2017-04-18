@@ -15,3 +15,32 @@
 		<%= submit_tag 'Enviar'%>
 
 	<% end %>
+
+<br><br><br>
+
+	<h3> Parser para departamento</h3>
+	<%= form_tag upload_departament_path, multipart: true do  %>
+		<%= file_field_tag 'document', accept: '.csv'%>
+		<%= submit_tag 'Enviar'%>
+
+	<% end %>
+
+	<br><br><br>
+
+	<h3> Parser para cursos</h3>
+	<%= form_tag upload_courses_path, multipart: true do  %>
+		<%= file_field_tag 'document', accept: '.csv'%>
+		<%= submit_tag 'Enviar'%>
+
+	<% end %>
+
+	<br><br><br>
+
+	<h3> Parser para os disciplina </h3>
+	<%= form_tag upload_disciplines_path, multipart: true do  %>
+		<%= file_field_tag 'document', accept: '.csv'%>
+		<%= submit_tag 'Enviar'%>
+
+	<% end %>
+
+<br><br><br>
