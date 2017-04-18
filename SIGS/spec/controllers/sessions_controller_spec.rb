@@ -41,7 +41,6 @@ RSpec.describe SessionsController, type: :controller do
       delete :destroy
       expect(session[:user_id]).to eq(nil)
       expect(@current_user).to eq(nil)
-      expect(@level).to eq(nil)
       expect(response).to redirect_to(root_url)
     end
     it "Should not create a session if user is logged in" do

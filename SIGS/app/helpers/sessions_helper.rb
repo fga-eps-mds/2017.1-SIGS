@@ -2,6 +2,13 @@ module SessionsHelper
 
   def sign_in(user)
     session[:user_id] = user.id
+  end
+
+  def current_user
+    @current_user ||= User.find_by(id: session[:user_id])
+  end
+
+  def permission
     coordinator = Coordinator.find_by(user_id: session[:user_id])
     department_assistant = DepartmentAssistant.find_by(user_id: session[:user_id])
     administrative_assistant = AdministrativeAssistant.find_by(user_id: session[:user_id])
@@ -12,13 +19,6 @@ module SessionsHelper
   elsif administrative_assistant
       @level = 3
     end
-  end
-
-  def current_user
-    @current_user ||= User.find_by(id: session[:user_id])
-  end
-
-  def permission
     @permission ||= @level
   end
 

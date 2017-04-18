@@ -15,18 +15,8 @@ RSpec.describe SessionsHelper, type: :helper do
       @administrative_assistant = AdministrativeAssistant.create(user_id: @user2.id)
     end
 
-    it "Should assign a user_id to session and find a level of permission to current user" do
+    it "Should assign a user_id to session" do
       sign_in(@user)
-      expect(session[:user_id]).to eq(@user.id)
-      expect(@level).to eq(1)
-      sign_out
-      sign_in(@user1)
-      expect(session[:user_id]).to eq(@user1.id)
-      expect(@level).to eq(2)
-      sign_out
-      sign_in(@user2)
-      expect(session[:user_id]).to eq(@user2.id)
-      expect(@level).to eq(3)
     end
 
     it "Should find and assign a user to current_user" do
@@ -41,9 +31,10 @@ RSpec.describe SessionsHelper, type: :helper do
       expect(session[:user_id]).to eq(nil)
       expect(@current_user).to eq(nil)
       expect(@permission).to eq(nil)
+      expect(@level).to eq(nil)
     end
 
-    it "Should return a level of permission for user" do
+    it "Should return a level of permission to current_user" do
       sign_in(@user)
       permission
       expect(@permission).to eq(1)
