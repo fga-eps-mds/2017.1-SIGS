@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170414142545) do
+ActiveRecord::Schema.define(version: 20170418005650) do
 
   create_table "buildings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "code"
@@ -18,6 +18,33 @@ ActiveRecord::Schema.define(version: 20170414142545) do
     t.string   "wing"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "courses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "code"
+    t.string   "name"
+    t.integer  "shift"
+    t.integer  "departament_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["departament_id"], name: "index_courses_on_departament_id", using: :btree
+  end
+
+  create_table "departaments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "code"
+    t.string   "name"
+    t.string   "acronym"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "disciplines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "code"
+    t.string   "name"
+    t.integer  "departament_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["departament_id"], name: "index_disciplines_on_departament_id", using: :btree
   end
 
   create_table "parsers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -37,4 +64,6 @@ ActiveRecord::Schema.define(version: 20170414142545) do
     t.index ["building_id"], name: "index_rooms_on_building_id", using: :btree
   end
 
+  add_foreign_key "courses", "departaments"
+  add_foreign_key "disciplines", "departaments"
 end
