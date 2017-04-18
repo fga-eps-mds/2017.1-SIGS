@@ -13,10 +13,19 @@
   padding:0;
 }
 
-.mainContainer h1,
-.mainContainer h2,
-.mainContainer h3 {
+.container.container-fluid h1,
+.container.container-fluid h2,
+.container.container-fluid h3 {
   font-family: 'Sawasdee';
+}
+
+.container.container-fluid  h1{
+  margin: 60px 0;
+}
+
+.container.container-fluid .mainConteiner {
+  color: #1c1c20;
+  margin-bottom: 100px;
 }
 
 ::selection {
