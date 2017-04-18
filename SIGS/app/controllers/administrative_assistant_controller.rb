@@ -13,13 +13,22 @@ class AdministrativeAssistantController < ApplicationController
 
   def enable_registration
     @user = User.find(params[:id])
-    @user.update_attributes(active: true)
+    if @user.update_attributes(active: true)
+      flash[:success] = "Usuário aprovado com sucesso"
+    else
+      flash[:error] = "Não foi possivel aprovar o usuário"
+    end
     redirect_to registration_request_path
   end
 
   def decline_registration
     @user = User.find(params[:id])
-    @user.destroy
+    if @user.destroy
+      flash[:success] = "Usuário recusado com sucesso"
+    else
+      flash[:error] = "Não foi possivel recusar o usuário"
+    end
+    redirect_to registration_request_path
   end
 
   #Funções de edição de outros usuários
