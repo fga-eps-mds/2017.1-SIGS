@@ -30,7 +30,7 @@
 
           <ul class="nav navbar-nav">
             <li><%= link_to "Minha Conta", user_edit_path %></li>
-            <li><a href="#">Logout</a></li>
+            <li><%= link_to 'Logout', sign_out_path, method: "delete" %></li>
             <li><a href="#">Turmas</a></li>
             <li><a href="#">Salas</a></li>
             <li class="dropdown">
