@@ -13,15 +13,10 @@ Rails.application.routes.draw do
 
 ### User - ROUTES
   patch 'user/update/:id', controller: 'user', action: 'update', as: 'user_update'
-
   get 'user/new' => 'user#new' , :as => 'user_new'
-
   get '/user/:id' => 'user#show', :as => 'user'
-
   post 'user/new' => 'user#create' , :as =>'user_create'
-
   get 'user/edit/:id' => 'user#edit', as: 'user_edit'
-
   get 'user/destroy/:id' => 'user#destroy', as: 'user_destroy'
 ###
 

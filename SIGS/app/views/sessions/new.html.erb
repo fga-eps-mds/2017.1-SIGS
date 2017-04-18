@@ -1,3 +1,5 @@
+<h1>Login</h1>
+<%= flash_message %>
 <%= form_for :session, url: sign_in_path do |f| %>
     <div class="field">
       <%= f.email_field :email, autofocus: true, placeholder: "E-mail" %>

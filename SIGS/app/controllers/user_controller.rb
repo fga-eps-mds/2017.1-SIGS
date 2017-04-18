@@ -9,6 +9,9 @@ class UserController < ApplicationController
 
   def show
       @user = User.find(params[:id])
+      if @user.id != current_user.id && permission != 3
+        redirect_to current_user
+      end
   end
 
   #Creating a new user
