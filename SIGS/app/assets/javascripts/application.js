@@ -33,7 +33,19 @@ $(document).ready(function(){
       $("#dropdown-coordinator").hide();
       $("#dropdown-department-assistant").hide();
     }
-});
+  });
+
+  $(".enterForm").bind('submit', function(e) {
+    if ($("#session_email").val() == '' || $("#session_password") == '') {
+      e.preventDefault();
+      $("#errorModal").modal('show');
+      $(".errorTxt").html("Por favor, preencha os campos <strong>Nome de Usuário</strong> e <strong>Senha</strong> corretamente.");
+    }
+  });
+
+  $('#errorModal').on('hidden.bs.modal', function () {
+    $(".enterForm").unbind('submit').submit();
+  })
 
 
 });

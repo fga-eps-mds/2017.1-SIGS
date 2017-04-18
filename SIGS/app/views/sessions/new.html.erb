@@ -1,7 +1,7 @@
   <div class="login">
     <div><figure><%= image_tag("sigs_logo") %></figure></div>
     <div>
-      <%= form_for :session, url: sign_in_path do |f| %>
+      <%= form_for :session, url: sign_in_path, html: {class: "enterForm"} do |f| %>
           <div class="field">
             <%= f.email_field :email, autofocus: true, placeholder: "E-mail" %>
           </div>
@@ -11,10 +11,23 @@
           </div>
           <div class="actions flexContainer alignEnd">
             <%= link_to "Solicitar Cadastro", user_new_path %>
-            <%= f.submit "Entrar", class: "btn btn-login" %>
+            <%= f.submit "Entrar", class: "btn btn-login btnEnter" %>
           </div>
         <% end %>
     </div>
-    <div><figure><a href="http://www.unb.br"><%= image_tag("rodape_unb") %></a></figure></div>
+    <!-- Error Modal -->
+    <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="alert alert-warning errorTxt" role="alert"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div><figure><%= link_to image_tag("rodape_unb"), 'http://www.unb.br' %></figure></div>
   </div><!-- ./login -->
   <div><h1 class="titleSigs">Sistema Inteligente de Gestão de Salas</h1></div>
