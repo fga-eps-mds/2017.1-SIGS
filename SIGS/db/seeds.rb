@@ -23,3 +23,9 @@ department_assistant = DepartmentAssistant.create(user: user_2, department: depa
 # Users - AdministrativeAssistant
 user_3 = User.create(name: 'Wallacy Braz', email: 'wallacy@unb.br', cpf: '05012348888', registration: '1234588', active: true, password: '123456')
 administrative_assistant = AdministrativeAssistant.create(user: user_3)
+buildings = Building.create([
+  {code: 'pjc', name: 'Pavilhão João Calmon', wing: 'Norte'},
+  {code: 'PAT', name: 'Pavilhão Anísio Teixeira', wing: 'norte'},
+  {code: 'BSAS', name: 'Bloco de Salas da Ala Sul', wing: 'sul'},
+  {code: 'BSAN', name: 'Bloco de Salas da Ala Norte', wing: 'norte'},          
+          ])

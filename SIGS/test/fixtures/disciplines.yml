@@ -3,12 +3,9 @@
 one:
   code: MyString
   name: MyString
-  shift: 1
-  department: one
+  departament: one
 
 two:
   code: MyString
   name: MyString
-  shift: 1
-  department: two
-
+  departament: two
