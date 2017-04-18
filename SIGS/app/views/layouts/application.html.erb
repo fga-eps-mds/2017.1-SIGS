@@ -29,7 +29,7 @@
 					</button>
 
           <ul class="nav navbar-nav">
-            <li><%= link_to "Minha Conta", user_edit_path %></li>
+            <li><%= link_to "Minha Conta", user_edit_path(current_user) %></li>
             <li><%= link_to 'Logout', sign_out_path, method: "delete" %></li>
             <li><a href="#">Turmas</a></li>
             <li><a href="#">Salas</a></li>
@@ -37,7 +37,7 @@
               <a data-toggle="collapse" href="#demo">Usuários
                 <ul class="collapse" id="demo">
                   <li><a href="#">Cadastros Pendentes</a></li>
-                  <li><a href="#">Usuários Registrados</a></li>
+                  <li><%= link_to "Usuários Registrados", index_users_path %></li>
                 </ul>
               </li>
             <li><a href="#">Alocações</a></li>

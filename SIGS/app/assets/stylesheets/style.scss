@@ -80,8 +80,11 @@
   background: #e23838;
 }
 
-/* Fontes */
+.container.container-fluid .mainConteiner.table {
+  width: 100%;
+}
 
+/* Fontes */
 @font-face {
   font-family: 'Sawasdee';
   src:url('Sawasdee.ttf');
