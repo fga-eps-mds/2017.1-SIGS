@@ -48,7 +48,7 @@ $(document).ready(function(){
   })
 
   $(".alert").hide().fadeIn(3000);
-  setTimeout("$(\".alert-sucess\").show().fadeOut(3000);", 10000);
+  setTimeout("$(\".alert-success\").show().fadeOut(3000);", 10000);
   setTimeout("$(\".alert-notice\").show().fadeOut(3000);", 10000);
 
 });
