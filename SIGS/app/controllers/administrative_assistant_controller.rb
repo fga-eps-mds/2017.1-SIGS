@@ -7,11 +7,8 @@ class AdministrativeAssistantController < ApplicationController
 
   def enable_registration
     @user = User.find(params[:id])
-    if @user.update_attributes(active: true)
-      flash[:success] = "Usuário aprovado com sucesso"
-    else
-      flash[:error] = "Não foi possivel aprovar o usuário"
-    end
+    @user.update_attributes(active: true)
+    flash[:success] = "Usuário aprovado com sucesso"
     redirect_to registration_request_path
   end
 
