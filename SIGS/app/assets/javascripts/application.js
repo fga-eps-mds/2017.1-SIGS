@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
+//= require data-confirm-modal
 //= require_tree .
 
 /* Script para Página de Cadastro */
@@ -53,20 +54,3 @@ $(document).ready(function(){
 
 });
 
-// $("#dropdown-department-assistant").hide();
-// $("#dropdown-coordinator").hide();
-//
-// $("input:radio[name='type']").change(function(){
-//
-//     if(this.value == 'department_assistant' && this.checked){
-//       $("#dropdown-department-assistant").show();
-//     }else{
-//       $("#dropdown-department-assistant").hide();
-//     }
-//
-//     if(this.value == 'coordinator' && this.checked){
-//       $("#dropdown-coordinator").show();
-//     }else{
-//       $("#dropdown-coordinator").hide();
-//     }
-// });

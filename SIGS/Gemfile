@@ -6,7 +6,9 @@ git_source(:github) do |repo_name|
 end
 
 gem 'simplecov' , :require => false  , :group => :test
+
 gem 'rspec-rails'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.2'
 # Use mysql as the database for Active Record
@@ -44,9 +46,17 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
 
+gem 'data-confirm-modal', '~> 1.1', '>= 1.1.1'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  gem 'cucumber-rails', :require => false
+  gem 'launchy'
+  gem 'rspec-rails'
+  #gem 'capybara'
+  gem 'database_cleaner'
+  #gem 'selenium-webdriver', '~> 2.53'
 end
 
 group :development do

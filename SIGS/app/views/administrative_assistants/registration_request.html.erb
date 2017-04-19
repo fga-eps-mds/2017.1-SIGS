@@ -1,0 +1,23 @@
+<h1>Solicitações Pendentes</h1>
+<% if @users.count == 0 %>
+  <h3>Não há nenhuma solitação pendente no momento.</h3>
+<% else %>
+  <table class="table">
+    <tr>
+      <th>Nome</th>
+      <th>Registro</th>
+      <th>CPF</th>
+      <th>E-mail</th>
+    </tr>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.name %></td>
+      <td><%= user.registration %></td>
+      <td><%= user.cpf %></td>
+      <td><%= user.email %></td>
+      <td><%= link_to image_tag('approve'), enable_registration_path(user.id) %></td>
+      <td><%= link_to image_tag('recuse'), decline_registration_path(user.id) %></td>
+    </tr>
+  <% end %>
+  </table>
+<% end %>

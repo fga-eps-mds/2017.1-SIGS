@@ -11,28 +11,34 @@ class User < ApplicationRecord
 #name
 validates_length_of :name,
 		:within => 7..100,
-		:too_short => 'Nome tem que ter no minimo 7 caracters',
-		:too_long => 'Nome pode ter no maximo 100 caracters'
+		:too_short => 'O Nome deve ter no mínimo 7 caracteres',
+		:too_long => 'Nome deve ter no máximo 100 caracters'
 
 # email
 VALID_EMAIL_REGEX = /\A[\w+\-.]+@unb.br\z/i
 
-validates :email, :presence => { :message => 'Email não pode ser vazio' },
-	length: { maximum: 50}, uniqueness: true, confirmation: true,
-	format: { with: VALID_EMAIL_REGEX, :message => 'Insira um e-mail válido'}
+validates :email, :presence => { :message => 'E-mail não pode ser vazio' },
+	length: { maximum: 50}, :uniqueness => { :message => 'E-mail já cadastrado no sistema' } ,
+	format: { with: VALID_EMAIL_REGEX, :message => 'Insira um E-mail válido'}
 
 # password
-validates :password, length: { minimum: 6, maximum: 20, :message => 'Senha deve possuir o mínimo 6 e máximo de 20 caracteres' }, confirmation: true, on: :create		  			
+validates :password, length: { minimum: 6, maximum: 20, :message => 'Senha deve possuir no mínimo 6 e no máximo de 20 caracteres' }, confirmation: true, on: :create
+
 
 # cpf
 VALID_CPF_REGEX = /\A[0-9]{3}?[0-9]{3}?[0-9]{3}?[0-9]{2}\z/i
 
 validates :cpf, :presence => { :message => 'Cpf nao pode ser vazio' },
-	length: { is: 11}, uniqueness: true,
-	format: { with: VALID_CPF_REGEX, :message => 'Insira um Cpf válido'}
-	
+	format: { with: VALID_CPF_REGEX, :message => 'Insira um Cpf válido'},
+	:uniqueness => {:message => "Cpf já cadastrado no sistema"}
+
 # registration
+VALID_REGISTRATION_REGEX = /\A[0-9]{7}\z/i
+
 validates :registration, :presence => { :message => 'Matricula nao pode ser vazio' },
-	length: { is: 7}, uniqueness: true
+	format: { with: VALID_REGISTRATION_REGEX, :message => 'Insira uma matricula válida'},
+	:uniqueness => {:message => "Matricula já cadastrado no sistema"}
+
+
 
 end

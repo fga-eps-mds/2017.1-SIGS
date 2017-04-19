@@ -13,13 +13,12 @@ module SessionsHelper
     department_assistant = DepartmentAssistant.find_by(user_id: session[:user_id])
     administrative_assistant = AdministrativeAssistant.find_by(user_id: session[:user_id])
     if coordinator
-      @level = 1
+      @permission ||= {:level => 1, :type => "Coordinator"}
   elsif department_assistant
-      @level = 2
+      @permission ||= {:level => 2, :type => "Department Assistant"}
   elsif administrative_assistant
-      @level = 3
+      @permission ||= {:level => 3, :type => "Administrative Assistant"}
     end
-    @permission ||= @level
   end
 
   def logged_in?
@@ -33,6 +32,5 @@ module SessionsHelper
     session.delete(:user_id)
     @current_user = nil
     @permission = nil
-    @level = nil
   end
 end
