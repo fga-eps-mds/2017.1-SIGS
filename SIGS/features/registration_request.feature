@@ -1,7 +1,7 @@
-Feature: Login
+Feature: Registration Request
 	To use application resources
-	As a system user
-	I would like to log in with my account
+	As a visitor user
+	I would like to request a registration
 
 	Scenario: Request registration of a user with valid attributes
 		Given I am on the log in page
