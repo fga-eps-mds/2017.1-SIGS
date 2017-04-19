@@ -1,4 +1,4 @@
-class AdministrativeAssistantController < ApplicationController
+class AdministrativeAssistantsController < ApplicationController
 
 
   def registration_request
