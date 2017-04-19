@@ -5,7 +5,7 @@ before_script:
 - cp SIGS/config/database.yml.travis SIGS/config/database.yml
 - mysql -e 'create database myapp_test;' -uroot
 script:
-- cd SIGS 
+- cd SIGS
 - bundle exec spring binstub --all
 - bundle install
 - bundle exec rake db:load_config
@@ -27,3 +27,10 @@ branches:
   only:
   - master
   - development
+deploy:
+  provider: heroku
+  app: sigs-unb
+  api_key:
+    secure: e+1/WyespltJmI44gFyRZNe9m+DQQT5iQK0M7E+FbULG7Dx8YBmLyPYLN4rQFnhS3OnbGiyYyNJ7GHjjFb4setWwNNRpdL2eIYfBpclZ/RFYQNuh/dKSYFqWsbmdtlkvdOoqWDTaEcwyr8hIKxP3NGHHD+X1wFeDTgb4hF/1ULrqmSC382FyMl9/5IAkv3JRz93j3qpc6uOHkJ5IM7Gnt+POnF5mEyQwbPl9wdCKBaLQT7ZMBQ+vZK1Dts9iBv/1F4Xv4ot+8ttQGMgRJvRWahYrcpKEjxhFsvZ2Emj/ZcK6Fy+sKEGJ3bcL499iavpt9TRwOHFouGle6hWZAIIgqSaSliowfhAXbCM7QE3cm2+HPO9sgY+rFvurC0QFMmPtfUNbkSS7wvVVHK3yRC2LUw7uxvuCojH65VF/ryFiGOym5Rrq72HkQGVxLG7q8f/acGr9X5/x83yRuYBc1DgceZqLH4xnT6OR7hsmLtdVq6BDJWwWT0fa89zbufNooHu4c/sydIxdGPwHHogZWrOfNu69ITJNhD0XnPvIMOw405L0uIehSMWmJOJwV1xw3JxPX/r7pSNF8YWEH1qgjEZZVV1wYnGOwxpHzCTu4479/ilJIvRADeysJEGWgU8qHIaoqoCvAswy/jWLTV3LTESldSOTyXM9MI62SrMrX1KEPO4=
+  on:
+     branch: master
