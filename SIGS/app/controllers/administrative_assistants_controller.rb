@@ -1,14 +1,16 @@
-class AdministrativeAssistantController < ApplicationController
+class AdministrativeAssistantsController < ApplicationController
 
 
   def registration_request
     @users = User.where(active: false)
+    return @users
   end
 
   def enable_registration
     @user = User.find(params[:id])
-    @user.update_attributes(active: true)
-    flash[:success] = "Usuário aprovado com sucesso"
+    if @user.update_attributes(active: true)
+      flash[:success] = "Usuário aprovado com sucesso"
+    end
     redirect_to registration_request_path
   end
 

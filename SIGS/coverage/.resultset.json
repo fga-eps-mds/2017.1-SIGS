@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/vagrant/SIGS/spec/controllers/administrative_assistant_controller_spec.rb": [
+      "/vagrant/SIGS/spec/controllers/administrative_assistants_controller_spec.rb": [
         1,
         null,
         1,
@@ -9,10 +9,9 @@
         1,
         null,
         1,
-        1,
-        1,
-        1,
-        1,
+        3,
+        3,
+        3,
         null,
         null,
         null,
@@ -21,7 +20,18 @@
         null,
         1,
         1,
-        0,
+        1,
+        null,
+        null,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        1,
         null,
         null,
         null,
@@ -415,29 +425,31 @@
         null,
         null
       ],
-      "/vagrant/SIGS/app/controllers/administrative_assistant_controller.rb": [
+      "/vagrant/SIGS/app/controllers/administrative_assistants_controller.rb": [
         1,
         null,
         null,
         1,
         0,
-        null,
-        null,
-        1,
-        0,
-        0,
-        0,
         0,
         null,
         null,
         1,
-        0,
-        0,
-        0,
+        1,
+        1,
+        1,
+        null,
+        1,
+        null,
+        null,
+        1,
+        2,
+        2,
+        2,
         null,
         0,
         null,
-        0,
+        2,
         null,
         null,
         1,
@@ -510,8 +522,21 @@
         1,
         1,
         null
+      ],
+      "/vagrant/SIGS/app/models/coordinator.rb": [
+        1,
+        1,
+        1,
+        1,
+        null
+      ],
+      "/vagrant/SIGS/app/models/department_assistant.rb": [
+        1,
+        1,
+        1,
+        null
       ]
     },
-    "timestamp": 1492581124
+    "timestamp": 1492588245
   }
 }
