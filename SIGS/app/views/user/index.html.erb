@@ -14,8 +14,7 @@
     <td><%= user.cpf %></td>
     <td><%= user.registration %></td>
     <td><%= link_to image_tag("icon_edit") , user_edit_path(user.id), confirm: "Tem certeza?" %></td>
-
-    <td><%= link_to image_tag("icon_trash") , user_destroy_path(user.id)%> </td>
+    <td><%= link_to image_tag("icon_trash") , user_destroy_path(user.id), data: {confirm: "Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?"}%> </td>
   </tr>
 <% end %>
 </table>

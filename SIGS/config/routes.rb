@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   patch 'user/update/', controller: 'user', action: 'update', as: 'user_update'
 
-  get 'user/destroy/:id' => 'user#destroy', as: 'user_destroy'
+  get 'user/destroy/:id', controller: 'user', action: 'destroy', as: 'user_destroy'
 
   # Coordinator
 
