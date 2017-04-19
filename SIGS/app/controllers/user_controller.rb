@@ -58,7 +58,17 @@ class UserController < ApplicationController
     if (@user.id != current_user.id && permission[:level] != 3)
       redirect_back fallback_location: {action: "show", id:current_user.id}
     else
-      @user.destroy
+      if permission[:level] == 3
+        if AdministrativeAssistant.all.count > 1
+          @user.destroy
+          flash[:sucess] = "Assistente Administrativo excluido com sucesso"
+        else
+          flash[:error] = "Não é possível excluir o único Assistente Administrativo"
+        end
+      else
+        @user.destroy
+        flash[:sucess] = "Usuário excluido com sucesso"
+      end
       redirect_to sign_in_path, :flash => { :error => "Conta Excluída" }
     end
   end
