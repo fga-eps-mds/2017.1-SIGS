@@ -19,7 +19,8 @@
     <% if current_user %>
       <div class="container container-fluid myContainer">
         <header class="navbar-default myNav">
-          <figure class="logo"><%= image_tag("sigs_logo") %></figure>
+          <figure class="logo"><%= image_tag("sigs_logo.png") %></figure>
+
 
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 						<span class="sr-only">Toggle navigation</span>
@@ -33,17 +34,19 @@
             <li><%= link_to 'Logout', sign_out_path, method: "delete" %></li>
             <li><a href="#">Turmas</a></li>
             <li><a href="#">Salas</a></li>
-            <li class="dropdown">
-              <a data-toggle="collapse" href="#demo">Usuários
-                <ul class="collapse" id="demo">
-                  <li><a href="#">Cadastros Pendentes</a></li>
-                  <li><%= link_to "Usuários Registrados", user_index_path(current_user.id) %></li>
-                </ul>
-              </li>
+            <% if permission[:level] == 3 %>
+              <li class="dropdown">
+                <a data-toggle="collapse" href="#demo">Usuários
+                  <ul class="collapse" id="demo">
+                    <li><%= link_to "Cadastros Pendentes", registration_request_path %></li>
+                    <li><%= link_to "Usuários Registrados", user_index_path %></li>
+                  </ul>
+                </li>
+            <% end %>
             <li><a href="#">Alocações</a></li>
           </ul>
 
-          <figure class="unbLogo"><a href="http://www.unb.br"><%= image_tag("rodape_unb") %></a></figure>
+          <figure class="unbLogo"><a href="http://www.unb.br"><%= image_tag("rodape_unb.png") %></a></figure>
         </header>
         <div class="alertContainer">
           <% flash.each do |key, value| %>
@@ -58,6 +61,12 @@
       <main class="container container-fluid myContainer" id="signIn">
         <%= yield %>
       </main>
+
+      <div class="alertContainer">
+        <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+        <% end %>
+      </div>
     <% end %>
 
   </body>
