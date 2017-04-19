@@ -76,13 +76,13 @@ class UsersController < ApplicationController
   private
   def user_params
     if params[:type] == "coordinator"
-      params[:user].permit(:name, :email, :password,:registration, :cpf, :active,
+      params[:user].permit(:id,:name, :email, :password,:registration, :cpf, :active,
                             :coordinator_attributes =>[:course_id,:user_id])
     elsif params[:type] == "department_assistant"
-      params[:user].permit(:name, :email, :password,:registration, :cpf, :active,
+      params[:user].permit(:id,:name, :email, :password,:registration, :cpf, :active,
                           :department_assistant_attributes => [:department_id,:user_id])
     else
-      params[:user].permit(:name, :email, :password,:registration, :cpf, :active,
+      params[:user].permit(:id,:name, :email, :password,:registration, :cpf, :active,
                           :administrative_assistant_attributes => [:user_id])
     end
   end

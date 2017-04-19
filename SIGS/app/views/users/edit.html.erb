@@ -1,7 +1,7 @@
 <h1>Minha Conta</h1>
 
 
-      <%= form_for @user, :url => {:action=> "update"} do |user| %>
+      <%= form_for @user,:url => {:action=> "update"} do |user| %>
 
         <%= user.label :name, "E-mail" %>
         <%= user.text_field :name, class: "form-control", value: @user.email, :disabled => true %><br>
