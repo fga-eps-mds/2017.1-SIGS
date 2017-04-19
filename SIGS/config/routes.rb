@@ -9,19 +9,19 @@ Rails.application.routes.draw do
   delete 'sign_out' => 'sessions#destroy'
 
   # User
-  get 'user/index' => 'user#index', :as => 'user_index'
+  get 'users/index' => 'users#index', :as => 'user_index'
 
-  get 'user/new' => 'user#new' , :as => 'user_new'
+  get 'users/new' => 'users#new' , :as => 'user_new'
 
-  post 'user/new' => 'user#create' , :as =>'user_create'
+  post 'users/new' => 'users#create' , :as =>'user_create'
 
-  get '/user/:id' => 'user#show', :as => 'user'
+  get '/users/:id' => 'users#show', :as => 'user'
 
-  get 'user/edit/:id' => 'user#edit', as: 'user_edit'
+  get 'users/edit/:id' => 'users#edit', as: 'user_edit'
 
-  patch 'user/update/', controller: 'user', action: 'update', as: 'user_update'
+  patch 'users/update/', controller: 'users', action: 'update', as: 'user_update'
 
-  get 'user/destroy/:id', controller: 'user', action: 'destroy', as: 'user_destroy'
+  get 'users/destroy/:id', controller: 'users', action: 'destroy', as: 'user_destroy'
 
   # Coordinator
 
@@ -29,11 +29,11 @@ Rails.application.routes.draw do
 
   # Administrative Assistant
 
-  get 'administrative_assistant/registration_request' => 'administrative_assistant#registration_request', as: 'registration_request'
+  get 'administrative_assistants/registration_request' => 'administrative_assistants#registration_request', as: 'registration_request'
 
-  get 'administrative_assistant/enable_registration/:id' => 'administrative_assistant#enable_registration', as: 'enable_registration'
+  get 'administrative_assistants/enable_registration/:id' => 'administrative_assistants#enable_registration', as: 'enable_registration'
 
-  get 'administrative_assistant/decline_registration/:id' => 'administrative_assistant#decline_registration', as: 'decline_registration'
+  get 'administrative_assistants/decline_registration/:id' => 'administrative_assistants#decline_registration', as: 'decline_registration'
 ###
 
 # Parsers

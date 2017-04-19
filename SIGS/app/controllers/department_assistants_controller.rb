@@ -1,0 +1,2 @@
+class DepartmentAssistantsController < ApplicationController
+end

@@ -1,4 +1,4 @@
-class UserController < ApplicationController
+class UsersController < ApplicationController
   before_action :logged_in?, except: [:new,:create]
 
   def new
