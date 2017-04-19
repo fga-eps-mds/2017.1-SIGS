@@ -23,13 +23,11 @@ Rails.application.routes.draw do
 
   get 'user/destroy/:id' => 'user#destroy', as: 'user_destroy'
 
-  # Administrative Assistant
-
   # Coordinator
 
   # Department Assistant
 
-  get 'administrative_assistant/destroy_users/:id' => 'administrative_assistant#destroy_users' , as: 'destroy_users'
+  # Administrative Assistant
 
   get 'administrative_assistant/registration_request' => 'administrative_assistant#registration_request', as: 'registration_request'
 
