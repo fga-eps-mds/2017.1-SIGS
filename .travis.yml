@@ -2,7 +2,7 @@ language: ruby
 services:
 - mysql
 before_script:
-- cp config/database.yml.travis config/database.yml
+- cp SIGS/config/database.yml.travis SIGS/config/database.yml
 - mysql -e 'create database myapp_test;' -uroot
 script:
 - bundle exec spring binstub --all
