@@ -58,6 +58,11 @@
       <main class="container container-fluid myContainer" id="signIn">
         <%= yield %>
       </main>
+      <div class="alertContainer">
+        <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+        <% end %>
+      </div>
     <% end %>
 
   </body>

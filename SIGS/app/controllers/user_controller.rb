@@ -50,8 +50,8 @@ class UserController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      flash[:success] = t(:sucessful_profile_update)
-      # Mandar para Show do tipo de usuário
+      redirect_to user_path
+      flash[:success] = ("Dados atualizados com sucesso")
     else
       redirect_to user_edit_path
       flash[:warning] = t(:error_profile_update)
@@ -64,7 +64,7 @@ class UserController < ApplicationController
       redirect_back fallback_location: {action: "show", id:current_user.id}
     else
       @user.destroy
-      redirect_to sign_in_path
+      redirect_to sign_in_path, :flash => { :error => "Conta Excluída" }
     end
   end
 
