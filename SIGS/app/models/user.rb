@@ -11,15 +11,15 @@ class User < ApplicationRecord
 #name
 validates_length_of :name,
 		:within => 7..100,
-		:too_short => 'O Nome tem deve ter no minimo 7 caracters',
-		:too_long => 'Nome deve ter no maximo 100 caracters'
+		:too_short => 'O Nome deve ter no mínimo 7 caracteres',
+		:too_long => 'Nome deve ter no máximo 100 caracters'
 
 # email
 VALID_EMAIL_REGEX = /\A[\w+\-.]+@unb.br\z/i
 
-validates :email, :presence => { :message => 'Email não pode ser vazio' },
-	length: { maximum: 50}, :uniqueness => { :message => 'Email já cadastrado no sistema' } ,
-	format: { with: VALID_EMAIL_REGEX, :message => 'Insira um e-mail válido'}
+validates :email, :presence => { :message => 'E-mail não pode ser vazio' },
+	length: { maximum: 50}, :uniqueness => { :message => 'E-mail já cadastrado no sistema' } ,
+	format: { with: VALID_EMAIL_REGEX, :message => 'Insira um E-mail válido'}
 
 # password
 validates :password, length: { minimum: 6, maximum: 20, :message => 'Senha deve possuir no mínimo 6 e no máximo de 20 caracteres' }, confirmation: true, on: :create
