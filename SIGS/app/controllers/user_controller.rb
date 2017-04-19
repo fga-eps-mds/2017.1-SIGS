@@ -16,7 +16,7 @@ class UserController < ApplicationController
   end
 
   def index
-    @users = User.where('id !=?', current_user.id)
+    @users = User.where('id != ? and active != false', current_user.id)
     if (permission[:level]!= 3)
       redirect_back fallback_location: {action: "show", id:current_user.id}
     end
