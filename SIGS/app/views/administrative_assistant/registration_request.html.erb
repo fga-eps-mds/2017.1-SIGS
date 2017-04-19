@@ -15,8 +15,8 @@
       <td><%= user.registration %></td>
       <td><%= user.cpf %></td>
       <td><%= user.email %></td>
-      <td><%= link_to image_tag('approve'), enable_registration_path(user.id) %></td>
-      <td><%= link_to image_tag('recuse'), decline_registration_path(user.id) %></td>
+      <td><%= link_to image_tag('approve.png'), enable_registration_path(user.id) %></td>
+      <td><%= link_to image_tag('recuse.png'), decline_registration_path(user.id) %></td>
     </tr>
   <% end %>
   </table>
