@@ -30,7 +30,7 @@ class UserController < ApplicationController
         @administrative_assistant = AdministrativeAssistant.create(user_id: @user.id)
       end
       redirect_to sign_in_path
-      flash[:notice] = 'Cadastro efetuado com sucesso!'
+      flash[:notice] = 'Solicitação de cadastro efetuado com sucesso!'
     else
       render :new
     end
@@ -81,7 +81,4 @@ class UserController < ApplicationController
                           :administrative_assistant_attributes => [:user_id])
     end
   end
-
-
-
 end
