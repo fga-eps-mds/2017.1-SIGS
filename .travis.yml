@@ -6,7 +6,6 @@ before_script:
 - mysql -e 'create database myapp_test;' -uroot
 script:
 - cd SIGS
-- bundle exec spring binstub --all
 - bundle install
 - bundle exec rake db:load_config
 - bundle exec rake db:create
