@@ -17,6 +17,7 @@ RSpec.describe SessionsHelper, type: :helper do
 
     it "Should assign a user_id to session" do
       sign_in(@user)
+      expect(session[:user_id]).to eq(@user.id)
     end
 
     it "Should find and assign a user to current_user" do
