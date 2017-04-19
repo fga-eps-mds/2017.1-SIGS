@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   delete 'sign_out' => 'sessions#destroy'
 
   # User
+  
   get 'users/index' => 'users#index', :as => 'user_index'
 
   get 'users/new' => 'users#new' , :as => 'user_new'
@@ -34,6 +35,7 @@ Rails.application.routes.draw do
   get 'administrative_assistants/enable_registration/:id' => 'administrative_assistants#enable_registration', as: 'enable_registration'
 
   get 'administrative_assistants/decline_registration/:id' => 'administrative_assistants#decline_registration', as: 'decline_registration'
+
 ###
 
 # Parsers
@@ -48,4 +50,6 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 
+
 end
+

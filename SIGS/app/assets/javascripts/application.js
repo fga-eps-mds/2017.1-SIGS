@@ -53,3 +53,4 @@ $(document).ready(function(){
   setTimeout("$(\".alert-notice\").show().fadeOut(3000);", 10000);
 
 });
+

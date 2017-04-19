@@ -24,6 +24,7 @@ validates :email, :presence => { :message => 'E-mail não pode ser vazio' },
 # password
 validates :password, length: { minimum: 6, maximum: 20, :message => 'Senha deve possuir no mínimo 6 e no máximo de 20 caracteres' }, confirmation: true, on: :create
 
+
 # cpf
 VALID_CPF_REGEX = /\A[0-9]{3}?[0-9]{3}?[0-9]{3}?[0-9]{2}\z/i
 
@@ -37,5 +38,7 @@ VALID_REGISTRATION_REGEX = /\A[0-9]{7}\z/i
 validates :registration, :presence => { :message => 'Matricula nao pode ser vazio' },
 	format: { with: VALID_REGISTRATION_REGEX, :message => 'Insira uma matricula válida'},
 	:uniqueness => {:message => "Matricula já cadastrado no sistema"}
+
+
 
 end
