@@ -72,7 +72,7 @@ validates :cpf, :presence => { :message => 'Cpf nao pode ser vazio' },
 	:uniqueness => {:message => "Cpf já cadastrado no sistema"}
 
 # registration
-VALID_REGISTRATION_REGEX = /\A[0-9]{9}\z/i
+VALID_REGISTRATION_REGEX = /\A[0-9]{7}\z/i
 
 validates :registration, :presence => { :message => 'Matricula nao pode ser vazio' },
 	format: { with: VALID_REGISTRATION_REGEX, :message => 'Insira uma matricula válida'},
