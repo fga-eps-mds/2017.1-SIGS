@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   get 'user/edit/:id' => 'user#edit', as: 'user_edit'
 
-  patch 'user/update/:id', controller: 'user', action: 'update', as: 'user_update'
+  patch 'user/update/', controller: 'user', action: 'update', as: 'user_update'
 
   get 'user/destroy/:id' => 'user#destroy', as: 'user_destroy'
 

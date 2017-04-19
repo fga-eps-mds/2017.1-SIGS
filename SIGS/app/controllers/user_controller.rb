@@ -22,7 +22,6 @@ class UserController < ApplicationController
     end
   end
 
-  #Creating a new user
   def create
   	@user = User.new(user_params)
     if @user.save
@@ -36,17 +35,13 @@ class UserController < ApplicationController
     end
   end
 
-  # Editing the user profile
-  def edit
+    def edit
     @user = User.find(params[:id])
-    if (@user.id != current_user.id && permission[:level] != 3)
+    if (@user.id != current_user.id)
       redirect_back fallback_location: {action: "show", id:current_user.id}
     end
-    #if @user != current_user
-    #end
   end
 
-  #Update User
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
