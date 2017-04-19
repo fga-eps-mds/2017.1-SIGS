@@ -5,6 +5,7 @@ before_script:
 - cp SIGS/config/database.yml.travis SIGS/config/database.yml
 - mysql -e 'create database myapp_test;' -uroot
 script:
+- cd SIGS 
 - bundle exec spring binstub --all
 - bundle install
 - bundle exec rake db:load_config
