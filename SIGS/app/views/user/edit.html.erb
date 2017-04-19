@@ -1,0 +1,29 @@
+<h1>Minha Conta</h1>
+
+
+      <%= form_for @user, :url => {:action=> "update"} do |user| %>
+
+        <%= user.label :name, "E-mail" %>
+        <%= user.text_field :name, class: "form-control", value: @user.email, :disabled => true %><br>
+
+        <%= user.label :name, "CPF" %>
+        <%= user.text_field :name, class: "form-control", value: @user.cpf, :disabled => true %><br>
+
+        <%= user.label :name, "Registro UnB" %>
+        <%= user.text_field :name, class: "form-control", value: @user.registration, :disabled => true %><br>
+
+        <%= user.label :name, "Nome: " %>
+        <%= user.text_field :name, class: "form-control", placeholder: "Digite seu nome completo" %><br>
+
+        <%= user.label :password, "Senha: " %>
+        <%= user.password_field :password, class: "form-control", placeholder: "Digite sua senha" %><br>
+
+        <label for="confirm_password">Confirmar Senha: </label>
+        <input type="text" name="confirm_password" id="confirm_password" class= "form-control" placeholder= "Digite sua senha"/>
+
+        <div class="actions">
+          <%= user.submit "Salvar", class: "pull-right btn btn-default btn-success" %>
+          <%= link_to "Excluir Conta", user_destroy_path, class: "btn btn-default btn-danger" %>
+        </div>
+      </div>
+      <% end %>

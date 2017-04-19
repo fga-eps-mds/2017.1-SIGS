@@ -1,0 +1,46 @@
+.myContainer form {
+  margin: 30px auto;
+}
+
+.myContainer input {
+  width: 100%;
+}
+
+.myContainer input[type="submit"] {
+  width: auto;
+  float: right;
+}
+
+.myContainer form label {
+  font-weight: normal;
+  margin: 0;
+}
+
+.myContainer form fieldset {
+  margin: 20px auto;
+}
+
+.btn {
+  border-radius: 50%;
+}
+
+.actions {
+  margin-top: 10px;
+}
+
+.mainConteiner .actions {
+  margin-top: 30px;
+}
+
+.formSection {
+  display: flex;
+}
+
+.radioButton {
+  display: flex;
+
+  input[type="radio"] {
+    width: auto;
+    margin-right: 10px;
+  }
+}

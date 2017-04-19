@@ -1,0 +1,2 @@
+class CoordinatorController < ApplicationController
+end
