@@ -10,14 +10,14 @@ class UserController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    if (@user.id != current_user.id && (type(current_user)[:level]) != 3)
+    if (@user.id != current_user.id && permission[:level] != 3)
       redirect_back fallback_location: {action: "show", id:current_user.id}
     end
   end
 
   def index
     @users = User.where('id !=?', current_user.id)
-    if (type(current_user)[:level] != 3)
+    if (permission[:level]!= 3)
       redirect_back fallback_location: {action: "show", id:current_user.id}
     end
   end
@@ -39,7 +39,7 @@ class UserController < ApplicationController
   # Editing the user profile
   def edit
     @user = User.find(params[:id])
-    if (@user.id != current_user.id && (type(current_user)[:level]) != 3)
+    if (@user.id != current_user.id && permission[:level] != 3)
       redirect_back fallback_location: {action: "show", id:current_user.id}
     end
     #if @user != current_user
@@ -60,7 +60,7 @@ class UserController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    if (@user.id != current_user.id && (type(current_user)[:level]) != 3)
+    if (@user.id != current_user.id && permission[:level] != 3)
       redirect_back fallback_location: {action: "show", id:current_user.id}
     else
       @user.destroy

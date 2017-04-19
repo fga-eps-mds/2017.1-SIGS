@@ -1,5 +1,5 @@
 <h1> <%= @user.name  %></h1>
-  <% case type(current_user)[:level]%>
+  <% case permission[:level]%>
    <% when 1 %>
    <%= render partial: "user/coordinator_show",
         locals: {user: @user} %>
