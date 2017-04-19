@@ -1,12 +1,12 @@
 <h1> <%= @user.name  %></h1>
   <% case permission[:level]%>
    <% when 1 %>
-   <%= render partial: "user/coordinator_show",
+   <%= render partial: "users/coordinators_show",
         locals: {user: @user} %>
    <% when 2 %>
-   <%= render partial: "user/department_assistant_show",
+   <%= render partial: "users/department_assistants_show",
         locals: {user: @user} %>
     <% when 3 %>
-    <%= render partial: "user/administrative_assistant_show",
+    <%= render partial: "users/administrative_assistants_show",
          locals: {user: @user} %>
     <% end %>
