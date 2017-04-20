@@ -1,24 +1,7 @@
-# README
+# SIGS - Sistema Inteligente de Gestão de Salas
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[![Build Status](https://travis-ci.org/fga-gpp-mds/2017.1-SIGS.svg?branch=master)](https://travis-ci.org/fga-gpp-mds/2017.1-SIGS)
 
-Things you may want to cover:
+Para mais informações, consultem a [wiki](https://github.com/fga-gpp-mds/2017.1-SIGS/wiki)
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Para instalação e configuração do sistema, acesse este [Tutorial](https://github.com/fga-gpp-mds/2017.1-SIGS/wiki/Comandos-de-Instala%C3%A7%C3%A3o-do-Ambiente)
