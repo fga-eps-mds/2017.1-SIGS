@@ -7,17 +7,17 @@
 # Ignore bundler config.
 /.bundle
 
-# Ignore all logfiles and tempfiles.
+# Ignore all logfiles, tempfiles and coverage.
 /log/*
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+*~
+/coverage/*
+.~*
 
 # Ignore Byebug command history file.
 .byebug_history
 
 # Ignore csv files
 public/csv/*.csv
-
-# Ignore coverage files
-/coverage/*
