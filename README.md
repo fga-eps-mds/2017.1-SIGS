@@ -1,6 +1,7 @@
 # SIGS - Sistema Inteligente de Gestão de Salas
 
 [![Build Status](https://travis-ci.org/fga-gpp-mds/2017.1-SIGS.svg?branch=master)](https://travis-ci.org/fga-gpp-mds/2017.1-SIGS)
+[![Coverage Status](https://coveralls.io/repos/github/fga-gpp-mds/2017.1-SIGS/badge.svg?branch=development)](https://coveralls.io/github/fga-gpp-mds/2017.1-SIGS?branch=development)
 
 Para mais informações, consultem a [wiki](https://github.com/fga-gpp-mds/2017.1-SIGS/wiki)
 
