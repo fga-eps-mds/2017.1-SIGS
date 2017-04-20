@@ -11,6 +11,8 @@ script:
 - bundle exec rake db:create
 - bundle exec rake db:migrate
 - bundle exec rspec
+after_sucess:
+- coveralls push
 rvm:
 - 2.3.1
 notifications:
