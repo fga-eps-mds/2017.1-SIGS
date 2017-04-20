@@ -18,3 +18,6 @@
 
 # Ignore csv files
 public/csv/*.csv
+
+# Ignore coverage files
+/coverage/*
