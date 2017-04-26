@@ -31,6 +31,10 @@ notifications:
     - carlosaragon3@hotmail.com
     - ateldybfilho@gmail.com
     - rodrigodadamos@gmail.com
+branches:
+  only:
+  - master
+  - /.*/
 deploy:
   provider: heroku
   app: sigs-unb
