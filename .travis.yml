@@ -24,10 +24,13 @@ notifications:
     - caiofelipe147@gmail.com
     - lucasandradeunb@gmail.com
     - joaopaulo.busche@gmail.com
-branches:
-  only:
-  - master
-  - development
+    - danielmarques7@hotmail.com
+    - wallacy.braz@live.com
+    - mendesiasmin96@gmail.com
+    - brunomatiascasas@hotmail.com
+    - carlosaragon3@hotmail.com
+    - ateldybfilho@gmail.com
+    - rodrigodadamos@gmail.com
 deploy:
   provider: heroku
   app: sigs-unb
