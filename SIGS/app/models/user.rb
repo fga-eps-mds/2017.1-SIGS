@@ -29,16 +29,15 @@ validates :password, length: { minimum: 6, maximum: 20, :message => 'Senha deve 
 VALID_CPF_REGEX = /\A[0-9]{3}?[0-9]{3}?[0-9]{3}?[0-9]{2}\z/i
 
 validates :cpf, :presence => { :message => 'Cpf nao pode ser vazio' },
-	format: { with: VALID_CPF_REGEX, :message => 'Insira um Cpf válido'},
-	:uniqueness => {:message => "Cpf já cadastrado no sistema"}
+  :uniqueness => {:message => "Cpf já cadastrado no sistema"},
+	format: { with: '/\A[0-9]{3}?[0-9]{3}?[0-9]{3}?[0-9]{2}\z/i', :message => 'Insira um Cpf válido'}
 
 # registration
 VALID_REGISTRATION_REGEX = /\A[0-9]{7}\z/i
 
 validates :registration, :presence => { :message => 'Matricula nao pode ser vazio' },
-	format: { with: VALID_REGISTRATION_REGEX, :message => 'Insira uma matricula válida'},
+	format: { with: '/\A[0-9]{7}\z/i', :message => 'Insira uma matricula válida'},
 	:uniqueness => {:message => "Matricula já cadastrado no sistema"}
-
 
 
 end
