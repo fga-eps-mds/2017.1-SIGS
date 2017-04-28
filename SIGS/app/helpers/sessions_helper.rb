@@ -1,5 +1,5 @@
+# Module to check the permission level on pages
 module SessionsHelper
-
   def sign_in(user)
     session[:user_id] = user.id
   end
@@ -9,9 +9,10 @@ module SessionsHelper
   end
 
   def permission
-    coordinator = Coordinator.find_by(user_id: session[:user_id])
-    department_assistant = DepartmentAssistant.find_by(user_id: session[:user_id])
-    administrative_assistant = AdministrativeAssistant.find_by(user_id: session[:user_id])
+    session_user_id = session[:user_id]
+    coordinator = Coordinator.find_by(user_id: session_user_id)
+    department_assistant = DepartmentAssistant.find_by(user_id: session_user_id)
+    administrative_assistant = AdministrativeAssistant.find_by(user_id: session_user_id)
     if coordinator
       @permission ||= {:level => 1, :type => "Coordinator"}
   elsif department_assistant
