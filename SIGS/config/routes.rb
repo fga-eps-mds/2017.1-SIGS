@@ -41,11 +41,11 @@ Rails.application.routes.draw do
 # Parsers
   post "/upload_buildings", controller: 'parsers', action: 'upload_buildings'
   post "/upload", controller: 'parsers', action: 'upload_rooms'
-  post "/parsers", controller: 'parsers', action: 'index', :as => "index_parser"
-  post "/upload_departament", controller: 'parsers', action: 'upload_departaments'
+  get "/parsers", controller: 'parsers', action: 'index', :as => "index_parser"
+  post "/upload_department", controller: 'parsers', action: 'upload_departments'
   post "/upload_courses", controller: 'parsers', action: 'upload_courses'
   post "/upload_disciplines", controller: 'parsers', action: 'upload_disciplines'
-  resources :parsers
+  #resources :parsers
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

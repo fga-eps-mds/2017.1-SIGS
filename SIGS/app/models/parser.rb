@@ -20,9 +20,9 @@ class Parser < ApplicationRecord
     end
   end
 
-  def self.save_data_departaments(file)
+  def self.save_data_departments(file)
     CSV.foreach(file, col_sep: ',', headers: true, encoding: 'Windows-1252') do |row|
-      departament_record = Departament.find_or_create_by(code: row[0], acronym: row[2], 
+      departament_record = Department.find_or_create_by(code: row[0], acronym: row[2], 
         name: row[2])
     
       departament_record.save
@@ -31,18 +31,18 @@ class Parser < ApplicationRecord
 
   def self.save_data_courses(file)
     CSV.foreach(file, col_sep: ',', headers: true, encoding: 'Windows-1252') do |row|
-       departament_record = Departament.find_or_create_by(name: row[3])
+       department_record = Department.find_or_create_by(name: row[3])
       
-       courses_record = Courses.find_or_create_by(code: row[0], name: row[1], shift: row[2], departament_id: departament_record.id)
+       courses_record = Course.find_or_create_by(code: row[0], name: row[1], shift: row[2], department_id: department_record.id)
     
       courses_record.save
     end
   end
 
-  def self.save_data_discipline(file)
+  def self.save_data_disciplines(file)
     CSV.foreach(file, col_sep: ',', headers: true, encoding: 'Windows-1252') do |row|
-      departament_record = Departament.find_or_create_by(name: row[3])
-      discipline_record = Discipline.find_or_create_by(code: row[0], name: row[1], departament_id: departament_record.id)
+      departament_record = Department.find_or_create_by(name: row[3])
+      discipline_record = Discipline.find_or_create_by(code: row[0], name: row[1], department_id: departament_record.id)
     
     
       discipline_record.save
