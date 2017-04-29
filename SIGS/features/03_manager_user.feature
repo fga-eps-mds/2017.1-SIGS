@@ -41,7 +41,7 @@ Feature: Manager User
     When I press 'Delete' button
     Then the 'Usuarios Registrados' page should load with notice message 'Usuário excluído com sucesso'
 
-  Scenario:
+  Scenario: None registrate users to administer
     Given I am logged in as asssistant administrative
     When I delete anothers registration users
     And click on link 'Usuários'
