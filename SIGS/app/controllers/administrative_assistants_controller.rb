@@ -1,5 +1,7 @@
 class AdministrativeAssistantsController < ApplicationController
 
+  before_action :logged_in?
+  before_action :authenticate_administrative_assistant?
 
   def registration_request
     @users = User.where(active: false)
@@ -18,18 +20,7 @@ class AdministrativeAssistantsController < ApplicationController
     @user = User.find(params[:id])
     if @user.destroy
       flash[:success] = "Usuário recusado com sucesso"
-    else
-      flash[:error] = "Não foi possivel recusar o usuário"
     end
     redirect_to registration_request_path
-  end
-
-  private
-  def users_update_params
-    params.require(:user).permit(:name, :email, :cpf, :registration)
-  end
-
-  def administrative_assistant_params
-    params[:administrative_assistant].permit(:user_id)
   end
 end
