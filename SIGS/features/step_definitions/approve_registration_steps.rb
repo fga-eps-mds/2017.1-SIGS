@@ -21,3 +21,7 @@ end
 Then (/^the request should be deleted and notice message 'Usuário recusado com sucesso'$/) do
 	expect(page).to have_content('Usuário recusado com sucesso')
 end
+
+Then (/^notice message 'Não há nenhuma solicitação pendente no momento.'$/) do
+	expect(page).to have_content('Não há nenhuma solicitação pendente no momento.')
+end

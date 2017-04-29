@@ -16,3 +16,13 @@ Feature: Approve registration
 		And click on link 'Cadastros Pendentes'
 		When I press 'Recuse' button
 		Then the request should be deleted and notice message 'Usuário recusado com sucesso'
+
+	Scenario: there is no registration
+		Given I am logged in as asssistant administrative
+		And click on link 'Usuários'
+		And click on link 'Cadastros Pendentes'
+		When I press 'Recuse' button
+		When I press 'Recuse' button
+		When I press 'Recuse' button
+		Then notice message 'Não há nenhuma solicitação pendente no momento.'
+
