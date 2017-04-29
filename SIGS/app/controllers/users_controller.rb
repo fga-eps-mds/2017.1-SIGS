@@ -49,7 +49,7 @@ class UsersController < ApplicationController
       flash[:success] = ("Dados atualizados com sucesso")
     else
       redirect_to user_edit_path
-      flash[:warning] = t(:error_profile_update)
+      flash[:warning] = ("Dados não foram atualizados")
     end
   end
 

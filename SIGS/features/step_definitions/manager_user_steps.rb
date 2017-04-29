@@ -40,7 +40,7 @@ Then (/^the 'Minha Conta' page should load with notice message 'Dados atualizado
 end
 
 Then (/^the 'Minha Conta' page should load with notice message 'Dados não foram atualizados'$/) do
-	expect(page).to have_content('translation missing: en.error_profile_update')
+	expect(page).to have_content('Dados não foram atualizados')
 end
 
 When (/^I press 'Excluir Conta' button$/) do
