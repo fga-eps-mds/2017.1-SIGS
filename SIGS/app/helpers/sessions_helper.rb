@@ -13,11 +13,11 @@ module SessionsHelper
     department_assistant = DepartmentAssistant.find_by(user_id: session[:user_id])
     administrative_assistant = AdministrativeAssistant.find_by(user_id: session[:user_id])
     if coordinator
-      @permission ||= {:level => 1, :type => "Coordinator"}
+      @permission ||= {:level => 1, :type => 'Coordinator'}
   elsif department_assistant
-      @permission ||= {:level => 2, :type => "Department Assistant"}
+      @permission ||= {:level => 2, :type => 'Department Assistant'}
   elsif administrative_assistant
-      @permission ||= {:level => 3, :type => "Administrative Assistant"}
+      @permission ||= {:level => 3, :type => 'Administrative Assistant'}
     end
   end
 
@@ -32,5 +32,12 @@ module SessionsHelper
     session.delete(:user_id)
     @current_user = nil
     @permission = nil
+  end
+
+  def authenticate_administrative_assistant?
+      if permission[:level] != 3
+        flash[:error] =  'Acesso Negado'
+        redirect_to current_user
+      end
   end
 end
