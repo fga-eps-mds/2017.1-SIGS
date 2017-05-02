@@ -153,6 +153,7 @@ GEM
     parser (2.4.0.0)
       ast (~> 2.2)
     path_expander (1.0.1)
+    powerpack (0.1.1)
     public_suffix (2.0.5)
     puma (3.8.2)
     rack (2.0.1)
@@ -213,6 +214,13 @@ GEM
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
+    rubocop (0.48.1)
+      parser (>= 2.3.3.1, < 3.0)
+      powerpack (~> 0.1)
+      rainbow (>= 1.99.1, < 3.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (~> 1.0, >= 1.0.1)
+    ruby-progressbar (1.8.1)
     ruby_parser (3.9.0)
       sexp_processor (~> 4.1)
     rubycritic (3.2.0)
@@ -262,6 +270,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
+    unicode-display_width (1.2.1)
     virtus (1.0.5)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -300,6 +309,7 @@ DEPENDENCIES
   rails (~> 5.0.2)
   rails_12factor
   rspec-rails
+  rubocop (~> 0.48.1)
   rubycritic
   sass-rails (~> 5.0)
   simplecov
