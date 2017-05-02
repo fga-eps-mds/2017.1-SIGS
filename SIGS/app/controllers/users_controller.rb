@@ -35,7 +35,7 @@ class UsersController < ApplicationController
     end
   end
 
-    def edit
+  def edit
     @user = User.find(params[:id])
     if (@user.id != current_user.id)
       redirect_back fallback_location: {action: "show", id:current_user.id}
@@ -49,27 +49,21 @@ class UsersController < ApplicationController
       flash[:success] = ("Dados atualizados com sucesso")
     else
       redirect_to user_edit_path
-      flash[:warning] = t(:error_profile_update)
+      flash[:warning] = ("Dados não foram atualizados")
     end
   end
 
   def destroy
     @user = User.find(params[:id])
     if (@user.id != current_user.id && permission[:level] != 3)
-      redirect_back fallback_location: {action: "show", id:current_user.id}
+      redirect_back fallback_location: {action: 'show', id:current_user.id}
     else
-      if permission[:level] == 3
-        if AdministrativeAssistant.all.count > 1
-          @user.destroy
-          flash[:sucess] = "Assistente Administrativo excluido com sucesso"
-        else
-          flash[:error] = "Não é possível excluir o único Assistente Administrativo"
-        end
+      if permission[:level] == 3 && AdministrativeAssistant.all.count == 1
+          redirect_to user_edit_path, :flash => {:error => 'Não é possível excluir o único Assistente Administrativo'}
       else
         @user.destroy
-        flash[:sucess] = "Usuário excluido com sucesso"
+        redirect_to sign_in_path, :flash => { :error => 'Conta Excluída' }
       end
-      redirect_to sign_in_path, :flash => { :error => "Conta Excluída" }
     end
   end
 
