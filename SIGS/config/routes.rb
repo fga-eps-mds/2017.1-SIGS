@@ -26,6 +26,12 @@ Rails.application.routes.draw do
   get 'administrative_assistants/decline_registration/:id' => 'administrative_assistants#decline_registration', as: 'decline_registration'
   get 'administrative_assistants/destroy_users/:id' => 'administrative_assistants#destroy_users', as: 'destroy_users'
 
+  # Room
+  get 'rooms/index' => 'rooms#index', as: 'room_index'
+  get 'rooms/edit/:id' => 'rooms#edit', as: 'room_edit'
+  get 'rooms/update/:id' => 'rooms#update'
+  get 'rooms/show/:id' => 'rooms#edit', as: 'room_show'
+
   # Parsers
   post "/upload_buildings", controller: 'parsers', action: 'upload_buildings'
   post "/upload", controller: 'parsers', action: 'upload_rooms'

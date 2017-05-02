@@ -1,0 +1,15 @@
+<h1>Salas</h1>
+<% if @rooms.count == 0 %>
+  <h3>Não há salas registradas no momento.</h3>
+<% else %>
+  <table>
+      <td>Código</td>
+      <td>Nome</td>
+      <td>Estado</td>
+      <td>Prédio</td>
+      <td>Grade Horária</td>
+  <% @rooms.each do |room| %>
+    <%  %>
+  <% end %>
+<% end %>
+</table>
