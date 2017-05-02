@@ -1,0 +1,48 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  Exclude:
+    - 'vendor/**/*'
+    - 'spec/**/*'
+    - 'tmp/**/*'
+    - 'Gemfile'
+    - 'Rakefile'
+    - 'app/channels/**/*'
+    - 'app/jobs/*'
+    - 'bin/*'
+    - 'config/*'
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'features/**/*'
+    - 'test/**/*'
+    - 'lib/**/*'
+    - 'script/*'
+
+Style/Encoding:
+  EnforcedStyle: never
+  Enabled: true
+
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: always
+
+Layout/IndentHeredoc:
+  EnforcedStyle: powerpack
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - 'spec/**/*.rb'
+
+Lint/UselessAccessModifier:
+  MethodCreatingMethods:
+    - 'def_matcher'
+    - 'def_node_matcher'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'spec/**/*.rb'
+
+Metrics/ModuleLength:
+  Exclude:
+    - 'spec/**/*.rb'
