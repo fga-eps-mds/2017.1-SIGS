@@ -1,2 +1,22 @@
-<h1>Rooms#edit</h1>
-<p>Find me in app/views/rooms/edit.html.erb</p>
+<h1>Editar Sala</h1>
+
+
+      <%= form_for @room,:url => {:action=> "update"} do |room| %>
+
+        <%= room.label :name, "Código da Sala" %>
+        <%= room.text_field :name, class: "form-control", value: @room.code, :disabled => true %><br>
+
+        <%= room.label :name, "Nome" %>
+        <%= room.text_field :name, class: "form-control", value: @room.name %><br>
+
+        <%= room.label :name, "Estado" %>
+        
+
+        <%= room.label :name, "Prédio: " %>
+        <%= room.text_field :name, class: "form-control", value: @room.building.name, :disabled => true %><br>
+
+        <div class="actions">
+          <%= room.submit "Salvar", class: "pull-right btn btn-default btn-success" %>
+        </div>
+      </div>
+      <% end %>

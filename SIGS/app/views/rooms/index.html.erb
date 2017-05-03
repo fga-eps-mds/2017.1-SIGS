@@ -2,14 +2,24 @@
 <% if @rooms.count == 0 %>
   <h3>Não há salas registradas no momento.</h3>
 <% else %>
-  <table>
+  <table class="table">
+    <tr>
       <td>Código</td>
       <td>Nome</td>
       <td>Estado</td>
       <td>Prédio</td>
-      <td>Grade Horária</td>
-  <% @rooms.each do |room| %>
-    <%  %>
-  <% end %>
+      <td style="text-align:center">Alterar</td>
+      <td style="text-align:center">Visualizar</td>
+    </tr>
+    <% @rooms.each do |room| %>
+      <tr>
+        <td><%= room.code %></td>
+        <td><%= room.name %></td>
+        <td><%=  ((room.active)? 'Disponível' : 'Não Disponível')  %></td>
+        <td><%= room.building.name %></td>
+        <td style="text-align:center"><%= link_to image_tag("icon_edit.png"), room_edit_path(room.id) %></td>
+        <td style="text-align:center"><%= link_to image_tag("icon_view.png"), room_show_path(room.id) %></td>
+      </tr>
+    <% end %>
 <% end %>
 </table>

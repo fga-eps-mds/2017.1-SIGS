@@ -33,7 +33,7 @@
             <li><%= link_to "Minha Conta", user_edit_path(current_user) %></li>
             <li><%= link_to 'Logout', sign_out_path, method: "delete" %></li>
             <li><a href="#">Turmas</a></li>
-            <li><a href="#">Salas</a></li>
+            <li><%= link_to 'Salas', room_index_path %></li>
             <% if permission[:level] == 3 %>
               <li class="dropdown">
                 <a data-toggle="collapse" href="#demo">Usuários

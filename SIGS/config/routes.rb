@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   get 'rooms/index' => 'rooms#index', as: 'room_index'
   get 'rooms/edit/:id' => 'rooms#edit', as: 'room_edit'
   get 'rooms/update/:id' => 'rooms#update'
-  get 'rooms/show/:id' => 'rooms#edit', as: 'room_show'
+  get 'rooms/show/:id' => 'rooms#show', as: 'room_show'
 
   # Parsers
   post "/upload_buildings", controller: 'parsers', action: 'upload_buildings'
