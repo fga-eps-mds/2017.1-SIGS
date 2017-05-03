@@ -1,2 +1,5 @@
-<h1>Rooms#show</h1>
-<p>Find me in app/views/rooms/show.html.erb</p>
+<h1>Sala: <%= @room.name %></h1>
+<h2>Código: <%= @room.code %></h2>
+<h2>Capacidade: <%= @room.capacity %></h2>
+<h2>Ativo: <%= ((@room.active) ? 'Sim' : 'Não') %></h2>
+<h2>Prédio: <%= @room.building.name %></h2>

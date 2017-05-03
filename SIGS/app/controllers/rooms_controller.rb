@@ -10,7 +10,7 @@ class RoomsController < ApplicationController
   def update
     @room = Room.find(params[:id])
     if @room.update_attributes(room_params)
-      redirect_to room_path(@room.id), :flash => {:success => "Dados da sala atualizados com sucesso"}
+      redirect_to room_index_path(@room.id), :flash => {:success => "Dados da sala atualizados com sucesso"}
     else
       redirect_to room_edit_path(@room.id), :flash => {:warning => "Dados não foram atualizados"}
     end

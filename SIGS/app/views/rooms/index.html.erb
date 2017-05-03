@@ -6,7 +6,7 @@
     <tr>
       <td>Código</td>
       <td>Nome</td>
-      <td>Estado</td>
+      <td>Ativo</td>
       <td>Prédio</td>
       <td style="text-align:center">Alterar</td>
       <td style="text-align:center">Visualizar</td>
@@ -15,10 +15,10 @@
       <tr>
         <td><%= room.code %></td>
         <td><%= room.name %></td>
-        <td><%=  ((room.active)? 'Disponível' : 'Não Disponível')  %></td>
+        <td><%=  ((room.active) ? 'Sim' : 'Não')  %></td>
         <td><%= room.building.name %></td>
         <td style="text-align:center"><%= link_to image_tag("icon_edit.png"), room_edit_path(room.id) %></td>
-        <td style="text-align:center"><%= link_to image_tag("icon_view.png"), room_show_path(room.id) %></td>
+        <td style="text-align:center"><%= link_to image_tag("icon_view.png"), room_path(room.id) %></td>
       </tr>
     <% end %>
 <% end %>
