@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>SIGS</title>
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico" />
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Sistema de Alocação de Salas Inteligente da UnB.">
+    <link rel="stylesheet" media="all" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" media="all" href="assets/css/style.css" />
+    <link rel="stylesheet" media="all" href="assets/css/signin.css" />
+    <script src="assets/js/jquery-1.12.4.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/main.js"></script>
+  </head>
+  <body>
+    <main class="container container-fluid myContainer" id="signIn">
+      <div class="login">
+        <div>
+          <figure>
+            <img src="assets/img/sigs_logo.png" alt="SIGS Logos" />
+          </figure>
+        </div>
+        <div>
+          <form action="pages/home.html" method="post">
+            <div class="field">
+              <input type="email" id="email" autofocus="true" placeholder="E-mail"/>
+            </div>
+            <div class="field">
+              <input type="password" id="senha" placeholder="Senha"/>
+            </div>
+            <div class="actions flexContainer alignEnd">
+              <a href="pages/cadastrar.html">Solicitar Cadastro</a>
+              <input type="submit" class="btn btn-login btnEnter" value="Entrar"/>
+            </div>
+        </div>
+        <!-- Error Modal -->
+        <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-body">
+                <div class="alert alert-warning errorTxt" role="alert"></div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <figure>
+            <a href="http://www.unb.br" target="_blank">
+              <img src="assets/img/rodape_unb.png" alt="SIGS Logos" />
+            </a>
+          </figure>
+        </div>
+      </div><!-- ./login -->
+      <div><h1 class="titleSigs">Sistema Inteligente de Gestão de Salas</h1></div>
+    </main>
+  </body>
+</html>
