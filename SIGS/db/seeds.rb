@@ -36,3 +36,7 @@ buildings = Building.create([
   {code: 'BSAS', name: 'Bloco de Salas da Ala Sul', wing: 'sul'},
   {code: 'BSAN', name: 'Bloco de Salas da Ala Norte', wing: 'norte'},
           ])
+
+# Disciplines
+discipline = Discipline.create(code: '876', name: 'Cálculo 3', department_id: 1)
+discipline_2 = Discipline.create(code: '777', name: 'Cálculo 2', department_id: 1)
