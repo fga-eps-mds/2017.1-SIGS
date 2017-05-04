@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>SIGS</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.ico" />
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Sistema de Alocação de Salas Inteligente da UnB.">
+    <link rel="stylesheet" media="all" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" media="all" href="../assets/css/style.css" />
+    <link rel="stylesheet" media="all" href="../assets/css/signin.css" />
+    <link rel="stylesheet" media="all" href="../assets/css/form.css" />
+    <script src="../assets/js/jquery-1.12.4.min.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+  </head>
+  <body>
+    <main class="container container-fluid myContainer" id="signIn">
+      <div class="singUp">
+
+        <div class="flexContainer">
+          <figure class="logo"><img src="../assets/img/sigs_logo.png" alt="SIGS Logos" /></figure>
+          <div>
+            <h1>Novo Usuário</h1>
+          </div>
+        </div>
+        <!-- <section id="section-form"> -->
+
+        <div id="form-new-user">
+
+          <form action="../index.html" method="post">
+            <div class="blockForm">
+              <label>Nome Completo </label>
+              <input type="text" class="form-control" />
+
+              <label>E-mail </label>
+              <input type="email" class="form-control" placeholder="exemplo@unb.br" />
+
+              <label>CPF </label>
+              <input type="text" class="form-control" />
+
+              <fieldset id="type">
+                <div class="radioButton">
+                  <input type="radio" name="type" value="administrative_assistant" checked>
+                  <label>Assistente Administrativo</label>
+                </div>
+                <div class="radioButton">
+                  <input type="radio" name="type" value="department_assistant">
+                  <label> Auxiliar de Departamento</label>
+                </div>
+                <div class="radioButton">
+                  <input type="radio" name="type" value="coordinator">
+                  <label>Coordenador de curso</label>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="blockForm flexContainer flexColumn">
+              <div>
+                <label>Registro UnB </label>
+                <input type="text" class="form-control" />
+
+                <label>Senha </label>
+                <input type="password" class="form-control" />
+
+                <label>Confirmar senha </label>
+                <input type="password" class="form-control" />
+
+              <div id="dropdown-group">
+                <div id="dropdown-department-assistant">
+                      <p> Departamento </p>
+                </div>
+
+                <div id="dropdown-coordinator">
+                    <p> Curso </p>
+                </div>
+              </div>
+
+              <div class="actions">
+                <input type="submit" value="Enviar" class="pull-right btn btn-default btn-success" />
+              </div>
+          </div>
+          </form>
+        </div>
+
+        <div>
+          <figure>
+            <a href="http://www.unb.br" target="_blank">
+              <img src="../assets/img/rodape_unb.png" alt="SIGS Logos" />
+            </a>
+          </figure>
+        </div>
+
+      </div><!-- ./singUp -->
+
+    </main>
+  </body>
+</html>
