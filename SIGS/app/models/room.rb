@@ -18,11 +18,6 @@ class Room < ApplicationRecord
   # capacity
   validates_numericality_of :capacity,
     :greater_than_or_equal_to => 5,
-    :less_than_or_equal_to => 200
-
-  private
-    def params_upcase
-      self.code.upcase!
-    end
+    :less_than_or_equal_to => 500
 
 end
