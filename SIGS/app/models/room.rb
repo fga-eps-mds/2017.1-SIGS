@@ -1,16 +1,24 @@
 class Room < ApplicationRecord
   belongs_to :building
 
-
-# Validates start here
-
   # code
   validates :code,
     presence: { message: 'Informe o código da sala'},
     uniqueness: { message: 'Uma sala com esse código já foi cadastra'}
 
+  # name
+  CHARACTERS_MINIMUM_FOR_THE_NAME_EXCEPTION = 'O Nome deve ter no mínimo 2 caracteres'
+  CHARACTERS_MAXIMUM_FOR_THE_NAME_EXCEPTION = 'Nome deve ter no máximo 50 caracters'
 
-# Validates end Here
+  validates_length_of :name,
+    :within => 2..50,
+    :too_short => CHARACTERS_MINIMUM_FOR_THE_NAME_EXCEPTION,
+    :too_long => CHARACTERS_MAXIMUM_FOR_THE_NAME_EXCEPTION
+
+  # capacity
+  validates_numericality_of :capacity,
+    :greater_than_or_equal_to => 5,
+    :less_than_or_equal_to => 200
 
   private
     def params_upcase

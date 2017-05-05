@@ -3,13 +3,16 @@
 
       <%= form_for @room,:url => {:action=> 'update'} do |room| %>
 
-        <%= room.label :name, 'Código da Sala' %>
-        <%= room.text_field :name, class: 'form-control', value: @room.code, :disabled => true %><br>
+        <%= room.label :code, 'Código da Sala' %>
+        <%= room.text_field :code, class: 'form-control', value: @room.code, :disabled => true %><br>
 
         <%= room.label :name, 'Nome' %>
         <%= room.text_field :name, class: 'form-control', value: @room.name %><br>
 
-        <%= room.label :name, 'Ativo' %>
+        <%= room.label :capacity, 'Capacidade' %>
+        <%= room.text_field :capacity, class: 'form-control', value: @room.capacity %><br>
+
+        <%= room.label :active, 'Ativo' %>
         <%= room.check_box :active, class: 'form-control',style: 'text-align:left; width: auto' %><br>
 
         <%= room.label :name, 'Prédio: ' %>
