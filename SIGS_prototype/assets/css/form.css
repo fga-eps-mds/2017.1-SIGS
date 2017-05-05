@@ -39,7 +39,26 @@
 .radioButton {
   display: flex;
 }
-  input[type="radio"] {
-    width: auto;
-    margin-right: 10px;
-  }
+
+input[type="radio"] {
+  width: auto;
+  margin-right: 10px;
+}
+
+#school_room .short_input {
+  display: table;
+}
+
+#school_room .short_input > * {
+  width: 100px;
+  float: left;
+}
+
+#school_room .short_input input[type="submit"] {
+  margin-left: 10px;
+  margin-top: 20px;
+}
+
+#school_room select{
+  margin-left: 10px;
+}

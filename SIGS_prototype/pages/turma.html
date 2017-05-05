@@ -11,6 +11,7 @@
     <link rel="stylesheet" media="all" href="../assets/css/bootstrap.min.css" />
     <link rel="stylesheet" media="all" href="../assets/css/style.css" />
     <link rel="stylesheet" media="all" href="../assets/css/navbar.css" />
+    <link rel="stylesheet" media="all" href="../assets/css/form.css" />
     <script src="../assets/js/jquery-1.12.4.min.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../assets/js/main.js"></script>
@@ -51,10 +52,53 @@
         </figure>
       </header>
       <main class="mainConteiner">
-        <h1> Wallacy Braz</h1>
-        <h2>CPF: 05012348888 </h2> <br>
-        <h2>Registro: 1234588 </h2> <br>
-        <h2>Email: wallacy@unb.br </h2> <br>
+        <h1>Turmas</h1>
+        <form id="school_room">
+          <label>Departamento</label>
+          <select>
+            <option>Departamento de Design</option>
+            <option>Departamento de Matemática</option>
+            <option>Departamento de Artes</option>
+          </select>
+          <label style="margin-left: 40px">Disciplina</label>
+          <select>
+            <option>Cálculo 1</option>
+            <option>História da Arte</option>
+            <option>Matemática Discreta</option>
+          </select>
+          <br>
+          <br>
+          <table class="table">
+            <tr>
+              <th>Turma</th>
+              <th>Horários</th>
+              <th></th>
+              <th></th>
+            </tr>
+            <tr>
+              <td>A</td>
+              <td>Segunda 8h</td>
+              <td>Quarta 8h</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>B</td>
+              <td>Terça 16h</td>
+              <td>Quinta 16h</td>
+              <td></td>
+            </tr>
+          </table>
+          <br><br>
+          <h3>Nova Turma</h3>
+          <fieldset class="short_input">
+            <div>
+              <label>Nome</label>
+              <input type="text" class="form-control">
+            </div>
+            <div></div>
+            <input type="submit" value="Criar Turma" class="btn btn-default btn-success" />
+          </fieldset>
+        </form>
       </main>
     </div>
   </body>
