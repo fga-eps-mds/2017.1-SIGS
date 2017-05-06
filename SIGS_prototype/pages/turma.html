@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>SIGS</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.ico" />
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Sistema de Alocação de Salas Inteligente da UnB.">
+    <link rel="stylesheet" media="all" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" media="all" href="../assets/css/style.css" />
+    <link rel="stylesheet" media="all" href="../assets/css/navbar.css" />
+    <link rel="stylesheet" media="all" href="../assets/css/form.css" />
+    <script src="../assets/js/jquery-1.12.4.min.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+  </head>
+  <body>
+    <div class="container container-fluid myContainer">
+      <header class="navbar-default myNav">
+        <figure class="logo">
+          <img src="../assets/img/sigs_logo.png" alt="SIGS Logos" />
+        </figure>
+
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+
+        <ul class="nav navbar-nav">
+          <li><a href="minha_conta.html">Minha Conta</a></li>
+          <li><a href="../index.html">Logout</a></li>
+          <li><a href="turma.html">Turmas</a></li>
+          <li><a href="#">Salas</a></li>
+          <li class="dropdown">
+            <a data-toggle="collapse" href="#demo">Usuários
+              <ul class="collapse" id="demo">
+                <li><a href="cadastros_pendentes.html">Cadastros Pendentes</a></li>
+                <li><a href="usuarios_registrados.html">Usuários Cadastrados</a></li>
+              </ul>
+            </li>
+          <li><a href="#">Alocações</a></li>
+        </ul>
+
+        <figure class="unbLogo">
+          <a href="http://www.unb.br" target="_blank">
+            <img src="../assets/img/rodape_unb.png" alt="SIGS Logos" />
+          </a>
+        </figure>
+      </header>
+      <main class="mainConteiner">
+        <h1>Turmas</h1>
+        <form id="school_room">
+          <label>Departamento</label>
+          <select>
+            <option>Departamento de Design</option>
+            <option>Departamento de Matemática</option>
+            <option>Departamento de Artes</option>
+          </select>
+          <label style="margin-left: 40px">Disciplina</label>
+          <select>
+            <option>Cálculo 1</option>
+            <option>História da Arte</option>
+            <option>Matemática Discreta</option>
+          </select>
+          <br>
+          <br>
+          <table class="table">
+            <tr>
+              <th>Turma</th>
+              <th>Horários</th>
+              <th></th>
+              <th></th>
+            </tr>
+            <tr>
+              <td>A</td>
+              <td>Segunda 8h</td>
+              <td>Quarta 8h</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>B</td>
+              <td>Terça 16h</td>
+              <td>Quinta 16h</td>
+              <td></td>
+            </tr>
+          </table>
+          <br><br>
+          <h3>Nova Turma</h3>
+          <fieldset class="short_input">
+            <div>
+              <label>Nome</label>
+              <input type="text" class="form-control">
+            </div>
+            <div></div>
+            <input type="submit" value="Criar Turma" class="btn btn-default btn-success" />
+          </fieldset>
+        </form>
+      </main>
+    </div>
+  </body>
+</html>
