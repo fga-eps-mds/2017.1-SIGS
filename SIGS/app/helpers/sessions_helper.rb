@@ -29,6 +29,12 @@ module SessionsHelper
       end
   end
 
+  def validade_permission_for_school_room
+    if permission == 3
+      redirect_to current_user , error: 'Você não tem permissão'
+    end
+  end
+
   def sign_out
     session.delete(:user_id)
     @current_user = nil
