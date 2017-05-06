@@ -23,7 +23,7 @@ module SessionsHelper
   end
 
   def logged_in?
-      if current_user.nil?
+      if !current_user
         flash.now[:notice] =  'Você precisa estar logado'
         render 'sessions/new'
       end
