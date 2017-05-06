@@ -2,6 +2,11 @@ Rails.application.routes.draw do
 
   root 'sessions#new'
 
+  #SchoolRooms
+
+  get 'school_rooms/new' => 'school_rooms#new', :as => 'school_rooms_new'
+  post 'school_rooms/create' => 'school_rooms#create', :as => 'school_rooms_create'
+
   # Sessions
   get 'sign_in' => 'sessions#new'
   post 'sign_in' => 'sessions#create'

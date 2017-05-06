@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170418005650) do
+ActiveRecord::Schema.define(version: 20170505033428) do
 
   create_table "administrative_assistants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -44,6 +44,13 @@ ActiveRecord::Schema.define(version: 20170418005650) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.index ["department_id"], name: "index_courses_on_department_id", using: :btree
+  end
+
+  create_table "courses_school_rooms", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "course_id",      null: false
+    t.integer "school_room_id", null: false
+    t.index ["course_id", "school_room_id"], name: "index_courses_school_rooms_on_course_id_and_school_room_id", using: :btree
+    t.index ["school_room_id", "course_id"], name: "index_courses_school_rooms_on_school_room_id_and_course_id", using: :btree
   end
 
   create_table "department_assistants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -89,6 +96,15 @@ ActiveRecord::Schema.define(version: 20170418005650) do
     t.index ["building_id"], name: "index_rooms_on_building_id", using: :btree
   end
 
+  create_table "school_rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.boolean  "active"
+    t.integer  "discipline_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["discipline_id"], name: "index_school_rooms_on_discipline_id", using: :btree
+  end
+
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "email"
@@ -107,4 +123,5 @@ ActiveRecord::Schema.define(version: 20170418005650) do
   add_foreign_key "department_assistants", "departments"
   add_foreign_key "department_assistants", "users"
   add_foreign_key "disciplines", "departments"
+  add_foreign_key "school_rooms", "disciplines"
 end
