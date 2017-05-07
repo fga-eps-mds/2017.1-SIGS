@@ -1,4 +1,4 @@
-# Class responsible for the room controller methods 
+# Class responsible for the room controller methods
 class RoomsController < ApplicationController
 
   def index
@@ -13,9 +13,9 @@ class RoomsController < ApplicationController
     @room = Room.find(params[:id])
     id = @room.id
     if @room.update_attributes(room_params)
-      redirect_to room_index_path(id), :flash => {:success => "Dados da sala atualizados com sucesso"}
+      redirect_to room_index_path(id), :flash => {:success => 'Dados da sala atualizados com sucesso'}
     else
-      redirect_to room_edit_path(id), :flash => {:warning => "Dados não foram atualizados"}
+      redirect_to room_edit_path(id), :flash => {:error => 'Dados não foram atualizados'}
     end
   end
 

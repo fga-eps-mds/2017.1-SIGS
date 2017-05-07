@@ -1,25 +1,31 @@
 <h1>Editar Sala</h1>
 
+  <ul id="erro-message">
+    <%= @room.errors.messages.values.each do |message| %>
+      <% message.each do |msg| %>
+        <li><%= msg %></li>
+      <%end %>
+    <% end %>
+  </ul>
 
-      <%= form_for @room,:url => {:action=> 'update'} do |room| %>
+  <%= form_for @room,:url => {:action=> 'update'} do |room| %>
+    <%= room.label :code, 'Código da Sala' %>
+    <%= room.text_field :code, class: 'form-control', value: @room.code %><br>
 
-        <%= room.label :code, 'Código da Sala' %>
-        <%= room.text_field :code, class: 'form-control', value: @room.code, :disabled => true %><br>
+    <%= room.label :name, 'Nome' %>
+    <%= room.text_field :name, class: 'form-control', value: @room.name %><br>
 
-        <%= room.label :name, 'Nome' %>
-        <%= room.text_field :name, class: 'form-control', value: @room.name %><br>
+    <%= room.label :capacity, 'Capacidade' %>
+    <%= room.text_field :capacity, class: 'form-control', value: @room.capacity %><br>
 
-        <%= room.label :capacity, 'Capacidade' %>
-        <%= room.text_field :capacity, class: 'form-control', value: @room.capacity %><br>
+    <%= room.label :active, 'Ativo' %>
+    <%= room.check_box :active, class: 'form-control',style: 'text-align:left; width: auto' %><br>
 
-        <%= room.label :active, 'Ativo' %>
-        <%= room.check_box :active, class: 'form-control',style: 'text-align:left; width: auto' %><br>
+    <%= room.label :name, 'Prédio: ' %>
+    <%= room.text_field :name, class: 'form-control', value: @room.building.name, :disabled => true %><br>
 
-        <%= room.label :name, 'Prédio: ' %>
-        <%= room.text_field :name, class: 'form-control', value: @room.building.name, :disabled => true %><br>
-
-        <div class='actions'>
-          <%= room.submit 'Salvar', class: 'pull-right btn btn-default btn-success' %>
-        </div>
-      </div>
-      <% end %>
+    <div class='actions'>
+      <%= room.submit 'Salvar', class: 'pull-right btn btn-default btn-success' %>
+    </div>
+    </div>
+  <% end %>
