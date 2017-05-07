@@ -5,7 +5,6 @@
 # files.
 
 require 'cucumber/rails'
-require File.dirname(__FILE__) + '/seeds'
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
@@ -31,9 +30,13 @@ ActionController::Base.allow_rescue = false
 
 # Remove/comment out the lines below if your app doesn't have a database.
 # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.
+
+Before do |scenario|
+  load Rails.root.join('db/seeds.rb')
+end
+
 begin
-  DatabaseCleaner.clean_with(:deletion)
-  DatabaseCleaner.strategy = :transaction
+  DatabaseCleaner.strategy = :truncation
 rescue NameError
   raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
 end
