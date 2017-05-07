@@ -20,7 +20,9 @@ class Room < ApplicationRecord
   MAXIMUM_FOR_THE_CAPACITY_EXCEPTION = 'A capacidade máxima é 500 vagas'
 
   validates_numericality_of :capacity,
-    :greater_than_or_equal_to => 5,
-    :less_than_or_equal_to => 500
+    :greater_than_or_equal_to => 5, :message => MINIMUM_FOR_THE_CAPACITY_EXCEPTION
+
+  validates_numericality_of :capacity,
+    :less_than_or_equal_to => 500, :message => MAXIMUM_FOR_THE_CAPACITY_EXCEPTION
 
 end

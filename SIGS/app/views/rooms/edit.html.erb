@@ -1,9 +1,9 @@
 <h1>Editar Sala</h1>
 
   <ul id="erro-message">
-    <%= @room.errors.messages.values.each do |message| %>
-      <% message.each do |msg| %>
-        <li><%= msg %></li>
+    <% @room.errors.messages.values.each do |msg| %>
+      <% msg.each do |m| %>
+        <li><%= m %></li>
       <%end %>
     <% end %>
   </ul>

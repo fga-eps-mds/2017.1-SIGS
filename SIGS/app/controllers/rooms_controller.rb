@@ -15,7 +15,8 @@ class RoomsController < ApplicationController
     if @room.update_attributes(room_params)
       redirect_to room_index_path(id), :flash => {:success => 'Dados da sala atualizados com sucesso'}
     else
-      redirect_to room_edit_path(id), :flash => {:error => 'Dados não foram atualizados'}
+      flash[:error] = 'Dados não foram atualizados'
+      render :edit
     end
   end
 
