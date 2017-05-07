@@ -42,6 +42,10 @@ And (/^I fill in 'capacity' with '2'$/) do
   fill_in('room[capacity]', :with=> '2')
 end
 
+And (/^I fill in 'capacity' with '980'$/) do
+  fill_in('room[capacity]', :with=> '980')
+end
+
 When (/^I delete all rooms$/) do
   @rooms = Room.all
   @rooms.each do |room|
@@ -53,12 +57,28 @@ Then (/^the 'Salas' page should load with notice message 'Dados da sala atualiza
   expect(page).to have_content('Dados da sala atualizados com sucesso')
 end
 
-Then (/^the 'Salas' page should load with notice message 'Dados não foram atualizados'$/) do
+Then (/^the 'Alterar Sala' page should load with notice message 'Dados não foram atualizados'$/) do
   expect(page).to have_content('Dados não foram atualizados')
+end
+
+And (/^the 'Alterar Sala' page should load with the errors messages$/) do
+  expect(page).to have_content('Informe o código da sala')
+  expect(page).to have_content('O Nome deve ter no mínimo 2 caracteres')
+  expect(page).to have_content('A capacidade mínima é 5 vagas')
+  expect(page).to have_content('A capacidade máxima é 500 vagas')
+end
+
+And (/^the 'Alterar Sala' page should load with errors messages of empty fields$/) do
+  expect(page).to have_content('O Nome deve ter no mínimo 2 caracteres')
+  expect(page).to have_content('A capacidade mínima é 5 vagas')
 end
 
 Then (/^the 'Salas' page should load with notice message 'Não há salas registradas no momento.'$/) do
   expect(page).to have_content('Não há salas registradas no momento.')
+end
+
+And (/^the 'Alterar Sala' page should load with a error message of capacity field$/) do
+  expect(page).to have_content('A capacidade máxima é 500 vagas')
 end
 
 Then (/^the 'Visualizar Sala' page should load with informations of that room$/) do

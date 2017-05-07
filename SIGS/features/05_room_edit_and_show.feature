@@ -21,10 +21,11 @@ Feature: Room Edit and show
     And I fill in 'name' with ''
     And I fill in 'capacity' with ''
     When I press 'Salvar' button
-    Then the 'Salas' page should load with notice message 'Dados não foram atualizados'
+    And the 'Alterar Sala' page should load with the errors messages
+    Then the 'Alterar Sala' page should load with notice message 'Dados não foram atualizados'
 
 
-  Scenario: Change code, name and capacity both invalid of room
+  Scenario: Change code, name both invalids and capacity less than 5 of room
     Given I am logged in as asssistant administrative
     When click on link 'Salas'
     And I press 'Icon edit' button
@@ -32,7 +33,19 @@ Feature: Room Edit and show
     And I fill in 'name' with 'a'
     And I fill in 'capacity' with '2'
     When I press 'Salvar' button
-    Then the 'Salas' page should load with notice message 'Dados não foram atualizados'
+    And the 'Alterar Sala' page should load with errors messages of empty fields
+    Then the 'Alterar Sala' page should load with notice message 'Dados não foram atualizados'
+
+  Scenario: Change code, name both invalids and capacity greater than 500 of room
+    Given I am logged in as asssistant administrative
+    When click on link 'Salas'
+    And I press 'Icon edit' button
+    And I fill in 'code' with '45632'
+    And I fill in 'name' with 'I10'
+    And I fill in 'capacity' with '980'
+    When I press 'Salvar' button
+    And the 'Alterar Sala' page should load with a error message of capacity field
+    Then the 'Alterar Sala' page should load with notice message 'Dados não foram atualizados'
 
   Scenario: No one room to edit
     Given I am logged in as asssistant administrative
