@@ -15,9 +15,9 @@ module SessionsHelper
     administrative_assistant = AdministrativeAssistant.find_by(user_id: session_user_id)
     if coordinator
       @permission ||= {:level => 1, :type => "Coordinator"}
-  elsif department_assistant
+    elsif department_assistant
       @permission ||= {:level => 2, :type => "Department Assistant"}
-  elsif administrative_assistant
+    elsif administrative_assistant
       @permission ||= {:level => 3, :type => "Administrative Assistant"}
     end
   end

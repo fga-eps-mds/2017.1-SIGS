@@ -4,13 +4,13 @@ class SchoolRoomsController < ApplicationController
 
   def new
     @school_room = SchoolRoom.new
-    @school_room.course
   end
 
   def create
     @school_room = SchoolRoom.new(school_rooms_params)
     @school_room.active = true
     @school_room.save
+    flash[:success] = "Turma criada"
   end
 
   def school_rooms_params

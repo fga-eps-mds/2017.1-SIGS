@@ -10,9 +10,9 @@
     <%= school_room.text_field :name, class: 'form-control' %>
   </div>
 
-  <p> Cursos Preferenciais</p>
+  <p> Cursos</p>
   <div class="checkbox-group">
-    <%= school_room.collection_check_boxes(:course_ids,Course.all,:id,:name, include_blank: true)%>
+    <%= school_room.collection_check_boxes(:course_ids,courses_by_user,:id,:name, include_blank: true)%>
   </div>
 
   <%= school_room.submit "Salvar", class: 'pull-right btn btn-default btn-success' %>
