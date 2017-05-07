@@ -2,8 +2,11 @@
   margin: 30px auto;
 }
 
-.myContainer input {
+.myContainer input[type="text"],
+.myContainer input[type="password"],
+.myContainer select {
   width: 100%;
+  margin-bottom:20px;
 }
 
 .myContainer input[type="submit"] {
@@ -18,6 +21,11 @@
 
 .myContainer form fieldset {
   margin: 20px auto;
+}
+
+.myContainer .checkbox-group label{
+  margin-left: 10px;
+  width: 96%;
 }
 
 .btn {
@@ -43,4 +51,8 @@
     width: auto;
     margin-right: 10px;
   }
+}
+
+.short_input select{
+  margin-left: 10px;
 }

@@ -52,52 +52,32 @@
         </figure>
       </header>
       <main class="mainConteiner">
-        <h1>Turmas</h1>
+        <h1>Turma</h1>
         <form id="school_room">
-          <label>Departamento</label>
-          <select>
-            <option>Departamento de Design</option>
-            <option>Departamento de Matemática</option>
-            <option>Departamento de Artes</option>
-          </select>
-          <label style="margin-left: 40px">Disciplina</label>
+          <label>Disciplina</label>
           <select>
             <option>Cálculo 1</option>
             <option>História da Arte</option>
             <option>Matemática Discreta</option>
           </select>
-          <br>
-          <br>
-          <table class="table">
-            <tr>
-              <th>Turma</th>
-              <th>Horários</th>
-              <th></th>
-              <th></th>
-            </tr>
-            <tr>
-              <td>A</td>
-              <td>Segunda 8h</td>
-              <td>Quarta 8h</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>B</td>
-              <td>Terça 16h</td>
-              <td>Quinta 16h</td>
-              <td></td>
-            </tr>
-          </table>
-          <br><br>
-          <h3>Nova Turma</h3>
-          <fieldset class="short_input">
-            <div>
-              <label>Nome</label>
-              <input type="text" class="form-control">
-            </div>
-            <div></div>
-            <input type="submit" value="Criar Turma" class="btn btn-default btn-success" />
-          </fieldset>
+          <div class="short_input">
+            <label>Nome</label>
+            <input type="text" class="form-control">
+          </div>
+
+          <p>Cursos Preferenciais</p>
+          <div class="checkbox-group">
+            <input type="checkbox">
+            <label>Engenharia de Software</label>
+            <input type="checkbox">
+            <label>Engenharia Eletrônica</label>
+            <input type="checkbox">
+            <label>Medicina</label>
+            <input type="checkbox">
+            <label>Design</label>
+          </div>
+
+          <input type="submit" value="Criar Turma" class="btn btn-default btn-success" />
         </form>
       </main>
     </div>

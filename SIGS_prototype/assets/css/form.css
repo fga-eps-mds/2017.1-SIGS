@@ -2,8 +2,11 @@
   margin: 30px auto;
 }
 
-.myContainer input {
+.myContainer input[type="text"],
+.myContainer input[type="password"],
+.myContainer select {
   width: 100%;
+  margin-bottom:20px;
 }
 
 .myContainer input[type="submit"] {
@@ -20,9 +23,10 @@
   margin: 20px auto;
 }
 
-/*.btn {
-  border-radius: 50%;
-}*/
+.myContainer .checkbox-group label{
+  margin-left: 10px;
+  width: 95%;
+}
 
 .actions {
   margin-top: 10px;
@@ -45,20 +49,6 @@ input[type="radio"] {
   margin-right: 10px;
 }
 
-#school_room .short_input {
-  display: table;
-}
-
-#school_room .short_input > * {
-  width: 100px;
-  float: left;
-}
-
-#school_room .short_input input[type="submit"] {
-  margin-left: 10px;
-  margin-top: 20px;
-}
-
-#school_room select{
+.short_input select{
   margin-left: 10px;
 }
