@@ -1,11 +1,7 @@
 Rails.application.routes.draw do
 
+
   root 'sessions#new'
-
-  #SchoolRooms
-
-  get 'school_rooms/new' => 'school_rooms#new', :as => 'school_rooms_new'
-  post 'school_rooms/create' => 'school_rooms#create', :as => 'school_rooms_create'
 
   # Sessions
   get 'sign_in' => 'sessions#new'
@@ -30,6 +26,14 @@ Rails.application.routes.draw do
   get 'administrative_assistants/enable_registration/:id' => 'administrative_assistants#enable_registration', as: 'enable_registration'
   get 'administrative_assistants/decline_registration/:id' => 'administrative_assistants#decline_registration', as: 'decline_registration'
   get 'administrative_assistants/destroy_users/:id' => 'administrative_assistants#destroy_users', as: 'destroy_users'
+
+  # Course
+  get 'courses/courses_by_user' => 'courses#courses_by_user', :as => 'courses_by_user'
+
+  #SchoolRooms
+
+  get 'school_rooms/new' => 'school_rooms#new', :as => 'school_rooms_new'
+  post 'school_rooms/create' => 'school_rooms#create', :as => 'school_rooms_create'
 
   # Parsers
   post "/upload_buildings", controller: 'parsers', action: 'upload_buildings'
