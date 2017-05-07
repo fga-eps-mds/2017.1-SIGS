@@ -1,19 +1,18 @@
-# Class responsible for the room controller methods
+# Classe responsavel pelos metodos controladores de sala
 class RoomsController < ApplicationController
-
   def index
     @rooms = Room.all
   end
 
   def edit
-    find_rooms()
+    find_rooms
   end
 
   def update
     @room = Room.find(params[:id])
-    id = @room.id
     if @room.update_attributes(room_params)
-      redirect_to room_index_path(id), :flash => {:success => 'Dados da sala atualizados com sucesso'}
+      success_mesage = 'Dados da sala atualizados com sucesso'
+      redirect_to room_index_path(@room.id), flash: { success: success_mesage }
     else
       flash[:error] = 'Dados não foram atualizados'
       render :edit
@@ -21,15 +20,24 @@ class RoomsController < ApplicationController
   end
 
   def show
-    find_rooms()
+    find_rooms
   end
 
   private
+
   def find_rooms
     @room = Room.find(params[:id])
   end
 
   def room_params
-    params[:room].permit(:id, :code, :name, :capacity, :active, :time_grid_id, :build_id)
+    params[:room].permit(
+      :id,
+      :code,
+      :name,
+      :capacity,
+      :active,
+      :time_grid_id,
+      :build_id
+    )
   end
 end
