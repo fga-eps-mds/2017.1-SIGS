@@ -16,4 +16,28 @@ RSpec.describe SchoolRoomsController, type: :controller do
     end
   end
 
+  describe 'SchoolRooms methods' do
+
+    before(:each) do
+      @user = User.create(name: 'joao silva', email: 'joaosilva@unb.br',
+        password: '123456', registration:'1100061', cpf:'05601407380', active: true)
+      @department = Department.create(name: 'Departamento de Matemática', code: "007")
+      @course = Course.create(name:"Matemática", code: "009", department: @department)
+      @discipline = Discipline.create(name: "Anãlise Combinatória", code: "123", department: @department)
+    end
+
+    it 'should return new view' do
+      get :new
+      expect(@school_room).to be_nil
+    end
+
+    it 'should create a new school room' do
+      sign_in(@user)
+      post :create, params:{school_room: {name: 'AA', discipline_id: @discipline.id, course_ids: ["", @course.id]}}
+      expect(flash[:success]).to eq("Turma criada")
+      expect(SchoolRoom.count).to be(1)
+    end
+
+  end
+
 end
