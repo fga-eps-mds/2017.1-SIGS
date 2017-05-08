@@ -47,5 +47,7 @@ RSpec.describe SessionsHelper, type: :helper do
       permission
       expect(@permission[:level]).to eq(3)
     end
+
+    
  end
 end

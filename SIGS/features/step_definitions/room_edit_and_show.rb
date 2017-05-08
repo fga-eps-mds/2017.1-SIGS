@@ -1,3 +1,10 @@
+Given (/^I am logged in as asssistant administrative$/) do
+  visit 'http://192.168.2.15:3000'
+  fill_in('session[email]', :with=> 'wallacy@unb.br')
+  fill_in('session[password]', :with=> '123456')
+  click_button('Entrar')
+end
+
 When (/^click on link 'Salas'$/) do
   click_link('Salas')
 end

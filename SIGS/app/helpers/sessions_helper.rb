@@ -40,4 +40,11 @@ module SessionsHelper
     @current_user = nil
     @permission = nil
   end
+
+  def authenticate_administrative_assistant?
+      if permission[:level] != 3
+        flash[:error] =  'Acesso Negado'
+        redirect_to current_user
+      end
+  end
 end
