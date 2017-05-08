@@ -19,7 +19,7 @@ user_2 = User.create(name: 'João Busche', email: 'joao@unb.br', cpf: '050444488
 coordinator = Coordinator.create(user: user_2, course: course)
 
 # Users - DepartmentAssistant
-user_3 = User.create(name: 'João Pedro', email: 'joao@unb.br', cpf: '05012349999', registration: '1234599', active: true, password: '123456')
+user_3 = User.create(name: 'João Pedro', email: 'pedro@unb.br', cpf: '05012349999', registration: '1234599', active: true, password: '123456')
 department_assistant = DepartmentAssistant.create(user: user_3, department: department)
 user_4 = User.create(name: 'Ateldy Brasil', email: 'ateldy@unb.br', cpf: '05022446688', registration: '1234333', active: false, password: '123456')
 department_assistant = DepartmentAssistant.create(user: user_4, department: department)
@@ -30,9 +30,14 @@ administrative_assistant = AdministrativeAssistant.create(user: user_5)
 user_6 = User.create(name: 'Carlos Aragon', email: 'carlos@unb.br', cpf: '05022248811', registration: '2224588', active: false, password: '123456')
 administrative_assistant = AdministrativeAssistant.create(user: user_6)
 
+# Buildings
 buildings = Building.create([
   {code: 'pjc', name: 'Pavilhão João Calmon', wing: 'Norte'},
   {code: 'PAT', name: 'Pavilhão Anísio Teixeira', wing: 'norte'},
   {code: 'BSAS', name: 'Bloco de Salas da Ala Sul', wing: 'sul'},
-  {code: 'BSAN', name: 'Bloco de Salas da Ala Norte', wing: 'norte'},
-          ])
+  {code: 'BSAN', name: 'Bloco de Salas da Ala Norte', wing: 'norte'}
+  ])
+
+# Rooms
+room_1 = Room.create(code: '124325', name: 'S10', capacity: 50, active: true, time_grid_id: 1, building_id: 1)
+room_2 = Room.create(code: '987653', name: 'SS', capacity: 40, active: false, time_grid_id: 2, building_id: 2)

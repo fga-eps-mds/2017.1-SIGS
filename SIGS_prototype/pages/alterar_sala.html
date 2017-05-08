@@ -51,10 +51,26 @@
         </figure>
       </header>
       <main class="mainConteiner">
-        <h1> Wallacy Braz</h1>
-        <h2>CPF: 05012348888 </h2> <br>
-        <h2>Registro: 1234588 </h2> <br>
-        <h2>Email: wallacy@unb.br </h2> <br>
+        <h1>Editar Sala</h1>
+
+        <form class="edit_room" id="edit_room_2" action="salas.html">
+
+          <label for="room_name">Código da Sala</label>
+          <input class="form-control" value="bbb" disabled="disabled" type="text" name="room[name]" id="room_name" /><br>
+
+          <label for="room_name">Nome</label>
+          <input class="form-control" value="S10" type="text" name="room[name]" id="room_name" /><br>
+
+          <label for="room_name">Ativo</label>
+          <input name="room[active]" type="hidden" value="0" /><input class="form-control" style="text-align:left; width: auto" type="checkbox" value="1" checked="checked" name="room[active]" id="room_active" /><br>
+
+          <label for="room_name">Prédio: </label>
+          <input class="form-control" value="Pavilhão João Calmon" disabled="disabled" type="text" name="room[name]" id="room_name" /><br>
+
+          <div class='actions'>
+            <input type="submit" name="commit" value="Salvar" class="pull-right btn btn-default btn-success" data-disable-with="Salvar" />
+          </div>
+        </form>
       </main>
     </div>
   </body>
