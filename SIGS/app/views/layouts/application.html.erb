@@ -32,7 +32,7 @@
           <ul class="nav navbar-nav">
             <li><%= link_to "Minha Conta", user_edit_path(current_user) %></li>
             <li><%= link_to 'Logout', sign_out_path, method: "delete" %></li>
-            <li><a href="#">Turmas</a></li>
+            <li><%= link_to "Turmas", school_rooms_new_path %></a></li>
             <li><a href="#">Salas</a></li>
             <% if permission[:level] == 3 %>
               <li class="dropdown">
