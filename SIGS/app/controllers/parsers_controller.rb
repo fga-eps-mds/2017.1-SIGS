@@ -1,71 +1,79 @@
 class ParsersController < ApplicationController
 
   def upload_rooms
-    document = params[:document]
     if document
-      File.open(Rails.root.join('public', 'csv', 'file_rooms.csv'), 'wb') do |file|
-        file.write(document.read)
-      end
+      open_file('file_rooms.csv')
       Parser.save_data_rooms('public/csv/file_rooms.csv')
-      redirect_to 'http://0.0.0.0:3000/'
+      home
     else
-      redirect_to 'http://0.0.0.0:3000/parsers'
+      parsers
     end
   end
   
   def upload_buildings
-    document = params[:document]
+
     if document
-      File.open(Rails.root.join('public', 'csv', 'file_buildings.csv'), 'wb') do |file|
-        file.write(document.read)
-      end
+      open_file('file_buildings.csv')
       Parser.save_data_buildings('public/csv/file_buildings.csv')
-      redirect_to 'http://0.0.0.0:3000/'
+      home
     else
-      redirect_to 'http://0.0.0.0:3000/parsers'
+      parsers
     end
   end
 
   def upload_departments
-    document = params[:document]
+ 
     if document
-      File.open(Rails.root.join('public', 'csv', 'file_departments.csv'), 'wb') do |file|
-        file.write(document.read)
-      end
-
+      open_file('file_departments.csv')
       Parser.save_data_departments('public/csv/file_departments.csv')
-      redirect_to 'http://192.168.2.15:3000/'
+      home
 
     else
-      redirect_to 'http://192.168.2.15:3000/parsers'
+      parsers
     end
   end
 
   def upload_courses
-    document = params[:document]
+
     if document
-      File.open(Rails.root.join('public', 'csv', 'file_courses.csv'), 'wb') do |file|
-        file.write(document.read)
-      end
-        
+      open_file('file_courses.csv')
       Parser.save_data_courses('public/csv/file_courses.csv')
-      redirect_to 'http://192.168.2.15:3000/'
+      home
 
     else
-      redirect_to 'http://192.168.2.15:3000/parsers'
+      parsers
     end
   end
 
   def upload_disciplines
-    document = params[:document]
     if document
-      File.open(Rails.root.join('public', 'csv', 'file_disciplines.csv'), 'wb') do |file|
-        file.write(document.read)
-      end
+      open_file('file_disciplines.csv')
       Parser.save_data_disciplines('public/csv/file_disciplines.csv')
-      redirect_to 'http://0.0.0.0:3000/'
+      home
     else
-      redirect_to 'http://0.0.0.0:3000/parsers'
+      parsers
+    end
+  end
+
+  # redireciona para parsers
+  def parsers
+    redirect_to 'http://192.168.2.15:3000/parsers'
+  end
+
+  # redireciona para home
+  def home
+    redirect_to 'http://192.168.2.15:3000/'
+  end
+ 
+  # recebe paramento do formulário
+  def document
+    document = params[:document]
+  end
+
+  # ler o arquivo csv e salva um novo em public/csv e chama a model Parser para pessistir os dados
+  def open_file(arquivo)
+    File.open(Rails.root.join('public', 'csv',arquivo), 'wb') do |file|
+        file.write(document.read)
     end
   end
 

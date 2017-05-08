@@ -27,6 +27,12 @@ Rails.application.routes.draw do
   get 'administrative_assistants/decline_registration/:id' => 'administrative_assistants#decline_registration', as: 'decline_registration'
   get 'administrative_assistants/destroy_users/:id' => 'administrative_assistants#destroy_users', as: 'destroy_users'
 
+  # Room
+  get 'rooms/index' => 'rooms#index', as: 'room_index'
+  get 'rooms/edit/:id' => 'rooms#edit', as: 'room_edit'
+  patch 'rooms/update/:id' => 'rooms#update'
+  get 'rooms/show/:id' => 'rooms#show', as: 'room'
+
   # Course
   get 'courses/courses_by_user' => 'courses#courses_by_user', :as => 'courses_by_user'
 

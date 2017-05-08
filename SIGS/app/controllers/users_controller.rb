@@ -11,14 +11,14 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     if (@user.id != current_user.id && permission[:level] != 3)
-      redirect_back fallback_location: {action: "show", id:current_user.id}
+      redirect_to_current_user
     end
   end
 
   def index
     @users = User.where('id != ? and active != false', current_user.id)
     if (permission[:level]!= 3)
-      redirect_back fallback_location: {action: "show", id:current_user.id}
+      redirect_to_current_user
     end
   end
 
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
     if (@user.id != current_user.id)
-      redirect_back fallback_location: {action: "show", id:current_user.id}
+      redirect_to_current_user
     end
   end
 
@@ -56,15 +56,19 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     if (@user.id != current_user.id && permission[:level] != 3)
-      redirect_back fallback_location: {action: 'show', id:current_user.id}
+      redirect_to_current_user
     else
-      if permission[:level] == 3 && AdministrativeAssistant.all.count == 1
+      confirm_destroy(@user)
+    end
+  end
+
+  def confirm_destroy(user)
+     if permission[:level] == 3 && AdministrativeAssistant.all.count == 1
           redirect_to user_edit_path, :flash => {:error => 'Não é possível excluir o único Assistente Administrativo'}
       else
-        @user.destroy
+        user.destroy
         redirect_to sign_in_path, :flash => { :error => 'Conta Excluída' }
       end
-    end
   end
 
   private
@@ -79,5 +83,9 @@ class UsersController < ApplicationController
       params[:user].permit(:id,:name, :email, :password,:registration, :cpf, :active,
                           :administrative_assistant_attributes => [:user_id])
     end
+  end
+
+  def redirect_to_current_user
+    redirect_back fallback_location: {action: "show", id:current_user.id}
   end
 end
