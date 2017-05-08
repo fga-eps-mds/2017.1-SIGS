@@ -10,8 +10,8 @@ script:
 - bundle exec rake db:load_config
 - bundle exec rake db:create
 - bundle exec rake db:migrate
-- bundle exec rspec
 - rake cucumber
+- bundle exec rspec
 after_sucess:
 - coveralls push
 rvm:
