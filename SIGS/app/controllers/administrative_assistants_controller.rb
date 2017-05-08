@@ -23,4 +23,11 @@ class AdministrativeAssistantsController < ApplicationController
     end
     redirect_to registration_request_path
   end
+  
+  def destroy_users
+    @user = User.find(params[:id])
+    if @user.destroy
+      redirect_to user_index_path, :flash => {:sucess => 'Usuário excluído com sucesso'}
+    end
+  end
 end

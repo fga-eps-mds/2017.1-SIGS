@@ -21,12 +21,6 @@ Feature: Manager User
     When I press 'Salvar' button
     Then the 'Minha Conta' page should load with notice message 'Dados não foram atualizados'
 
-  Scenario: Delete a account of a user
-    Given I am logged in as asssistant administrative
-    When click on link 'Minha Conta'
-    When I press 'Excluir Conta' button
-    Then the initial page should load with notice message 'Conta Excluída'
-
   Scenario: Delete a only account of a administrative asssistant
     Given I am logged in as asssistant administrative
     When I delete another asssistant administrative

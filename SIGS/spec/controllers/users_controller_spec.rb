@@ -204,7 +204,7 @@ RSpec.describe UsersController, type: :controller do
       sign_in(@user)
       post :update, params:{id: @user.id,user: {name: ''}}
       expect(response).to redirect_to(user_edit_path)
-      expect(flash[:warning]).to eq("translation missing: en.error_profile_update")
+      expect(flash[:warning]).to eq("Dados não foram atualizados")
     end
   end
 end
