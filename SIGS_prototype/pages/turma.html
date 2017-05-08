@@ -11,6 +11,7 @@
     <link rel="stylesheet" media="all" href="../assets/css/bootstrap.min.css" />
     <link rel="stylesheet" media="all" href="../assets/css/style.css" />
     <link rel="stylesheet" media="all" href="../assets/css/navbar.css" />
+    <link rel="stylesheet" media="all" href="../assets/css/form.css" />
     <script src="../assets/js/jquery-1.12.4.min.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../assets/js/main.js"></script>
@@ -33,14 +34,14 @@
           <li><a href="minha_conta.html">Minha Conta</a></li>
           <li><a href="../index.html">Logout</a></li>
           <li><a href="turma.html">Turmas</a></li>
-          <li><a href="salas.html">Salas</a></li>
+          <li><a href="#">Salas</a></li>
           <li class="dropdown">
             <a data-toggle="collapse" href="#demo">Usuários
               <ul class="collapse" id="demo">
                 <li><a href="cadastros_pendentes.html">Cadastros Pendentes</a></li>
                 <li><a href="usuarios_registrados.html">Usuários Cadastrados</a></li>
               </ul>
-          </li>
+            </li>
           <li><a href="#">Alocações</a></li>
         </ul>
 
@@ -51,10 +52,33 @@
         </figure>
       </header>
       <main class="mainConteiner">
-        <h1> Wallacy Braz</h1>
-        <h2>CPF: 05012348888 </h2> <br>
-        <h2>Registro: 1234588 </h2> <br>
-        <h2>Email: wallacy@unb.br </h2> <br>
+        <h1>Turma</h1>
+        <form id="school_room">
+          <label>Disciplina</label>
+          <select>
+            <option>Cálculo 1</option>
+            <option>História da Arte</option>
+            <option>Matemática Discreta</option>
+          </select>
+          <div class="short_input">
+            <label>Nome</label>
+            <input type="text" class="form-control">
+          </div>
+
+          <p>Cursos Preferenciais</p>
+          <div class="checkbox-group">
+            <input type="checkbox">
+            <label>Engenharia de Software</label>
+            <input type="checkbox">
+            <label>Engenharia Eletrônica</label>
+            <input type="checkbox">
+            <label>Medicina</label>
+            <input type="checkbox">
+            <label>Design</label>
+          </div>
+
+          <input type="submit" value="Criar Turma" class="btn btn-default btn-success" />
+        </form>
       </main>
     </div>
   </body>

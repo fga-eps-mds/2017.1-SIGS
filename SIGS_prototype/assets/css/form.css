@@ -2,8 +2,11 @@
   margin: 30px auto;
 }
 
-.myContainer input {
+.myContainer input[type="text"],
+.myContainer input[type="password"],
+.myContainer select {
   width: 100%;
+  margin-bottom:20px;
 }
 
 .myContainer input[type="submit"] {
@@ -20,9 +23,10 @@
   margin: 20px auto;
 }
 
-/*.btn {
-  border-radius: 50%;
-}*/
+.myContainer .checkbox-group label{
+  margin-left: 10px;
+  width: 100%;
+}
 
 .actions {
   margin-top: 10px;
@@ -39,7 +43,12 @@
 .radioButton {
   display: flex;
 }
-  input[type="radio"] {
-    width: auto;
-    margin-right: 10px;
-  }
+
+input[type="radio"] {
+  width: auto;
+  margin-right: 10px;
+}
+
+.short_input select{
+  margin-left: 10px;
+}
