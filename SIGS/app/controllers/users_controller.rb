@@ -56,7 +56,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     if (@user.id == current_user.id)
-      if permission[:level] == 3 and AdministrativeAssistant.all.count == 1
+      if permission[:level] == 3 and AdministrativeAssistant.joins(:user).where(users: {active: true}).count == 1
           flash[:error] = "Não é possível excluir o único Assistente Administrativo"
           redirect_to current_user
       else

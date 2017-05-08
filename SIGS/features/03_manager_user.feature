@@ -23,7 +23,6 @@ Feature: Manager User
 
   Scenario: Delete a only account of a administrative asssistant
     Given I am logged in as asssistant administrative
-    When I delete another asssistant administrative
     When click on link 'Minha Conta'
     When I press 'Excluir Conta' button
     Then the initial page should load with notice message 'Não é possível excluir o único Assistente Administrativo'
