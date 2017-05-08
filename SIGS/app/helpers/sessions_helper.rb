@@ -15,9 +15,9 @@ module SessionsHelper
     administrative_assistant = AdministrativeAssistant.find_by(user_id: session_user_id)
     if coordinator
       @permission ||= {:level => 1, :type => "Coordinator"}
-  elsif department_assistant
+    elsif department_assistant
       @permission ||= {:level => 2, :type => "Department Assistant"}
-  elsif administrative_assistant
+    elsif administrative_assistant
       @permission ||= {:level => 3, :type => "Administrative Assistant"}
     end
   end
@@ -27,6 +27,12 @@ module SessionsHelper
         flash.now[:notice] =  'Você precisa estar logado'
         render 'sessions/new'
       end
+  end
+
+  def validade_permission_for_school_room
+    if permission == 3
+      redirect_to current_user , error: 'Você não tem permissão'
+    end
   end
 
   def sign_out

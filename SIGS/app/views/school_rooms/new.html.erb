@@ -1,0 +1,20 @@
+<h2>Nova Turma</h2>
+
+<%= form_for @school_room, url: school_rooms_create_path do |school_room| %>
+
+  <label>Disciplina </label>
+  <%= school_room.collection_select(:discipline_id,Discipline.all,:id,:name, include_blank: true)%>
+
+  <div class="short_input">
+    <%= school_room.label :name, "Turma" %>
+    <%= school_room.text_field :name, class: 'form-control' %>
+  </div>
+
+  <p> Cursos</p>
+  <div class="checkbox-group">
+    <%= school_room.collection_check_boxes(:course_ids,courses_by_user,:id,:name, include_blank: true)%>
+  </div>
+
+  <%= school_room.submit "Salvar", class: 'pull-right btn btn-default btn-success' %>
+
+<% end %>
