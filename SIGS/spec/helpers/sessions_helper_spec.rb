@@ -9,7 +9,7 @@ RSpec.describe SessionsHelper, type: :helper do
       @user1 = User.create(name: 'teste1234', cpf: '05365052171', registration: '1234568', email: 'test1@unb.br', password: '1231234', active: true)
       @department = Department.create(code:"123",name:"departmentTest")
       @course = Course.create(code:"123",name:"courseTest",department_id: @department.id)
-      @coordinator = Coordinator.create(course_id: @course.id,department_id: @department.id, user_id: @user.id)
+      @coordinator = Coordinator.create(course_id: @course.id, user_id: @user.id)
       @user2 = User.create(name: 'teste12345', cpf: '05365052172', registration: '1234569', email: 'test2@unb.br', password: '12312345', active: true)
       @department_assistant = DepartmentAssistant.create(department_id: @department.id,user_id: @user1.id)
       @administrative_assistant = AdministrativeAssistant.create(user_id: @user2.id)

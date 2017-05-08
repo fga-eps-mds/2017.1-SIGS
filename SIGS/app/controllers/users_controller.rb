@@ -11,14 +11,14 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     if (@user.id != current_user.id && permission[:level] != 3)
-      redirect_back fallback_location: {action: "show", id:current_user.id}
+      redirect_to_current_user
     end
   end
 
   def index
     @users = User.where('id != ? and active != false', current_user.id)
     if (permission[:level]!= 3)
-      redirect_back fallback_location: {action: "show", id:current_user.id}
+      redirect_to_current_user
     end
   end
 
@@ -35,10 +35,10 @@ class UsersController < ApplicationController
     end
   end
 
-    def edit
+  def edit
     @user = User.find(params[:id])
     if (@user.id != current_user.id)
-      redirect_back fallback_location: {action: "show", id:current_user.id}
+      redirect_to_current_user
     end
   end
 
@@ -49,7 +49,7 @@ class UsersController < ApplicationController
       flash[:success] = ("Dados atualizados com sucesso")
     else
       redirect_to user_edit_path
-      flash[:warning] = t(:error_profile_update)
+      flash[:warning] = ("Dados não foram atualizados")
     end
   end
 
@@ -82,5 +82,9 @@ class UsersController < ApplicationController
       params[:user].permit(:id,:name, :email, :password,:registration, :cpf, :active,
                           :administrative_assistant_attributes => [:user_id])
     end
+  end
+
+  def redirect_to_current_user
+    redirect_back fallback_location: {action: "show", id:current_user.id}
   end
 end
