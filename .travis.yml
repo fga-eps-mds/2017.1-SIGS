@@ -11,6 +11,7 @@ script:
 - bundle exec rake db:create
 - bundle exec rake db:migrate
 - bundle exec rspec
+- rake cucumber
 after_sucess:
 - coveralls push
 rvm:
