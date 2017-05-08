@@ -55,20 +55,19 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    if (@user.id != current_user.id && permission[:level] != 3)
-      redirect_to_current_user
-    else
-      confirm_destroy(@user)
-    end
-  end
-
-  def confirm_destroy(user)
-     if permission[:level] == 3 && AdministrativeAssistant.all.count == 1
-          redirect_to user_edit_path, :flash => {:error => 'Não é possível excluir o único Assistente Administrativo'}
+    if (@user.id == current_user.id)
+      if permission[:level] == 3 and AdministrativeAssistant.joins(:user).where(users: {active: true}).count == 1
+          flash[:error] = "Não é possível excluir o único Assistente Administrativo"
+          redirect_to current_user
       else
-        user.destroy
-        redirect_to sign_in_path, :flash => { :error => 'Conta Excluída' }
+        @user.destroy
+        flash[:success] = "Usuário excluído com sucesso"
+        redirect_to sign_in_path
       end
+    else
+      flash[:error] = "Acesso Negado"
+      redirect_back fallback_location: {action: "show", id:current_user.id}
+    end
   end
 
   private
