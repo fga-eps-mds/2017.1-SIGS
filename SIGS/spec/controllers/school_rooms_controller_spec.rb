@@ -24,9 +24,11 @@ RSpec.describe SchoolRoomsController, type: :controller do
       @department = Department.create(name: 'Departamento de Matemática', code: "007")
       @course = Course.create(name:"Matemática", code: "009", department: @department)
       @discipline = Discipline.create(name: "Anãlise Combinatória", code: "123", department: @department)
+      @coordinator = Coordinator.create(user: @user, course: @course)
     end
 
     it 'should return new view' do
+      sign_in(@user)
       get :new
       expect(@school_room).to be_nil
     end

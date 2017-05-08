@@ -32,7 +32,6 @@
           <ul class="nav navbar-nav">
             <li><%= link_to "Minha Conta", user_edit_path(current_user) %></li>
             <li><%= link_to 'Logout', sign_out_path, method: "delete" %></li>
-            <li><a href="#">Turmas</a></li>
             <li><%= link_to 'Salas', room_index_path %></li>
             <% if permission[:level] == 3 %>
               <li class="dropdown">
@@ -42,6 +41,8 @@
                     <li><%= link_to "Usuários Registrados", user_index_path %></li>
                   </ul>
                 </li>
+            <% else %>
+              <li><%= link_to "Turmas", school_rooms_new_path %></a></li>
             <% end %>
             <li><a href="#">Alocações</a></li>
           </ul>

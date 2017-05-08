@@ -30,8 +30,8 @@ module SessionsHelper
   end
 
   def validade_permission_for_school_room
-    if permission == 3
-      redirect_to current_user , error: 'Você não tem permissão'
+    if permission[:level] == 3
+      redirect_to current_user , error: 'Acesso Negado'
     end
   end
 
