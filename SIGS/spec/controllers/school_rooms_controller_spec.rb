@@ -27,6 +27,11 @@ RSpec.describe SchoolRoomsController, type: :controller do
       @coordinator = Coordinator.create(user: @user, course: @course)
     end
 
+    it 'should return new view2' do
+      post :new
+      expect(response).to have_http_status(200)
+    end
+
     it 'should return new view' do
       sign_in(@user)
       get :new
