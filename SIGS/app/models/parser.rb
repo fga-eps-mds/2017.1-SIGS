@@ -44,8 +44,10 @@ class Parser < ApplicationRecord
   def self.save_data_disciplines(file)
     CSV.foreach(file, col_sep: ',', headers: true, encoding: 'Windows-1252') do |row|
       departament_record = Department.find_or_create_by(name: row[3])
-      discipline_record = Discipline.find_or_create_by(code: row[0], name: row[1],
-                                                  department_id: departament_record.id)
+      discipline_record = Discipline.find_or_create_by(code: row[0],
+                                                       name: row[1],
+                                                       department_id:
+                                                       departament_record.id)
       discipline_record.save
     end
   end
