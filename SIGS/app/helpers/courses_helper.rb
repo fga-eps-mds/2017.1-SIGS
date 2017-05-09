@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# module to define course by user
 module CoursesHelper
   include SessionsHelper
 
@@ -11,5 +14,4 @@ module CoursesHelper
       @courses = Course.where(department_id: @department_assistant.department_id)
     end
   end
-
 end
