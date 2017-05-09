@@ -64,7 +64,7 @@ class ParsersController < ApplicationController
 
   # recebe paramento do formulario
   def document
-    document = params[:document]
+    params[:document]
   end
 
   # ler o arquivo csv e salva um novo em public/csv e chama a model

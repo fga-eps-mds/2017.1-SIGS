@@ -20,7 +20,8 @@ class AdministrativeAssistantsController < ApplicationController
 
   def decline_registration
     @user = User.find(params[:id])
-    if @user.destroy
+    if @user
+      @user.destroy
       flash[:success] = 'Usuário recusado com sucesso'
     end
     redirect_to registration_request_path
@@ -28,8 +29,8 @@ class AdministrativeAssistantsController < ApplicationController
 
   def destroy_users
     @user = User.find(params[:id])
-    if @user.destroy
-      redirect_to user_index_path, flash: { sucess: 'Usuário excluído com sucesso' }
-    end
+    return unless @user
+    @user.destroy
+    redirect_to user_index_path, flash: { sucess: 'Usuário excluído com sucesso' }
   end
 end
