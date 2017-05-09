@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Module to check the permission level on pages
 module SessionsHelper
   def sign_in(user)
@@ -14,25 +16,23 @@ module SessionsHelper
     department_assistant = DepartmentAssistant.find_by(user_id: session_user_id)
     administrative_assistant = AdministrativeAssistant.find_by(user_id: session_user_id)
     if coordinator
-      @permission ||= {:level => 1, :type => "Coordinator"}
+      @permission ||= { level: 1, type: 'Coordinator' }
     elsif department_assistant
-      @permission ||= {:level => 2, :type => "Department Assistant"}
+      @permission ||= { level: 2, type: 'Department Assistant' }
     elsif administrative_assistant
-      @permission ||= {:level => 3, :type => "Administrative Assistant"}
+      @permission ||= { level: 3, type: 'Administrative Assistant' }
     end
   end
 
   def logged_in?
-      if !current_user
-        flash.now[:notice] =  'Você precisa estar logado'
-        render 'sessions/new'
-      end
+    return unless current_user != true
+    flash.now[:notice] = 'Você precisa estar logado'
+    render 'sessions/new'
   end
 
   def validade_permission_for_school_room
-    if permission[:level] == 3
-      redirect_to current_user , error: 'Acesso Negado'
-    end
+    return unless permission[:level] == 3
+    redirect_to current_user, error: 'Acesso Negado'
   end
 
   def sign_out
@@ -42,9 +42,8 @@ module SessionsHelper
   end
 
   def authenticate_administrative_assistant?
-      if permission[:level] != 3
-        flash[:error] =  'Acesso Negado'
-        redirect_to current_user
-      end
+    return unless permission[:level] != 3
+    flash[:error] = 'Acesso Negado'
+    redirect_to current_user
   end
 end
