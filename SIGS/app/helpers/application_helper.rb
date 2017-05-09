@@ -3,12 +3,12 @@
 # module to show messages
 module ApplicationHelper
   def flash_message
-	  messages = ''
-	  [:notice, :info, :warning, :error].each { |type|
-		  if flash[type]
-		  	messages += "#{flash[type]}"
-		  end
-	  }
-  	messages
-	end
+    messages = ''
+    [:notice, :info, :warning, :error].each { |type|
+      if flash[type]
+        messages += flash[type].to_s
+      end
+    }
+    messages
+  end
 end

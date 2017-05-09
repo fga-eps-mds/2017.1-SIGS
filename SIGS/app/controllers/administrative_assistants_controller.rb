@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# class that manages registration process
 class AdministrativeAssistantsController < ApplicationController
   before_action :logged_in?
   before_action :authenticate_administrative_assistant?
@@ -22,7 +25,7 @@ class AdministrativeAssistantsController < ApplicationController
     end
     redirect_to registration_request_path
   end
-  
+
   def destroy_users
     @user = User.find(params[:id])
     if @user.destroy
