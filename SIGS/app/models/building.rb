@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Building class
+# buildings class
 class Building < ApplicationRecord
   has_many :rooms
   before_save :params_upcase
@@ -14,7 +14,6 @@ class Building < ApplicationRecord
 
   # Validates end Here
   private
-
   def params_upcase
     code.upcase!
     wing.upcase!
