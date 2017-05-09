@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 # module to show messages
-class ParsersController < ApplicationController
 module ApplicationHelper
   def flash_message
 	  messages = ''
@@ -9,8 +8,6 @@ module ApplicationHelper
 		  if flash[type]
 		  	messages += "#{flash[type]}"
 		  end
-			else
-			end
 	  }
   	messages
 	end

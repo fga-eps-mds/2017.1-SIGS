@@ -12,8 +12,6 @@ class AdministrativeAssistantsController < ApplicationController
     if @user.update_attributes(active: true)
       flash[:success] = 'Usuário aprovado com sucesso'
     end
-    else
-    end
     redirect_to registration_request_path
   end
 
