@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   root 'sessions#new'
 
   # Sessions
@@ -37,9 +36,12 @@ Rails.application.routes.draw do
   get 'courses/courses_by_user' => 'courses#courses_by_user', :as => 'courses_by_user'
 
   #SchoolRooms
-
-  get 'school_rooms/new' => 'school_rooms#new', :as => 'school_rooms_new'
-  post 'school_rooms/create' => 'school_rooms#create', :as => 'school_rooms_create'
+  get 'school_rooms/index' => 'school_rooms#index', as: 'school_rooms_index'
+  get 'school_rooms/show/:id' => 'school_rooms#show', as: 'school_rooms_show'
+  get 'school_rooms/new' => 'school_rooms#new', as: 'school_rooms_new'
+  post 'school_rooms/create' => 'school_rooms#create'
+  get 'school_rooms/edit/:id' => 'school_rooms#edit', as: 'school_rooms_edit'
+  patch 'school_rooms/update' => 'school_rooms#update'
 
   # Parsers
   post "/upload_buildings", controller: 'parsers', action: 'upload_buildings'
