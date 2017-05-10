@@ -1,0 +1,8 @@
+<%= link_to 'Criar', school_rooms_new_path, class: 'btn btn-default btn-primary' %>
+<br>
+
+<% @school_rooms.each do |school_room| %>
+
+	<%= link_to school_room.name, school_rooms_show_path(school_room.id)%> <br>
+
+<% end %>
