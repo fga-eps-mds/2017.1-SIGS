@@ -24,8 +24,8 @@ class SessionsController < ApplicationController
 
   def active(user)
     if user.active == true
-          sign_in(user)
-          redirect_to current_user , notice: 'Login realizado com sucesso'
+      sign_in(user)
+      redirect_to current_user , notice: 'Login realizado com sucesso'
     else
       flash[:error] =  'Sua conta não está ativa'
       render 'new'

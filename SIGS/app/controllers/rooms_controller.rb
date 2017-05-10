@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Classe responsavel pelos metodos controladores de sala
 class RoomsController < ApplicationController
   def index
