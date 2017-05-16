@@ -1,11 +1,8 @@
 Rails.application.routes.draw do
 
-  get 'categories/new'
-  get 'categories/create'
-  get 'categories/index'
-  get 'categories/edit'
-  get 'categories/update'
-  get 'categories/destroy'
+  #Categories
+  get 'categories/new' => 'categories#new' , :as => 'categories_new'
+  post 'categories/create' => 'categories#create' , :as => 'categories_create'
 
   root 'sessions#new'
 
