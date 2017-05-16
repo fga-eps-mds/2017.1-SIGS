@@ -296,6 +296,18 @@
         null,
         1,
         null,
+        1,
+        null,
+        1,
+        null,
+        1,
+        null,
+        1,
+        null,
+        1,
+        null,
+        1,
+        null,
         null,
         1,
         1,
@@ -366,6 +378,13 @@
         null,
         1,
         null,
+        null
+      ],
+      "/vagrant/SIGS/app/helpers/categories_helper.rb": [
+        null,
+        null,
+        null,
+        1,
         null
       ],
       "/vagrant/SIGS/app/helpers/coordinator_helper.rb": [
@@ -1487,6 +1506,6 @@
         null
       ]
     },
-    "timestamp": 1494971073
+    "timestamp": 1494972171
   }
 }

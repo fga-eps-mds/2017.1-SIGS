@@ -1,6 +1,18 @@
 Rails.application.routes.draw do
 
 
+  get 'categories/new'
+
+  get 'categories/create'
+
+  get 'categories/index'
+
+  get 'categories/edit'
+
+  get 'categories/update'
+
+  get 'categories/destroy'
+
   root 'sessions#new'
 
   # Sessions
