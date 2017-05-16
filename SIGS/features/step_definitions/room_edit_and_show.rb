@@ -93,5 +93,5 @@ Then (/^the 'Visualizar Sala' page should load with informations of that room$/)
   expect(page).to have_content('Código: 124325')
   expect(page).to have_content('Capacidade: 50')
   expect(page).to have_content('Ativo: Sim')
-  expect(page).to have_content('Prédio: Pavilhão João Calmon')
+  expect(page).to have_content('Prédio: Pavilhão Anísio Teixeira')
 end

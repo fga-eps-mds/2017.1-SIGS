@@ -10,13 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170505033428) do
+ActiveRecord::Schema.define(version: 20170515184616) do
 
   create_table "administrative_assistants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_administrative_assistants_on_user_id", using: :btree
+  end
+
+  create_table "allocations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.boolean  "active"
+    t.time     "start_time"
+    t.time     "end_time"
+    t.integer  "user_id"
+    t.integer  "room_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_allocations_on_room_id", using: :btree
+    t.index ["user_id"], name: "index_allocations_on_user_id", using: :btree
   end
 
   create_table "buildings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -84,24 +96,34 @@ ActiveRecord::Schema.define(version: 20170505033428) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "periods", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.date     "initial_date"
+    t.date     "final_date"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "code"
     t.string   "name"
     t.integer  "capacity"
     t.boolean  "active"
     t.integer  "time_grid_id"
+    t.integer  "department_id"
     t.integer  "building_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.index ["building_id"], name: "index_rooms_on_building_id", using: :btree
+    t.index ["department_id"], name: "index_rooms_on_department_id", using: :btree
   end
 
   create_table "school_rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.boolean  "active"
+    t.integer  "students_amount"
     t.integer  "discipline_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.index ["discipline_id"], name: "index_school_rooms_on_discipline_id", using: :btree
   end
 
@@ -117,6 +139,8 @@ ActiveRecord::Schema.define(version: 20170505033428) do
   end
 
   add_foreign_key "administrative_assistants", "users"
+  add_foreign_key "allocations", "rooms"
+  add_foreign_key "allocations", "users"
   add_foreign_key "coordinators", "courses"
   add_foreign_key "coordinators", "users"
   add_foreign_key "courses", "departments"

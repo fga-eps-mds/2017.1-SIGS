@@ -3,6 +3,8 @@
 # Classe modelo da Sala
 class Room < ApplicationRecord
   belongs_to :building
+  has_many :allocations
+  belongs_to :department
 
   # Codigo da sala
   validates :code,
