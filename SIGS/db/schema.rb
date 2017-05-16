@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170516213757) do
+ActiveRecord::Schema.define(version: 20170516222140) do
 
   create_table "administrative_assistants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -31,6 +31,13 @@ ActiveRecord::Schema.define(version: 20170516213757) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "categories_rooms", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "category_id", null: false
+    t.integer "room_id",     null: false
+    t.index ["category_id", "room_id"], name: "index_categories_rooms_on_category_id_and_room_id", using: :btree
+    t.index ["room_id", "category_id"], name: "index_categories_rooms_on_room_id_and_category_id", using: :btree
   end
 
   create_table "coordinators", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
