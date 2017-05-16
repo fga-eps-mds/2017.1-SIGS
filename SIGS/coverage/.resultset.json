@@ -1271,28 +1271,6 @@
         null,
         null
       ],
-      "/vagrant/SIGS/spec/models/category_spec.rb": [
-        1,
-        null,
-        1,
-        1,
-        null
-      ],
-      "/vagrant/SIGS/app/models/category.rb": [
-        null,
-        null,
-        null,
-        1,
-        null
-      ],
-      "/vagrant/SIGS/app/models/application_record.rb": [
-        null,
-        null,
-        null,
-        1,
-        1,
-        null
-      ],
       "/vagrant/SIGS/spec/views/rooms/edit.html.erb_spec.rb": [
         1,
         null,
@@ -1381,6 +1359,14 @@
         null,
         null
       ],
+      "/vagrant/SIGS/app/models/application_record.rb": [
+        null,
+        null,
+        null,
+        1,
+        1,
+        null
+      ],
       "/vagrant/SIGS/app/models/administrative_assistant.rb": [
         null,
         null,
@@ -1435,6 +1421,7 @@
         null,
         null,
         null,
+        1,
         1,
         1,
         null,
@@ -1506,6 +1493,6 @@
         null
       ]
     },
-    "timestamp": 1494972171
+    "timestamp": 1494973487
   }
 }
