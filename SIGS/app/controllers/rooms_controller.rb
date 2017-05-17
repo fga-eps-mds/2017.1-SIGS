@@ -29,6 +29,7 @@ class RoomsController < ApplicationController
 
   def find_rooms
     @room = Room.find(params[:id])
+    @room_categories = @room.category
   end
 
   def room_params
