@@ -35,6 +35,12 @@ module SessionsHelper
     redirect_to current_user, error: 'Acesso Negado'
   end
 
+  def validade_permission_for_categories
+    return unless permission[:level] != 3
+    flash[:error] = 'Acesso Negado'
+    redirect_to current_user
+  end
+
   def sign_out
     session.delete(:user_id)
     @current_user = nil
