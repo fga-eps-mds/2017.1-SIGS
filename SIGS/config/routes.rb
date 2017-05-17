@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   #Categories
   get 'categories/new' => 'categories#new' , :as => 'categories_new'
   post 'categories/create' => 'categories#create' , :as => 'categories_create'
+  get 'categories/index' => 'categories#index' , :as => 'categories_index'
 
   root 'sessions#new'
 
