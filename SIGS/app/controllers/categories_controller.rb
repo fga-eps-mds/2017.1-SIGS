@@ -13,11 +13,22 @@ class CategoriesController < ApplicationController
     flash[:success] = 'Categoria criada'
   end
 
-  def categories_params
-    params[:category].permit(:name)
-  end
-
   def index
     @categories = Category.all
+  end
+
+  def edit
+    @category = Category.find(params[:id])
+  end
+
+  def update
+    @category = Category.find(params[:id])
+    return unless @category.update_attributes(category_params)
+    redirect_to categories_index_path
+    flash[:success] = 'Categoria atualizada com sucesso'
+  end
+
+  def categories_params
+    params[:category].permit(:name)
   end
 end
