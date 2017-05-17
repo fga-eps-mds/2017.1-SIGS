@@ -15,7 +15,7 @@
 
     <%= school_room.collection_check_boxes(:course_ids, courses_by_user, :id, :name, include_blank: true)%>
   </div>
-
+  <br>
   <p> Categorias</p>
   <div class="checkbox-group">
     <%= school_room.collection_check_boxes(:category_ids,all_categories,:id,:name, include_blank: true)%>
