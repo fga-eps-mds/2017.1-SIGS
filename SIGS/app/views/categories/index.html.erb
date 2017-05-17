@@ -12,8 +12,8 @@
     <% @categories.each do |category| %>
     <tr>
       <td><%= category.name%></td>
-      <td><%= link_to image_tag("icon_edit.png") %></td>
-      <td><%= link_to image_tag("icon_trash.png") %> </td>
+      <td><%= link_to image_tag("icon_edit.png"), categories_edit_path(category.id), confirm: "Tem certeza?"  %></td>
+      <td><%= link_to image_tag("icon_trash.png") %></td>
     </tr>
     <% end %>
   </table>
