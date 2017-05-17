@@ -10,5 +10,4 @@ Feature: Create school room
 		And I fill in 'name' with 'D'
 		And I fill in 'type' with 'Engenharia de Software'
 		When I press 'Salvar' button
-		Then notice message 'create'
-		
+		Then notice message 'Turma criada'
