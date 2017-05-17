@@ -1,6 +1,5 @@
 <h1>Categorias</h1>
 
-<%  %>
 <%= link_to "+ criar nova categoria", categories_new_path %>
 <% if @categories.count == 0 %>
   <h3>Não há nenhuma categoria registrada no momento.</h3>
@@ -13,7 +12,7 @@
     <tr>
       <td><%= category.name%></td>
       <td><%= link_to image_tag("icon_edit.png"), categories_edit_path(category.id), confirm: "Tem certeza?"  %></td>
-      <td><%= link_to image_tag("icon_trash.png") %></td>
+      <td><%= link_to image_tag("icon_trash.png"), categories_destroy_path(category.id), data: {confirm: "Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?"} %></td>
     </tr>
     <% end %>
   </table>

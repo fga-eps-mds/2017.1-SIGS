@@ -31,4 +31,11 @@ class CategoriesController < ApplicationController
   def categories_params
     params[:category].permit(:name)
   end
+
+  def destroy
+    @category = Category.find(params[:id])
+    @category.destroy
+    flash[:success] = 'Categoria excluída com sucesso'
+    redirect_to categories_index_path
+  end
 end
