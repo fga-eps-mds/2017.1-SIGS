@@ -39,7 +39,8 @@ class RoomsController < ApplicationController
       :capacity,
       :active,
       :time_grid_id,
-      :build_id
+      :build_id,
+      category_ids: []
     )
   end
 end
