@@ -57,7 +57,7 @@ RSpec.describe UsersController, type: :controller do
 
     it 'should create a new coordinator user' do
       @department = Department.create(name: 'Departamento de Computação')
-      @course = Course.create(name: 'Engenharia de Software', department: @department)
+      @course = Course.create(name: 'Engenharia de Software')
       post :create, params:{user: {name: 'joao silva', email: 'joaosilva@unb.br',
         password: '123456', registration:'1100061', cpf:'01505038137', active: false, coordinator_attributes: {course_id: @course.id}}, type: 'coordinator'}
       expect(User.count).to be(1)
