@@ -61,7 +61,28 @@
         <h1>Categorias de Salas</h1>
         <table class="table">
             <tr>
-              <a href="criar_categoria.html" class="radioButton">Criar nova categoria</a>
+              <div class="container">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Criar nova categoria</button>
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" role="dialog">
+                  <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Criar nova categoria</h4>
+                      </div>
+                      <div class="modal-body">
+                      <label for="category_name">Categoria</label>
+                        <input class="form-control" type="text" name="category[name]" id="category_name" /><br>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="pull-right btn btn-default btn-success" data-dismiss="modal">Salvar</button>
+                      </div>
+                    </div> 
+                  </div>
+                </div>
+              </div>
             </tr>
             <br>
             <tr>
