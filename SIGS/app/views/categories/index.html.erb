@@ -1,6 +1,23 @@
 <h1>Categorias</h1>
-  <div class="container">
     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Criar nova categoria</button>
+<br>
+<br>
+<% if @categories.count == 0 %>
+  <h3>Não há nenhuma categoria registrada no momento.</h3>
+<% else %>
+  <table class="table">
+    <tr>
+      <th>Nome</th>
+    </tr>
+    <% @categories.each do |category| %>
+    <tr>
+      <td><%= category.name%></td>
+      <td><%= link_to image_tag("icon_edit.png"), categories_edit_path(category.id), confirm: "Tem certeza?"  %></td>
+      <td><%= link_to image_tag("icon_trash.png"), categories_destroy_path(category.id), data: {confirm: "Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?"} %></td>
+    </tr>
+    <% end %>
+  </table>
+<% end %>
     <!-- Modal -->
     <div class="modal fade" id="myModal" role="dialog">
       <div class="modal-dialog">
@@ -24,19 +41,3 @@
       </div>
     </div>
   </div>
-<% if @categories.count == 0 %>
-  <h3>Não há nenhuma categoria registrada no momento.</h3>
-<% else %>
-  <table class="table">
-    <tr>
-      <th>Nome</th>
-    </tr>
-    <% @categories.each do |category| %>
-    <tr>
-      <td><%= category.name%></td>
-      <td><%= link_to image_tag("icon_edit.png"), categories_edit_path(category.id), confirm: "Tem certeza?"  %></td>
-      <td><%= link_to image_tag("icon_trash.png"), categories_destroy_path(category.id), data: {confirm: "Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?"} %></td>
-    </tr>
-    <% end %>
-  </table>
-<% end %>
