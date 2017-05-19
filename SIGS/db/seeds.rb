@@ -52,3 +52,8 @@ discipline_2 = Discipline.create(code: '777', name: 'Cálculo 2', department_id:
 
 school_room = SchoolRoom.create(name:"A",active:true,discipline: discipline)
 school_room2 = SchoolRoom.create(name:"B",active:true,discipline: discipline)
+
+#Categoris
+
+category = Category.create(name: 'Retroprojetor')
+category = Category.create(name: 'Laboratório Químico')
