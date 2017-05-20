@@ -1,8 +1,31 @@
-<%= link_to 'Criar', school_rooms_new_path, class: 'btn btn-default btn-primary' %>
-<br>
-
-<% @school_rooms.each do |school_room| %>
-
-	<%= link_to school_room.name, school_rooms_show_path(school_room.id)%> <br>
-
+<h2>Suas turmas</h2>
+<%= link_to 'Criar Turma', school_rooms_new_path, class: 'btn btn-default btn-primary btn-lg' %>
+<br> <br> <br>
+<% if @school_rooms.count == 0 %>
+  <h3>Não há turmas cadastradas no momento.</h3>
+<% else %>
+  <table class="table table-hover">
+    <tr>
+      <td>Nome</td>
+      <td>Ativo</td>
+      <td>Disciplina</td>
+      <td style="text-align:center">Alterar</td>
+      <td style="text-align:center">Visualizar</td>
+      <td style="text-align:center">Excluir</td>
+    </tr>
+    <% @school_rooms.each do |school_room| %>
+      <tr>
+        <td><%= school_room.name %></td>
+        <td><%=  ((school_room.active) ? 'Sim' : 'Não')  %></td>
+        <td><%= school_room.discipline.name %></td>
+        <td style="text-align:center"><%= link_to image_tag("icon_edit.png"), school_rooms_edit_path(school_room.id) %></td>
+        <td style="text-align:center"><%= link_to image_tag("icon_view.png"), school_rooms_show_path(school_room.id) %></td>
+        <td style="text-align:center">
+					<%= link_to school_rooms_destroy_path(school_room.id), data: {confirm: "Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?"} do %>
+  			    <i class="fa fa-trash fa-lg"></i>
+  			  <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
 <% end %>
