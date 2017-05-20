@@ -1,6 +1,5 @@
 <h2>Editar Turma</h2>
-
-<%= form_for(@school_room, url: school_rooms_update_path) do |school_room| %>
+<%= form_for(@school_room, url: {action: "update"}) do |school_room| %>
 
   <label>Disciplina </label>
   <%= school_room.select :discipline_id, Discipline.all.collect {|d| [d.name, d.id]} %>
@@ -19,5 +18,6 @@
   </div>
 
   <%= school_room.submit "Alterar", class: 'pull-right btn btn-default btn-success' %>
+  <%= link_to "Voltar", school_rooms_show_path(@school_room.id), class: "pull-right btn btn-default"%> <br>
 
 <% end %>

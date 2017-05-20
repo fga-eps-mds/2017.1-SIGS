@@ -14,7 +14,7 @@ class SchoolRoomsController < ApplicationController
   end
 
   def edit
-    @school_room = SchoolRoom.find_by(params[:id])
+    @school_room = SchoolRoom.find(params[:id])
   end
 
   def show
@@ -26,13 +26,34 @@ class SchoolRoomsController < ApplicationController
   end
 
   def update
-    @school_room = SchoolRoom.find_by(params[:id])
+    @school_room = SchoolRoom.find(params[:id])
     respond_to do |format|
       if @school_room.update(school_rooms_params)
-        format.html { render :show, notice: 'A turma foi alterada com sucesso' }
+        format.html { redirect_to school_rooms_index_path, notice: 'A turma foi alterada com sucesso' }
       else
         format.html { render :edit, error: 'A turma não pode ser alterada' }
       end
+    end
+  end
+
+  def destroy
+    @school_room = SchoolRoom.find(params[:id])
+    if !logged_in?
+      # coordinator = Coordinator.find_by(user_id: current_user.id)
+      # course = Course.where(id: coordinator.course_id)
+      # department = Department.find_by(id: course.department_id)
+      # discipline = Discipline.where(id: @school_room.discipline_id)
+      # if discipline.department_id == department.id
+        @school_room.destroy
+        redirect_to school_rooms_index_path
+        flash[:success] = "A turma foi excluída com sucesso"
+      # else
+      #   redirect_to sign_in_path
+      #   flash[:error] = "Você não permissão para excluir essa turma"
+      # end
+    else
+      redirect_to sign_in_path
+      flash[:error] = "Você não permissão para excluir essa turma"
     end
   end
 
