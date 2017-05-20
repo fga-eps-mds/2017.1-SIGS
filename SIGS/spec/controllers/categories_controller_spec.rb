@@ -41,6 +41,13 @@ RSpec.describe CategoriesController, type: :controller do
       expect(Category.count).to be(1)
     end
 
+    it 'should not create a new category' do
+      sign_in(@user_adm)
+      post :create, params:{category: {name: ''}}
+      expect(flash[:error]).to eq('Não foi possivel criar categoria. Categoria já registrada
+                       ou campo de preechimento estava vazio.')
+    end
+
     # Method edit
     it 'should return a success response in view of edit' do
       sign_in(@user_adm)
@@ -70,7 +77,7 @@ RSpec.describe CategoriesController, type: :controller do
       @categories = Category.all
       expect(@categories.count).to eq(2)
     end
-    
+
     # Method destroy
     it 'should destroy a category and redirect to index path' do
       sign_in(@user_adm)

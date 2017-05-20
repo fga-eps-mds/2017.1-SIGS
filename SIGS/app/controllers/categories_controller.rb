@@ -11,9 +11,13 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new(categories_params)
-    @category.save
+    if @category.save
+      flash[:success] = 'Categoria criada'
+    else
+      flash[:error] = 'Não foi possivel criar categoria. Categoria já registrada
+                       ou campo de preechimento estava vazio.'
+    end
     redirect_to categories_index_path
-    flash[:success] = 'Categoria criada'
   end
 
   def index

@@ -2,6 +2,8 @@
 
 # Classe responsavel pelos metodos controladores de sala
 class RoomsController < ApplicationController
+  before_action :logged_in?
+
   def index
     @rooms = Room.all
   end
