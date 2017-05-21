@@ -1,0 +1,17 @@
+<h1> Período </h1>
+
+<table class='table'>
+  <tr>
+    <th>Tipo</th>
+    <th>Data Inicial</th>
+    <th>Data Final</th>
+  </tr>
+  <% @periods.each do |period| %>
+    <tr>
+      <td><%= period.period_type %></td>
+      <td><%= period.initial_date.strftime("%d/%m/%Y %H:%M")%></td>
+      <td><%= period.final_date.strftime("%d/%m/%Y %H:%M") %></td>
+      <td> <%= link_to image_tag("icon_edit.png"), period_edit_path(period.id)%> </td>
+    </tr>
+  <% end %>
+</table>
