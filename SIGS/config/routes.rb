@@ -62,6 +62,11 @@ Rails.application.routes.draw do
   post "/upload_disciplines", controller: 'parsers', action: 'upload_disciplines'
   #resources :parsers
 
+  # Period
+  get 'periods/index' => 'periods#index' , as: 'period_index'
+  get 'periods/edit/:id' => 'periods#edit', as: 'period_edit'
+  post 'periods/update' => 'periods#update', as: 'period_update'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end
