@@ -1,0 +1,43 @@
+<h1>Categorias</h1>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Criar nova categoria</button>
+<br>
+<br>
+<% if @categories.count == 0 %>
+  <h3>Não há nenhuma categoria registrada no momento.</h3>
+<% else %>
+  <table class="table">
+    <tr>
+      <th>Nome</th>
+    </tr>
+    <% @categories.each do |category| %>
+    <tr>
+      <td><%= category.name%></td>
+      <td><%= link_to image_tag("icon_edit.png"), categories_edit_path(category.id), confirm: "Tem certeza?"  %></td>
+      <td><%= link_to image_tag("icon_trash.png"), categories_destroy_path(category.id), data: {confirm: "Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?"} %></td>
+    </tr>
+    <% end %>
+  </table>
+<% end %>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Criar nova categoria</h4>
+          </div>
+          <div class="modal-body">
+            <%= form_for :category, url: categories_create_path do |category| %>
+              <div class="short_input">
+                <%= category.label :name, "Nome" %>
+                <%= category.text_field :name, class: 'form-control' %>
+              </div>
+          <div class="modal-footer">
+            <%= category.submit "Salvar", class: 'pull-right btn btn-default btn-success' %>
+          </div>
+            <% end %>
+        </div>
+      </div>
+    </div>
+  </div>

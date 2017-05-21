@@ -2,6 +2,15 @@ Rails.application.routes.draw do
 
   root 'sessions#new'
 
+  # Categories
+  get 'categories/new' => 'categories#new' , :as => 'categories_new'
+  post 'categories/create' => 'categories#create' , :as => 'categories_create'
+  get 'categories/index' => 'categories#index' , :as => 'categories_index'
+  get 'categories/edit/:id' => 'categories#edit', as: 'categories_edit'
+  patch 'categories/update/:id', controller: 'categories', action: 'update', as: 'categories_update'
+  get 'categories/destroy/:id', controller: 'categories', action: 'destroy', as: 'categories_destroy'
+
+
   # Sessions
   get 'sign_in' => 'sessions#new'
   post 'sign_in' => 'sessions#create'

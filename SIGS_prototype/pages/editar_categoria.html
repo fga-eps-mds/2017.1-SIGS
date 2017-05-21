@@ -11,6 +11,7 @@
     <link rel="stylesheet" media="all" href="../assets/css/bootstrap.min.css" />
     <link rel="stylesheet" media="all" href="../assets/css/style.css" />
     <link rel="stylesheet" media="all" href="../assets/css/navbar.css" />
+    <link rel="stylesheet" media="all" href="../assets/css/form.css" />
     <script src="../assets/js/jquery-1.12.4.min.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../assets/js/main.js"></script>
@@ -32,7 +33,7 @@
         <ul class="nav navbar-nav">
           <li><a href="minha_conta.html">Minha Conta</a></li>
           <li><a href="../index.html">Logout</a></li>
-          <li><a href="#">Turmas</a></li>
+          <li><a href="#">Turmas</a></li>           
             <li class="dropdown">
             <a data-toggle="collapse" href="#salas">Salas
               <ul class="collapse" id="salas">
@@ -57,39 +58,16 @@
         </figure>
       </header>
       <main class="mainConteiner">
-        <h1>Solicitações Pendentes</h1>
-        <table class="table">
-          <tr>
-            <th>Nome</th>
-            <th>Registro</th>
-            <th>CPF</th>
-            <th>E-mail</th>
-          </tr>
-          <tr>
-            <td>João Busche</td>
-            <td>1234544</td>
-            <td>05044448888</td>
-            <td>joao@unb.br</td>
-            <td><a href="#"><img src="../assets/img/approve.png" alt="Approve" /></a></td>
-            <td><a href="#"><img src="../assets/img/recuse.png" alt="Recuse" /></a></td>
-          </tr>
-          <tr>
-            <td>Ateldy Brasil</td>
-            <td>1234333</td>
-            <td>05022446688</td>
-            <td>ateldy@unb.br</td>
-            <td><a href="#"><img src="../assets/img/approve.png" alt="Approve" /></a></td>
-            <td><a href="#"><img src="../assets/img/recuse.png" alt="Recuse" /></a></td>
-          </tr>
-          <tr>
-            <td>Carlos Aragon</td>
-            <td>2224588</td>
-            <td>05022248811</td>
-            <td>carlos@unb.br</td>
-            <td><a href="#"><img src="../assets/img/approve.png" alt="Approve" /></a></td>
-            <td><a href="#"><img src="../assets/img/recuse.png" alt="Recuse" /></a></td>
-          </tr>
-        </table>
+
+        <h1>Editar Categoria de Sala</h1>
+        <form class="edit_category" id="edit_category_1" action="#" accept-charset="UTF-8" method="post">
+          <label for="category_name">Categoria</label>
+          <input class="form-control" value="Sala de informática" type="text" name="category[name]" id="category_name" /><br>
+
+          <div class="actions">
+            <input type="submit" name="commit" value="Salvar" class="pull-right btn btn-default btn-success" data-disable-with="Salvar" />
+          </div>
+        </form>
       </main>
     </div>
   </body>
