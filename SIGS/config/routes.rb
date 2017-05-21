@@ -45,7 +45,6 @@ Rails.application.routes.draw do
   get 'courses/courses_by_user' => 'courses#courses_by_user', :as => 'courses_by_user'
 
   #SchoolRooms
-
   get 'school_rooms/new' => 'school_rooms#new', :as => 'school_rooms_new'
   post 'school_rooms/create' => 'school_rooms#create', :as => 'school_rooms_create'
 
@@ -57,6 +56,11 @@ Rails.application.routes.draw do
   post "/upload_courses", controller: 'parsers', action: 'upload_courses'
   post "/upload_disciplines", controller: 'parsers', action: 'upload_disciplines'
   #resources :parsers
+
+  # Period
+  get 'periods/index' => 'periods#index' , as: 'period_index'
+  get 'periods/edit/:id' => 'periods#edit', as: 'period_edit'
+  post 'periods/update' => 'periods#update', as: 'period_update'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
