@@ -12,6 +12,7 @@ script:
 - bundle exec rake db:migrate
 - rake cucumber
 - bundle exec rspec
+- rubocop
 after_sucess:
 - coveralls push
 rvm:

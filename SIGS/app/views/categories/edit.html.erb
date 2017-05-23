@@ -1,0 +1,11 @@
+<h1>Editar Categoria <%= @category.name %></h1>
+
+  <%= form_for @category,:url => {:action=> "update"} do |category| %>
+    <%= category.label :name, "Nome" %>
+    <%= category.text_field :name, class: "form-control", value: @category.name %><br>
+
+    <div class="actions">
+      <%= category.submit "Salvar", class: "pull-right btn btn-default btn-success" %>
+    </div>
+  </div>
+  <% end %>

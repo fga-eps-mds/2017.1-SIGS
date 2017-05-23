@@ -21,8 +21,10 @@
     <%= room.label :active, 'Ativo' %>
     <%= room.check_box :active, class: 'form-control',style: 'text-align:left; width: auto' %><br>
 
-    <%= room.label :name, 'Prédio: ' %>
-    <%= room.text_field :name, class: 'form-control', value: @room.building.name, :disabled => true %><br>
+    <p> Categorias</p>
+    <div class="checkbox-group">
+      <%= room.collection_check_boxes(:category_ids,all_categories,:id,:name, include_blank: true)%>
+    </div>
 
     <div class='actions'>
       <%= room.submit 'Salvar', class: 'pull-right btn btn-default btn-success' %>

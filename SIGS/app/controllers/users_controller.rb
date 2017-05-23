@@ -17,9 +17,8 @@ class UsersController < ApplicationController
 
   def index
     @users = User.where('id != ? and active != false', current_user.id)
-    if (permission[:level]!= 3)
-      redirect_to_current_user
-    end
+    return unless permission[:level] != 3
+    redirect_to_current_user
   end
 
   def create
@@ -37,9 +36,8 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    if (@user.id != current_user.id)
-      redirect_to_current_user
-    end
+    return unless @user.id != current_user.id
+    redirect_to_current_user
   end
 
   def update
@@ -56,7 +54,8 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     if (@user.id == current_user.id)
-      if permission[:level] == 3 and AdministrativeAssistant.joins(:user).where(users: {active: true}).count == 1
+      if permission[:level] == 3 &&
+         AdministrativeAssistant.joins(:user).where(users: {active: true}).count == 1
           flash[:error] = "Não é possível excluir o único Assistente Administrativo"
           redirect_to current_user
       else

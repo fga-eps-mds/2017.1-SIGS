@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
 
-
   root 'sessions#new'
+
+  # Categories
+  get 'categories/new' => 'categories#new' , :as => 'categories_new'
+  post 'categories/create' => 'categories#create' , :as => 'categories_create'
+  get 'categories/index' => 'categories#index' , :as => 'categories_index'
+  get 'categories/edit/:id' => 'categories#edit', as: 'categories_edit'
+  patch 'categories/update/:id', controller: 'categories', action: 'update', as: 'categories_update'
+  get 'categories/destroy/:id', controller: 'categories', action: 'destroy', as: 'categories_destroy'
+
 
   # Sessions
   get 'sign_in' => 'sessions#new'
@@ -32,12 +40,13 @@ Rails.application.routes.draw do
   get 'rooms/edit/:id' => 'rooms#edit', as: 'room_edit'
   patch 'rooms/update/:id' => 'rooms#update'
   get 'rooms/show/:id' => 'rooms#show', as: 'room'
+  get 'room/destroy/:id', controller: 'rooms', action: 'destroy', as: 'destroy_room'
+
 
   # Course
   get 'courses/courses_by_user' => 'courses#courses_by_user', :as => 'courses_by_user'
 
   #SchoolRooms
-
   get 'school_rooms/new' => 'school_rooms#new', :as => 'school_rooms_new'
   post 'school_rooms/create' => 'school_rooms#create', :as => 'school_rooms_create'
 
@@ -49,6 +58,11 @@ Rails.application.routes.draw do
   post "/upload_courses", controller: 'parsers', action: 'upload_courses'
   post "/upload_disciplines", controller: 'parsers', action: 'upload_disciplines'
   #resources :parsers
+
+  # Period
+  get 'periods/index' => 'periods#index' , as: 'period_index'
+  get 'periods/edit/:id' => 'periods#edit', as: 'period_edit'
+  post 'periods/update' => 'periods#update', as: 'period_update'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
