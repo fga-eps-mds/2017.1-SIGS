@@ -1,6 +1,6 @@
 Given (/^I am logged in as coordinator$/) do
 	visit 'http://192.168.2.15:3000'
-	fill_in('session[email]', :with=> 'pedro@unb.br')
+	fill_in('session[email]', :with=> 'caio@unb.br')
 	fill_in('session[password]', :with=> '123456')
   	click_button('Entrar')
 end

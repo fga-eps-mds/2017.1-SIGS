@@ -3,7 +3,7 @@
 <%= form_for @school_room, url: school_rooms_create_path do |school_room| %>
 
   <label>Disciplina </label>
-  <%= school_room.select :discipline_id, Discipline.all.collect {|d| [d.name, d.id] }%>
+  <%= school_room.select :discipline_id, @disciplines.collect {|d| [d.name, d.id] }%>
 
   <div class="short_input">
     <%= school_room.label :name, "Turma" %>
