@@ -20,7 +20,7 @@
         <td><%= room.building.name %></td>
         <td style="text-align:center"><%= link_to image_tag("icon_view.png"), room_path(room.id) %></td>
         <td style="text-align:center"><%= link_to image_tag("icon_edit.png"), room_edit_path(room.id) %></td>
-        <td style="text-align:center"><%= image_tag("icon_trash.png"), destroy_room_path(room.id), data: {confirm: "Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?" %></td>
+        <td style="text-align:center"><%= link_to image_tag("icon_trash.png"), destroy_room_path(room.id), data: {confirm: "Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?"} %></td>
       </tr>
     <% end %>
 <% end %>
