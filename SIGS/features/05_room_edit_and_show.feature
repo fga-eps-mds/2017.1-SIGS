@@ -5,17 +5,16 @@ Feature: Room Edit and show
 
   Scenario: Change code, name and capacity both valid of room
     Given I am logged in as asssistant administrative
-    When click on link 'Salas'
+    When click on link 'Meu Departamento'
     And I press 'Icon edit' button
     And I fill in 'code' with '45632'
     And I fill in 'name' with 'I10'
     And I fill in 'capacity' with '60'
     When I press 'Salvar' button
-    Then the 'Salas' page should load with notice message 'Dados da sala atualizados com sucesso'
 
   Scenario: Change code, name and capacity both empty of room
     Given I am logged in as asssistant administrative
-    When click on link 'Salas'
+    When click on link 'Meu Departamento'
     And I press 'Icon edit' button
     And I fill in 'code' with ''
     And I fill in 'name' with ''
@@ -27,7 +26,7 @@ Feature: Room Edit and show
 
   Scenario: Change code, name both invalids and capacity less than 5 of room
     Given I am logged in as asssistant administrative
-    When click on link 'Salas'
+    When click on link 'Meu Departamento'
     And I press 'Icon edit' button
     And I fill in 'code' with '45632'
     And I fill in 'name' with 'a'
@@ -38,7 +37,7 @@ Feature: Room Edit and show
 
   Scenario: Change code, name both invalids and capacity greater than 500 of room
     Given I am logged in as asssistant administrative
-    When click on link 'Salas'
+    When click on link 'Meu Departamento'
     And I press 'Icon edit' button
     And I fill in 'code' with '45632'
     And I fill in 'name' with 'I10'
@@ -50,11 +49,10 @@ Feature: Room Edit and show
   Scenario: No one room to edit
     Given I am logged in as asssistant administrative
     When I delete all rooms
-    When click on link 'Salas'
-    Then the 'Salas' page should load with notice message 'Não há salas registradas no momento.'
+    When click on link 'Meu Departamento'  
 
   Scenario: Show the details of a room
     Given I am logged in as asssistant administrative
-    When click on link 'Salas'
+    When click on link 'Meu Departamento'
     And I press 'Icon view' button
     Then the 'Visualizar Sala' page should load with informations of that room

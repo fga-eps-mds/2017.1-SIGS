@@ -5,8 +5,8 @@ Given (/^I am logged in as asssistant administrative$/) do
   click_button('Entrar')
 end
 
-When (/^click on link 'Salas'$/) do
-  click_link('Salas')
+When (/^click on link 'Meu Departamento'$/) do
+  click_link('Meu Departamento')
 end
 
 And (/^I press 'Icon edit' button$/) do
