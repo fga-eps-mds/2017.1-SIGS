@@ -13,7 +13,9 @@ class Building < ApplicationRecord
                    foi cadastro' }
 
   # Validates end Here
+
   private
+
   def params_upcase
     code.upcase!
     wing.upcase!

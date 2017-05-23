@@ -5,12 +5,12 @@ Given (/^I am logged in as coordinator$/) do
   	click_button('Entrar')
 end
 
-And (/^click on link 'Turmas'$/) do
-	click_link ('Turmas')
+And (/^click on link 'Nova Turma'$/) do
+	click_link ('Nova Turma')
 end
 
-And (/^I select '' in 'discipline_id'$/) do
-	find_field('school_room_discipline_id').find("option[value='']").text
+And (/^I select '1' in 'discipline_id'$/) do
+	find_field('school_room_discipline_id').find("option[value='1']").text
 end
 
 And (/^I fill in 'name' with 'D'$/) do
