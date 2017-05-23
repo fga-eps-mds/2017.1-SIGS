@@ -11,6 +11,7 @@
     <link rel="stylesheet" media="all" href="../assets/css/bootstrap.min.css" />
     <link rel="stylesheet" media="all" href="../assets/css/style.css" />
     <link rel="stylesheet" media="all" href="../assets/css/navbar.css" />
+    <link rel="stylesheet" media="all" href="../assets/css/form.css" />
     <script src="../assets/js/jquery-1.12.4.min.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../assets/js/main.js"></script>
@@ -63,23 +64,65 @@
         </figure>
       </header>
       <main class="mainConteiner">
-        <h1>Usuários Registrados</h1>
+        <h1>Turma</h1>
+        <label>Disciplina</label>
+        <select>
+          <option>Literatura</option>
+          <option>Cálculo 1</option>
+          <option>História da Arte</option>
+          <option>Matemática Discreta</option>
+        </select>
+
+        <h3>Literatura</h3>
         <table class="table">
             <tr>
-              <th>Nome</th>
-              <th>Email</th>
-              <th>CPF</th>
-              <th>Matricula</th>
+              <th>Turma</th>
+              <th>Cursos</th>
+              <th>Recursos</th>
+              <th>Editar</th>
+              <th>Excluir</th>
             </tr>
           <tr>
-            <td>Caio Filipe</td>
-            <td>caio@unb.br</td>
-            <td>05012345678</td>
-            <td>1234567</td>
-            <td><a confirm="Tem certeza?" href="#"><img src="../assets/img/icon_edit.png" alt="Icon edit" /></a></td>
-            <td><a data-confirm="Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?" href="#"><img src="../assets/img/icon_trash.png" alt="Icon trash" /></a></td>
+            <td>A</td>
+            <td>Letras, Jornalismo</td>
+            <td></td>
+            <td><a href="#"><img src="../assets/img/icon_edit.png" alt="Icon edit" /></a></td>
+            <td><a href="#!" data-toggle="modal" data-target=".modalDelete"><img src="../assets/img/icon_trash.png" alt="excluir"></a></td>
+          </tr>
+          <tr>
+            <td>B</td>
+            <td>Direito</td>
+            <td>Retroprojetor</td>
+            <td><a href="#"><img src="../assets/img/icon_edit.png" alt="Icon edit" /></a></td>
+            <td><a href="#!" data-toggle="modal" data-target=".modalDelete"><img src="../assets/img/icon_trash.png" alt="excluir"></a></td>
+          </tr>
+          <tr>
+            <td>C</td>
+            <td></td>
+            <td></td>
+            <td><a href="#"><img src="../assets/img/icon_edit.png" alt="Icon edit" /></a></td>
+            <td><a href="#!" data-toggle="modal" data-target=".modalDelete"><img src="../assets/img/icon_trash.png" alt="excluir"></a></td>
           </tr>
         </table>
+
+        <!-- Modal -->
+        <div class="modal fade modalDelete" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Excluir Sala</h4>
+              </div>
+              <div class="modal-body">
+                <p>Esta ação não poderá ser desfeita, tem certeza que deseja continuar?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-success btnDelete" data-dismiss="modal">Confirmar</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </main>
     </div>
   </body>
