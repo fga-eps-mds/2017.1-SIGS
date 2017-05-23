@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'coordinator_helper'
+
 # class that create school rooms
 class SchoolRoomsController < ApplicationController
   include CoordinatorHelper

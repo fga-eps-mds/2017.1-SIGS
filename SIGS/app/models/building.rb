@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# buildings class
+# Building class
 class Building < ApplicationRecord
   has_many :rooms
   before_save :params_upcase
@@ -13,7 +13,6 @@ class Building < ApplicationRecord
                    foi cadastro' }
 
   # Validates end Here
-
   private
 
   def params_upcase
