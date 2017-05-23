@@ -1,4 +1,5 @@
 require 'rails_helper'
+include SessionsHelper
 
 RSpec.describe SchoolRoomsController, type: :controller do
 

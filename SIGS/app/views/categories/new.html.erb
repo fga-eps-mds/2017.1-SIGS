@@ -1,0 +1,12 @@
+<h1>Criar Categoria</h1>
+
+<%= form_for @category, url: categories_create_path do |category| %>
+
+  <div class="short_input">
+    <%= category.label :name, "Nome" %>
+    <%= category.text_field :name, class: 'form-control' %>
+  </div>
+
+  <%= category.submit "Salvar", class: 'pull-right btn btn-default btn-success' %>
+
+<% end %>

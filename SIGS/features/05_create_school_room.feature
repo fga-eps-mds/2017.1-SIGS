@@ -9,4 +9,4 @@ Feature: Create school room
 		And I select '' in 'discipline_id'
 		And I fill in 'name' with 'D'
 		When I press 'Salvar' button
-		Then notice message 'create'
+		Then notice message 'Turma criada'

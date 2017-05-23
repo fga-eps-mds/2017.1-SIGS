@@ -3,3 +3,7 @@
 <h2>Capacidade: <%= @room.capacity %></h2>
 <h2>Ativo: <%= ((@room.active) ? 'Sim' : 'Não') %></h2>
 <h2>Prédio: <%= @room.building.name %></h2>
+<h1>Categorias:</h1>
+<% @room_categories.each do |room_category| %>
+<h2><%= room_category.name %><br></h2>
+<% end %>

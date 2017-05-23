@@ -53,3 +53,12 @@ discipline_2 = Discipline.create(code: '777', name: 'Cálculo 2', department: de
 #SchoolRooms
 school_room = SchoolRoom.create(name:"A", active:true, students_amount: 30, discipline: discipline)
 school_room2 = SchoolRoom.create(name:"B", active:true, students_amount: 40, discipline: discipline)
+
+#Categoris
+category = Category.create(name: 'Retroprojetor')
+category = Category.create(name: 'Laboratório Químico')
+
+# Periods
+period_1 = Period.create(period_type:'Alocação', initial_date: DateTime.strptime('10-01-2018 00:00', '%d-%m-%Y %H:%M'), final_date:DateTime.strptime('01-02-2018 18:00', '%d-%m-%Y %H:%M'))
+period_2 = Period.create(period_type:'Ajuste', initial_date: DateTime.strptime('23-02-2018 00:00', '%d-%m-%Y %H:%M'), final_date: DateTime.strptime('01-03-2018 16:32', '%d-%m-%Y %H:%M'))
+period_3 = Period.create(period_type:'Letivo', initial_date: DateTime.strptime('08-03-2018 00:00', '%d-%m-%Y %H:%M'), final_date: DateTime.strptime('14-07-2018 23:59', '%d-%m-%Y %H:%M'))

@@ -2,6 +2,8 @@
 
 # Classe responsavel pelos metodos controladores de sala
 class RoomsController < ApplicationController
+  before_action :logged_in?
+
   def index
     @rooms = Room.all
   end
@@ -42,6 +44,7 @@ class RoomsController < ApplicationController
 
   def find_rooms
     @room = Room.find(params[:id])
+    @room_categories = @room.category
   end
 
   def room_params
@@ -52,7 +55,8 @@ class RoomsController < ApplicationController
       :capacity,
       :active,
       :time_grid_id,
-      :build_id
+      :build_id,
+      category_ids: []
     )
   end
 end

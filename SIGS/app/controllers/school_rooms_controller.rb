@@ -13,10 +13,11 @@ class SchoolRoomsController < ApplicationController
     @school_room = SchoolRoom.new(school_rooms_params)
     @school_room.active = true
     @school_room.save
+    redirect_to current_user
     flash[:success] = 'Turma criada'
   end
 
   def school_rooms_params
-    params[:school_room].permit(:name, :discipline_id, course_ids: [])
+    params[:school_room].permit(:name, :discipline_id, course_ids: [], category_ids: [])
   end
 end

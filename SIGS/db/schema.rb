@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170515184616) do
+ActiveRecord::Schema.define(version: 20170521022908) do
 
   create_table "administrative_assistants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -37,6 +37,26 @@ ActiveRecord::Schema.define(version: 20170515184616) do
     t.string   "wing"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "categories_rooms", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "category_id", null: false
+    t.integer "room_id",     null: false
+    t.index ["category_id", "room_id"], name: "index_categories_rooms_on_category_id_and_room_id", using: :btree
+    t.index ["room_id", "category_id"], name: "index_categories_rooms_on_room_id_and_category_id", using: :btree
+  end
+
+  create_table "categories_school_rooms", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "category_id",    null: false
+    t.integer "school_room_id", null: false
+    t.index ["category_id", "school_room_id"], name: "index_categories_school_rooms_on_category_id_and_school_room_id", using: :btree
+    t.index ["school_room_id", "category_id"], name: "index_categories_school_rooms_on_school_room_id_and_category_id", using: :btree
   end
 
   create_table "coordinators", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -97,8 +117,9 @@ ActiveRecord::Schema.define(version: 20170515184616) do
   end
 
   create_table "periods", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.date     "initial_date"
-    t.date     "final_date"
+    t.datetime "initial_date"
+    t.datetime "final_date"
+    t.string   "period_type"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
