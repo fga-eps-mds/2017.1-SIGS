@@ -6,5 +6,4 @@ class SchoolRoom < ApplicationRecord
   has_and_belongs_to_many :course
   has_and_belongs_to_many :allocations
   has_and_belongs_to_many :category
-
 end
