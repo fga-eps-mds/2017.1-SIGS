@@ -45,61 +45,46 @@
     <main class="mainConteiner">
       <div class="container">
         <h1>Salas</h1>
-
-        <table class="table">
-          <tr>
-              <th>Ala</th>
-              <th>Vagas</th>
-              <th>Curso</th>
-              <th>Disciplina</th>
-          </tr>
-
-          <tr>
-            <td>
-              <select>
-                <option value=""></option>
-                <option value="norte">Ala Norte</option>
-                <option value="central">Ala Central</option>
-                <option value="sul">Ala Sul</option>
-              </select>
-            </td>
-
-            <td>
-                <input type="number" name="quantity" min="1" max="300">
-            </td>
-              <td>
+        <div>
+          <form class="form_filter_room">
+              <label class="left_zero">Nome
+                  <input type="text" name="nome" min="1" max="50">
+              </label>
+              <label>Ala
                 <select>
                   <option value=""></option>
-                  <option value="norte">Engenharia de Software</option>
-                  <option value="central">Design</option>
-                  <option value="sul">Física</option>
+                  <option value="norte">Ala Norte</option>
+                  <option value="central">Ala Central</option>
+                  <option value="sul">Ala Sul</option>
                 </select>
-              </td>
-              <td>
-                  <select>
-                    <option value=""></option>
-                    <option value="norte">Algoritmos de Programação</option>
-                    <option value="central">Design de jogos</option>
-                    <option value="sul">Física Experimental</option>
-                  </select>
-                </td>
-            </tr>
-            <tr>
-                <th>Categoria</th>
-                <th>Horário de início</th>
-            </tr>
-            <tr>
-                <td>
-                  <input type="checkbox" name="category1" value="Retroprojetor">Retroprojetor
-                  <br>
-                  <input type="checkbox" name="category2" value="Ar_condicionado">Ar condicionado
-                  <br>
-                  <input type="checkbox" name="category3" value="Sala_de_informatica">Sala de informática
-                  <br>
-                  <input type="checkbox" name="category4" value="Laboratorio_Quimico">Laboratório Químico
-                  <br>
-                  <input type="checkbox" name="category5" value="Auditorio">Auditório
-                  <br><br>
+              </label>
+              <label>Prédio
+                <select>
+                  <option value=""></option>
+                  <option value="pavilhao">Pavilhão João Calmon</option>
+                  <option value="auditorio">ICC</option>
+                </select>
+              </label>
+              <label>Vagas
+                <input type="number" name="quantity" min="1" max="300" class="number">
+              </label>
+              <br><br>
+              <label class="checkbox_space left_zero">Categorias:
+                <!-- <br> -->
+                <input type="checkbox" name="category1" value="Retroprojetor">Retroprojetor
+                <input type="checkbox" name="category2" value="Ar_condicionado">Ar condicionado
+                <input type="checkbox" name="category3" value="Sala_de_informatica">Sala de informática
+                <input type="checkbox" name="category4" value="Laboratorio_Quimico">Laboratório Químico
+                <input type="checkbox" name="category5" value="Auditorio">Auditório
+              </label>
+              <br><br>
+              <label class="checkbox_space left_zero">Funcionamento:
+                <input type="checkbox" name="category1" value="Retroprojetor">Ativa
+                <input type="checkbox" name="category2" value="Ar_condicionado">Inativa
+              </label>
+          </form>
+        </div>
+        <button type="button" class="btn btn-success button_align">Pesquisar</button>
 
                   <td>
                     <input type="checkbox" name="category5" value="Auditorio">06:00

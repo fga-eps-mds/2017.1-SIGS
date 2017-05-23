@@ -325,8 +325,6 @@ body {
 	background: #ffff99;
 }
 
-//school room reports
-
 .report_school{
   margin-left: -340px !important;
 }
@@ -392,4 +390,24 @@ body {
     display: block;
     font-weight: bold;
     font-size: 18px;
+
+.number{
+  width: 90px;
+}
+
+.button_align{
+  margin-top: 20px;
+}
+
+.form_filter_room label{
+  padding-left: 25px;
+}
+
+.left_zero{
+  padding-left: 0px !important;
+}
+
+.checkbox_space input{
+  padding-left: 30px !important;
+  margin-left: 20px;
 }
