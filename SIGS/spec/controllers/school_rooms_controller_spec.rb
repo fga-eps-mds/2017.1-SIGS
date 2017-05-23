@@ -1,4 +1,5 @@
 require 'rails_helper'
+include SessionsHelper
 
 RSpec.describe SchoolRoomsController, type: :controller do
 
@@ -44,6 +45,16 @@ RSpec.describe SchoolRoomsController, type: :controller do
       expect(flash[:success]).to eq("Turma criada")
       expect(SchoolRoom.count).to be(1)
     end
+
+# Esse teste não ta encontrando a rota delete
+
+    # it 'should delete a existing school room' do
+    #   sign_in(@user)
+    #   @school_room = SchoolRoom.create(name: 'Turma SS', active: true, 
+    #     discipline_id: 1)
+    #   delete :delete, params:{id: @school_room.id}
+    #   expect(flash[:success]).to eq('A turma foi excluída com sucesso')
+    # end
 
   end
 

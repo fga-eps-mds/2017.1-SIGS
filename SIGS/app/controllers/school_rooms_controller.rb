@@ -9,8 +9,13 @@ class SchoolRoomsController < ApplicationController
   def create
     @school_room = SchoolRoom.new(school_rooms_params)
     @school_room.active = true
-    @school_room.save
-    flash[:success] = "Turma criada"
+    if @school_room.save
+      redirect_to school_rooms_index_path
+      flash[:success] = "Turma criada"
+    else
+      flash[:error] = "O turma não pode ser criada"
+      render :new
+    end
   end
 
   def edit
@@ -22,7 +27,23 @@ class SchoolRoomsController < ApplicationController
   end
 
   def index
+    @my_school_rooms = filter_coordinator_school_rooms(current_user.id)
+  end
+
+  def filter_coordinator_school_rooms(user_id)
     @school_rooms = SchoolRoom.all
+    @filter_school_rooms = []
+    coordinator = Coordinator.find(user_id)
+    course = Course.find(coordinator.course_id)
+    department = Department.find(course.department_id)
+    @school_rooms.each do |school_room|
+      discipline = Discipline.find(school_room.discipline_id)
+      if discipline.department_id == department.id
+        @filter_school_rooms << school_room
+      else
+      end
+    end
+    return @filter_school_rooms
   end
 
   def update
@@ -36,7 +57,7 @@ class SchoolRoomsController < ApplicationController
     end
   end
 
-  def destroy
+  def delete
     @school_room = SchoolRoom.find(params[:id])
     if !logged_in?
       # coordinator = Coordinator.find_by(user_id: current_user.id)
@@ -44,7 +65,7 @@ class SchoolRoomsController < ApplicationController
       # department = Department.find_by(id: course.department_id)
       # discipline = Discipline.where(id: @school_room.discipline_id)
       # if discipline.department_id == department.id
-        @school_room.destroy
+        @school_room.delete
         redirect_to school_rooms_index_path
         flash[:success] = "A turma foi excluída com sucesso"
       # else
