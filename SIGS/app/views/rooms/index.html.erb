@@ -1,7 +1,39 @@
 <h1>Salas</h1>
+
 <% if @rooms.count == 0 %>
   <h3>Não há salas registradas no momento.</h3>
 <% else %>
+
+  <%= form_for :index, url: room_index_post_path,  :html => {:role => 'form'} do |f| %>
+    <%= f.label :name, "Nome " %>
+    <%= f.text_field :name, class: 'form-control' %>
+
+    <%= f.label :ala, "Alas" %>
+    <%= f.select :ala, ["", "Norte", "Sul", "Central"] %>
+
+    <%= f.label :building, "Prédio" %>
+    <%= f.fields_for :building do |ff| %>
+      <%= ff.collection_select(:building_id,Building.all,:id,:name,include_blank: true) %>
+    <% end %>
+
+    <%= f.label :vagas, "Vagas " %>
+    <%= f.number_field :vagas, class: 'form-control', min: 5, max: 500 %>
+
+    <%= f.label :category, "Categorias" %>
+    <br>
+    <%= f.fields_for :all_categories do |fff| %>
+      <%= fff.collection_check_boxes(:category_id,Category.all,:id,:name,include_blank: true) %>
+    <% end %>
+
+    <br><br>
+    <%= f.label :activity, "Atividade" %>
+    <br>
+    <%= f.check_box :active %> Ativo
+    <%= f.check_box :active %> Inativo
+
+    <%= f.submit "Enviar", class: 'pull-right btn btn-default btn-success' %>
+  <%end%>
+
   <table class="table">
     <tr>
       <td>Código</td>
@@ -21,5 +53,6 @@
         <td style="text-align:center"><%= link_to image_tag("icon_view.png"), room_path(room.id) %></td>
       </tr>
     <% end %>
+  </table>
+
 <% end %>
-</table>

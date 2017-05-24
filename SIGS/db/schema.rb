@@ -48,11 +48,13 @@ ActiveRecord::Schema.define(version: 20170521022908) do
   end
 
   create_table "coordinators", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "department_id"
     t.integer  "course_id"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.index ["course_id"], name: "index_coordinators_on_course_id", using: :btree
+    t.index ["department_id"], name: "index_coordinators_on_department_id", using: :btree
     t.index ["user_id"], name: "index_coordinators_on_user_id", using: :btree
   end
 
@@ -146,6 +148,7 @@ ActiveRecord::Schema.define(version: 20170521022908) do
 
   add_foreign_key "administrative_assistants", "users"
   add_foreign_key "coordinators", "courses"
+  add_foreign_key "coordinators", "departments"
   add_foreign_key "coordinators", "users"
   add_foreign_key "courses", "departments"
   add_foreign_key "department_assistants", "departments"
