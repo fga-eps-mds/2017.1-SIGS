@@ -31,6 +31,7 @@ class SchoolRoomsController < ApplicationController
 
   def edit
     @school_room = SchoolRoom.find(params[:id])
+    @all_courses = Course.all
   end
 
   def show
@@ -58,13 +59,14 @@ class SchoolRoomsController < ApplicationController
 
   def update
     @school_room = SchoolRoom.find(params[:id])
-    respond_to do |format|
-      if @school_room.update(school_rooms_params)
-        redirect_to school_rooms_index_path
-        flash[:success] = 'A turma foi alterada com sucesso'
-      else
-        format.html { render :edit, error: 'A turma não pode ser alterada' }
-      end
+    @all_courses = Course.all
+
+    if @school_room.update_attributes(school_rooms_params_update)
+      success_mesage = 'A turma foi alterada com sucesso'
+      redirect_to school_rooms_index_path, flash: { success: success_mesage }
+    else
+      flash[:error] = 'A turma não pode ser alterada'
+      render :edit
     end
   end
 
@@ -84,6 +86,10 @@ class SchoolRoomsController < ApplicationController
 
   def school_rooms_params
     params[:school_room].permit(:name, :discipline_id, course_ids: [], category_ids: [])
+  end
+
+  def school_rooms_params_update
+    params[:school_room].permit(:discipline_id, course_ids: [], category_ids: [])
   end
 
   def flash_error_new_auxiliar(mensage)
