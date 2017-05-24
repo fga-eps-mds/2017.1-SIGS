@@ -1,0 +1,8 @@
+<%= @school_room.name %>
+
+<br>
+
+<%= link_to 'Editar', school_rooms_edit_path(@school_room.id), class: 'btn btn-primary' %>
+
+<%= link_to "Excluir Turma", school_rooms_destroy_path, class: "btn btn-default btn-danger", data: {confirm: "Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?"} %>
+
