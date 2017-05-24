@@ -5,12 +5,16 @@ class RoomsController < ApplicationController
   before_action :logged_in?
 
   def index
-    user = Coordinator.find_by(user_id: current_user)
-    if user.nil?
-      department = Department.find_by(name: 'PRC')
-      @rooms = Room.where(department: department)
+    @rooms = Room.all
+
+    if params[:name].present? || params[:code].present?
+      @rooms.columns.each do |attr|
+        if params[:"#{attr.name}"].present?
+          @rooms = @rooms.where("#{attr.name} like ?", "%#{params[attr.name]}%")
+        end
+      end
     else
-      @rooms = Room.where(department: user.course.department)
+      @rooms = Room.all
     end
   end
 
