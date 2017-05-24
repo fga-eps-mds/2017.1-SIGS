@@ -7,6 +7,7 @@ class CreateRooms < ActiveRecord::Migration[5.0]
       t.boolean :active
       t.integer :time_grid_id
 
+      t.references :department
       t.belongs_to :building, index: true
 
       t.timestamps

@@ -51,7 +51,7 @@ Feature: Room Edit and show
     Given I am logged in as asssistant administrative
     When I delete all rooms
     When click on link 'Salas'
-    Then the 'Salas' page should load with notice message 'Não há salas registradas no momento.'
+    Then the 'Salas' page should load with notice message 'Não há salas registradas no momento.'  
 
   Scenario: Show the details of a room
     Given I am logged in as asssistant administrative

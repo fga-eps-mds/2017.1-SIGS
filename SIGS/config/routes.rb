@@ -40,6 +40,8 @@ Rails.application.routes.draw do
   get 'rooms/edit/:id' => 'rooms#edit', as: 'room_edit'
   patch 'rooms/update/:id' => 'rooms#update'
   get 'rooms/show/:id' => 'rooms#show', as: 'room'
+  get 'room/destroy/:id', controller: 'rooms', action: 'destroy', as: 'destroy_room'
+
 
   # Course
   get 'courses/courses_by_user' => 'courses#courses_by_user', :as => 'courses_by_user'

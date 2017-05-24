@@ -41,7 +41,11 @@ RSpec.describe SchoolRoomsController, type: :controller do
 
     it 'should create a new school room' do
       sign_in(@user)
+<<<<<<< HEAD
       post :create, params:{school_room: {name: 'AA', discipline_id: @discipline.id, course: @course.id}}
+=======
+      post :create, params:{school_room: {name: 'AA', discipline_id: @discipline.id, course_ids: ['', @course.id]}}
+>>>>>>> development
       expect(flash[:success]).to eq('Turma criada')
       expect(SchoolRoom.count).to be(1)
     end
