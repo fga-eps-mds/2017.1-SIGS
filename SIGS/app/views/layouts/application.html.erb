@@ -51,11 +51,11 @@
                     <li><%= link_to "Usuários Registrados", user_index_path %></li>
                   </ul>
               </li>
-              <li><%= link_to "Período", period_index_path %> </li>  
+              <li><%= link_to "Período", period_index_path %> </li>
             <% else %>
               <li><%= link_to "Turmas", school_rooms_new_path %></a></li>
             <% end %>
-            <li><a href="#">Alocações</a></li>
+            <li><%= link_to "Alocações", allocations_new_path %> </li>
           </ul>
 
           <figure class="unbLogo"><a href="http://www.unb.br"><%= image_tag("rodape_unb.png") %></a></figure>

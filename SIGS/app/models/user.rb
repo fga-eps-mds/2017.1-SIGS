@@ -10,6 +10,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :administrative_assistant
   has_secure_password
   has_many :allocations
+  has_many :school_rooms
 
   # Nome
   CHARACTERS_MINIMUM_FOR_THE_NAME_EXCEPTION = 'O Nome deve ter

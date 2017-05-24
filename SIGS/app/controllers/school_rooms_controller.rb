@@ -3,7 +3,7 @@
 # class that create school rooms
 class SchoolRoomsController < ApplicationController
   before_action :logged_in?
-  before_action :validade_permission_for_school_room
+  before_action :validade_permission_1
 
   def new
     @school_room = SchoolRoom.new
@@ -13,7 +13,7 @@ class SchoolRoomsController < ApplicationController
     @school_room = SchoolRoom.new(school_rooms_params)
     @school_room.active = true
     @school_room.save
-    redirect_to current_user
+    redirect_to allocations_new_path
     flash[:success] = 'Turma criada'
   end
 
