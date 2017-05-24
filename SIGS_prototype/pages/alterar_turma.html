@@ -48,13 +48,27 @@
               </ul>
             </li>
           <li class="dropdown">
-            <a data-toggle="collapse" href="#demo">Usuários
+            <a data-toggle="collapse" href="#salas">Salas
+              <ul class="collapse" id="salas">
+                <li><a href="salas.html">Meu Departamento</a></li>
+                <li><a href="#!">Buscar Salas</a></li>
+              </ul>
+            </a>
+          </li>
+          <li class="dropdown">
+            <a data-toggle="collapse" href="#demo">Usuários</a>
               <ul class="collapse" id="demo">
                 <li><a href="cadastros_pendentes.html">Cadastros Pendentes</a></li>
                 <li><a href="usuarios_registrados.html">Usuários Cadastrados</a></li>
               </ul>
-            </li>
-          <li><a href="#">Alocações</a></li>
+          </li>
+          <li class="dropdown">
+            <a data-toggle="collapse" href="#alocar">Alocações</a>
+              <ul class="collapse" id="alocar">
+                <li><a href="alocacao.html">Graduação</a></li>
+                <li><a href="alocar_extensao.html">Extensão</a></li>
+              </ul>
+          </li>
         </ul>
 
         <figure class="unbLogo">
@@ -64,65 +78,38 @@
         </figure>
       </header>
       <main class="mainConteiner">
-        <h1>Turma</h1>
-        <label>Disciplina</label>
-        <select>
-          <option>Literatura</option>
-          <option>Cálculo 1</option>
-          <option>História da Arte</option>
-          <option>Matemática Discreta</option>
-        </select>
-
-        <h3>Literatura</h3>
-        <table class="table">
-            <tr>
-              <th>Turma</th>
-              <th>Cursos</th>
-              <th>Recursos</th>
-              <th>Editar</th>
-              <th>Excluir</th>
-            </tr>
-          <tr>
-            <td>A</td>
-            <td>Letras, Jornalismo</td>
-            <td></td>
-            <td><a href="alterar_turma.html"><img src="../assets/img/icon_edit.png" alt="Icon edit" /></a></td>
-            <td><a href="#!" data-toggle="modal" data-target=".modalDelete"><img src="../assets/img/icon_trash.png" alt="excluir"></a></td>
-          </tr>
-          <tr>
-            <td>B</td>
-            <td>Direito</td>
-            <td>Retroprojetor</td>
-            <td><a href="alterar_turma.html"><img src="../assets/img/icon_edit.png" alt="Icon edit" /></a></td>
-            <td><a href="#!" data-toggle="modal" data-target=".modalDelete"><img src="../assets/img/icon_trash.png" alt="excluir"></a></td>
-          </tr>
-          <tr>
-            <td>C</td>
-            <td></td>
-            <td></td>
-            <td><a href="alterar_turma.html"><img src="../assets/img/icon_edit.png" alt="Icon edit" /></a></td>
-            <td><a href="#!" data-toggle="modal" data-target=".modalDelete"><img src="../assets/img/icon_trash.png" alt="excluir"></a></td>
-          </tr>
-        </table>
-
-        <!-- Modal -->
-        <div class="modal fade modalDelete" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Excluir Sala</h4>
-              </div>
-              <div class="modal-body">
-                <p>Esta ação não poderá ser desfeita, tem certeza que deseja continuar?</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-success btnDelete" data-dismiss="modal">Confirmar</button>
-              </div>
-            </div>
+        <h1>Alterar Turma</h1>
+        <form id="school_room">
+          <label>Disciplina</label>
+          <select>
+            <option>Cálculo 1</option>
+            <option>História da Arte</option>
+            <option>Matemática Discreta</option>
+            <option selected>Literatura</option>
+          </select>
+          <div class="short_input">
+            <label>Nome</label>
+            <input type="text" class="form-control" value="A">
           </div>
-        </div>
+
+          <p>Cursos Preferenciais</p>
+          <div class="checkbox-group">
+            <input type="checkbox">
+            <label>Engenharia de Software</label>
+            <input type="checkbox">
+            <label>Engenharia Eletrônica</label>
+            <input type="checkbox">
+            <label>Medicina</label>
+            <input type="checkbox">
+            <label>Design</label>
+            <input type="checkbox" checked>
+            <label>Letras</label>
+            <input type="checkbox" checked>
+            <label>Jornalismo</label>
+          </div>
+
+          <input type="submit" value="Alterar Turma" class="btn btn-default btn-success" />
+        </form>
       </main>
     </div>
   </body>
