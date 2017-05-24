@@ -13,17 +13,17 @@ class SchoolRoomsController < ApplicationController
     @school_room = SchoolRoom.new(school_rooms_params)
     @school_room.active = true
 
-    if @school_room.name == ""
+    if !SchoolRoom.find_by(name: @school_room.name).nil?
+      flash[:error] = 'Já existe uma turma com esse nome'
+      render :new
+    elsif @school_room.name == ''
       flash[:error] = 'Indique o nome da turma'
       render :new
-      puts "-" * 80
+    elsif @school_room.save
+      redirect_to school_rooms_index_path, flash: { success: 'Turma criada' }
     else
-      if @school_room.save
-        redirect_to school_rooms_index_path, flash: { success: 'Turma criada' }
-      else
-        flash[:error] = 'Falha ao criar'
-        render :new
-      end
+      flash[:error] = 'Falha ao criar'
+      render :new
     end
   end
 
