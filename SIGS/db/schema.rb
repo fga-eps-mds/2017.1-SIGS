@@ -26,17 +26,12 @@ ActiveRecord::Schema.define(version: 20170524205851) do
     t.string   "day"
     t.integer  "user_id"
     t.integer  "room_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "school_room_id"
     t.index ["room_id"], name: "index_allocations_on_room_id", using: :btree
+    t.index ["school_room_id"], name: "index_allocations_on_school_room_id", using: :btree
     t.index ["user_id"], name: "index_allocations_on_user_id", using: :btree
-  end
-
-  create_table "allocations_school_rooms", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "allocation_id",  null: false
-    t.integer "school_room_id", null: false
-    t.index ["allocation_id", "school_room_id"], name: "index_allocations_school_rooms", using: :btree
-    t.index ["school_room_id", "allocation_id"], name: "index_school_rooms_allocations", using: :btree
   end
 
   create_table "buildings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -168,6 +163,7 @@ ActiveRecord::Schema.define(version: 20170524205851) do
 
   add_foreign_key "administrative_assistants", "users"
   add_foreign_key "allocations", "rooms"
+  add_foreign_key "allocations", "school_rooms"
   add_foreign_key "allocations", "users"
   add_foreign_key "coordinators", "courses"
   add_foreign_key "coordinators", "users"

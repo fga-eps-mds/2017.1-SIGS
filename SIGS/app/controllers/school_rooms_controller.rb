@@ -3,7 +3,7 @@
 # class that create school rooms
 class SchoolRoomsController < ApplicationController
   before_action :logged_in?
-  before_action :validade_permission_for_school_room
+  before_action :validade_permission_1
 
   def new
     @school_room = SchoolRoom.new
