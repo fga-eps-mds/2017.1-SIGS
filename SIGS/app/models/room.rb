@@ -6,6 +6,8 @@ class Room < ApplicationRecord
   has_many :allocations
   belongs_to :department
   has_and_belongs_to_many :category
+  belongs_to :department
+  has_many :allocations
 
   # Codigo da sala
   validates :code,

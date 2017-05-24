@@ -1,5 +1,19 @@
 Rails.application.routes.draw do
 
+  get 'allocations/index'
+
+  get 'allocations/new'
+
+  get 'allocations/create'
+
+  get 'allocations/edit'
+
+  get 'allocations/update'
+
+  get 'allocations/show'
+
+  get 'allocations/destroy'
+
   root 'sessions#new'
 
   # Categories

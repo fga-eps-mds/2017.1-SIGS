@@ -47,7 +47,6 @@ room_1 = Room.create(code: '124325', name: 'S10', capacity: 50, active: true, ti
 room_2 = Room.create(code: '987653', name: 'SS', capacity: 40, active: false, time_grid_id: 2, department: department, building: buildings[2])
 room_3 = Room.create(code: '987655', name: 'S9', capacity: 40, active: false, time_grid_id: 2, department: department_1, building: buildings[2])
 
-
 # Disciplines
 discipline = Discipline.create(code: '876', name: 'Cálculo 3', department: department)
 discipline_2 = Discipline.create(code: '777', name: 'Cálculo 2', department: department)

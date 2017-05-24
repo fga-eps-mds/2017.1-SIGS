@@ -10,6 +10,8 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :department_assistant, reject_if: :all_blank
   accepts_nested_attributes_for :coordinator, reject_if: :all_blank
   accepts_nested_attributes_for :administrative_assistant
+  has_secure_password
+  has_many :allocations
 
   # Nome
   CHARACTERS_MINIMUM_FOR_THE_NAME_EXCEPTION = 'O Nome deve ter

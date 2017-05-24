@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Allocation class
+# class of Allocation
 class Allocation < ApplicationRecord
   belongs_to :user
   belongs_to :room
