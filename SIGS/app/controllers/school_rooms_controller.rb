@@ -7,11 +7,13 @@ class SchoolRoomsController < ApplicationController
 
   def new
     @school_room = SchoolRoom.new
+    @all_courses = Course.all
   end
 
   def create
     @school_room = SchoolRoom.new(school_rooms_params)
     @school_room.active = true
+    @all_courses = Course.all
 
     if !SchoolRoom.find_by(name: @school_room.name).nil?
       flash[:error] = 'Já existe uma turma com esse nome'

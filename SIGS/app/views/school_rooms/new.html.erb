@@ -13,7 +13,7 @@
   <p> Cursos</p>
   <div class="checkbox-group">
 
-    <%= school_room.collection_check_boxes(:course_ids, courses_by_user, :id, :name, include_blank: true)%>
+    <%= school_room.collection_check_boxes(:course_ids, @all_courses, :id, :name, include_blank: true)%>
   </div>
   <br>
   <p> Categorias</p>
