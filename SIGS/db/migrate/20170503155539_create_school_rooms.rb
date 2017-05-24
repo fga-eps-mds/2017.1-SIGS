@@ -4,6 +4,7 @@ class CreateSchoolRooms < ActiveRecord::Migration[5.0]
       table.string :name
       table.boolean :active
       table.references :discipline, foreign_key: true
+
       table.timestamps
     end
   end

@@ -3,6 +3,7 @@
 # Classe modelo da Turma
 class SchoolRoom < ApplicationRecord
   belongs_to :discipline
-  has_and_belongs_to_many :course
-  has_and_belongs_to_many :category
+  # has_and_belongs_to_many :courses
+  has_and_belongs_to_many :categorys
+  has_and_belongs_to_many :allocations
 end

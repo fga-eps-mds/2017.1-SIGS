@@ -41,8 +41,8 @@ buildings = Building.create([
   ])
 
 # Rooms
-room_1 = Room.create(code: '124325', name: 'S10', capacity: 50, active: true, time_grid_id: 1, building_id: 1)
-room_2 = Room.create(code: '987653', name: 'SS', capacity: 40, active: false, time_grid_id: 2, building_id: 2)
+room_1 = Room.create(code: '124325', name: 'S10', capacity: 50, active: true, time_grid_id: 1, building_id: 1, department: department)
+room_2 = Room.create(code: '987653', name: 'SS', capacity: 40, active: false, time_grid_id: 2, building_id: 2, department: department)
 
 # Disciplines
 discipline = Discipline.create(code: '876', name: 'Cálculo 3', department_id: 1)
@@ -61,4 +61,3 @@ category = Category.create(name: 'Laboratório Químico')
 period_1 = Period.create(period_type:'Alocação', initial_date: DateTime.strptime('10-01-2018 00:00', '%d-%m-%Y %H:%M'), final_date:DateTime.strptime('01-02-2018 18:00', '%d-%m-%Y %H:%M'))
 period_2 = Period.create(period_type:'Ajuste', initial_date: DateTime.strptime('23-02-2018 00:00', '%d-%m-%Y %H:%M'), final_date: DateTime.strptime('01-03-2018 16:32', '%d-%m-%Y %H:%M'))
 period_3 = Period.create(period_type:'Letivo', initial_date: DateTime.strptime('08-03-2018 00:00', '%d-%m-%Y %H:%M'), final_date: DateTime.strptime('14-07-2018 23:59', '%d-%m-%Y %H:%M'))
-
