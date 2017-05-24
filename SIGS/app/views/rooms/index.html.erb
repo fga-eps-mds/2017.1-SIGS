@@ -1,10 +1,15 @@
 <h1>Salas</h1>
 
-<% if @rooms.count == 0 %>
-  <h3>Não há salas registradas no momento.</h3>
-<% else %>
+<%= form_tag(room_index_post_path, :method => :post) do %>
+  <%= text_field_tag 'name', nil, placeholder: 'Digite o nome da sala...', size: '50', class: 'form-control' %>
+  <%= text_field_tag 'code', nil, placeholder: 'Digite o código da sala...', size: '50', class: 'form-control' %>
+  <%= number_field_tag 'capacity', nil, placeholder: 'Digite a quantidade de vagas...', size: '300', class: 'form-control' %>
 
-  <%= form_for :index, url: room_index_post_path,  :html => {:role => 'form'} do |f| %>
+  <%= submit_tag "Submit"%>
+<% end %>
+
+<!--
+  <%= form_for :index, url: room_index_path,  :html => {:role => 'form'} do |f| %>
     <%= f.label :name, "Nome " %>
     <%= f.text_field :name, class: 'form-control' %>
 
@@ -31,8 +36,8 @@
     <%= f.check_box :active %> Ativo
     <%= f.check_box :active %> Inativo
 
-    <%= f.submit "Enviar", class: 'pull-right btn btn-default btn-success' %>
-  <%end%>
+    <%= f.submit "Enviar", class: 'pull-right btn btn-default btn-success' %> -->
+  <!-- <%end%> -->
 
   <table class="table">
     <tr>
@@ -54,5 +59,3 @@
       </tr>
     <% end %>
   </table>
-
-<% end %>

@@ -6,6 +6,16 @@ class RoomsController < ApplicationController
 
   def index
     @rooms = Room.all
+
+    if params[:name].present? || params[:code].present?
+      @rooms.columns.each do |attr|
+        if params[:"#{attr.name}"].present?
+          @rooms = @rooms.where("#{attr.name} like ?", "%#{params[attr.name]}%")
+        end
+      end
+    else
+      @rooms = Room.all
+    end
   end
 
   def edit
