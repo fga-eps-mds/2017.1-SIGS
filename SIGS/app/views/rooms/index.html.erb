@@ -39,23 +39,27 @@
     <%= f.submit "Enviar", class: 'pull-right btn btn-default btn-success' %> -->
   <!-- <%end%> -->
 
-  <table class="table">
-    <tr>
-      <td>Código</td>
-      <td>Nome</td>
-      <td>Ativo</td>
-      <td>Prédio</td>
-      <td style="text-align:center">Alterar</td>
-      <td style="text-align:center">Visualizar</td>
-    </tr>
-    <% @rooms.each do |room| %>
+  <% if @rooms.count == 0 %>
+    <h3>Não há salas registradas no momento.</h3>
+  <% else %>
+    <table class="table">
       <tr>
-        <td><%= room.code %></td>
-        <td><%= room.name %></td>
-        <td><%=  ((room.active) ? 'Sim' : 'Não')  %></td>
-        <td><%= room.building.name %></td>
-        <td style="text-align:center"><%= link_to image_tag("icon_edit.png"), room_edit_path(room.id) %></td>
-        <td style="text-align:center"><%= link_to image_tag("icon_view.png"), room_path(room.id) %></td>
+        <td>Código</td>
+        <td>Nome</td>
+        <td>Ativo</td>
+        <td>Prédio</td>
+        <td style="text-align:center">Alterar</td>
+        <td style="text-align:center">Visualizar</td>
       </tr>
-    <% end %>
-  </table>
+      <% @rooms.each do |room| %>
+        <tr>
+          <td><%= room.code %></td>
+          <td><%= room.name %></td>
+          <td><%=  ((room.active) ? 'Sim' : 'Não')  %></td>
+          <td><%= room.building.name %></td>
+          <td style="text-align:center"><%= link_to image_tag("icon_edit.png"), room_edit_path(room.id) %></td>
+          <td style="text-align:center"><%= link_to image_tag("icon_view.png"), room_path(room.id) %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% end %>
