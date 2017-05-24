@@ -47,6 +47,7 @@ room_2 = Room.create(code: '987653', name: 'SS', capacity: 40, active: false, ti
 # Disciplines
 discipline = Discipline.create(code: '876', name: 'Cálculo 3', department_id: 1)
 discipline_2 = Discipline.create(code: '777', name: 'Cálculo 2', department_id: 1)
+discipline_3 = Discipline.create(code: '773', name: 'Cálculo 1', department_id: 1)
 
 #SchoolRooms
 school_room = SchoolRoom.create(name:"A",active:true,discipline: discipline)

@@ -1,24 +1,30 @@
 # frozen_string_literal: true
 
-require 'coordinator_helper'
-
 # class that create school rooms
 class SchoolRoomsController < ApplicationController
-  include CoordinatorHelper
   before_action :logged_in?
   before_action :validade_permission_for_school_room
 
   def new
     @school_room = SchoolRoom.new
-    @disciplines = get_disciplines(current_user)
   end
 
   def create
     @school_room = SchoolRoom.new(school_rooms_params)
     @school_room.active = true
-    @school_room.save
-    redirect_to current_user
-    flash[:success] = 'Turma criada'
+
+    if @school_room.name == ""
+      flash[:error] = 'Indique o nome da turma'
+      render :new
+      puts "-" * 80
+    else
+      if @school_room.save
+        redirect_to school_rooms_index_path, flash: { success: 'Turma criada' }
+      else
+        flash[:error] = 'Falha ao criar'
+        render :new
+      end
+    end
   end
 
   def edit
