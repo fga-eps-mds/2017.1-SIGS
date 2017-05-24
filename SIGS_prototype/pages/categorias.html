@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>SIGS</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.ico" />
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Sistema de Alocação de Salas Inteligente da UnB.">
+    <link rel="stylesheet" media="all" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" media="all" href="../assets/css/style.css" />
+    <link rel="stylesheet" media="all" href="../assets/css/navbar.css" />
+    <link rel="stylesheet" media="all" href="../assets/css/form.css" />
+    <script src="../assets/js/jquery-1.12.4.min.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+  </head>
+  <body>
+    <div class="container container-fluid myContainer">
+      <header class="navbar-default myNav">
+        <figure class="logo">
+          <img src="../assets/img/sigs_logo.png" alt="SIGS Logos" />
+        </figure>
+
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+
+        <ul class="nav navbar-nav">
+          <li><a href="minha_conta.html">Minha Conta</a></li>
+          <li><a href="../index.html">Logout</a></li>
+          <li class="dropdown">
+          <a data-toggle="collapse" href="#salas">Turmas
+            <ul class="collapse" id="salas">
+              <li><a href="criar_turma.html">Nova Turma</a></li>
+              <li><a href="visualizar_turmas.html">Meu Departamento</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Turmas</a></li>
+            <li class="dropdown">
+            <a data-toggle="collapse" href="#salas">Salas
+              <ul class="collapse" id="salas">
+                <li><a href="salas.html">Salas</a></li>
+                <li><a href="categorias.html">Categorias</a></li>
+              </ul>
+            </li>
+          <li class="dropdown">
+            <a data-toggle="collapse" href="#demo">Usuários
+              <ul class="collapse" id="demo">
+                <li><a href="cadastros_pendentes.html">Cadastros Pendentes</a></li>
+                <li><a href="usuarios_registrados.html">Usuários Cadastrados</a></li>
+              </ul>
+            </li>
+          <li><a href="#">Alocações</a></li>
+        </ul>
+
+        <figure class="unbLogo">
+          <a href="http://www.unb.br" target="_blank">
+            <img src="../assets/img/rodape_unb.png" alt="SIGS Logos" />
+          </a>
+        </figure>
+      </header>
+      <main class="mainConteiner">
+        <h1>Categorias de Salas</h1>
+        <table class="table">
+            <tr>
+              <div class="container">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Criar nova categoria</button>
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" role="dialog">
+                  <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Criar nova categoria</h4>
+                      </div>
+                      <div class="modal-body">
+                      <label for="category_name">Categoria</label>
+                        <input class="form-control" type="text" name="category[name]" id="category_name" /><br>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="pull-right btn btn-default btn-success" data-dismiss="modal">Salvar</button>
+                      </div>
+                    </div> 
+                  </div>
+                </div>
+              </div>
+            </tr>
+            <br>
+            <tr>
+              <td>Retroprojetor</td>
+              <td style="text-align:center"><a href="editar_categoria.html"><img src="../assets/img/icon_edit.png" alt="alterar"></a></td>
+              <td><a data-confirm="Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?" href="#"><img src="../assets/img/icon_trash.png" alt="Icon trash" /></a></td>
+            </tr>
+            <tr>
+              <td>Ar condicionado</td>
+              <td style="text-align:center"><a href="editar_categoria.html"><img src="../assets/img/icon_edit.png" alt="alterar"></a></td>
+              <td><a data-confirm="Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?" href="#"><img src="../assets/img/icon_trash.png" alt="Icon trash" /></a></td>
+            </tr>
+            <tr>
+              <td>Sala de informática</td>
+              <td style="text-align:center"><a href="editar_categoria.html"><img src="../assets/img/icon_edit.png" alt="alterar"></a></td>
+              <td><a data-confirm="Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?" href="#"><img src="../assets/img/icon_trash.png" alt="Icon trash" /></a></td>
+            </tr>
+            <tr>
+              <td>Laboratório Químico</td>
+              <td style="text-align:center"><a href="editar_categoria.html"><img src="../assets/img/icon_edit.png" alt="alterar"></a></td>
+              <td><a data-confirm="Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?" href="#"><img src="../assets/img/icon_trash.png" alt="Icon trash" /></a></td>
+            </tr>
+            <tr>
+              <td>Auditório</td>
+              <td style="text-align:center"><a href="editar_categoria.html"><img src="../assets/img/icon_edit.png" alt="alterar"></a></td>
+              <td><a data-confirm="Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?" href="#"><img src="../assets/img/icon_trash.png" alt="Icon trash" /></a></td>
+            </tr>
+        </table>
+      </main>
+    </div>
+  </body>
+</html>

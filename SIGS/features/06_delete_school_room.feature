@@ -5,9 +5,5 @@ Feature: Delete school room
 
 	Scenario: delete school room with
 		Given I am logged in as Caio, an coordinator
-		And click on link 'Turmas'
+		And click on link 'Nova Turma'
 		And I choose SchoolRoom with name 'D'
-		And I click on view icon
-		When I press the "Excluir Turma" button
-		Then notice message 'A turma foi excluída com sucesso'
-		

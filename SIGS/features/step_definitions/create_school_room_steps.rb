@@ -5,28 +5,38 @@ Given (/^I am logged in as coordinator$/) do
   	click_button('Entrar')
 end
 
-And (/^click on link 'Turmas'$/) do
-	click_link ('Turmas')
+And (/^click on link 'Nova Turma'$/) do
+	click_link ('Nova Turma')
 end
 
-And (/^I click on link 'Criar Turma'$/) do
-    click_link('Criar Turma')
-end
-
-And (/^I select '' in 'discipline_id'$/) do
-	expect(page).to have_content('Nova Turma')
+And (/^I select '1' in 'discipline_id'$/) do
+	find_field('school_room_discipline_id').find("option[value='1']").text
 end
 
 And (/^I fill in 'name' with 'D'$/) do
-	#fill_in 'school_room[name]', with: 'D'
   find(:css, "input[id$='school_room_name']").set("D")
 end
 
-And (/^I fill in 'type' with 'Engenharia de Software'$/) do
+And (/^I fill in 'name' with 'A'$/) do
+	fill_in('school_room[name]', :with=> 'A')
+end
+
+And (/^I check 'Retroprojetor'$/) do
+	find(:css, "#school_room_category_ids_1").set(true)
+end
+
+And (/^I check 'Engenharia Eletronica'$/) do
    find(:css, "#school_room_course_ids_2").set(true)
 end
 
-Then (/^notice message 'create'$/) do
-	expect(page).to have_content('Suas Turmas')
+Then (/^notice message 'Turma criada'$/) do
+	expect(page).to have_content('Turma criada')
 end
 
+Then (/^notice message 'Já existe uma turma com esse nome'$/) do
+	expect(page).to have_content('Já existe uma turma com esse nome')
+end
+
+Then (/^notice message 'Indique o nome da turma'$/) do
+	expect(page).to have_content('Indique o nome da turma')
+end

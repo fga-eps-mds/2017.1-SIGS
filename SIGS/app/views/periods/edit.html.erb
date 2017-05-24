@@ -1,0 +1,19 @@
+<h1> Editando Período </h1>
+
+<ul id="erro-message">
+  <% @period.errors.messages.values.each do |msg| %>
+    <% msg.each do |m| %>
+      <li><%= m %></li>
+    <%end %>
+  <% end %>
+</ul>
+
+<%= form_for @period, url: period_update_path , method: :post do |period|%>
+  <%= period.label :initial_date , 'Data inicial' %>
+  <%= period.datetime_field :initial_date %>
+  <%= period.label :final_date, 'Data final' %>
+  <%= period.datetime_field :final_date %>
+  <%= period.hidden_field :id %>
+  <%= period.submit 'Salvar', class: 'pull-right btn btn-default btn-success'%>
+
+<% end %>

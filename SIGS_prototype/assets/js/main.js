@@ -26,10 +26,14 @@ $(document).ready(function(){
 
   $('#errorModal').on('hidden.bs.modal', function () {
     $(".enterForm").unbind('submit').submit();
-  })
+  });
 
   $(".alert").hide().fadeIn(3000);
   setTimeout("$(\".alert-success\").show().fadeOut(3000);", 10000);
   setTimeout("$(\".alert-notice\").show().fadeOut(3000);", 10000);
+
+  $(".btnDelete").on("click", function(){
+    $(".sala1").hide(800);
+  });
 
 });
