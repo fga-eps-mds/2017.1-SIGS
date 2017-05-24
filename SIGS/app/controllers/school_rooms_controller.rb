@@ -15,17 +15,16 @@ class SchoolRoomsController < ApplicationController
     @school_room.active = true
     @all_courses = Course.all
 
-    if !SchoolRoom.find_by(name: @school_room.name).nil?
-      flash[:error] = 'Já existe uma turma com esse nome'
-      render :new
-    elsif @school_room.name == ''
-      flash[:error] = 'Indique o nome da turma'
-      render :new
+    name = @school_room.name
+
+    if !SchoolRoom.find_by(name: name).nil?
+      flash_error_new_auxiliar('Já existe uma turma com esse nome')
+    elsif name == ''
+      flash_error_new_auxiliar('Indique o nome da turma')
     elsif @school_room.save
       redirect_to school_rooms_index_path, flash: { success: 'Turma criada' }
     else
-      flash[:error] = 'Falha ao criar'
-      render :new
+      flash_error_new_auxiliar('Falha ao criar')
     end
   end
 
@@ -69,5 +68,10 @@ class SchoolRoomsController < ApplicationController
 
   def school_rooms_params
     params[:school_room].permit(:name, :discipline_id, course_ids: [], category_ids: [])
+  end
+
+  def flash_error_new_auxiliar(mensage)
+    flash[:error] = mensage
+    render :new
   end
 end
