@@ -65,16 +65,21 @@ class SchoolRoomsController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     @school_room = SchoolRoom.find(params[:id])
-    if !logged_in?
-      @school_room.destroy
-      redirect_to school_rooms_index_path
-      flash[:success] = 'A turma foi excluída com sucesso'
+    coordinator = Coordinator.find_by(user_id: current_user.id)
+
+    if permission[:level] == 1 &&
+       coordinator.course.department == @school_room.discipline.department
+      if @school_room.destroy
+        flash[:success] = 'A turma foi excluída com sucesso'
+      else
+        ocurred_errors(@school_room)
+      end
     else
-      redirect_to sign_in_path
-      flash[:error] = 'Você não permissão para excluir essa turma'
+      flash[:error] = 'Permissão negada'
     end
+    redirect_to school_rooms_index_path
   end
 
   private
