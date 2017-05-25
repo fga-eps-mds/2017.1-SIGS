@@ -32,7 +32,7 @@ RSpec.describe SchoolRoomsController, type: :controller do
     it 'should create school room with null name' do
       sign_in(@user)
       post :create, params:{school_room: {name: '', capacity: 5, discipline_id: @discipline1.id, course: @course.id}}
-      expect(flash[:error]).to eq('Indique o nome da turma')
+      expect(flash[:error]).to eq('Turma não pode ser vazia')
     end
 
     it 'should create school room with existent name' do
@@ -42,28 +42,28 @@ RSpec.describe SchoolRoomsController, type: :controller do
       expect(flash[:error]).to eq('Turma com nome já cadastrado')
     end
 
-    it 'should create school room force to fail' do
+    it 'not should create school room with null discipline' do
       sign_in(@user)
-      post :create, params:{school_room: {name: 'AA',  capacity: 200, discipline_id: '', course: @course.id}}
-      expect(flash[:error]).to eq('Falha ao criar')
+      post :create, params:{school_room: {name: 'AA',  capacity: 200, discipline: '', course: @course.id}}
+      expect(flash[:error]).to include('Disciplina não pode ser vazia')
     end
 
-    it 'should create school room with low capacity' do
+    it 'not should create school room with low capacity' do
       sign_in(@user)
-      post :create, params:{school_room: {name: 'AA',  capacity: 4, discipline_id: '', course: @course.id}}
-      expect(flash[:error]).to eq('Capacidade Inválida')
+      post :create, params:{school_room: {name: 'AA',  capacity: 4, discipline: @discipline2, course: @course.id}}
+      expect(flash[:error]).to include('A capacidade mínima é 5 vagas')
     end
 
-    it 'should create school room with high capacity' do
+    it 'not should create school room with high capacity' do
       sign_in(@user)
-      post :create, params:{school_room: {name: 'AA',  capacity: 201, discipline_id: '', course: @course.id}}
-      expect(flash[:error]).to eq('Capacidade Inválida')
+      post :create, params:{school_room: {name: 'AA',  capacity: 800, discipline: Discipline.last, course: @course.id}}
+      expect(flash[:error]).to include('A capacidade máxima é 500 vagas')
     end
 
-    it 'should create school room with blank capacity' do
+    it 'not should create school room with blank capacity' do
       sign_in(@user)
-      post :create, params:{school_room: {name: 'AA', capacity: '', discipline_id: '', course: @course.id}}
-      expect(flash[:error]).to eq('Capacidade Inválida')
+      post :create, params:{school_room: {name: 'AA', capacity: '', discipline: @discipline2, course: @course.id}}
+      expect(flash[:error]).to include('Capacidade não pode ser vazia')
     end
 
     it 'returns http success' do
@@ -80,11 +80,11 @@ RSpec.describe SchoolRoomsController, type: :controller do
       expect(SchoolRoom.find(school_room.id).discipline_id).to eq(@discipline2.id)
     end  
 
-    it 'should update with force error' do
+    it 'not should update with null discipline' do
       sign_in(@user)
       school_room = SchoolRoom.create(name: 'AA',capacity: 50, discipline_id: @discipline1.id)
       get :update, params:{id: school_room.id, school_room:{discipline_id: nil}}
-      expect(flash[:error]).to eq('A turma não pode ser alterada')
+      expect(flash[:error]).to include('Disciplina não pode ser vazia')
     end  
   end
 end

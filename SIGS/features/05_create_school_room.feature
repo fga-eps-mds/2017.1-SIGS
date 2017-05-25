@@ -29,7 +29,7 @@ Feature: Create school room
 		And I select '1' in 'discipline_id'
 		And I fill in 'capacity' with '50'
 		When I press 'Salvar' button
-		Then notice message 'Indique o nome da turma'
+		Then notice message 'Turma não pode ser vazia'
 
 
 	Scenario: create school room with existent name attributes
@@ -41,11 +41,30 @@ Feature: Create school room
 		When I press 'Salvar' button
 		Then notice message 'Turma com nome já cadastrado'
 
-	Scenario: create school room with invalid capacity
+	Scenario: create school room with null capacity
 		Given I am logged in as coordinator
 		And click on link 'Nova Turma'
 		And I select '1' in 'discipline_id'
 		And I fill in 'name' with 'D'
-		And I fill in 'capacity' with '0'
+		And I fill in 'capacity' with null
 		When I press 'Salvar' button
-		Then notice message 'Capacidade Inválida'
+		Then notice message 'Capacidade não pode ser vazia'
+
+	Scenario: create school room with lower capacity
+		Given I am logged in as coordinator
+		And click on link 'Nova Turma'
+		And I select '1' in 'discipline_id'
+		And I fill in 'name' with 'D'
+		And I fill in 'capacity' with '1'
+		When I press 'Salvar' button
+		Then notice message 'A capacidade mínima é 5 vagas'
+
+
+	Scenario: create school room with high capacity
+		Given I am logged in as coordinator
+		And click on link 'Nova Turma'
+		And I select '1' in 'discipline_id'
+		And I fill in 'name' with 'D'
+		And I fill in 'capacity' with '800'
+		When I press 'Salvar' button
+		Then notice message 'A capacidade máxima é 500 vagas'
