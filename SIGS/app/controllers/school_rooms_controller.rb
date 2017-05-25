@@ -71,11 +71,8 @@ class SchoolRoomsController < ApplicationController
 
     if permission[:level] == 1 &&
        coordinator.course.department == @school_room.discipline.department
-      if @school_room.destroy
-        flash[:success] = 'A turma foi excluída com sucesso'
-      else
-        ocurred_errors(@school_room)
-      end
+      @school_room.destroy
+      flash[:success] = 'A turma foi excluída com sucesso'
     else
       flash[:error] = 'Permissão negada'
     end
