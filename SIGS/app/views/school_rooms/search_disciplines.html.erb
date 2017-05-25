@@ -1,22 +1,7 @@
-<%= link_to 'Criar Turma', school_rooms_new_path, class: ' pull-right btn btn-default btn-primary btn-lg' %>
-<h2>Suas Turmas</h2>
+<% if @disciplines.present? %>
 
-<br> <br>
-<div class="container-search-form">
-  <%= form_for(:current_search, url: search_disciplines_path) do |f|%>
-
-    <%= f.text_field :search, placeholder: "Buscar Disciplinas", id: 'input-search-field', class: 'input-search', data: {autocomplete_source: discipline_of_department(user_department_id).order(:name).map(&:name)} %> 
-
-      <%= f.submit "Search" %> 
-
-  <% end %>
-</div>
-</br>
-
-<% if @my_school_rooms.count == 0 %>
-  <h3>Não há turmas cadastradas no momento.</h3>
-<% else %>
-  <table class="table table-hover">
+	<h2> Disciplinas encontradas: </h2>
+	<table class="table table-hover">
     <tr>
       <th>Nome</th>
       <th>Ativo</th>
@@ -26,7 +11,7 @@
       <th style="text-align:center">Visualizar</th>
       <th style="text-align:center">Excluir</th>
     </tr>
-    <% @my_school_rooms.each do |school_room| %>
+    <% @school_rooms.each do |school_room| %>
       <tr>
         <td><%= school_room.name %></td>
         <td><%= raw ((school_room.active) ? '<i class="fa fa-check-circle fa-lg"></i>' : '<i class="fa fa-times-circle fa-lg"></i>')  %></td>
@@ -46,4 +31,7 @@
       </tr>
     <% end %>
   </table>
+
+<% else %>
+	<h2> Nenhuma disciplina encontrada. </h2>
 <% end %>

@@ -13,3 +13,51 @@
 .fa-trash {
 	color: #f23d3d;
 }
+
+.container-search-form {
+}
+
+.input-search {
+	width: 30%;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-image: url('searchicon.png');
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+.input-search:focus {
+	width: 70%;
+}
+
+ul.ui-autocomplete {
+  position: absolute;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  cursor: default;
+  border: solid 4px darkgray;
+}
+
+ul.ui-autocomplete li {
+  background-color: #FFF;
+  border-top: solid 1px #DDD;
+  margin: 0;
+  padding: 0;  
+}
+
+ul.ui-autocomplete li a {
+  color: #000;
+  display: block;
+  padding: 3px;
+}
+
+ul.ui-autocomplete li a.ui-state:hover, a.ui-state:active {
+  background-color: slateblue;
+}

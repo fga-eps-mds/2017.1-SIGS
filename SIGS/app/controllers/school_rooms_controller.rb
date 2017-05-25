@@ -57,6 +57,15 @@ class SchoolRoomsController < ApplicationController
     @filter_school_rooms
   end
 
+  def search_disciplines
+    @search_param = params[:current_search][:search]
+    @disciplines = discipline_of_department(user_department_id).where("name LIKE :search", 
+    :search => "%#{params[:current_search][:search]}%")
+    search_attribute = params[:current_search][:search]
+
+    @school_rooms = school_rooms_of_disciplines(@disciplines)
+  end
+
   def update
     @school_room = SchoolRoom.find(params[:id])
     @all_courses = Course.all

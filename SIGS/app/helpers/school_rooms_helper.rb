@@ -1,17 +1,24 @@
 module SchoolRoomsHelper
 
-  def courses_of_school_room(course_ids)
-    courses_names = []
-    if course_ids.kind_of?(Array)
-      course_ids.each do |course_id|
-        course = Course.find(course_id)
-        courses_names << course.name  
+  def get_discipline_name(id)
+    discipline = Discipline.find(id)
+    return discipline
+  end
+
+  def discipline_of_department(id)
+    my_disciplines = Discipline.where(department_id: id).load
+    return my_disciplines
+  end
+
+  def school_rooms_of_disciplines(disciplines)
+    school_rooms = []
+    disciplines.each do |discipline|
+      school_rooms_sort = SchoolRoom.where(discipline_id: discipline.id)
+      school_rooms_sort.each do |school_room|
+        school_rooms << school_room
       end
-    else 
-      course = Course.find(course_ids)
-      courses_names << course.name  
     end
-    return courses_names
+    return school_rooms
   end
 
 end
