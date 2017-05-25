@@ -13,15 +13,15 @@ class SchoolRoomsController < ApplicationController
   def create
     @school_room = SchoolRoom.new(school_rooms_params)
     @school_room.active = true
-
+    @school_room.name.upcase!
     @all_courses = Course.all
 
-    name = @school_room.name
-
-    if !SchoolRoom.find_by(name: name).nil?
-      flash_error_new_auxiliar('Já existe uma turma com esse nome')
-    elsif name == ''
+    if validate_duplicate_name_param
+      flash_error_new_auxiliar('Turma com nome já cadastrado')
+    elsif validate_blank_name_param
       flash_error_new_auxiliar('Indique o nome da turma')
+    elsif validate_capacity_param
+      flash_error_new_auxiliar('Capacidade Inválida')
     elsif @school_room.save
       redirect_to school_rooms_index_path, flash: { success: 'Turma criada' }
     else
@@ -85,7 +85,13 @@ class SchoolRoomsController < ApplicationController
   private
 
   def school_rooms_params
-    params[:school_room].permit(:name, :discipline_id, course_ids: [], category_ids: [])
+    params[:school_room].permit(
+      :name,
+      :discipline_id,
+      :capacity,
+      course_ids: [],
+      category_ids: []
+    )
   end
 
   def school_rooms_params_update
@@ -95,5 +101,21 @@ class SchoolRoomsController < ApplicationController
   def flash_error_new_auxiliar(mensage)
     flash[:error] = mensage
     render :new
+  end
+
+  def validate_capacity_param
+    if @school_room.capacity.nil?
+      true
+    else
+      @school_room.capacity < 5 || @school_room.capacity > 200
+    end
+  end
+
+  def validate_duplicate_name_param
+    !SchoolRoom.find_by(name: @school_room.name).nil?
+  end
+
+  def validate_blank_name_param
+    @school_room.name.blank?
   end
 end

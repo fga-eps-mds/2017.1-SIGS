@@ -8,6 +8,7 @@ Feature: Create school room
 		And click on link 'Nova Turma'
 		And I select '1' in 'discipline_id'
 		And I fill in 'name' with 'D'
+		And I fill in 'capacity' with '50'
 		When I press 'Salvar' button
 		Then notice message 'Turma criada'
 
@@ -18,6 +19,7 @@ Feature: Create school room
 		And I check 'Engenharia Eletronica'
 		And I check 'Retroprojetor'
 		And I fill in 'name' with 'D'
+		And I fill in 'capacity' with '50'
 		When I press 'Salvar' button
 		Then notice message 'Turma criada'
 
@@ -25,6 +27,7 @@ Feature: Create school room
 		Given I am logged in as coordinator
 		And click on link 'Nova Turma'
 		And I select '1' in 'discipline_id'
+		And I fill in 'capacity' with '50'
 		When I press 'Salvar' button
 		Then notice message 'Indique o nome da turma'
 
@@ -34,5 +37,15 @@ Feature: Create school room
 		And click on link 'Nova Turma'
 		And I select '1' in 'discipline_id'
 		And I fill in 'name' with 'A'
+		And I fill in 'capacity' with '50'
 		When I press 'Salvar' button
-		Then notice message 'Já existe uma turma com esse nome'
+		Then notice message 'Turma com nome já cadastrado'
+
+	Scenario: create school room with invalid capacity
+		Given I am logged in as coordinator
+		And click on link 'Nova Turma'
+		And I select '1' in 'discipline_id'
+		And I fill in 'name' with 'D'
+		And I fill in 'capacity' with '0'
+		When I press 'Salvar' button
+		Then notice message 'Capacidade Inválida'

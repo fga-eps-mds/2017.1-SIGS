@@ -17,6 +17,14 @@ And (/^I fill in 'name' with 'D'$/) do
   find(:css, "input[id$='school_room_name']").set("D")
 end
 
+And (/^I fill in 'capacity' with '50'$/) do
+	fill_in('school_room[capacity]', :with=> '50')
+end
+
+And (/^I fill in 'capacity' with '0'$/) do
+	fill_in('school_room[capacity]', :with=> '0')
+end
+
 And (/^I fill in 'name' with 'A'$/) do
 	fill_in('school_room[name]', :with=> 'A')
 end
@@ -33,10 +41,14 @@ Then (/^notice message 'Turma criada'$/) do
 	expect(page).to have_content('Turma criada')
 end
 
-Then (/^notice message 'Já existe uma turma com esse nome'$/) do
-	expect(page).to have_content('Já existe uma turma com esse nome')
+Then (/^notice message 'Turma com nome já cadastrado'$/) do
+	expect(page).to have_content('Turma com nome já cadastrado')
 end
 
 Then (/^notice message 'Indique o nome da turma'$/) do
 	expect(page).to have_content('Indique o nome da turma')
+end
+
+Then (/^notice message 'Capacidade Inválida'$/) do
+	expect(page).to have_content('Capacidade Inválida')
 end
