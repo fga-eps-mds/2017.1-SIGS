@@ -34,8 +34,8 @@
           <li><a href="minha_conta.html">Minha Conta</a></li>
           <li><a href="../index.html">Logout</a></li>
           <li class="dropdown">
-          <a data-toggle="collapse" href="#salas">Turmas
-            <ul class="collapse" id="salas">
+          <a data-toggle="collapse" href="#turmas">Turmas
+            <ul class="collapse" id="turmas">
               <li><a href="criar_turma.html">Nova Turma</a></li>
               <li><a href="visualizar_turmas.html">Meu Departamento</a></li>
             </ul>
@@ -47,14 +47,6 @@
                 <li><a href="categorias.html">Categorias</a></li>
               </ul>
             </li>
-          <li class="dropdown">
-            <a data-toggle="collapse" href="#salas">Salas
-              <ul class="collapse" id="salas">
-                <li><a href="salas.html">Meu Departamento</a></li>
-                <li><a href="#!">Buscar Salas</a></li>
-              </ul>
-            </a>
-          </li>
           <li class="dropdown">
             <a data-toggle="collapse" href="#demo">Usuários</a>
               <ul class="collapse" id="demo">
@@ -89,8 +81,10 @@
           <div class="short_input">
             <label>Nome</label>
             <input type="text" class="form-control">
+            <label>Capacidade</label>
+            <input type="number" class="form-control">
           </div>
-
+          <br>
           <p>Cursos Preferenciais</p>
           <div class="checkbox-group">
             <input type="checkbox">
@@ -101,6 +95,14 @@
             <label>Medicina</label>
             <input type="checkbox">
             <label>Design</label>
+          </div>
+          <br>
+          <p>Categorias</p>
+          <div class="checkbox-group">
+            <input type="checkbox">
+            <label>Retroprojetor</label>
+            <input type="checkbox">
+            <label>Laboratório Químico</label>
           </div>
 
           <input type="submit" value="Criar Turma" class="btn btn-default btn-success" />

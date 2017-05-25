@@ -34,10 +34,22 @@
         <ul class="nav navbar-nav">
           <li><a href="minha_conta.html">Minha Conta</a></li>
           <li><a href="../index.html">Logout</a></li>
-          <li><a href="turma.html">Turmas</a></li>
-          <li><a href="salas.html">Salas</a></li>
           <li class="dropdown">
-            <a data-toggle="collapse" href="#demo">Usuários
+          <a data-toggle="collapse" href="#turmas">Turmas
+            <ul class="collapse" id="turmas">
+              <li><a href="criar_turma.html">Nova Turma</a></li>
+              <li><a href="visualizar_turmas.html">Meu Departamento</a></li>
+            </ul>
+          </li>
+            <li class="dropdown">
+            <a data-toggle="collapse" href="#salas">Salas
+              <ul class="collapse" id="salas">
+                <li><a href="salas.html">Salas</a></li>
+                <li><a href="categorias.html">Categorias</a></li>
+              </ul>
+            </li>
+          <li class="dropdown">
+            <a data-toggle="collapse" href="#demo">Usuários</a>
               <ul class="collapse" id="demo">
                 <li><a href="cadastros_pendentes.html">Cadastros Pendentes</a></li>
                 <li><a href="usuarios_registrados.html">Usuários Cadastrados</a></li>

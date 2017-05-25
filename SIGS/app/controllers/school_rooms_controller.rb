@@ -13,23 +13,20 @@ class SchoolRoomsController < ApplicationController
   def create
     @school_room = SchoolRoom.new(school_rooms_params)
     @school_room.active = true
+    @school_room.name.upcase!
     @all_courses = Course.all
 
-    name = @school_room.name
-
-    if !SchoolRoom.find_by(name: name).nil?
-      flash_error_new_auxiliar('Já existe uma turma com esse nome')
-    elsif name == ''
-      flash_error_new_auxiliar('Indique o nome da turma')
-    elsif @school_room.save
+    if @school_room.save
       redirect_to school_rooms_index_path, flash: { success: 'Turma criada' }
     else
-      flash_error_new_auxiliar('Falha ao criar')
+      ocurred_errors(@school_room)
+      render :new
     end
   end
 
   def edit
     @school_room = SchoolRoom.find(params[:id])
+    @all_courses = Course.all
   end
 
   def show
@@ -37,22 +34,38 @@ class SchoolRoomsController < ApplicationController
   end
 
   def index
+    @my_school_rooms = filter_coordinator_school_rooms(current_user.id)
+  end
+
+  def filter_coordinator_school_rooms(user_id)
     @school_rooms = SchoolRoom.all
+    @filter_school_rooms = []
+    coordinator = Coordinator.find(user_id)
+    course = Course.find(coordinator.course_id)
+    department = Department.find(course.department_id)
+    @school_rooms.each do |school_room|
+      discipline = Discipline.find(school_room.discipline_id)
+      if discipline.department_id == department.id
+        @filter_school_rooms << school_room
+      end
+    end
+    @filter_school_rooms
   end
 
   def update
     @school_room = SchoolRoom.find(params[:id])
-    respond_to do |format|
-      if @school_room.update(school_rooms_params)
-        redirect_to school_rooms_index_path
-        flash[:success] = 'A turma foi alterada com sucesso'
-      else
-        format.html { render :edit, error: 'A turma não pode ser alterada' }
-      end
+    @all_courses = Course.all
+
+    if @school_room.update_attributes(school_rooms_params_update)
+      success_mesage = 'A turma foi alterada com sucesso'
+      redirect_to school_rooms_index_path, flash: { success: success_mesage }
+    else
+      ocurred_errors(@school_room)
+      render :edit
     end
   end
 
-  def destroy
+  def delete
     @school_room = SchoolRoom.find(params[:id])
     if !logged_in?
       @school_room.destroy
@@ -67,11 +80,21 @@ class SchoolRoomsController < ApplicationController
   private
 
   def school_rooms_params
-    params[:school_room].permit(:name, :discipline_id, course_ids: [], category_ids: [])
+    params[:school_room].permit(
+      :name,
+      :discipline_id,
+      :capacity,
+      course_ids: [],
+      category_ids: []
+    )
   end
 
-  def flash_error_new_auxiliar(mensage)
-    flash[:error] = mensage
-    render :new
+  def school_rooms_params_update
+    params[:school_room].permit(
+      :discipline_id,
+      :capacity,
+      course_ids: [],
+      category_ids: []
+    )
   end
 end

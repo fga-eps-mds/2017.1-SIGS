@@ -11,6 +11,7 @@
     <link rel="stylesheet" media="all" href="../assets/css/bootstrap.min.css" />
     <link rel="stylesheet" media="all" href="../assets/css/style.css" />
     <link rel="stylesheet" media="all" href="../assets/css/navbar.css" />
+    <link rel="stylesheet" media="all" href="../assets/css/form.css" />
     <script src="../assets/js/jquery-1.12.4.min.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../assets/js/main.js"></script>
@@ -69,16 +70,48 @@
         </figure>
       </header>
       <main class="mainConteiner">
-        <h1>Sala: Superior 10</h1>
-        <h2>Código: S10</h2>
-        <h2>Capacidade: 50</h2>
-        <h2>Ativo: Sim</h2>
-        <h2>Prédio: Pavilhão João Calmon</h2>
-        <h2>Categorias: </h2>
-          <ul>
-          <li><h3>Sala de informática</h3></li>
-          <li><h3>Ar condicionado</h3></li>
-          </ul>  
+        <h1>Alterar Turma</h1>
+        <form id="school_room">
+          <label>Disciplina</label>
+          <select>
+            <option>Cálculo 1</option>
+            <option>História da Arte</option>
+            <option>Matemática Discreta</option>
+            <option selected>Literatura</option>
+          </select>
+          <div class="short_input">
+            <label>Nome</label>
+            <input type="text" class="form-control" value="A" disabled="disabled">
+            <label>Capacidade</label>
+            <input type="number" class="form-control">
+          </div>
+
+          <p>Cursos</p>
+          <div class="checkbox-group">
+            <input type="checkbox">
+            <label>Engenharia de Software</label>
+            <input type="checkbox">
+            <label>Engenharia Eletrônica</label>
+            <input type="checkbox">
+            <label>Medicina</label>
+            <input type="checkbox">
+            <label>Design</label>
+            <input type="checkbox" checked>
+            <label>Letras</label>
+            <input type="checkbox" checked>
+            <label>Jornalismo</label>
+          </div>
+          <br>
+          <p>Categorias</p>
+          <div class="checkbox-group">
+            <input type="checkbox">
+            <label>Retroprojetor</label>
+            <input type="checkbox">
+            <label>Laboratório Químico</label>
+          </div>
+
+          <input type="submit" value="Alterar Turma" class="btn btn-default btn-success" />
+        </form>
       </main>
     </div>
   </body>

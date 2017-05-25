@@ -9,16 +9,18 @@
 # Departaments
 department = Department.create(code: '789', name: 'Engenharia')
 department_1 = Department.create(code: '781', name: 'PRC')
+department_2 = Department.create(code: '156', name: 'Artes')
 
 # Courses
 course = Course.create(code: '10', name: 'Engenharia de Software', department: department)
 course = Course.create(code: '12', name: 'Engenharia Eletrônica', department: department)
+course2 = Course.create(code: '09', name: 'Artes Visuais', department: department_2)
 
 # Users - Coordinator
 user_1 = User.create(name: 'Caio Filipe', email: 'caio@unb.br', cpf: '05012345678', registration: '1234567', active: true, password: '123456')
 coordinator = Coordinator.create(user: user_1, course: course)
 user_2 = User.create(name: 'João Busche', email: 'joao@unb.br', cpf: '05044448888', registration: '1234544', active: false, password: '123456')
-coordinator = Coordinator.create(user: user_2, course: course)
+coordinator = Coordinator.create(user: user_2, course: course2)
 
 # Users - DepartmentAssistant
 user_3 = User.create(name: 'João Pedro', email: 'pedro@unb.br', cpf: '05012349999', registration: '1234599', active: true, password: '123456')
@@ -52,8 +54,9 @@ discipline_2 = Discipline.create(code: '777', name: 'Cálculo 2', department_id:
 discipline_3 = Discipline.create(code: '773', name: 'Cálculo 1', department_id: 1)
 
 #SchoolRooms
-school_room = SchoolRoom.create(name:"A",active:true,discipline: discipline)
-school_room2 = SchoolRoom.create(name:"B",active:true,discipline: discipline)
+school_room = SchoolRoom.create(name:"A",active:true, capacity: 50, discipline: discipline)
+school_room2 = SchoolRoom.create(name:"B",active:true, capacity: 35, discipline: discipline)
+
 #Categoris
 category = Category.create(name: 'Retroprojetor')
 category = Category.create(name: 'Laboratório Químico')
