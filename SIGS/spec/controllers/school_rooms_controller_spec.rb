@@ -41,29 +41,48 @@ RSpec.describe SchoolRoomsController, type: :controller do
 
     it 'should create a new school room' do
       sign_in(@user)
-      post :create, params:{school_room: {name: 'AA', discipline_id: @discipline.id, course: @course.id}}
+      post :create, params:{school_room: {name: 'AA', capacity: 5, discipline_id: @discipline.id, course: @course.id}}
       expect(flash[:success]).to eq('Turma criada')
       expect(SchoolRoom.count).to be(1)
     end
 
     it 'should create school room with null name' do
       sign_in(@user)
-      post :create, params:{school_room: {name: '', discipline_id: @discipline.id, course: @course.id}}
+      post :create, params:{school_room: {name: '', capacity: 5, discipline_id: @discipline.id, course: @course.id}}
       expect(flash[:error]).to eq('Indique o nome da turma')
     end
 
     it 'should create school room with existent name' do
       sign_in(@user)
-      post :create, params:{school_room: {name: 'AA', discipline_id: @discipline.id, course: @course.id}}
-      post :create, params:{school_room: {name: 'AA', discipline_id: @discipline.id, course: @course.id}}
-      expect(flash[:error]).to eq('Já existe uma turma com esse nome')
+      post :create, params:{school_room: {name: 'AA',  capacity: 5, discipline_id: @discipline.id, course: @course.id}}
+      post :create, params:{school_room: {name: 'AA',  capacity: 5, discipline_id: @discipline.id, course: @course.id}}
+      expect(flash[:error]).to eq('Turma com nome já cadastrado')
     end
 
     it 'should create school room force to fail' do
       sign_in(@user)
-      post :create, params:{school_room: {name: 'AA', discipline_id: '', course: @course.id}}
+      post :create, params:{school_room: {name: 'AA',  capacity: 200, discipline_id: '', course: @course.id}}
       expect(flash[:error]).to eq('Falha ao criar')
     end
+
+    it 'should create school room with low capacity' do
+      sign_in(@user)
+      post :create, params:{school_room: {name: 'AA',  capacity: 4, discipline_id: '', course: @course.id}}
+      expect(flash[:error]).to eq('Capacidade Inválida')
+    end
+
+    it 'should create school room with high capacity' do
+      sign_in(@user)
+      post :create, params:{school_room: {name: 'AA',  capacity: 201, discipline_id: '', course: @course.id}}
+      expect(flash[:error]).to eq('Capacidade Inválida')
+    end
+
+    it 'should create school room with blank capacity' do
+      sign_in(@user)
+      post :create, params:{school_room: {name: 'AA', capacity: '', discipline_id: '', course: @course.id}}
+      expect(flash[:error]).to eq('Capacidade Inválida')
+    end
+
   end
 
 end
