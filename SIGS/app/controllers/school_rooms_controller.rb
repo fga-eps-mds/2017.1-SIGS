@@ -29,22 +29,6 @@ class SchoolRoomsController < ApplicationController
     end
   end
 
-  def validate_capacity_param
-    if @school_room.capacity.nil?
-      true
-    else
-      @school_room.capacity < 5 || @school_room.capacity > 200
-    end
-  end
-
-  def validate_duplicate_name_param
-    !SchoolRoom.find_by(name: @school_room.name).nil?
-  end
-
-  def validate_blank_name_param
-    @school_room.name.blank?
-  end
-
   def edit
     @school_room = SchoolRoom.find(params[:id])
   end
@@ -96,5 +80,21 @@ class SchoolRoomsController < ApplicationController
   def flash_error_new_auxiliar(mensage)
     flash[:error] = mensage
     render :new
+  end
+
+  def validate_capacity_param
+    if @school_room.capacity.nil?
+      true
+    else
+      @school_room.capacity < 5 || @school_room.capacity > 200
+    end
+  end
+
+  def validate_duplicate_name_param
+    !SchoolRoom.find_by(name: @school_room.name).nil?
+  end
+
+  def validate_blank_name_param
+    @school_room.name.blank?
   end
 end
