@@ -52,7 +52,7 @@ Rails.application.routes.draw do
   get 'school_rooms/new' => 'school_rooms#new', as: 'school_rooms_new'
   post 'school_rooms/create' => 'school_rooms#create'
   get 'school_rooms/edit/:id' => 'school_rooms#edit', as: 'school_rooms_edit'
-  patch 'school_rooms/update/:id' => 'school_rooms#update'
+  patch 'school_rooms/update/:id', controller: 'school_rooms', action: 'update', as: 'school_rooms_update'
   delete 'delete/:id' => 'school_rooms#delete', as: 'delete'
 
   # Parsers
