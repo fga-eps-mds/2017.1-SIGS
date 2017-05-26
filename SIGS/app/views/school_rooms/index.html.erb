@@ -1,7 +1,6 @@
-<%= link_to 'Criar Turma', school_rooms_new_path, class: ' pull-right btn btn-default btn-primary btn-lg' %>
-<h2>Suas Turmas</h2>
+<%= link_to 'Criar Turma', school_rooms_new_path, class: ' pull-right btn btn-default btn-success btn-lg' %>
+<h1>Suas Turmas</h1>
 
-<br> <br>
 <%= form_for(:current_search, url: search_disciplines_path) do |f|%>
 
   <div class="search-elements">
@@ -13,7 +12,6 @@
     <% end %>
   </div>
 <% end %>
-</br>
 
 <% if @my_school_rooms.count == 0 %>
   <h3>Não há turmas cadastradas no momento.</h3>
@@ -21,9 +19,9 @@
   <table class="table table-hover">
     <tr>
       <th>Nome</th>
-      <th>Ativo</th>
       <th>Disciplina</th>
       <th>Cursos</th>
+      <th>Capacidade</th>
       <th style="text-align:center">Alterar</th>
       <th style="text-align:center">Visualizar</th>
       <th style="text-align:center">Excluir</th>
@@ -31,19 +29,17 @@
     <% @my_school_rooms.each do |school_room| %>
       <tr>
         <td><%= school_room.name %></td>
-        <td><%= raw ((school_room.active) ? '<i class="fa fa-check-circle fa-lg"></i>' : '<i class="fa fa-times-circle fa-lg"></i>')  %></td>
         <td><%= school_room.discipline.name %></td>
         <td>
           <% school_room.course.each do |course| %>
             <%= course.name %> <br>
           <% end %>
+        <td><%= school_room.capacity %></td>
         </td>
         <td style="text-align:center"><%= link_to image_tag("icon_edit.png"), school_rooms_edit_path(school_room.id) %></td>
         <td style="text-align:center"><%= link_to image_tag("icon_view.png", id: 'icon_visualizar'+school_room.name), school_rooms_show_path(school_room.id) %></td>
         <td style="text-align:center">
-					<%= link_to delete_path(school_room.id), method: "delete", data: {confirm: "Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?"} do %>
-  			    <i class="fa fa-trash fa-lg"></i>
-  			  <% end %>
+					<%= link_to image_tag("icon_trash.png"), delete_path(school_room.id), method: "delete", data: {confirm: "Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?"} %>
         </td>
       </tr>
     <% end %>
