@@ -140,11 +140,10 @@ ActiveRecord::Schema.define(version: 20170521022908) do
 
   create_table "school_rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
-    t.boolean  "active"
-    t.integer  "students_amount"
+    t.integer  "capacity"
     t.integer  "discipline_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.index ["discipline_id"], name: "index_school_rooms_on_discipline_id", using: :btree
   end
 
