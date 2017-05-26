@@ -45,12 +45,20 @@ And (/^I check 'Engenharia Eletronica'$/) do
    find(:css, "#school_room_course_ids_2").set(true)
 end
 
+And (/^I check 'Engenharia Automotiva'$/) do
+   find(:css, "#school_room_course_ids_3").set(true)
+end
+
 Then (/^notice message 'Turma criada'$/) do
 	expect(page).to have_content('Turma criada')
 end
 
 Then (/^notice message 'Turma com nome já cadastrado'$/) do
 	expect(page).to have_content('Turma com nome já cadastrado')
+end
+
+Then (/^notice message 'Cursos devem ser do mesmo período'$/) do
+	expect(page).to have_content('Cursos devem ser do mesmo período')
 end
 
 Then (/^notice message 'Turma não pode ser vazia'$/) do

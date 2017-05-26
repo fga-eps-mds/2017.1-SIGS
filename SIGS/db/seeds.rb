@@ -14,7 +14,7 @@ department_2 = Department.create(code: '156', name: 'Artes')
 # Courses
 course = Course.create(code: '10', name: 'Engenharia de Software', department: department, shift: 1)
 course = Course.create(code: '12', name: 'Engenharia Eletrônica', department: department, shift: 1)
-course1 = Course.create(code: '12', name: 'Engenharia Automotiva', department: department, shift: 2)
+course1 = Course.create(code: '15', name: 'Engenharia Automotiva', department: department, shift: 2)
 course2 = Course.create(code: '09', name: 'Artes Visuais', department: department_2, shift: 1)
 
 # Users - Coordinator
@@ -55,8 +55,8 @@ discipline_2 = Discipline.create(code: '777', name: 'Cálculo 2', department_id:
 discipline_3 = Discipline.create(code: '773', name: 'Cálculo 1', department_id: 1)
 
 #SchoolRooms
-school_room = SchoolRoom.create(name:"A",active:true, capacity: 50, discipline: discipline)
-school_room2 = SchoolRoom.create(name:"B",active:true, capacity: 35, discipline: discipline)
+school_room = SchoolRoom.create(name:"A",active:true, capacity: 50, discipline: discipline, course_ids: [course.id, course2.id])
+school_room2 = SchoolRoom.create(name:"B",active:true, capacity: 35, discipline: discipline, course_ids: [course1.id])
 
 #Categoris
 category = Category.create(name: 'Retroprojetor')

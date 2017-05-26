@@ -15,6 +15,7 @@ class SchoolRoom < ApplicationRecord
   validates_presence_of :name, message: 'Turma não pode ser vazia'
   validates_presence_of :capacity, message: 'Capacidade não pode ser vazia'
   validates_presence_of :discipline, message: 'Disciplina não pode ser vazia'
+  validates_presence_of :course, message: 'Turma deve haver pelo menos um curso'
 
   validates_numericality_of :capacity,
                             greater_than_or_equal_to: 5,
@@ -27,16 +28,16 @@ class SchoolRoom < ApplicationRecord
 
   def validate_courses
     response = ''
-    
-    if(!course.nil?)
+    unless course.size.zero?
       response = course[0].shift
-    end
 
-    course.each do |_course|
-      if _course.shift != response
-        errors.add(:course, "Cursos devem ser do mesmo período")
-        break
+      course.each do |course_of_school_room|
+        if course_of_school_room.shift != response
+          errors.add(:course, 'Cursos devem ser do mesmo período')
+          break
+        end
       end
     end
+    response
   end
 end
