@@ -17,6 +17,22 @@ And (/^I fill in 'name' with 'D'$/) do
   find(:css, "input[id$='school_room_name']").set("D")
 end
 
+And (/^I fill in 'capacity' with '50'$/) do
+	fill_in('school_room[capacity]', :with=> '50')
+end
+
+And (/^I fill in 'capacity' with null$/) do
+	fill_in('school_room[capacity]', :with=> '')
+end
+
+And (/^I fill in 'capacity' with '1'$/) do
+	fill_in('school_room[capacity]', :with=> '1')
+end
+
+And (/^I fill in 'capacity' with '800'$/) do
+	fill_in('school_room[capacity]', :with=> '800')
+end
+
 And (/^I fill in 'name' with 'A'$/) do
 	fill_in('school_room[name]', :with=> 'A')
 end
@@ -33,10 +49,22 @@ Then (/^notice message 'Turma criada'$/) do
 	expect(page).to have_content('Turma criada')
 end
 
-Then (/^notice message 'Já existe uma turma com esse nome'$/) do
-	expect(page).to have_content('Já existe uma turma com esse nome')
+Then (/^notice message 'Turma com nome já cadastrado'$/) do
+	expect(page).to have_content('Turma com nome já cadastrado')
 end
 
-Then (/^notice message 'Indique o nome da turma'$/) do
-	expect(page).to have_content('Indique o nome da turma')
+Then (/^notice message 'Turma não pode ser vazia'$/) do
+	expect(page).to have_content('Turma não pode ser vazia')
+end
+
+Then (/^notice message 'Capacidade não pode ser vazia'$/) do
+	expect(page).to have_content('Capacidade não pode ser vazia')
+end
+
+Then (/^notice message 'A capacidade mínima é 5 vagas'$/) do
+	expect(page).to have_content('A capacidade mínima é 5 vagas')
+end
+
+Then (/^notice message 'A capacidade máxima é 500 vagas'$/) do
+	expect(page).to have_content('A capacidade máxima é 500 vagas')
 end

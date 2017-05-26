@@ -25,8 +25,7 @@
         <td><%= school_room.capacity %></td>
         <td style="text-align:center"><%= link_to image_tag("icon_edit.png"), school_rooms_edit_path(school_room.id) %></td>
         <td style="text-align:center"><%= link_to image_tag("icon_view.png", id: 'icon_visualizar'+school_room.name), school_rooms_show_path(school_room.id) %></td>
-        <td style="text-align:center">
-          <%= link_to image_tag("icon_trash.png"), delete_path(school_room.id), method: "delete", data: {confirm: "Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?"} %>
+				<td style="text-align:center"><%= link_to image_tag("icon_trash.png"), destroy_school_room_path(school_room.id), data: {confirm: "Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?"} %></td>
         </td>
       </tr>
     <% end %>

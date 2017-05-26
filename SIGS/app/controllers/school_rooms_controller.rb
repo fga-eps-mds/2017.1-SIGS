@@ -12,18 +12,15 @@ class SchoolRoomsController < ApplicationController
 
   def create
     @school_room = SchoolRoom.new(school_rooms_params)
+    @school_room.active = true
+    @school_room.name.upcase!
     @all_courses = Course.all
 
-    name = @school_room.name
-
-    if !SchoolRoom.find_by(name: name).nil?
-      flash_error_new_auxiliar('Já existe uma turma com esse nome')
-    elsif name == ''
-      flash_error_new_auxiliar('Indique o nome da turma')
-    elsif @school_room.save
+    if @school_room.save
       redirect_to school_rooms_index_path, flash: { success: 'Turma criada' }
     else
-      flash_error_new_auxiliar('Falha ao criar')
+      ocurred_errors(@school_room)
+      render :new
     end
   end
 
@@ -56,10 +53,10 @@ class SchoolRoomsController < ApplicationController
   end
 
   def search_disciplines
-    @search_param = params[:current_search][:search]
-    @disciplines = discipline_of_department(user_department_id).where("name LIKE :search", 
-    :search => "%#{params[:current_search][:search]}%")
     search_attribute = params[:current_search][:search]
+    @disciplines = discipline_of_department(user_department_id).where(
+      'name LIKE :search', search: "%#{search_attribute}%"
+    )
 
     @school_rooms = school_rooms_of_disciplines(@disciplines)
   end
@@ -72,35 +69,54 @@ class SchoolRoomsController < ApplicationController
       success_mesage = 'A turma foi alterada com sucesso'
       redirect_to school_rooms_index_path, flash: { success: success_mesage }
     else
-      flash[:error] = 'A turma não pode ser alterada'
+      ocurred_errors(@school_room)
       render :edit
     end
   end
 
-  def delete
+  def destroy
     @school_room = SchoolRoom.find(params[:id])
-    if !logged_in?
+    coordinator = Coordinator.find_by(user_id: current_user.id)
+
+    if permission[:level] == 1 &&
+       coordinator.course.department == @school_room.discipline.department
       @school_room.destroy
-      redirect_to school_rooms_index_path
       flash[:success] = 'A turma foi excluída com sucesso'
     else
-      redirect_to sign_in_path
-      flash[:error] = 'Você não permissão para excluir essa turma'
+      flash[:error] = 'Permissão negada'
     end
+    redirect_to school_rooms_index_path
   end
 
   private
 
   def school_rooms_params
-    params[:school_room].permit(:name, :discipline_id, course_ids: [], category_ids: [])
+    params[:school_room].permit(
+      :name,
+      :discipline_id,
+      :capacity,
+      course_ids: [],
+      category_ids: []
+    )
   end
 
   def school_rooms_params_update
-    params[:school_room].permit(:discipline_id, course_ids: [], category_ids: [])
+    params[:school_room].permit(
+      :discipline_id,
+      :capacity,
+      course_ids: [],
+      category_ids: []
+    )
   end
 
-  def flash_error_new_auxiliar(mensage)
-    flash[:error] = mensage
-    render :new
+  def school_rooms_of_disciplines(disciplines)
+    school_rooms = []
+    disciplines.each do |discipline|
+      school_rooms_sort = SchoolRoom.where(discipline_id: discipline.id)
+      school_rooms_sort.each do |school_room|
+        school_rooms << school_room
+      end
+    end
+    school_rooms
   end
 end
