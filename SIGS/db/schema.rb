@@ -133,17 +133,18 @@ ActiveRecord::Schema.define(version: 20170524205851) do
     t.integer  "capacity"
     t.boolean  "active"
     t.integer  "time_grid_id"
+    t.integer  "actual_capacity"
     t.integer  "department_id"
     t.integer  "building_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.index ["building_id"], name: "index_rooms_on_building_id", using: :btree
     t.index ["department_id"], name: "index_rooms_on_department_id", using: :btree
   end
 
   create_table "school_rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
-    t.integer  "capacity"
+    t.integer  "vacancies"
     t.integer  "discipline_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false

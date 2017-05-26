@@ -14,27 +14,27 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2017-06-03T14:52:23+00:00">2017-06-03T14:52:23+00:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2017-06-03T15:25:53+00:00">2017-06-03T15:25:53+00:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="green">98.4%</span></span>
+    (<span class="covered_percent"><span class="green">95.37%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         2.32
+         2.24
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>66</b> files in total.
-    <b>999</b> relevant lines. 
-    <span class="green"><b>983</b> lines covered</span> and
-    <span class="red"><b>16</b> lines missed </span>
+    <b>1037</b> relevant lines. 
+    <span class="green"><b>989</b> lines covered</span> and
+    <span class="red"><b>48</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -62,12 +62,12 @@
       
       <tr>
         <td class="strong"><a href="#29ed6f5ed32de67d7d9ce215d9c4b27b2bba130c" class="src_link" title="app/controllers/allocations_controller.rb">app/controllers/allocations_controller.rb</a></td>
-        <td class="red strong">44.44 %</td>
-        <td>33</td>
-        <td>18</td>
-        <td>8</td>
-        <td>10</td>
-        <td>0.4</td>
+        <td class="red strong">25.0 %</td>
+        <td>105</td>
+        <td>56</td>
+        <td>14</td>
+        <td>42</td>
+        <td>0.3</td>
       </tr>
       
       <tr>
@@ -113,7 +113,7 @@
       <tr>
         <td class="strong"><a href="#51cb3d2d7d0d6be7c1c08a7400c7c69eee32a5ee" class="src_link" title="app/controllers/rooms_controller.rb">app/controllers/rooms_controller.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>62</td>
+        <td>63</td>
         <td>29</td>
         <td>29</td>
         <td>0</td>
@@ -963,11 +963,11 @@
         <div class="source_table" id="29ed6f5ed32de67d7d9ce215d9c4b27b2bba130c">
   <div class="header">
     <h3>app/controllers/allocations_controller.rb</h3>
-    <h4><span class="red">44.44 %</span> covered</h4>
+    <h4><span class="red">25.0 %</span> covered</h4>
     <div>
-      <b>18</b> relevant lines. 
-      <span class="green"><b>8</b> lines covered</span> and
-      <span class="red"><b>10</b> lines missed.</span>
+      <b>56</b> relevant lines. 
+      <span class="green"><b>14</b> lines covered</span> and
+      <span class="red"><b>42</b> lines missed.</span>
     </div>
   </div>
   
@@ -1079,67 +1079,67 @@
         <li class="covered" data-hits="1" data-linenumber="18">
           <span class="hits">1</span>
           
-          <code class="ruby">  def create</code>
+          <code class="ruby">  def same_schedule_and_diferent_school_room(allocation, allocation_day_of_room)</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="19">
           
           
-          <code class="ruby">    @allocation = Allocation.new(allocation_params)</code>
+          <code class="ruby">    allocation_day_of_room.each do |allocation_day_room|</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="20">
           
           
-          <code class="ruby">    @allocation.user_id = current_user.id</code>
+          <code class="ruby">      discipline = allocation.school_room.discipline</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="21">
           
           
-          <code class="ruby">    if @allocation.save</code>
+          <code class="ruby">      vacancies = allocation.school_room.vacancies</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="22">
+        <li class="never" data-hits="" data-linenumber="22">
           
           
-          <code class="ruby">      flash[:sucess] = &#39;Alocação feita com sucesso&#39;</code>
+          <code class="ruby">      if allocation_same_schedule(allocation, allocation_day_room) &amp;&amp;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="23">
+        <li class="missed" data-hits="0" data-linenumber="23">
           
           
-          <code class="ruby">    else</code>
+          <code class="ruby">         discipline == allocation_day_room.school_room.discipline &amp;&amp;</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="24">
+        <li class="never" data-hits="" data-linenumber="24">
           
           
-          <code class="ruby">      flash[:error] = &#39;Alocação não realizada&#39;</code>
+          <code class="ruby">         vacancies &gt; allocation_day_room.room.actual_capacity</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="25">
+        <li class="missed" data-hits="0" data-linenumber="25">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">        return true</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="26">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">      end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="27">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="28">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="28">
           
-          <code class="ruby">  private</code>
+          
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="29">
@@ -1151,22 +1151,454 @@
         <li class="covered" data-hits="1" data-linenumber="30">
           <span class="hits">1</span>
           
-          <code class="ruby">  def allocation_params</code>
+          <code class="ruby">  def time_invalid(allocation)</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="31">
           
           
-          <code class="ruby">    params[:allocation].permit(:room_id, :school_room_id)</code>
+          <code class="ruby">    start = convert_start_time_to_i allocation</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="32">
+        <li class="missed" data-hits="0" data-linenumber="32">
+          
+          
+          <code class="ruby">    final = convert_final_time_to_i allocation</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="33">
+          
+          
+          <code class="ruby">    shift = allocation.school_room.courses.first.shift</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="34">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="35">
+          
+          
+          <code class="ruby">    (((start - final) * -1 &lt; 1) ||</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="36">
+          
+          
+          <code class="ruby">      ((start - final) * -1 &gt; 3)) ||</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="37">
+          
+          
+          <code class="ruby">      ((shift == 1 &amp;&amp; final &gt; 18) ||</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="38">
+          
+          
+          <code class="ruby">      (shift == 2 &amp;&amp; start &lt; 18))</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="39">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="33">
+        <li class="never" data-hits="" data-linenumber="40">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="41">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def allocation_same_schedule(allocation, allocation_day_room)</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="42">
+          
+          
+          <code class="ruby">    start_time = convert_start_time_to_i allocation</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="43">
+          
+          
+          <code class="ruby">    final_time = convert_final_time_to_i allocation</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="44">
+          
+          
+          <code class="ruby">    start_day_room = convert_start_time_to_i allocation_day_room</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="45">
+          
+          
+          <code class="ruby">    final_day_room = convert_start_time_to_i allocation_day_room</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="46">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="47">
+          
+          
+          <code class="ruby">    (start_time &gt;= start_day_room &amp;&amp;</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="48">
+          
+          
+          <code class="ruby">      start_time &lt;= final_day_room) ||</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="49">
+          
+          
+          <code class="ruby">      (final_time &gt;= start_day_room &amp;&amp;</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="50">
+          
+          
+          <code class="ruby">      final_time &lt;= final_day_room)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="51">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="52">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="53">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def create</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="54">
+          
+          
+          <code class="ruby">    @allocation = Allocation.new(allocation_params)</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="55">
+          
+          
+          <code class="ruby">    @allocation.user_id = current_user.id</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="56">
+          
+          
+          <code class="ruby">    @allocations_of_day_and_room = Allocation.where(</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="57">
+          
+          
+          <code class="ruby">      day: @allocation.day,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="58">
+          
+          
+          <code class="ruby">      room_id: @allocation.room_id</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="59">
+          
+          
+          <code class="ruby">    )</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="60">
+          
+          
+          <code class="ruby">    return unless validate_alocation</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="61">
+          
+          
+          <code class="ruby">    @allocation.room.actual_capacity -= @allocation.school_room.vacancies</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="62">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="63">
+          
+          
+          <code class="ruby">    if @allocation.save</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="64">
+          
+          
+          <code class="ruby">      flash[:sucess] = &#39;Alocação feita com sucesso&#39;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="65">
+          
+          
+          <code class="ruby">    else</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="66">
+          
+          
+          <code class="ruby">      flash[:error] = &#39;Alocação não realizada&#39;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="67">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="68">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="69">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="70">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  private</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="71">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="72">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def validate_alocation</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="73">
+          
+          
+          <code class="ruby">    if time_invalid(@allocation)</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="74">
+          
+          
+          <code class="ruby">      flash[:error] = &#39;Horário inválido&#39;</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="75">
+          
+          
+          <code class="ruby">      return false</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="76">
+          
+          
+          <code class="ruby">    else</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="77">
+          
+          
+          <code class="ruby">      @allocations_of_day_and_room.each do |allocation_day_room|</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="78">
+          
+          
+          <code class="ruby">        @no_save = allocation_same_schedule(@allocation, allocation_day_room)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="79">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="80">
+          
+          
+          <code class="ruby">      if @no_save &amp;&amp;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="81">
+          
+          
+          <code class="ruby">         same_schedule_and_diferent_school_room(@allocation,</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="82">
+          
+          
+          <code class="ruby">                                                @allocations_of_day_and_room)</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="83">
+          
+          
+          <code class="ruby">        flash[:error] = &#39;Alocação com horário não vago&#39;</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="84">
+          
+          
+          <code class="ruby">        return false</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="85">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="86">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="87">
+          
+          
+          <code class="ruby">    true</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="88">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="89">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="90">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def allocation_params</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="91">
+          
+          
+          <code class="ruby">    params[:allocation].permit(:room_id,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="92">
+          
+          
+          <code class="ruby">                               :school_room_id,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="93">
+          
+          
+          <code class="ruby">                               :day,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="94">
+          
+          
+          <code class="ruby">                               :start_time,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="95">
+          
+          
+          <code class="ruby">                               :final_time)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="96">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="97">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="98">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def convert_start_time_to_i(allocation)</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="99">
+          
+          
+          <code class="ruby">    allocation.start_time.strftime(&#39;%H&#39;).to_i</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="100">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="101">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="102">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def convert_final_time_to_i(allocation)</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="103">
+          
+          
+          <code class="ruby">    allocation.final_time.strftime(&#39;%H&#39;).to_i</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="104">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="105">
           
           
           <code class="ruby">end</code>
@@ -2177,40 +2609,46 @@
         <li class="never" data-hits="" data-linenumber="56">
           
           
-          <code class="ruby">      :active,</code>
+          <code class="ruby">      :actual_capacity,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="57">
           
           
-          <code class="ruby">      :time_grid_id,</code>
+          <code class="ruby">      :active,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="58">
           
           
-          <code class="ruby">      :build_id,</code>
+          <code class="ruby">      :time_grid_id,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="59">
           
           
-          <code class="ruby">      category_ids: []</code>
+          <code class="ruby">      :build_id,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="60">
           
           
-          <code class="ruby">    )</code>
+          <code class="ruby">      category_ids: []</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="61">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">    )</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="62">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="63">
           
           
           <code class="ruby">end</code>
@@ -2729,7 +3167,7 @@
         <li class="never" data-hits="" data-linenumber="83">
           
           
-          <code class="ruby">      :capacity,</code>
+          <code class="ruby">      :vacancies,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="84">
@@ -2783,7 +3221,7 @@
         <li class="never" data-hits="" data-linenumber="92">
           
           
-          <code class="ruby">      :capacity,</code>
+          <code class="ruby">      :vacancies,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="93">
@@ -5927,7 +6365,7 @@
         <li class="covered" data-hits="1" data-linenumber="17">
           <span class="hits">1</span>
           
-          <code class="ruby">  validates_presence_of :capacity, message: &#39;Capacidade não pode ser vazia&#39;</code>
+          <code class="ruby">  validates_presence_of :vacancies, message: &#39;Capacidade não pode ser vazia&#39;</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="18">
@@ -5945,7 +6383,7 @@
         <li class="covered" data-hits="1" data-linenumber="20">
           <span class="hits">1</span>
           
-          <code class="ruby">  validates_numericality_of :capacity,</code>
+          <code class="ruby">  validates_numericality_of :vacancies,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="21">
@@ -5963,7 +6401,7 @@
         <li class="covered" data-hits="1" data-linenumber="23">
           <span class="hits">1</span>
           
-          <code class="ruby">  validates_numericality_of :capacity,</code>
+          <code class="ruby">  validates_numericality_of :vacancies,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="24">
@@ -10043,7 +10481,7 @@
         <li class="covered" data-hits="16" data-linenumber="18">
           <span class="hits">16</span>
           
-          <code class="ruby">      @school_room = SchoolRoom.create(name:&quot;YY&quot;, capacity: 50, discipline: @discipline1)</code>
+          <code class="ruby">      @school_room = SchoolRoom.create(name:&quot;YY&quot;, vacancies: 50, discipline: @discipline1)</code>
         </li>
       
         <li class="covered" data-hits="16" data-linenumber="19">
@@ -10193,7 +10631,7 @@
         <li class="covered" data-hits="1" data-linenumber="43">
           <span class="hits">1</span>
           
-          <code class="ruby">      post :create, params:{school_room: {name: &#39;AA&#39;, capacity: 5, discipline_id: @discipline1.id, course: @course.id}}</code>
+          <code class="ruby">      post :create, params:{school_room: {name: &#39;AA&#39;, vacancies: 5, discipline_id: @discipline1.id, course: @course.id}}</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="44">
@@ -10229,7 +10667,7 @@
         <li class="covered" data-hits="1" data-linenumber="49">
           <span class="hits">1</span>
           
-          <code class="ruby">      post :create, params:{school_room: {name: &#39;&#39;, capacity: 5, discipline_id: @discipline1.id, course: @course.id}}</code>
+          <code class="ruby">      post :create, params:{school_room: {name: &#39;&#39;, vacancies: 5, discipline_id: @discipline1.id, course: @course.id}}</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="50">
@@ -10259,13 +10697,13 @@
         <li class="covered" data-hits="1" data-linenumber="54">
           <span class="hits">1</span>
           
-          <code class="ruby">      post :create, params:{school_room: {name: &#39;AA&#39;,  capacity: 5, discipline_id: @discipline1.id, course: @course.id}}</code>
+          <code class="ruby">      post :create, params:{school_room: {name: &#39;AA&#39;,  vacancies: 5, discipline_id: @discipline1.id, course: @course.id}}</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="55">
           <span class="hits">1</span>
           
-          <code class="ruby">      post :create, params:{school_room: {name: &#39;AA&#39;,  capacity: 5, discipline_id: @discipline1.id, course: @course.id}}</code>
+          <code class="ruby">      post :create, params:{school_room: {name: &#39;AA&#39;,  vacancies: 5, discipline_id: @discipline1.id, course: @course.id}}</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="56">
@@ -10295,7 +10733,7 @@
         <li class="covered" data-hits="1" data-linenumber="60">
           <span class="hits">1</span>
           
-          <code class="ruby">      post :create, params:{school_room: {name: &#39;AA&#39;,  capacity: 200, discipline: &#39;&#39;, course: @course.id}}</code>
+          <code class="ruby">      post :create, params:{school_room: {name: &#39;AA&#39;,  vacancies: 200, discipline: &#39;&#39;, course: @course.id}}</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="61">
@@ -10319,13 +10757,13 @@
         <li class="covered" data-hits="1" data-linenumber="64">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &#39;not should create school room with low capacity&#39; do</code>
+          <code class="ruby">    it &#39;not should create school room with low vacancies&#39; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="65">
           <span class="hits">1</span>
           
-          <code class="ruby">      post :create, params:{school_room: {name: &#39;AA&#39;,  capacity: 4, discipline: @discipline2, course: @course.id}}</code>
+          <code class="ruby">      post :create, params:{school_room: {name: &#39;AA&#39;,  vacancies: 4, discipline: @discipline2, course: @course.id}}</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="66">
@@ -10349,13 +10787,13 @@
         <li class="covered" data-hits="1" data-linenumber="69">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &#39;not should create school room with high capacity&#39; do</code>
+          <code class="ruby">    it &#39;not should create school room with high vacancies&#39; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="70">
           <span class="hits">1</span>
           
-          <code class="ruby">      post :create, params:{school_room: {name: &#39;AA&#39;,  capacity: 800, discipline: Discipline.last, course: @course.id}}</code>
+          <code class="ruby">      post :create, params:{school_room: {name: &#39;AA&#39;,  vacancies: 800, discipline: Discipline.last, course: @course.id}}</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="71">
@@ -10379,13 +10817,13 @@
         <li class="covered" data-hits="1" data-linenumber="74">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &#39;not should create school room with blank capacity&#39; do</code>
+          <code class="ruby">    it &#39;not should create school room with blank vacancies&#39; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="75">
           <span class="hits">1</span>
           
-          <code class="ruby">      post :create, params:{school_room: {name: &#39;AA&#39;, capacity: &#39;&#39;, discipline: @discipline2, course: @course.id}}</code>
+          <code class="ruby">      post :create, params:{school_room: {name: &#39;AA&#39;, vacancies: &#39;&#39;, discipline: @discipline2, course: @course.id}}</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="76">
@@ -10415,7 +10853,7 @@
         <li class="covered" data-hits="1" data-linenumber="80">
           <span class="hits">1</span>
           
-          <code class="ruby">      school_room = SchoolRoom.create(name: &#39;AA&#39;,capacity: 50, discipline_id: @discipline1.id)</code>
+          <code class="ruby">      school_room = SchoolRoom.create(name: &#39;AA&#39;,vacancies: 50, discipline_id: @discipline1.id)</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="81">
@@ -10451,7 +10889,7 @@
         <li class="covered" data-hits="1" data-linenumber="86">
           <span class="hits">1</span>
           
-          <code class="ruby">      school_room = SchoolRoom.create(name: &#39;AA&#39;,capacity: 50, discipline_id: @discipline1.id)</code>
+          <code class="ruby">      school_room = SchoolRoom.create(name: &#39;AA&#39;,vacancies: 50, discipline_id: @discipline1.id)</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="87">
@@ -10487,7 +10925,7 @@
         <li class="covered" data-hits="1" data-linenumber="92">
           <span class="hits">1</span>
           
-          <code class="ruby">      school_room = SchoolRoom.create(name: &#39;AA&#39;,capacity: 50, discipline_id: @discipline1.id)</code>
+          <code class="ruby">      school_room = SchoolRoom.create(name: &#39;AA&#39;,vacancies: 50, discipline_id: @discipline1.id)</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="93">
@@ -10523,7 +10961,7 @@
         <li class="covered" data-hits="1" data-linenumber="98">
           <span class="hits">1</span>
           
-          <code class="ruby">      school_room = SchoolRoom.create(name: &#39;AA&#39;,capacity: 50, discipline_id: @discipline1.id)</code>
+          <code class="ruby">      school_room = SchoolRoom.create(name: &#39;AA&#39;,vacancies: 50, discipline_id: @discipline1.id)</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="99">
@@ -10559,7 +10997,7 @@
         <li class="covered" data-hits="1" data-linenumber="104">
           <span class="hits">1</span>
           
-          <code class="ruby">      school_room = SchoolRoom.create(name: &#39;AA&#39;,capacity: 50, discipline_id: @discipline3.id)</code>
+          <code class="ruby">      school_room = SchoolRoom.create(name: &#39;AA&#39;,vacancies: 50, discipline_id: @discipline3.id)</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="105">
