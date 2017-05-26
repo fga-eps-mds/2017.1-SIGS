@@ -5,7 +5,7 @@
 <div class="container-search-form">
   <%= form_for(:current_search, url: search_disciplines_path) do |f|%>
 
-    <%= f.text_field :search, placeholder: "Buscar Disciplinas", id: 'input-search-field', class: 'input-search', data: {autocomplete_source: discipline_of_department(user_department_id).order(:name).map(&:name)} %> 
+    <%= f.text_field :search, placeholder: "Buscar por disciplinas", id: 'input-search-field', class: 'input-search', data: {autocomplete_source: discipline_of_department(user_department_id).order(:name).map(&:name)} %> 
 
       <%= f.submit "Search" %> 
 

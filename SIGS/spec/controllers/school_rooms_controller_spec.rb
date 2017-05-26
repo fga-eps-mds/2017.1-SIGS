@@ -13,6 +13,7 @@ RSpec.describe SchoolRoomsController, type: :controller do
       @discipline1 = Discipline.create(name: 'Anãlise Combinatória', code: '123', department: @department)
       @discipline2 = Discipline.create(name: 'Fisica 1', code: '193', department: @department)
       @coordinator = Coordinator.create(user: @user, course: @course)
+      @school_room = SchoolRoom.create(name:"YY", active:true, discipline: @discipline1)
     end
 
     it 'should return new' do
@@ -25,7 +26,7 @@ RSpec.describe SchoolRoomsController, type: :controller do
       sign_in(@user)
       post :create, params:{school_room: {name: 'AA', discipline_id: @discipline1.id, course: @course.id}}
       expect(flash[:success]).to eq('Turma criada')
-      expect(SchoolRoom.count).to be(1)
+      expect(SchoolRoom.count).to be(2)
     end
 
     it 'should create school room with null name' do
@@ -67,6 +68,19 @@ RSpec.describe SchoolRoomsController, type: :controller do
       school_room = SchoolRoom.create(name: 'AA',students_amount: 50, discipline_id: @discipline1.id)
       get :update, params:{id: school_room.id, school_room:{discipline_id: nil}}
       expect(flash[:error]).to eq('A turma não pode ser alterada')
-    end  
+    end 
+
+    it 'should get index view' do
+      sign_in(@user)
+      get :index
+      expect(response).to have_http_status(200)
+    end
+
+    it 'should get index view' do
+      sign_in(@user)
+      get :show, params:{id: @school_room.id}
+      expect(response).to have_http_status(200)
+    end
+
   end
 end
