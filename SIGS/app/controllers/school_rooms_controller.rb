@@ -18,6 +18,10 @@ class SchoolRoomsController < ApplicationController
   end
 
   def school_rooms_params
-    params[:school_room].permit(:name, :discipline_id, course_ids: [], category_ids: [])
+    params[:school_room].permit(:name,
+                                :discipline_id,
+                                :vacancies,
+                                course_ids: [],
+                                category_ids: [])
   end
 end

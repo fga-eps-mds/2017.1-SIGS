@@ -10,9 +10,9 @@
 department = Department.create(code: '789', name: 'Engenharia')
 
 # Courses
-course = Course.create(code: '10', name: 'Engenharia de Software', department: department)
-course = Course.create(code: '12', name: 'Engenharia Eletrônica', department: department)
-
+course = Course.create(code: '10', name: 'Engenharia de Software', department: department, shift: 1)
+course = Course.create(code: '12', name: 'Engenharia Eletrônica', department: department, shift: 1)
+course1 = Course.create(code: '12', name: 'Engenharia Automotiva', department: department, shift: 2)
 
 # Users - Coordinator
 user_1 = User.create(name: 'Caio Filipe', email: 'caio@unb.br', cpf: '05012345678', registration: '1234567', active: true, password: '123456')
@@ -41,16 +41,16 @@ buildings = Building.create([
   ])
 
 # Rooms
-room_1 = Room.create(code: '124325', name: 'S10', capacity: 50, active: true, time_grid_id: 1, building_id: 1, department: department)
-room_2 = Room.create(code: '987653', name: 'SS', capacity: 40, active: false, time_grid_id: 2, building_id: 2, department: department)
+room_1 = Room.create(code: '124325', name: 'S10', capacity: 50, actual_capacity: 50, active: true, time_grid_id: 1, building_id: 1, department: department)
+room_2 = Room.create(code: '987653', name: 'SS', capacity: 40, actual_capacity: 40, active: false, time_grid_id: 2, building_id: 2, department: department)
 
 # Disciplines
 discipline = Discipline.create(code: '876', name: 'Cálculo 3', department_id: 1)
 discipline_2 = Discipline.create(code: '777', name: 'Cálculo 2', department_id: 1)
 
 #SchoolRooms
-school_room = SchoolRoom.create(name:"A",active:true,discipline: discipline, course_ids: [course.id])
-school_room2 = SchoolRoom.create(name:"B",active:true,discipline: discipline, course_ids: [course.id])
+school_room_1 = SchoolRoom.create(name:'A', active:true, discipline: discipline, vacancies: 40, course_ids: [course.id])
+school_room_2 = SchoolRoom.create(name:'B', active:true, discipline: discipline, vacancies: 60, course_ids: [course1.id])
 
 
 #Categoris
