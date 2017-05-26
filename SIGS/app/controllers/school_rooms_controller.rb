@@ -12,8 +12,6 @@ class SchoolRoomsController < ApplicationController
 
   def create
     @school_room = SchoolRoom.new(school_rooms_params)
-    @school_room.active = true
-
     @all_courses = Course.all
 
     name = @school_room.name
