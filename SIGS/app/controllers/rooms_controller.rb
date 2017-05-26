@@ -7,6 +7,31 @@ class RoomsController < ApplicationController
   def index
     @rooms = Room.all
 
+    if params[:name].present? || params[:code].present? || params[:capacity].present?
+      filter_by_name_and_code
+      filter_by_capacity
+    else
+      @rooms = Room.all
+    end
+  end
+
+  # def filter_by_capacity
+  #   if params[:capacity].present?
+  #     @rooms = @rooms.where(:capacity => params[:capacity].to_s)
+  #   else
+  #     @rooms
+  #   end
+  # end
+
+  def filter_by_capacity
+    if params[:capacity].present?
+      @rooms = @rooms.where(capacity: params[:capacity].to_s)
+    else
+      @rooms
+    end
+  end
+
+  def filter_by_name_and_code
     if params[:name].present? || params[:code].present?
       @rooms.columns.each do |attr|
         if params[:"#{attr.name}"].present?
@@ -14,7 +39,7 @@ class RoomsController < ApplicationController
         end
       end
     else
-      @rooms = Room.all
+      @rooms
     end
   end
 
