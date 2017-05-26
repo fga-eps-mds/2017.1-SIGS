@@ -1,28 +1,28 @@
-<h2>Nova Turma</h2>
-
-<%= form_for @school_room, url: school_rooms_create_path do |school_room| %>
+<h2>Editar Turma</h2>
+<%= form_for(@school_room, url: {action: "update"}) do |school_room| %>
 
   <label>Disciplina </label>
   <%= school_room.select :discipline_id, get_disciplines(current_user).collect {|d| [d.name, d.id] }%>
 
   <div class="short_input">
     <%= school_room.label :name, "Turma" %>
-    <%= school_room.text_field :name, class: 'form-control' %>
+    <%= school_room.text_field :name, class: 'form-control', id: 'school_room_name', :disabled => true  %>
     <%= school_room.label :capacity, "Capacidade" %>
     <%= school_room.number_field :capacity, class: 'form-control' %>
   </div>
-  <br>
-  <%= school_room.label :course_ids, "Cursos" %>
+
+  <p> Cursos</p>
   <div class="checkbox-group">
+
     <%= school_room.collection_check_boxes(:course_ids, @all_courses, :id, :name, include_blank: true)%>
   </div>
   <br>
-  <%= school_room.label :category_ids, "Categorias" %>
+  <p> Categorias</p>
   <div class="checkbox-group">
     <%= school_room.collection_check_boxes(:category_ids,all_categories,:id,:name, include_blank: true)%>
   </div>
   <br>
 
-  <%= school_room.submit "Salvar", class: 'pull-right btn btn-default btn-success' %>
+  <%= school_room.submit "Alterar", class: 'pull-right btn btn-default btn-success' %>
 
 <% end %>

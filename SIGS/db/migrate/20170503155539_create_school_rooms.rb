@@ -3,7 +3,7 @@ class CreateSchoolRooms < ActiveRecord::Migration[5.0]
     create_table :school_rooms do |table|
       table.string :name
       table.boolean :active
-      table.integer :vacancies
+      table.integer :capacity
       table.references :discipline, foreign_key: true
 
       table.timestamps

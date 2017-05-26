@@ -33,7 +33,13 @@
         <ul class="nav navbar-nav">
           <li><a href="minha_conta.html">Minha Conta</a></li>
           <li><a href="../index.html">Logout</a></li>
-          <li><a href="#">Turmas</a></li>
+          <li class="dropdown">
+          <a data-toggle="collapse" href="#turmas">Turmas
+            <ul class="collapse" id="turmas">
+              <li><a href="criar_turma.html">Nova Turma</a></li>
+              <li><a href="visualizar_turmas.html">Meu Departamento</a></li>
+            </ul>
+          </li>
             <li class="dropdown">
             <a data-toggle="collapse" href="#salas">Salas
               <ul class="collapse" id="salas">
@@ -42,13 +48,19 @@
               </ul>
             </li>
           <li class="dropdown">
-            <a data-toggle="collapse" href="#demo">Usuários
+            <a data-toggle="collapse" href="#demo">Usuários</a>
               <ul class="collapse" id="demo">
                 <li><a href="cadastros_pendentes.html">Cadastros Pendentes</a></li>
                 <li><a href="usuarios_registrados.html">Usuários Cadastrados</a></li>
               </ul>
-            </li>
-          <li><a href="#">Alocações</a></li>
+          </li>
+          <li class="dropdown">
+            <a data-toggle="collapse" href="#alocar">Alocações</a>
+              <ul class="collapse" id="alocar">
+                <li><a href="alocacao.html">Graduação</a></li>
+                <li><a href="alocar_extensao.html">Extensão</a></li>
+              </ul>
+          </li>
         </ul>
 
         <figure class="unbLogo">
@@ -58,7 +70,7 @@
         </figure>
       </header>
       <main class="mainConteiner">
-        <h1>Turma</h1>
+        <h1>Nova Turma</h1>
         <form id="school_room">
           <label>Disciplina</label>
           <select>
@@ -69,8 +81,10 @@
           <div class="short_input">
             <label>Nome</label>
             <input type="text" class="form-control">
+            <label>Capacidade</label>
+            <input type="number" class="form-control">
           </div>
-
+          <br>
           <p>Cursos Preferenciais</p>
           <div class="checkbox-group">
             <input type="checkbox">
@@ -81,6 +95,14 @@
             <label>Medicina</label>
             <input type="checkbox">
             <label>Design</label>
+          </div>
+          <br>
+          <p>Categorias</p>
+          <div class="checkbox-group">
+            <input type="checkbox">
+            <label>Retroprojetor</label>
+            <input type="checkbox">
+            <label>Laboratório Químico</label>
           </div>
 
           <input type="submit" value="Criar Turma" class="btn btn-default btn-success" />
