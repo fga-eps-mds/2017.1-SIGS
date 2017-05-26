@@ -12,9 +12,10 @@ department_1 = Department.create(code: '781', name: 'PRC')
 department_2 = Department.create(code: '156', name: 'Artes')
 
 # Courses
-course = Course.create(code: '10', name: 'Engenharia de Software', department: department)
-course = Course.create(code: '12', name: 'Engenharia Eletrônica', department: department)
-course2 = Course.create(code: '09', name: 'Artes Visuais', department: department_2)
+course = Course.create(code: '10', name: 'Engenharia de Software', department: department, shift: 1)
+course = Course.create(code: '12', name: 'Engenharia Eletrônica', department: department, shift: 1)
+course1 = Course.create(code: '12', name: 'Engenharia Automotiva', department: department, shift: 2)
+course2 = Course.create(code: '09', name: 'Artes Visuais', department: department_2, shift: 1)
 
 # Users - Coordinator
 user_1 = User.create(name: 'Caio Filipe', email: 'caio@unb.br', cpf: '05012345678', registration: '1234567', active: true, password: '123456')

@@ -22,4 +22,21 @@ class SchoolRoom < ApplicationRecord
   validates_numericality_of :capacity,
                             less_than_or_equal_to: 500,
                             message: 'A capacidade máxima é 500 vagas'
+
+  validate :validate_courses
+
+  def validate_courses
+    response = ''
+    
+    if(!course.nil?)
+      response = course[0].shift
+    end
+
+    course.each do |_course|
+      if _course.shift != response
+        errors.add(:course, "Cursos devem ser do mesmo período")
+        break
+      end
+    end
+  end
 end
