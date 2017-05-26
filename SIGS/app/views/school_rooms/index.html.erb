@@ -2,15 +2,17 @@
 <h2>Suas Turmas</h2>
 
 <br> <br>
-<div class="container-search-form">
-  <%= form_for(:current_search, url: search_disciplines_path) do |f|%>
+<%= form_for(:current_search, url: search_disciplines_path) do |f|%>
 
-    <%= f.text_field :search, placeholder: "Buscar por disciplinas", id: 'input-search-field', class: 'input-search', data: {autocomplete_source: discipline_of_department(user_department_id).order(:name).map(&:name)} %> 
-
-      <%= f.submit "Search" %> 
-
-  <% end %>
-</div>
+  <div class="search-elements">
+    <%= f.text_field :search, placeholder: "Buscar por disciplinas", id: 'input-search-field', class: 'search-input', data: {autocomplete_source: discipline_of_department(user_department_id).order(:name).map(&:name)} %> 
+  </div>
+  <div class="search-elements">
+    <%= button_tag type: 'submit', class: "icon-search-submit" do %>
+      <i class="fa fa-search fa-lg"></i>
+    <% end %>
+  </div>
+<% end %>
 </br>
 
 <% if @my_school_rooms.count == 0 %>
