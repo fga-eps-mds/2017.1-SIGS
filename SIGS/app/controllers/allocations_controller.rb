@@ -4,16 +4,22 @@
 class AllocationsController < ApplicationController
   def new_education
     @coordinator_rooms = current_user.coordinator.course.department.rooms
-    @school_room_coordinator = current_user.coordinator.course.school_room
+    @school_rooms_coordinator = current_user.coordinator.course.school_room
   end
 
   def create_education
     @allocation = Allocation.new(allocation_params)
     @allocation.periodicity = 0
-    @allocation.user = current_user
-    @allocation_education = AllocationEducation.new(school_room: params[:school_room])
+    @allocation.user_id = current_user.id
+    @allocation_education = AllocationEducation.new(
+      school_room_id: params[:school_room]
+    )
     @allocation.allocable = @allocation_education
-    @allocation.save
+    if @allocation.save
+      render inline: '<div class="alert alert-success">Alocação salva</div>'
+    else
+      render inline: '<div class="alert alert-success">Alocação não efetivada</div>'
+    end
   end
 
   private
