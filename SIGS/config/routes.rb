@@ -1,5 +1,20 @@
 Rails.application.routes.draw do
 
+
+  get 'allocations/index'
+
+  get 'allocations/show'
+
+  get 'allocations/new'
+
+  get 'allocations/create'
+
+  get 'allocations/edit'
+
+  get 'allocations/update'
+
+  get 'allocations/destroy'
+
   root 'sessions#new'
 
   # Categories
@@ -69,9 +84,7 @@ Rails.application.routes.draw do
   get 'periods/edit/:id' => 'periods#edit', as: 'period_edit'
   post 'periods/update' => 'periods#update', as: 'period_update'
 
-  #allocation
-  get 'allocations/new' => 'allocations#new' , :as => 'allocations_new'
-  post 'allocations/create' => 'allocations#create' , :as => 'allocations_create'
+
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

@@ -1,26 +1,2 @@
-<h1>Alocação</h1>
-
-<%= form_for @allocation, url: allocations_create_path do |allocation| %>
-
-  <label> Sala </label>
-  <%= allocation.collection_select(:room_id,@coordinator_rooms,:id,:name)%>
-
-  <label> Turma </label> <%= link_to "+ Criar uma nova turma" , school_rooms_new_path %><br>
-  <%= allocation.collection_select(:school_room_id,@school_rooms_coordinator,:id,:name) %>
-
-  <% days = ["Segunda","Terça","Quarta","Quinta","Sexta","Sabado"] %>
-  <%= allocation.label :day, "Escolha um dia:" %><br>
-  <% days.each do |day| %>
-    <%= day %>
-    <%= allocation.radio_button :day,day %> |
-  <% end %>
-  <br><br>
-  <label> Hora de inicio: </label><br>
-  <%= allocation.time_field(:start_time) %>
-  <br>
-  <label> Hora de términio: </label><br>
-  <%= allocation.time_field(:final_time) %>
-
-  <%= allocation.submit "Salvar", class: 'pull-right btn btn-default btn-success' %>
-
-<% end %>
+<h1>Allocations#new</h1>
+<p>Find me in app/views/allocations/new.html.erb</p>

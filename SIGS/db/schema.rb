@@ -10,13 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170527015353) do
+ActiveRecord::Schema.define(version: 20170527074352) do
 
   create_table "administrative_assistants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_administrative_assistants_on_user_id", using: :btree
+  end
+
+  create_table "allocation_educations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "school_room_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["school_room_id"], name: "index_allocation_educations_on_school_room_id", using: :btree
+  end
+
+  create_table "allocation_educations_school_rooms", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "allocation_education_id", null: false
+    t.integer "school_room_id",          null: false
+    t.index ["allocation_education_id", "school_room_id"], name: "education_school_room", using: :btree
+    t.index ["school_room_id", "allocation_education_id"], name: "school_room_education", using: :btree
+  end
+
+  create_table "allocation_extensions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "extension_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["extension_id"], name: "index_allocation_extensions_on_extension_id", using: :btree
   end
 
   create_table "allocation_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -30,14 +51,16 @@ ActiveRecord::Schema.define(version: 20170527015353) do
     t.boolean  "active"
     t.time     "start_time"
     t.time     "final_time"
-    t.string   "day"
+    t.date     "day"
+    t.integer  "periodicity",    default: 0
     t.integer  "user_id"
     t.integer  "room_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.integer  "school_room_id"
+    t.string   "allocable_type"
+    t.integer  "allocable_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["allocable_type", "allocable_id"], name: "index_allocations_on_allocable_type_and_allocable_id", using: :btree
     t.index ["room_id"], name: "index_allocations_on_room_id", using: :btree
-    t.index ["school_room_id"], name: "index_allocations_on_school_room_id", using: :btree
     t.index ["user_id"], name: "index_allocations_on_user_id", using: :btree
   end
 
@@ -180,8 +203,9 @@ ActiveRecord::Schema.define(version: 20170527015353) do
   end
 
   add_foreign_key "administrative_assistants", "users"
+  add_foreign_key "allocation_educations", "school_rooms"
+  add_foreign_key "allocation_extensions", "extensions"
   add_foreign_key "allocations", "rooms"
-  add_foreign_key "allocations", "school_rooms"
   add_foreign_key "allocations", "users"
   add_foreign_key "coordinators", "courses"
   add_foreign_key "coordinators", "users"
