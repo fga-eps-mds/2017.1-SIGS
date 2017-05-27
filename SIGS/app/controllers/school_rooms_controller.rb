@@ -28,19 +28,17 @@ class SchoolRoomsController < ApplicationController
   end
 
   def index
-    @my_school_rooms = filter_coordinator_school_rooms
-  end
-
-  def filter_coordinator_school_rooms
-    department = department_by_coordinator
-    SchoolRoom.joins(:discipline).merge(
-      Discipline.order(:name).where(department_id: department)
+    @my_school_rooms = SchoolRoom.joins(:discipline).merge(
+      Discipline.order(:name).where(department_id: department_by_coordinator)
     ).order(:name)
+    @disciplines = discipline_of_department(department_by_coordinator)
+                   .order(:name)
+                   .map(&:name)
   end
 
   def search_disciplines
     @search_attribute = params[:current_search][:search]
-    @disciplines = discipline_of_department(user_department_id).where(
+    @disciplines = discipline_of_department(department_by_coordinator).where(
       'name LIKE :search', search: "%#{@search_attribute}%"
     ).order(:name)
     if @disciplines.present?
@@ -98,18 +96,11 @@ class SchoolRoomsController < ApplicationController
   end
 
   def school_rooms_of_disciplines(disciplines)
-    school_rooms = []
-    disciplines.each do |discipline|
-      school_rooms_sort = SchoolRoom.where(discipline_id: discipline.id).order(:name)
-      school_rooms_sort.each do |school_room|
-        school_rooms << school_room
-      end
-    end
-    school_rooms
+    SchoolRoom.where(discipline: disciplines).order(:name)
   end
 
   def department_by_coordinator
-    coordinator = Coordinator.find(current_user.id)
+    coordinator = Coordinator.find_by(user: current_user.id)
     course = Course.find(coordinator.course_id)
     Department.find(course.department_id)
   end

@@ -21,17 +21,20 @@ RSpec.describe SchoolRoomsController, type: :controller do
       sign_in(@user)
     end
 
-    # Não consegue encontrar o coordenador, o id fica sempre aumentando.
+    it 'should get index view' do
+      post :index
+      expect(response).to have_http_status(200)
+    end
 
-    # it 'should get index view' do
-    #   get :index
-    #   expect(response).to have_http_status(200)
-    # end
-    
-    # it 'should search for a discipline' do
-    #   post :search_disciplines , params: {current_search: {search: 'fis'}}
-    #   expect(response).to have_http_status(200)
-    # end
+    it 'should search for a discipline' do
+      post :search_disciplines , params: {current_search: {search: 'fis'}}
+      expect(response).to have_http_status(200)
+    end
+
+    it 'should search for a not existent discipline' do
+      post :search_disciplines , params: {current_search: {search: 'aaaaa'}}
+      expect(flash[:notice]).to include("Nenhuma turma encontrada")
+    end
 
     it 'should return new' do
       post :new

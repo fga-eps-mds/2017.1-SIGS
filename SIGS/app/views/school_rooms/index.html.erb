@@ -1,9 +1,9 @@
-<h1>Turmas - <%= department_name_by_user %></h1>
+<h1>Turmas - <%= courses_by_user.name %></h1>
 
 <%= form_for(:current_search, url: search_disciplines_path) do |f|%>
 
   <div class="search-elements">
-    <%= f.text_field :search, placeholder: "Buscar por disciplinas", id: 'input-search-field', class: 'search-input', data: {autocomplete_source: discipline_of_department(user_department_id).order(:name).map(&:name)} %>
+    <%= f.text_field :search, placeholder: "Buscar por disciplinas", id: 'input-search-field', class: 'search-input', data: {autocomplete_source: @discipline} %>
   </div>
   <div class="search-elements">
     <%= button_tag type: 'submit', class: "icon-search-submit", id: "searchButton" do %>
