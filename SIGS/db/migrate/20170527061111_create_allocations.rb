@@ -8,8 +8,7 @@ class CreateAllocations < ActiveRecord::Migration[5.0]
       t.integer :periodicity, default: 0 # 0 => semanal 1 => mensal
       t.references :user, foreign_key: true
       t.references :room, foreign_key: true
-      t.references :allocation_type, foreign_key: true
-
+      t.references :allocable, polymorphic: true, index: true
       t.timestamps
     end
   end
