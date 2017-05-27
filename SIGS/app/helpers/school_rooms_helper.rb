@@ -24,20 +24,4 @@ module SchoolRoomsHelper
     return school_rooms
   end
 
-
-  def filter_coordinator_school_rooms(user_id)
-    @school_rooms = SchoolRoom.all
-    @filter_school_rooms = []
-    coordinator = Coordinator.find(user_id)
-    course = Course.find(coordinator.course_id)
-    department = Department.find(course.department_id)
-    @school_rooms.each do |school_room|
-      discipline = Discipline.find(school_room.discipline_id)
-      if discipline.department_id == department.id
-        @filter_school_rooms << school_room
-      end
-    end
-    @filter_school_rooms
-  end
-  
 end
