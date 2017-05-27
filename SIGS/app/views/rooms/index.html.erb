@@ -1,13 +1,15 @@
 <h1>Salas</h1>
-
+<table class="table">
+<tr>
 <%= form_tag(room_index_post_path, :method => :post) do %>
-  <%= text_field_tag 'name', nil, placeholder: 'Digite o nome da sala...', size: '50', class: 'form-control' %>
-  <%= text_field_tag 'code', nil, placeholder: 'Digite o código da sala...', size: '50', class: 'form-control' %>
-  <%= number_field_tag 'capacity', nil, placeholder: 'Digite a quantidade de vagas...', size: '300', class: 'form-control' %>
-  Ativa <%= check_box_tag 'active', value="1", checked = false%>
-  <%= submit_tag "Submit"%>
+  <td><%= text_field_tag 'name', nil, placeholder: 'Digite o nome da sala...', size: '50', class: 'form-control' %></td>
+  <td><%= text_field_tag 'code', nil, placeholder: 'Digite o código da sala...', size: '50', class: 'form-control' %></td>
+  <td><%= number_field_tag 'capacity', nil, placeholder: 'Digite a quantidade de vagas...', size: '300', class: 'form-control' %></td>
+  <td>Ativa <%= check_box_tag 'active', value="1", checked = false%></td>
+  <td><%= submit_tag "Submit"%></td>
 <% end %>
-
+</tr>
+</table>
 <!--
   <%= form_for :index, url: room_index_path,  :html => {:role => 'form'} do |f| %>
     <%= f.label :name, "Nome " %>
@@ -44,12 +46,12 @@
   <% else %>
     <table class="table">
       <tr>
-        <td>Código</td>
-        <td>Nome</td>
-        <td>Ativo</td>
-        <td>Prédio</td>
-        <td style="text-align:center">Alterar</td>
-        <td style="text-align:center">Visualizar</td>
+        <th>Código</th>
+        <th>Nome</th>
+        <th>Ativo</th>
+        <th>Prédio</th>
+        <th style="text-align:center">Alterar</th>
+        <th style="text-align:center">Visualizar</th>
       </tr>
       <% @rooms.each do |room| %>
         <tr>
