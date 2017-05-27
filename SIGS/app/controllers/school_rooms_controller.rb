@@ -38,7 +38,7 @@ class SchoolRoomsController < ApplicationController
       Discipline.order(:name).where(department_id: department)
     ).order(:name)
   end
-  
+
   def search_disciplines
     @search_attribute = params[:current_search][:search]
     @disciplines = discipline_of_department(user_department_id).where(
