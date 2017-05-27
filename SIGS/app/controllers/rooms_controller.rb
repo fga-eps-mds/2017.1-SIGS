@@ -15,17 +15,17 @@ class RoomsController < ApplicationController
     end
   end
 
-  # def filter_by_capacity
-  #   if params[:capacity].present?
-  #     @rooms = @rooms.where(:capacity => params[:capacity].to_s)
-  #   else
-  #     @rooms
-  #   end
-  # end
-
   def filter_by_capacity
     if params[:capacity].present?
       @rooms = @rooms.where(capacity: params[:capacity].to_s)
+    else
+      @rooms
+    end
+  end
+
+ def filter_by_buildings
+    if params[:build_id].present?
+      @rooms = @rooms.where(build_id: params[:build_id].to_s)
     else
       @rooms
     end
