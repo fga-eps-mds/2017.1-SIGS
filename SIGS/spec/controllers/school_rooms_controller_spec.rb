@@ -1,5 +1,7 @@
 require 'rails_helper'
 include SessionsHelper
+include SchoolRoomsHelper
+include UserHelper
 
 RSpec.describe SchoolRoomsController, type: :controller do
 
@@ -16,6 +18,24 @@ RSpec.describe SchoolRoomsController, type: :controller do
       @discipline3 = Discipline.create(name: 'Artes Visuais', code: '194', department: @department2)
       @coordinator = Coordinator.create(user: @user, course: @course)
       @school_room = SchoolRoom.create(name:"YY", capacity: 50, discipline: @discipline1)
+    end
+
+    it 'should get index view' do
+      sign_in(@user)
+      get :index
+      expect(response).to have_http_status(200)
+    end
+    
+    it 'should get one school room' do
+      sign_in(@user)
+      get :show, params:{id: @school_room.id}
+      expect(response).to have_http_status(200)
+    end
+    
+    it 'should search for a discipline' do
+      sign_in(@user)
+      post :search_disciplines , params: {current_search: {search: 'fis'}}
+      expect(response).to have_http_status(200)
     end
 
     it 'should return new' do
@@ -103,24 +123,5 @@ RSpec.describe SchoolRoomsController, type: :controller do
       get :destroy, params:{id: school_room.id}
       expect(flash[:error]).to include('Permissão negada')
     end
-
-    # it 'should get index view' do
-    #   sign_in(@user)
-    #   get :index
-    #   expect(response).to have_http_status(200)
-    # end
-    #
-    # it 'should get index view' do
-    #   sign_in(@user)
-    #   get :show, params:{id: @school_room.id}
-    #   expect(response).to have_http_status(200)
-    # end
-    #
-    # it 'should get index view' do
-    #   sign_in(@user)
-    #   post :search_disciplines , params: {current_search: {search: 'fis'}}
-    #   expect(response).to have_http_status(200)
-    # end
-
   end
 end

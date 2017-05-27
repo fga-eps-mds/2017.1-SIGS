@@ -37,21 +37,6 @@ class SchoolRoomsController < ApplicationController
     @my_school_rooms = filter_coordinator_school_rooms(current_user.id)
   end
 
-  def filter_coordinator_school_rooms(user_id)
-    @school_rooms = SchoolRoom.all
-    @filter_school_rooms = []
-    coordinator = Coordinator.find(user_id)
-    course = Course.find(coordinator.course_id)
-    department = Department.find(course.department_id)
-    @school_rooms.each do |school_room|
-      discipline = Discipline.find(school_room.discipline_id)
-      if discipline.department_id == department.id
-        @filter_school_rooms << school_room
-      end
-    end
-    @filter_school_rooms
-  end
-
   def search_disciplines
     search_attribute = params[:current_search][:search]
     @disciplines = discipline_of_department(user_department_id).where(
