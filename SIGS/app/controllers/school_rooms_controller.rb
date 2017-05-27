@@ -15,7 +15,6 @@ class SchoolRoomsController < ApplicationController
     @school_room.active = true
     @school_room.name.upcase!
     @all_courses = Course.all
-
     if @school_room.save
       redirect_to school_rooms_index_path, flash: { success: 'Turma criada' }
     else
@@ -29,42 +28,46 @@ class SchoolRoomsController < ApplicationController
     @all_courses = Course.all
   end
 
-  def show
-    @school_room = SchoolRoom.find(params[:id])
-  end
-
   def index
-    @my_school_rooms = filter_coordinator_school_rooms(current_user.id)
+    @my_school_rooms = filter_coordinator_school_rooms
   end
 
-  def filter_coordinator_school_rooms(user_id)
-    @school_rooms = SchoolRoom.all
-    @filter_school_rooms = []
-    coordinator = Coordinator.find(user_id)
-    course = Course.find(coordinator.course_id)
-    department = Department.find(course.department_id)
-    @school_rooms.each do |school_room|
-      discipline = Discipline.find(school_room.discipline_id)
-      if discipline.department_id == department.id
-        @filter_school_rooms << school_room
-      end
-    end
-    @filter_school_rooms
+  def filter_coordinator_school_rooms
+    department = department_by_coordinator
+    SchoolRoom.joins(:discipline).merge(
+      Discipline.order(:name).where(department_id: department)
+    ).order(:name)
   end
+
+  # def search_disciplines
+  #   department = department_by_coordinator
+  #   @search_attribute = params[:current_search][:search]
+  #   @disciplines = Discipline.where('name like :search', search:
+  #     '%#{@search_attribute}%').where(department_id: department)
+  #   if @disciplines.present?
+  #     @school_rooms = school_rooms_of_disciplines(@disciplines)
+  #   else
+  #     flash[:notice] = 'Nenhuma turma encontrada'
+  #     redirect_to school_rooms_index_path
+  #   end
+  # end
 
   def search_disciplines
-    search_attribute = params[:current_search][:search]
+    @search_attribute = params[:current_search][:search]
     @disciplines = discipline_of_department(user_department_id).where(
-      'name LIKE :search', search: "%#{search_attribute}%"
-    )
-
-    @school_rooms = school_rooms_of_disciplines(@disciplines)
+      'name LIKE :search', search: "%#{@search_attribute}%"
+    ).order(:name)
+    if @disciplines.present?
+      @school_rooms = school_rooms_of_disciplines(@disciplines)
+    else
+      flash[:notice] = 'Nenhuma turma encontrada'
+      redirect_to school_rooms_index_path
+    end
   end
 
   def update
     @school_room = SchoolRoom.find(params[:id])
     @all_courses = Course.all
-
     if @school_room.update_attributes(school_rooms_params_update)
       success_mesage = 'A turma foi alterada com sucesso'
       redirect_to school_rooms_index_path, flash: { success: success_mesage }
@@ -77,7 +80,6 @@ class SchoolRoomsController < ApplicationController
   def destroy
     @school_room = SchoolRoom.find(params[:id])
     coordinator = Coordinator.find_by(user_id: current_user.id)
-
     if permission[:level] == 1 &&
        coordinator.course.department == @school_room.discipline.department
       @school_room.destroy
@@ -112,11 +114,16 @@ class SchoolRoomsController < ApplicationController
   def school_rooms_of_disciplines(disciplines)
     school_rooms = []
     disciplines.each do |discipline|
-      school_rooms_sort = SchoolRoom.where(discipline_id: discipline.id)
+      school_rooms_sort = SchoolRoom.where(discipline_id: discipline.id).order(:name)
       school_rooms_sort.each do |school_room|
         school_rooms << school_room
       end
     end
     school_rooms
+  end
+
+  def department_by_coordinator
+    course = Course.find(Coordinator.find(current_user).course_id)
+    Department.find(course.department_id)
   end
 end
