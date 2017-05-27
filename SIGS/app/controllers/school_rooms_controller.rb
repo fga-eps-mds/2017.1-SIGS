@@ -111,6 +111,6 @@ class SchoolRoomsController < ApplicationController
   def department_by_coordinator
     coordinator = Coordinator.find(current_user.id)
     course = Course.find(coordinator.course_id)
-    department = Department.find(course.department_id)
+    Department.find(course.department_id)
   end
 end
