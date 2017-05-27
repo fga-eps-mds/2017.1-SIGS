@@ -38,20 +38,7 @@ class SchoolRoomsController < ApplicationController
       Discipline.order(:name).where(department_id: department)
     ).order(:name)
   end
-
-  # def search_disciplines
-  #   department = department_by_coordinator
-  #   @search_attribute = params[:current_search][:search]
-  #   @disciplines = Discipline.where('name like :search', search:
-  #     '%#{@search_attribute}%').where(department_id: department)
-  #   if @disciplines.present?
-  #     @school_rooms = school_rooms_of_disciplines(@disciplines)
-  #   else
-  #     flash[:notice] = 'Nenhuma turma encontrada'
-  #     redirect_to school_rooms_index_path
-  #   end
-  # end
-
+  
   def search_disciplines
     @search_attribute = params[:current_search][:search]
     @disciplines = discipline_of_department(user_department_id).where(
