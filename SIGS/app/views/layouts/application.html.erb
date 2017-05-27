@@ -61,7 +61,13 @@
                   </ul>
               </li>
             <% end %>
-            <li><%= link_to "Alocações", allocations_new_path %> </li>
+            <li class="dropdown">
+              <a data-toggle="collapse" href="#alocar">Alocações</a>
+                <ul class="collapse" id="alocar">
+                  <li><%= link_to "Graduação", allocations_new_education_path %></a></li>
+                  <li><a href="#">Extensão</a></li>
+                </ul>
+            </li>
           </ul>
 
           <figure class="unbLogo"><a href="http://www.unb.br"><%= image_tag("rodape_unb.png") %></a></figure>
