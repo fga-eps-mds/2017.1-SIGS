@@ -1,13 +1,30 @@
 <h1>Salas</h1>
 <table class="table">
-<tr>
-<%= form_tag(room_index_post_path, :method => :post) do %>
-  <td><%= text_field_tag 'name', nil, placeholder: 'Digite o nome da sala...', size: '50', class: 'form-control' %></td>
-  <td><%= text_field_tag 'code', nil, placeholder: 'Digite o código da sala...', size: '50', class: 'form-control' %></td>
-  <td><%= number_field_tag 'capacity', nil, placeholder: 'Digite a quantidade de vagas...', size: '300', class: 'form-control' %></td>
-</tr>
+  <tr>
+  <%= form_tag(room_index_post_path, :method => :post) do %>
+    <td>
+      <%= label_tag("Nome") %>
+      <%= text_field_tag 'name', nil, placeholder: 'Digite o nome da sala...', size: '40', class: 'form-control' %>
+    </td>
+    <td>
+      <%= label_tag("Código") %>
+      <%= text_field_tag 'code', nil, placeholder: 'Digite o código da sala...', size: '25', class: 'form-control' %>
+    </td>
+    <td>
+      <%= label_tag("Capacidade") %>
+      <%= number_field_tag 'capacity', nil, placeholder: 'Insira a quantidade...', size: '300', class: 'form-control' %>
+    </td>
+  </tr>
 
   <tr>
+    <td>
+      <%= label_tag("Prédio") %>
+      <%= select_tag 'building_id', options_from_collection_for_select(@buildings, "id", "name"), include_blank: true %>
+    </td>
+  </tr>
+
+  <tr>
+    <td><b>Funcionamento:</b></td>
     <td class="select_active">
     <%= label_tag(:active_ativa, "Ativa") %>
       <%= radio_button_tag(:ativo, "ativa", :id => "id_active") %>
@@ -16,45 +33,11 @@
     <%= label_tag(:active_inativa, "Inativa") %>
       <%= radio_button_tag(:ativo, "inativa", :id => "id_anative") %>
     </td>
-    <!--<td>Ativa <%= check_box_tag 'active', value="1", checked = false%></td>  
-    <td>Inativa <%= check_box_tag 'active', value="0", checked = false%></td>-->
     <td><%= submit_tag "Submit"%></td>
   </tr>
 
 </table>
 <% end %>
-
-<!--
-  <%= form_for :index, url: room_index_path,  :html => {:role => 'form'} do |f| %>
-    <%= f.label :name, "Nome " %>
-    <%= f.text_field :name, class: 'form-control' %>
-
-    <%= f.label :ala, "Alas" %>
-    <%= f.select :ala, ["", "Norte", "Sul", "Central"] %>
-
-    <%= f.label :building, "Prédio" %>
-    <%= f.fields_for :building do |ff| %>
-      <%= ff.collection_select(:building_id,Building.all,:id,:name,include_blank: true) %>
-    <% end %>
-
-    <%= f.label :vagas, "Vagas " %>
-    <%= f.number_field :vagas, class: 'form-control', min: 5, max: 500 %>
-
-    <%= f.label :category, "Categorias" %>
-    <br>
-    <%= f.fields_for :all_categories do |fff| %>
-      <%= fff.collection_check_boxes(:category_id,Category.all,:id,:name,include_blank: true) %>
-    <% end %>
-
-    <br><br>
-    <%= f.label :activity, "Atividade" %>
-    <br>
-    <%= f.check_box :active %> Ativo
-    <%= f.check_box :active %> Inativo
-
-    <%= f.submit "Enviar", class: 'pull-right btn btn-default btn-success' %> -->
-  <!-- <%end%> -->
-
 
   <% if @rooms.count == 0 %>
     <h3>Não há salas registradas no momento.</h3>
@@ -80,8 +63,8 @@
           <td style="text-align:center"><%= link_to image_tag("icon_edit.png"), room_edit_path(room.id) %></td>
           <td style="text-align:center"><%= link_to image_tag("icon_view.png"), room_path(room.id) %></td>
         </tr>
-      <% end %> 
-    </tbody>  
+      <% end %>
+    </tbody>
     </table>
   <% end %>
 
@@ -127,9 +110,9 @@
     <%end%>
 
   }
-    
-  });
-  
 
-  
+  });
+
+
+
 </script>
