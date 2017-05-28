@@ -11,7 +11,6 @@
     <link rel="stylesheet" media="all" href="../assets/css/bootstrap.min.css" />
     <link rel="stylesheet" media="all" href="../assets/css/style.css" />
     <link rel="stylesheet" media="all" href="../assets/css/navbar.css" />
-    <link rel="stylesheet" media="all" href="../assets/css/form.css" />
     <script src="../assets/js/jquery-1.12.4.min.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../assets/js/main.js"></script>
@@ -24,11 +23,11 @@
         </figure>
 
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
 
         <ul class="nav navbar-nav">
           <li><a href="minha_conta.html">Minha Conta</a></li>
@@ -69,7 +68,6 @@
               </ul>
           </li>
         </ul>
-
         <figure class="unbLogo">
           <a href="http://www.unb.br" target="_blank">
             <img src="../assets/img/rodape_unb.png" alt="SIGS Logos" />
@@ -77,49 +75,73 @@
         </figure>
       </header>
       <main class="mainConteiner">
-        <h1>Alterar Turma</h1>
-        <form id="school_room">
-          <label>Disciplina</label>
+        <h1>Relatório por Sala</h1>
+        <form action="Relatório_salas.pdf">
+          <label>Departamento</label>
           <select>
-            <option>Cálculo 1</option>
-            <option>História da Arte</option>
-            <option>Matemática Discreta</option>
-            <option selected>Literatura</option>
+            <option>Departamento de Física</option>
+            <option>Departamento de Matemática</option>
+            <option>Departamento de Artes</option>
+            <option>Departamento de Design</option>
           </select>
-          <div class="short_input">
-            <label>Nome</label>
-            <input type="text" class="form-control" value="A" disabled="disabled">
-            <label>Capacidade</label>
-            <input type="number" class="form-control">
+        
+
+          <input type="checkbox" name="" id="salas">
+          <label>Todas as Salas</label>
+
+          <label>Filtrar salas pelo código:(A pessoa digita parte do código e o select abaixo atualiza de acordo com cada tecla digitada)</label><br>
+          <span style="color: red;"></span>
+          <div class="search-elements">
+            <input placeholder="Digite o código da Sala" id="input-search-field" class="search-input" type="text" name="current_search[search]"/>
           </div>
 
-          <p>Cursos</p>
-          <div class="checkbox-group">
-            <input type="checkbox">
-            <label>Engenharia de Software</label>
-            <input type="checkbox">
-            <label>Engenharia Eletrônica</label>
-            <input type="checkbox">
-            <label>Medicina</label>
-            <input type="checkbox">
-            <label>Design</label>
-            <input type="checkbox" checked>
-            <label>Letras</label>
-            <input type="checkbox" checked>
-            <label>Jornalismo</label>
-          </div>
-          <br>
-          <p>Categorias</p>
-          <div class="checkbox-group">
-            <input type="checkbox">
-            <label>Retroprojetor</label>
-            <input type="checkbox">
-            <label>Laboratório Químico</label>
-          </div>
+          <label>Código da Sala:</label><br>
+          <span style="color: red;"></span>
+          <select class="sala_select">
+            <option>S10</option>
+            <option>BSAS11</option>
+            <option>BSAS12</option>
+            <option>BSAN08</option>
+          </select>
 
-          <input type="submit" value="Alterar Turma" class="btn btn-default btn-success" />
+
+          <label>1ª Semana</label>
+          <select>
+            <option selected="selected">Aqui terão todas as semanas desde o inicio do período de alocação até o fim do período letivo</option>
+            <option>06/03/2017 à 11/03/2017</option>
+            <option>13/03/2017 à 18/03/2017</option>
+            <option>20/03/2017 à 25/03/2017</option>
+            <option>27/03/2017 à 01/04/2017</option>
+          </select>
+
+
+          <label>Última Semana</label>
+          <select>
+            <option selected="selected">Aqui terão todas as semanas desde o inicio do período de alocação até o fim do período letivo</option>
+            <option>06/03/2017 à 11/03/2017</option>
+            <option>13/03/2017 à 18/03/2017</option>
+            <option>20/03/2017 à 25/03/2017</option>
+            <option>27/03/2017 à 01/04/2017</option>
+          </select>
+
+
+          <div class='actions'>
+            <input type="submit" name="commit" value="Gerar" class="pull-right btn btn-default btn-success" data-disable-with="Gerar" />
+          </div>
         </form>
       </main>
     </div>
   </body>
 </html>
+
+<script type="text/javascript">
+  $("#salas").click(function (){
+    $("#input-search-field").prop('disabled', $(this).prop('checked'));
+    $("#sala_select").prop('disabled', $(this).prop('checked'));
+    if($(this).prop('checked')){
+      $("span").html("Campo desativado");
+    }else {
+      $("span").html("");
+    }
+  });
+</script>
