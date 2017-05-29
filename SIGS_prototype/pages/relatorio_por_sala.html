@@ -14,6 +14,10 @@
     <script src="../assets/js/jquery-1.12.4.min.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../assets/js/main.js"></script>
+    <style type="text/css">
+      select{width:100%;}
+    </style>
+
   </head>
   <body>
     <div class="container container-fluid myContainer">
@@ -84,15 +88,19 @@
             <option>Departamento de Artes</option>
             <option>Departamento de Design</option>
           </select>
+
+          <br>
         
 
           <input type="checkbox" name="" id="salas">
           <label>Todas as Salas</label>
 
+          <br>
+
           <label>Filtrar salas pelo código:(A pessoa digita parte do código e o select abaixo atualiza de acordo com cada tecla digitada)</label><br>
           <span style="color: red;"></span>
           <div class="search-elements">
-            <input placeholder="Digite o código da Sala" id="input-search-field" class="search-input" type="text" name="current_search[search]"/>
+            <input placeholder="Digite o código da Sala" id="input-search-field" class="search-input" type="text" name="current_search[search]" style="width:100%" />
           </div>
 
           <label>Código da Sala:</label><br>
@@ -104,8 +112,10 @@
             <option>BSAN08</option>
           </select>
 
+          <br>
 
-          <label>1ª Semana</label>
+          <label>1ª Semana</label><br>
+
           <select>
             <option selected="selected">Aqui terão todas as semanas desde o inicio do período de alocação até o fim do período letivo</option>
             <option>06/03/2017 à 11/03/2017</option>
@@ -114,8 +124,10 @@
             <option>27/03/2017 à 01/04/2017</option>
           </select>
 
+          <br>
 
           <label>Última Semana</label>
+          <br>
           <select>
             <option selected="selected">Aqui terão todas as semanas desde o inicio do período de alocação até o fim do período letivo</option>
             <option>06/03/2017 à 11/03/2017</option>
@@ -123,6 +135,8 @@
             <option>20/03/2017 à 25/03/2017</option>
             <option>27/03/2017 à 01/04/2017</option>
           </select>
+          <br>
+          <br>
 
 
           <div class='actions'>
@@ -135,11 +149,13 @@
 </html>
 
 <script type="text/javascript">
-  $("#salas").click(function (){
+
+  $('input:checkbox').click(function (){
     $("#input-search-field").prop('disabled', $(this).prop('checked'));
     $("#sala_select").prop('disabled', $(this).prop('checked'));
     if($(this).prop('checked')){
       $("span").html("Campo desativado");
+      
     }else {
       $("span").html("");
     }
