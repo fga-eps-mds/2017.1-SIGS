@@ -1,3 +1,43 @@
 // Place all the styles related to the school_rooms controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.fa-check-circle {
+	color: #3ac75f;
+}
+
+.fa-times-circle {
+	color: #f23d3d;
+}
+
+.fa-trash {
+	color: #f23d3d;
+}
+
+.container-search-form {
+
+}
+
+.search-elements {  
+  display: inline-block;
+}
+
+.icon-search-submit {
+  border: 0px;
+  background-color: #FFFFFF;
+}
+
+
+.search-input {
+  padding: 5%;
+  border-top-style: none;
+  border-right-style: none;
+  border-bottom-style: solid;
+  border-left-style: none;
+  border-bottom-color: black;
+  border-bottom-width: 1px;
+}
+
+.search-input:focus {
+  border-bottom-width: 2px;
+}

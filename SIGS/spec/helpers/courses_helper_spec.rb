@@ -38,6 +38,5 @@ RSpec.describe CoursesHelper, type: :helper do
       expect(@department_assistant.id).to eq(@department_assistant_test.id)
       expect(@department_assistant).to_not eq(nil)
     end
-
   end
 end

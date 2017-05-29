@@ -11,6 +11,7 @@
     <link rel="stylesheet" media="all" href="../assets/css/bootstrap.min.css" />
     <link rel="stylesheet" media="all" href="../assets/css/style.css" />
     <link rel="stylesheet" media="all" href="../assets/css/navbar.css" />
+    <link rel="stylesheet" media="all" href="../assets/css/form.css" />
     <script src="../assets/js/jquery-1.12.4.min.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../assets/js/main.js"></script>
@@ -30,7 +31,6 @@
 					<span class="icon-bar"></span>
 				</button>
 
-
         <ul class="nav navbar-nav" id="myNavBar"></ul>
 
         <figure class="unbLogo">
@@ -40,34 +40,47 @@
         </figure>
       </header>
       <main class="mainConteiner">
-        <h1>Editar Sala</h1>
-
-        <form class="edit_room" id="edit_room_2" action="salas.html">
-
-          <label for="room_name">Código da Sala</label>
-          <input class="form-control" value="bbb" disabled="disabled" type="text" name="room[name]" id="room_name" /><br>
-
-          <label for="room_name">Nome</label>
-          <input class="form-control" value="S10" type="text" name="room[name]" id="room_name" /><br>
-
-          <label for="room_name">Ativo</label>
-          <input name="room[active]" type="hidden" value="0" /><input class="form-control" style="text-align:left; width: auto" type="checkbox" value="1" checked="checked" name="room[active]" id="room_active" /><br>
-
-          <label for="room_name">Prédio: </label>
-          <input class="form-control" value="Pavilhão João Calmon" disabled="disabled" type="text" name="room[name]" id="room_name" /><br>
-
-          <label for="room_name">Categorias: </label><br>
-          <form action="">
-            <input type="checkbox" name="category" value="Retroprojetor">Retroprojetor<br>
-            <input type="checkbox" name="category" value="Ar_condicionado">Ar condicionado<br>
-            <input type="checkbox" name="category" value="Sala_de_informatica">Sala de informática<br>
-            <input type="checkbox" name="category" value="Laboratório_quimico">Laboratório Químico<br>
-            <input type="checkbox" name="category" value="Sala_de_informatica">Auditório<br>
-          </form>
-
-          <div class='actions'>
-            <input type="submit" name="commit" value="Salvar" class="pull-right btn btn-default btn-success" data-disable-with="Salvar" />
+        <h1>Alterar Turma</h1>
+        <form id="school_room">
+          <label>Disciplina</label>
+          <select>
+            <option>Cálculo 1</option>
+            <option>História da Arte</option>
+            <option>Matemática Discreta</option>
+            <option selected>Literatura</option>
+          </select>
+          <div class="short_input">
+            <label>Nome</label>
+            <input type="text" class="form-control" value="A" disabled="disabled">
+            <label>Capacidade</label>
+            <input type="number" class="form-control">
           </div>
+
+          <p>Cursos</p>
+          <div class="checkbox-group">
+            <input type="checkbox">
+            <label>Engenharia de Software</label>
+            <input type="checkbox">
+            <label>Engenharia Eletrônica</label>
+            <input type="checkbox">
+            <label>Medicina</label>
+            <input type="checkbox">
+            <label>Design</label>
+            <input type="checkbox" checked>
+            <label>Letras</label>
+            <input type="checkbox" checked>
+            <label>Jornalismo</label>
+          </div>
+          <br>
+          <p>Categorias</p>
+          <div class="checkbox-group">
+            <input type="checkbox">
+            <label>Retroprojetor</label>
+            <input type="checkbox">
+            <label>Laboratório Químico</label>
+          </div>
+
+          <input type="submit" value="Alterar Turma" class="btn btn-default btn-success" />
         </form>
       </main>
     </div>

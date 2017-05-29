@@ -1,0 +1,43 @@
+<h1>Turmas - <%= courses_by_user.name %></h1>
+
+<%= form_for(:current_search, url: search_disciplines_path) do |f|%>
+
+  <div class="search-elements">
+    <%= f.text_field :search, placeholder: "Buscar por disciplinas", id: 'input-search-field', class: 'search-input', data: {autocomplete_source: @discipline} %>
+  </div>
+  <div class="search-elements">
+    <%= button_tag type: 'submit', class: "icon-search-submit", id: "searchButton" do %>
+      <i class="fa fa-search fa-lg"></i>
+    <% end %>
+  </div>
+<% end %>
+
+<% if @my_school_rooms.count == 0 %>
+  <h3>Não há turmas cadastradas no momento.</h3>
+<% else %>
+  <table class="table table-hover">
+    <tr>
+      <th>Disciplina</th>
+      <th>Turma</th>
+      <th>Cursos</th>
+      <th>Nº de Vagas</th>
+      <th style="text-align:center">Alterar</th>
+      <th style="text-align:center">Excluir</th>
+    </tr>
+    <% @my_school_rooms.each do |school_room| %>
+      <tr>
+        <td><%= school_room.discipline.name %></td>
+        <td><%= school_room.name %></td>
+        <td>
+          <% school_room.course.each do |course| %>
+            <%= course.name %> <br>
+          <% end %>
+        <td><%= school_room.capacity %></td>
+        </td>
+        <td style="text-align:center"><%= link_to image_tag("icon_edit.png"), school_rooms_edit_path(school_room.id) %></td>
+        <td style="text-align:center"><%= link_to image_tag("icon_trash.png"), destroy_school_room_path(school_room.id), data: {confirm: "Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?"} %></td>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
