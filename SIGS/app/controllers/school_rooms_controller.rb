@@ -82,21 +82,12 @@ class SchoolRoomsController < ApplicationController
   private
 
   def school_rooms_params
-    params[:school_room].permit(
-      :name,
-      :discipline_id,
-      :capacity,
-      course_ids: [],
-      category_ids: []
-    )
+    params[:school_room].permit(:name, :discipline_id, :vacancies,
+                                course_ids: [], category_ids: [])
   end
 
   def school_rooms_params_update
-    params[:school_room].permit(
-      :discipline_id,
-      :capacity,
-      course_ids: [],
-      category_ids: []
-    )
+    params[:school_room].permit(:discipline_id, :vacancies,
+                                course_ids: [], category_ids: [])
   end
 end

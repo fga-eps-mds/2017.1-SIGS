@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170527074352) do
+ActiveRecord::Schema.define(version: 20170530015901) do
 
   create_table "administrative_assistants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -51,16 +51,14 @@ ActiveRecord::Schema.define(version: 20170527074352) do
     t.boolean  "active"
     t.time     "start_time"
     t.time     "final_time"
-    t.date     "day"
-    t.integer  "periodicity",    default: 0
+    t.string   "day"
     t.integer  "user_id"
     t.integer  "room_id"
-    t.string   "allocable_type"
-    t.integer  "allocable_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.index ["allocable_type", "allocable_id"], name: "index_allocations_on_allocable_type_and_allocable_id", using: :btree
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "school_room_id"
     t.index ["room_id"], name: "index_allocations_on_room_id", using: :btree
+    t.index ["school_room_id"], name: "index_allocations_on_school_room_id", using: :btree
     t.index ["user_id"], name: "index_allocations_on_user_id", using: :btree
   end
 
@@ -184,7 +182,7 @@ ActiveRecord::Schema.define(version: 20170527074352) do
   create_table "school_rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.boolean  "active"
-    t.integer  "capacity"
+    t.integer  "vacancies"
     t.integer  "discipline_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
@@ -206,6 +204,7 @@ ActiveRecord::Schema.define(version: 20170527074352) do
   add_foreign_key "allocation_educations", "school_rooms"
   add_foreign_key "allocation_extensions", "extensions"
   add_foreign_key "allocations", "rooms"
+  add_foreign_key "allocations", "school_rooms"
   add_foreign_key "allocations", "users"
   add_foreign_key "coordinators", "courses"
   add_foreign_key "coordinators", "users"

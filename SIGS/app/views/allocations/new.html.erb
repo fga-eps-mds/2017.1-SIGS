@@ -1,2 +1,209 @@
-<h1>Allocations#new</h1>
-<p>Find me in app/views/allocations/new.html.erb</p>
+<h1>Alocação</h1> <br><br>
+
+<label> Turma </label>
+<%= select_tag "sala", options_from_collection_for_select(@school_rooms_coordinator, 'id', 'name'),:include_blank => true %>
+<br><br>
+<div class="flexContainer">
+  <button type="button" class="btn btn-success day_button" data-toggle="modal" data-target="#myModal">Segunda</button>
+  <button type="button" class="btn btn-success day_button" data-toggle="modal" data-target="#myModal1">Terça</button>
+  <button type="button" class="btn btn-success day_button" data-toggle="modal" data-target="#myModal2">Quarta</button>
+  <button type="button" class="btn btn-success day_button" data-toggle="modal" data-target="#myModal3">Quinta</button>
+  <button type="button" class="btn btn-success day_button" data-toggle="modal" data-target="#myModal4">Sexta</button>
+  <button type="button" class="btn btn-success day_button" data-toggle="modal" data-target="#myModal5">Sabado</button>
+</div>
+<div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <h4 class="modal-title">Alocar Segunda</h4>
+          </div>
+          <div class="modal-body">
+            <%= form_for @allocation, url: allocations_create_path do |allocation| %>
+
+              <label> Sala </label>
+              <%= allocation.collection_select(:room_id,@coordinator_rooms,:id,:name, include_blank: true)%>
+
+              <%= allocation.hidden_field :school_room_id, class: 'sala' %>
+              <!-- <label> Turma </label> <%= link_to "+ Criar uma nova turma" , school_rooms_new_path %><br>
+              <%= allocation.collection_select(:school_room_id,@school_rooms_coordinator,:id,:name, include_blank: true) %> -->
+
+              <%= allocation.hidden_field :day, :value => "Segunda" %>
+              <br><br>
+              <label> Hora de inicio: </label><br>
+              <%= allocation.time_field(:start_time) %>
+              <br>
+              <label> Hora de términio: </label><br>
+              <%= allocation.time_field(:final_time) %>
+
+              <%= allocation.submit "Salvar", class: 'pull-right btn btn-default btn-success' %>
+
+            <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<div class="modal fade" id="myModal1" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <h4 class="modal-title">Alocar Terça</h4>
+          </div>
+          <div class="modal-body">
+            <%= form_for @allocation, url: allocations_create_path do |allocation| %>
+
+              <label> Sala </label>
+              <%= allocation.collection_select(:room_id,@coordinator_rooms,:id,:name, include_blank: true)%>
+
+              <%= allocation.hidden_field :school_room_id , class: 'sala' %>
+              <!-- <label> Turma </label> <%= link_to "+ Criar uma nova turma" , school_rooms_new_path %><br>
+              <%= allocation.collection_select(:school_room_id,@school_rooms_coordinator,:id,:name, include_blank: true) %> -->
+
+              <%= allocation.hidden_field :day, :value => "Terça" %>
+              <br><br>
+              <label> Hora de inicio: </label><br>
+              <%= allocation.time_field(:start_time) %>
+              <br>
+              <label> Hora de términio: </label><br>
+              <%= allocation.time_field(:final_time) %>
+
+              <%= allocation.submit "Salvar", class: 'pull-right btn btn-default btn-success' %>
+
+            <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="myModal2" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">×</button>
+              <h4 class="modal-title">Alocar Quarta</h4>
+            </div>
+            <div class="modal-body">
+              <%= form_for @allocation, url: allocations_create_path do |allocation| %>
+
+                <label> Sala </label>
+                <%= allocation.collection_select(:room_id,@coordinator_rooms,:id,:name, include_blank: true)%>
+
+                <%= allocation.hidden_field :school_room_id, class: 'sala' %>
+
+                <%= allocation.hidden_field :day, :value => "Quarta" %>
+                <br><br>
+                <label> Hora de inicio: </label><br>
+                <%= allocation.time_field(:start_time) %>
+                <br>
+                <label> Hora de términio: </label><br>
+                <%= allocation.time_field(:final_time) %>
+
+                <%= allocation.submit "Salvar", class: 'pull-right btn btn-default btn-success' %>
+
+              <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="myModal3" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title">Alocar Quinta</h4>
+              </div>
+              <div class="modal-body">
+                <%= form_for @allocation, url: allocations_create_path do |allocation| %>
+
+                  <label> Sala </label>
+                  <%= allocation.collection_select(:room_id,@coordinator_rooms,:id,:name, include_blank: true)%>
+
+                  <%= allocation.hidden_field :school_room_id, class: 'sala' %>
+
+                  <%= allocation.hidden_field :day, :value => "Quinta" %>
+                  <br><br>
+                  <label> Hora de inicio: </label><br>
+                  <%= allocation.time_field(:start_time) %>
+                  <br>
+                  <label> Hora de términio: </label><br>
+                  <%= allocation.time_field(:final_time) %>
+
+                  <%= allocation.submit "Salvar", class: 'pull-right btn btn-default btn-success' %>
+
+                <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="myModal4" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">×</button>
+                  <h4 class="modal-title">Alocar Sexta</h4>
+                </div>
+                <div class="modal-body">
+                  <%= form_for @allocation, url: allocations_create_path do |allocation| %>
+
+                    <label> Sala </label>
+                    <%= allocation.collection_select(:room_id,@coordinator_rooms,:id,:name, include_blank: true)%>
+
+                    <%= allocation.hidden_field :school_room_id, class: 'sala' %>
+
+                    <%= allocation.hidden_field :day, :value => "Sexta" %>
+                    <br><br>
+                    <label> Hora de inicio: </label><br>
+                    <%= allocation.time_field(:start_time) %>
+                    <br>
+                    <label> Hora de términio: </label><br>
+                    <%= allocation.time_field(:final_time) %>
+
+                    <%= allocation.submit "Salvar", class: 'pull-right btn btn-default btn-success' %>
+
+                  <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="myModal5" role="dialog">
+              <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">Alocar Sabado</h4>
+                  </div>
+                  <div class="modal-body">
+                    <%= form_for @allocation, url: allocations_create_path do |allocation| %>
+
+                      <label> Sala </label>
+                      <%= allocation.collection_select(:room_id,@coordinator_rooms,:id,:name, include_blank: true)%>
+
+                      <%= allocation.hidden_field :school_room_id, class: 'sala' %>
+
+                      <%= allocation.hidden_field :day, :value => "Sabado" %>
+                      <br><br>
+                      <label> Hora de inicio: </label><br>
+                      <%= allocation.time_field(:start_time) %>
+                      <br>
+                      <label> Hora de términio: </label><br>
+                      <%= allocation.time_field(:final_time) %>
+
+                      <%= allocation.submit "Salvar", class: 'pull-right btn btn-default btn-success' %>
+
+                    <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
