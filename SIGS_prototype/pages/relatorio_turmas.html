@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>SIGS</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.ico" />
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Sistema de Alocação de Salas Inteligente da UnB.">
+    <link rel="stylesheet" media="all" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" media="all" href="../assets/css/style.css" />
+    <link rel="stylesheet" media="all" href="../assets/css/navbar.css" />
+    <link rel="stylesheet" media="all" href="../assets/css/form.css" />
+    <script src="../assets/js/jquery-1.12.4.min.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/menu.js"></script>
+  </head>
+  <body>
+    <div class="container container-fluid myContainer">
+      <header class="navbar-default myNav">
+        <figure class="logo">
+          <img src="../assets/img/sigs_logo.png" alt="SIGS Logos" />
+        </figure>
+
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <ul class="nav navbar-nav" id="myNavBar"></ul>
+
+        <figure class="unbLogo">
+          <a href="http://www.unb.br" target="_blank">
+            <img src="../assets/img/rodape_unb.png" alt="SIGS Logos" />
+          </a>
+        </figure>
+      </header>
+
+      <main class="mainConteiner">
+        <h1>Relatório por Turmas</h1>
+        <form action="relatorios_turmas.html">
+          <input type="radio" name="relatorio">
+          <label class="school_room_reports">Todas</label>
+          <input type="radio" name="relatorio">
+          <label class="school_room_reports">Alocadas</label>
+          <input type="radio" name="relatorio">
+          <label class="school_room_reports">Não Alocadas</label>
+          <br>
+          <div class='actions col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+            <input type="submit" value="Gerar" class=" btn btn-default btn-success align-left"/>
+          </div>
+        </form>
+      </main>
+    </div>
+  </body>
+</html>
