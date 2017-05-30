@@ -43,9 +43,9 @@ buildings = Building.create([
   ])
 
 # Rooms
-room_1 = Room.create(code: '124325', name: 'S10', capacity: 50, active: true, time_grid_id: 1, department: department, building: buildings[1])
-room_2 = Room.create(code: '987653', name: 'SS', capacity: 40, active: false, time_grid_id: 2, department: department, building: buildings[2])
-room_3 = Room.create(code: '987655', name: 'S9', capacity: 40, active: false, time_grid_id: 2, department: department_1, building: buildings[2])
+room_1 = Room.create(code: 'S10', name: 'Superior 10', capacity: 50, active: true, time_grid_id: 1, department: department, building: buildings[1])
+room_2 = Room.create(code: 'I9', name: 'Inferior 9', capacity: 40, active: false, time_grid_id: 2, department: department, building: buildings[2])
+room_3 = Room.create(code: 'Linf', name: 'Laboratório de Informática', capacity: 40, active: false, time_grid_id: 2, department: department_1, building: buildings[2])
 
 
 # Disciplines
