@@ -1,0 +1,40 @@
+<h1>Relatório por Sala</h1>
+
+<%= form_for :reports, url: generate_by_room_path do |f| %>
+	<%=f.label :departments, 'Departamento:' %>
+	<%=f.select :departments, @departments.collect {|d| [d.name, d.id] }, class: 'form-control' %>
+
+	<%=f.check_box :all_rooms, style: 'text-align: left; width: auto' %>
+	<%=f.label :all_rooms, 'Todas as salas', style: 'text-align: left; width: auto' %>
+	<br>
+	<br>
+	<%=f.label :filter, 'Filtrar salas pelo código:' %>
+	<span style="color: red;"></span>
+	<%=f.text_field :filter, class: 'form-control', placeholder: 'Digite o código da sala' %>
+
+	<%=f.label :room_code, 'Código da sala:' %>
+	<span style="color: red;"></span>
+	<%=f.select :room_code, @rooms.collect {|d| [d.code, d.id] }, class: 'form-control' %>
+
+	<%=f.label :initial_week, 'Primeira semana:' %>
+	<%=f.select :initial_week, @weeks, class: 'form-control' %>
+	<%=f.label :last_week, 'Última semana:' %>
+	<%=f.select :last_week, @weeks, class: 'form-control' %>
+
+  <%= f.submit "Gerar", class: 'pull-right btn btn-default btn-success' %>
+
+<% end %>
+
+<script type="text/javascript">
+
+  $('input:checkbox').click(function (){
+    $("#reports_filter").prop('disabled', $(this).prop('checked'));
+    $("#reports_room_code").prop('disabled', $(this).prop('checked'));
+    if($(this).prop('checked')){
+      $("span").html("Campo desativado");
+      
+    }else {
+      $("span").html("");
+    }
+  });
+</script>

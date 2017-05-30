@@ -62,7 +62,14 @@
               </li>
             <% end %>
             <li><a href="#">Alocações</a></li>
+             <li class="dropdown">
+                <a data-toggle="collapse" href="#relatorios">Relatórios
+                  <ul class="collapse" id="relatorios">
+                    <li><%= link_to "Salas", reports_by_room_path %></li>
+                  </ul>
+              </li>
           </ul>
+
 
           <figure class="unbLogo"><a href="http://www.unb.br"><%= image_tag("rodape_unb.png") %></a></figure>
         </header>

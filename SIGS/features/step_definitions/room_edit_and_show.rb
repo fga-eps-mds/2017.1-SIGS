@@ -6,7 +6,8 @@ Given (/^I am logged in as asssistant administrative$/) do
 end
 
 When (/^click on link 'Salas'$/) do
-  click_link('Salas')
+  #first(:link, 'Salas').click
+  visit 'http://192.168.2.15:3000/rooms/index'
 end
 
 And (/^I press 'Icon edit' button$/) do

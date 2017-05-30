@@ -69,6 +69,10 @@ Rails.application.routes.draw do
   get 'periods/edit/:id' => 'periods#edit', as: 'period_edit'
   post 'periods/update' => 'periods#update', as: 'period_update'
 
+  # Reports
+  get 'reports/by_room'=> 'reports#by_room', as: 'reports_by_room'
+  get 'reports/generate_by_room' => 'reports#generate_by_room', as: 'generate_by_room' 
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end
