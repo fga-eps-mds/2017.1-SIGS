@@ -69,10 +69,10 @@ Rails.application.routes.draw do
   get 'periods/edit/:id' => 'periods#edit', as: 'period_edit'
   post 'periods/update' => 'periods#update', as: 'period_update'
 
-
   # Allocation
-  get 'allocations/create_education' => 'allocations#create_education'
-  get 'allocations/new_education' => 'allocations#new_education', as: 'allocations_new_education'
+  get 'allocations/new' => 'allocations#new' , :as => 'allocations_new'
+  post 'allocations/create' => 'allocations#create' , :as => 'allocations_create'
+  get 'allocations/destroy/:id', controller: 'allocations', action: 'destroy', as: 'allocations_destroy'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
