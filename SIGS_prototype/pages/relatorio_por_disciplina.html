@@ -44,60 +44,45 @@
       </header>
       <main class="mainConteiner">
         <h1>Relatório por Disciplina</h1>
-        <form action="Relatório_disciplinas.pdf">
-          <label>Departamento</label>
-          <select>
-            <option>Departamento de Física</option>
-            <option>Departamento de Matemática</option>
-            <option>Departamento de Artes</option>
-            <option>Departamento de Design</option>
-          </select>
 
-          <br>
-
-
-          <input type="checkbox" name="" id="salas">
-          <label>Todas as Disciplinas</label>
-
-          <br>
-
-          <label>Filtrar disciplinas pelo nome:(A pessoa digita parte do nome e o select abaixo atualiza de acordo com cada tecla digitada)</label><br>
-          <span style="color: red;"></span>
+        <form action="" accept-charset="UTF-8" class="formDisciplineSearch">
           <div class="search-elements">
-            <input placeholder="Digite o nome da Disciplina" id="input-search-field" class="search-input" type="text" name="current_search[search]" style="width:100%" />
+            <input placeholder="Buscar por disciplinas" id="input-search-field" class="search-input" type="text" name="current_search[search]" />
           </div>
-
-          <label>Nome da Disciplina:</label><br>
-          <span style="color: red;"></span>
-          <select class="disciplina_select">
-            <option>Cálculo 1</option>
-            <option>Cálculo 2</option>
-            <option>Cálculo 3</option>
-            <option>Introdução à Álgebra Linear</option>
-          </select>
-          <br>
-          <br>
-
-
-          <div class='actions'>
-            <input type="submit" name="commit" value="Gerar" class="pull-right btn btn-default btn-success" data-disable-with="Gerar" />
+          <div class="search-elements">
+            <button name="button" type="submit" class="icon-search-submit" id="searchButton">
+              <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            </button>
           </div>
         </form>
-      </main>
+
+        <table class="table table-striped tableDisciplineReport">
+          <thead>
+            <tr>
+              <th>Disciplina</th>
+              <th>Departamento</th>
+              <th>Relatório</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Cálculo 1</td>
+              <td>Departamento de Matemática</td>
+              <td><a href="Relatório_disciplinas.pdf"><img src="../assets/img/icon_pdf.png" alt="Gerar Relatório" /></a></td>
+            </tr>
+            <tr>
+              <td>Cálculo 2</td>
+              <td>Departamento de Matemática</td>
+              <td><a href="Relatório_disciplinas.pdf"><img src="../assets/img/icon_pdf.png" alt="Gerar Relatório" /></a></td>
+            </tr>
+            <tr>
+              <td>Cálculo 3</td>
+              <td>Departamento de Matemática</td>
+              <td><a href="Relatório_disciplinas.pdf"><img src="../assets/img/icon_pdf.png" alt="Gerar Relatório" /></a></td>
+            </tr>
+          </tbody>
+        </table>
+
     </div>
   </body>
 </html>
-
-<script type="text/javascript">
-
-  $('input:checkbox').click(function (){
-    $("#input-search-field").prop('disabled', $(this).prop('checked'));
-    $("#disciplina_select").prop('disabled', $(this).prop('checked'));
-    if($(this).prop('checked')){
-      $("span").html("Campo desativado");
-
-    }else {
-      $("span").html("");
-    }
-  });
-</script>
