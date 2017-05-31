@@ -22,9 +22,16 @@ ActiveRecord::Schema.define(version: 20170530015901) do
   create_table "allocation_extensions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "extension_id"
     t.integer  "user_id"
+    t.integer  "room_id"
+    t.date     "inicial_date"
+    t.date     "final_date"
+    t.string   "periodicity"
+    t.time     "start_time"
+    t.time     "final_time"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.index ["extension_id"], name: "index_allocation_extensions_on_extension_id", using: :btree
+    t.index ["room_id"], name: "index_allocation_extensions_on_room_id", using: :btree
     t.index ["user_id"], name: "index_allocation_extensions_on_user_id", using: :btree
   end
 
@@ -181,6 +188,7 @@ ActiveRecord::Schema.define(version: 20170530015901) do
 
   add_foreign_key "administrative_assistants", "users"
   add_foreign_key "allocation_extensions", "extensions"
+  add_foreign_key "allocation_extensions", "rooms"
   add_foreign_key "allocation_extensions", "users"
   add_foreign_key "allocations", "rooms"
   add_foreign_key "allocations", "school_rooms"
