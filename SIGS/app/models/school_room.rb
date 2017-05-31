@@ -4,7 +4,6 @@
 class SchoolRoom < ApplicationRecord
   belongs_to :discipline
   has_and_belongs_to_many :courses
-  # has_and_belongs_to_many :allocation_educations
   has_and_belongs_to_many :category
   has_many :allocations
 

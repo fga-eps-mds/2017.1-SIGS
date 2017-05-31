@@ -19,32 +19,13 @@ ActiveRecord::Schema.define(version: 20170530015901) do
     t.index ["user_id"], name: "index_administrative_assistants_on_user_id", using: :btree
   end
 
-  create_table "allocation_educations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "school_room_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.index ["school_room_id"], name: "index_allocation_educations_on_school_room_id", using: :btree
-  end
-
-  create_table "allocation_educations_school_rooms", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "allocation_education_id", null: false
-    t.integer "school_room_id",          null: false
-    t.index ["allocation_education_id", "school_room_id"], name: "education_school_room", using: :btree
-    t.index ["school_room_id", "allocation_education_id"], name: "school_room_education", using: :btree
-  end
-
   create_table "allocation_extensions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "extension_id"
+    t.integer  "user_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.index ["extension_id"], name: "index_allocation_extensions_on_extension_id", using: :btree
-  end
-
-  create_table "allocation_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "type"
-    t.integer  "id_son"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_allocation_extensions_on_user_id", using: :btree
   end
 
   create_table "allocations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -145,11 +126,9 @@ ActiveRecord::Schema.define(version: 20170530015901) do
   create_table "extensions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "responsible"
-    t.integer  "capacity"
-    t.integer  "user_id"
+    t.integer  "vacancies"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["user_id"], name: "index_extensions_on_user_id", using: :btree
   end
 
   create_table "parsers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -201,8 +180,8 @@ ActiveRecord::Schema.define(version: 20170530015901) do
   end
 
   add_foreign_key "administrative_assistants", "users"
-  add_foreign_key "allocation_educations", "school_rooms"
   add_foreign_key "allocation_extensions", "extensions"
+  add_foreign_key "allocation_extensions", "users"
   add_foreign_key "allocations", "rooms"
   add_foreign_key "allocations", "school_rooms"
   add_foreign_key "allocations", "users"
@@ -212,7 +191,6 @@ ActiveRecord::Schema.define(version: 20170530015901) do
   add_foreign_key "department_assistants", "departments"
   add_foreign_key "department_assistants", "users"
   add_foreign_key "disciplines", "departments"
-  add_foreign_key "extensions", "users"
   add_foreign_key "rooms", "departments"
   add_foreign_key "school_rooms", "disciplines"
 end

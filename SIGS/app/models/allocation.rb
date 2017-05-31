@@ -3,7 +3,6 @@
 # class that create allocations
 class Allocation < ApplicationRecord
   belongs_to :room
-  # belongs_to :allocable, polymorphic: true
   belongs_to :school_room
   belongs_to :user
 
