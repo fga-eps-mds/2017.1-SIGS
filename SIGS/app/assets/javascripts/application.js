@@ -52,5 +52,9 @@ $(document).ready(function(){
   setTimeout("$(\".alert-success\").show().fadeOut(3000);", 10000);
   setTimeout("$(\".alert-notice\").show().fadeOut(3000);", 10000);
 
-});
+  $(".sala").val($("#sala").val());
 
+  $("#sala").change(function() {
+    $(".sala").val($("#sala").val());
+  });
+});

@@ -3,7 +3,7 @@
 # class that create school rooms
 class SchoolRoomsController < ApplicationController
   before_action :logged_in?
-  before_action :validade_permission_for_school_room
+  before_action :validade_permission_1
 
   def new
     @school_room = SchoolRoom.new
@@ -77,22 +77,13 @@ class SchoolRoomsController < ApplicationController
   private
 
   def school_rooms_params
-    params[:school_room].permit(
-      :name,
-      :discipline_id,
-      :capacity,
-      course_ids: [],
-      category_ids: []
-    )
+    params[:school_room].permit(:name, :discipline_id, :vacancies,
+                                course_ids: [], category_ids: [])
   end
 
   def school_rooms_params_update
-    params[:school_room].permit(
-      :discipline_id,
-      :capacity,
-      course_ids: [],
-      category_ids: []
-    )
+    params[:school_room].permit(:discipline_id, :vacancies,
+                                course_ids: [], category_ids: [])
   end
 
   def school_rooms_of_disciplines(disciplines)

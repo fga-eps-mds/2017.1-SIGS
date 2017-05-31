@@ -14,6 +14,7 @@
 !/tmp/.keep
 *~
 /coverage/*
+/coverage
 .~*
 
 # Ignore Byebug command history file.

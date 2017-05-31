@@ -75,6 +75,11 @@ Rails.application.routes.draw do
   get 'reports/json_of_rooms_by_department' => 'reports#json_of_rooms_by_department'
   get 'reports/json_of_rooms_with_parts_of_name' => 'reports#json_of_rooms_with_parts_of_name'
 
+  # Allocation
+  get 'allocations/new' => 'allocations#new' , :as => 'allocations_new'
+  post 'allocations/create' => 'allocations#create' , :as => 'allocations_create'
+  get 'allocations/destroy/:id', controller: 'allocations', action: 'destroy', as: 'allocations_destroy'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end
