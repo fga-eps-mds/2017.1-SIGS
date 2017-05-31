@@ -61,7 +61,7 @@ class AllocationsController < ApplicationController
         end
       end
       if @no_save == 1 && same_schedule_and_diferent_school_room(@allocation) == false
-        flash[:error] = 'Alocação com horário não vago ou capacidade cheia'
+        flash[:error] = 'Alocação com horário não vago ou capacidade da sala cheia'
       else
         if @allocation.save
           flash[:success] = 'Alocação feita com sucesso'

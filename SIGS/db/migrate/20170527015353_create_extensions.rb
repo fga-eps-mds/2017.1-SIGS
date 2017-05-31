@@ -3,8 +3,7 @@ class CreateExtensions < ActiveRecord::Migration[5.0]
     create_table :extensions do |t|
       t.string :name
       t.string :responsible
-      t.integer :capacity
-      t.references :user, foreign_key: true
+      t.integer :vacancies
 
       t.timestamps
     end

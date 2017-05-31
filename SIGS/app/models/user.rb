@@ -12,6 +12,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :administrative_assistant
   has_secure_password
   has_many :allocations
+  has_many :allocationExtensions
   has_many :school_rooms
 
   # Nome
