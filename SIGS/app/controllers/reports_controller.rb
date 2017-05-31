@@ -9,7 +9,18 @@ class ReportsController < ApplicationController
     @weeks = obtain_weeks_of_period
   end
 
-  def generate_by_room; end
+  def generate_by_room
+    require 'prawn/table'
+    require 'prawn'
+
+    Prawn::Document.generate('public/test.pdf', page_layout: :landscape) do |pdf|
+      pdf.text 'Hello World!'
+      # table_data = Array.new
+      # table_data << ["Product name", "Product category"]
+      # table_data << ['teste', 'teste2']
+      # pdf.table(table_data, :width => 500, :cell_style => { :inline_format => true })
+    end
+  end
 
   def json_of_rooms_by_department
     department_code = params[:department_code]
@@ -26,6 +37,11 @@ class ReportsController < ApplicationController
   end
 
   private
+
+  def report_by_room_params
+    params[:reports_by_room].permit(:departments, :all_rooms, :room_code,
+                                    :initial_week, :last_week)
+  end
 
   def obtain_room_list_with_name_id(rooms)
     rooms.map do |u|

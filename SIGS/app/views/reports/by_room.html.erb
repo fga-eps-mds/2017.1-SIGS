@@ -1,6 +1,6 @@
 <h1>Relatório por Sala</h1>
 
-<%= form_for :reports, url: generate_by_room_path do |f| %>
+<%= form_for :reports_by_room, url: generate_by_room_path do |f| %>
 	<%=f.label :departments, 'Departamento:' %>
 	<%=f.select :departments, @departments.collect {|d| [d.name, d.id] }, class: 'form-control' %>
 
