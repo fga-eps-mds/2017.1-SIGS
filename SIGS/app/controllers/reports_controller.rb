@@ -49,19 +49,16 @@ class ReportsController < ApplicationController
     @allocation = Allocation.all
   end
 
-
   def report_school_room_allocation
     @allocation = Allocation.all
-
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: "report_school_room_allocation",
-        layout: 'pdf'
+        render pdf: 'report_school_room_allocation',
+               layout: 'pdf'
       end
     end
   end
-
 
   def report_school_room_not_allocation
     @allocation = Allocation.all
@@ -108,5 +105,4 @@ class ReportsController < ApplicationController
       initial_day += 7.days
     end
   end
-
 end
