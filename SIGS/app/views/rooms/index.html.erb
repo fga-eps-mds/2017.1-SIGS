@@ -21,6 +21,11 @@
       <%= label_tag("Prédio") %>
       <%= select_tag 'building_id', options_from_collection_for_select(@buildings, "id", "name"), include_blank: true %>
     </td>
+
+    <td>
+      <%= label_tag("Ala") %>
+      <%= select_tag 'wing_id', options_from_collection_for_select(@buildings, "id", "wing"), include_blank: true %>
+    </td>
   </tr>
 
   <tr>
@@ -33,7 +38,9 @@
     <%= label_tag(:active_inativa, "Inativa") %>
       <%= radio_button_tag(:ativo, "inativa", :id => "id_anative") %>
     </td>
-    <td><%= submit_tag "Submit"%></td>
+  </tr>
+  <tr>
+    <td><%= submit_tag "Pesquisar"%></td>
   </tr>
 
 </table>
