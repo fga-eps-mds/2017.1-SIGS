@@ -12,9 +12,11 @@ department_1 = Department.create(code: '781', name: 'PRC')
 department_2 = Department.create(code: '156', name: 'Artes')
 
 # Courses
-course = Course.create(code: '10', name: 'Engenharia de Software', department: department)
-course = Course.create(code: '12', name: 'Engenharia Eletrônica', department: department)
-course2 = Course.create(code: '09', name: 'Artes Visuais', department: department_2)
+course = Course.create(code: '10', name: 'Engenharia de Software', department: department, shift: 1)
+course = Course.create(code: '12', name: 'Engenharia Eletrônica', department: department, shift: 1)
+course1 = Course.create(code: '12', name: 'Engenharia Automotiva', department: department, shift: 2)
+course2 = Course.create(code: '09', name: 'Artes Visuais', department: department_2, shift: 1)
+
 
 # Users - Coordinator
 user_1 = User.create(name: 'Caio Filipe', email: 'caio@unb.br', cpf: '05012345678', registration: '1234567', active: true, password: '123456')
@@ -42,11 +44,14 @@ buildings = Building.create([
   {code: 'BSAN', name: 'Bloco de Salas da Ala Norte', wing: 'norte'}
   ])
 
-# Rooms
-room_1 = Room.create(code: '124325', name: 'S10', capacity: 50, active: true, time_grid_id: 1, department: department, building: buildings[1])
-room_2 = Room.create(code: '987653', name: 'SS', capacity: 40, active: false, time_grid_id: 2, department: department, building: buildings[2])
-room_3 = Room.create(code: '987655', name: 'S9', capacity: 40, active: false, time_grid_id: 2, department: department_1, building: buildings[2])
+# Categories
+category = Category.create(name: 'Retroprojetor')
+category = Category.create(name: 'Laboratório Químico')
 
+# Rooms
+room_1 = Room.create(code: 'S10', name: 'Superior 10', capacity: 50, active: true, time_grid_id: 1, department: department, building: buildings[1], category_ids: [category.id])
+room_2 = Room.create(code: 'I9', name: 'Inferior 9', capacity: 40, active: false, time_grid_id: 2, department: department, building: buildings[2], category_ids: [category.id])
+room_3 = Room.create(code: 'Linf', name: 'Laboratório de Informática', capacity: 40, active: false, time_grid_id: 2, department: department_1, building: buildings[2], category_ids: [category.id])
 
 # Disciplines
 discipline = Discipline.create(code: '876', name: 'Cálculo 3', department: department)
@@ -54,20 +59,15 @@ discipline_2 = Discipline.create(code: '777', name: 'Cálculo 2', department: de
 discipline_3 = Discipline.create(code: '773', name: 'Cálculo 1', department: department)
 discipline_4 = Discipline.create(code: '774', name: 'Artes Visuais', department: department_2)
 
-#SchoolRooms
-school_room = SchoolRoom.create(name:"A", capacity: 50, discipline: discipline)
-school_room2 = SchoolRoom.create(name:"B", capacity: 35, discipline: discipline)
-school_room2 = SchoolRoom.create(name:"B", capacity: 35, discipline: discipline_3)
-school_room3 = SchoolRoom.create(name:"A", capacity: 35, discipline: discipline_3)
-school_room4 = SchoolRoom.create(name:"C", capacity: 35, discipline: discipline_3)
-school_room4 = SchoolRoom.create(name:"A", capacity: 45, discipline: discipline_4)
-school_room5 = SchoolRoom.create(name:"B", capacity: 45, discipline: discipline_4)
-
-#Categoris
-category = Category.create(name: 'Retroprojetor')
-category = Category.create(name: 'Laboratório Químico')
+# SchoolRooms
+school_room_1 = SchoolRoom.create(name:'A', active:true, discipline: discipline, vacancies: 40, course_ids: [course.id])
+school_room_2 = SchoolRoom.create(name:'B', active:true, discipline: discipline_3, vacancies: 60, course_ids: [course1.id])
+school_room_3 = SchoolRoom.create(name:'C', active:true, discipline: discipline_2, vacancies: 40, course_ids: [course.id])
 
 # Periods
 period_1 = Period.create(period_type:'Alocação', initial_date: DateTime.strptime('10-01-2018 00:00', '%d-%m-%Y %H:%M'), final_date: DateTime.strptime('01-02-2018 18:00', '%d-%m-%Y %H:%M'))
 period_2 = Period.create(period_type:'Ajuste', initial_date: DateTime.strptime('23-02-2018 00:00', '%d-%m-%Y %H:%M'), final_date: DateTime.strptime('01-03-2018 16:32', '%d-%m-%Y %H:%M'))
 period_3 = Period.create(period_type:'Letivo', initial_date: DateTime.strptime('08-03-2018 00:00', '%d-%m-%Y %H:%M'), final_date: DateTime.strptime('14-07-2018 23:59', '%d-%m-%Y %H:%M'))
+
+# Allocations
+# allocation1 = Allocation.create(user_id: user_1.id,room_id: room_1.id, school_room_id: school_room_2.id, day: "Segunda", start_time: '12:00:00', final_time: '14:00:00')

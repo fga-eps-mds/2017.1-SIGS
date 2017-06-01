@@ -11,11 +11,10 @@ $(document).ready(function (){
   addItem("Salas", "salas", "Salas");
   addItem("Categorias", "categorias", "Salas");
   menuDropdown("Alocações");
-  addItem("Graduação", "home", "Alocações");
-  addItem("Extensão", "home", "Alocações");
+  addItem("Graduação", "home", "Alocações")
+  addItem("Extensão", "home", "Alocações")
   menuDropdown("Relatórios");
-  addItem("por Sala", "relatorio_por_sala", "Relatórios");
-  addItem("por Disciplina", "relatorio_por_disciplina", "Relatórios");
+  addItem("por Sala", "relatorio_por_sala", "Relatórios")
 });
 
 function addItem(name, page, father) {
