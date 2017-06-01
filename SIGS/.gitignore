@@ -10,8 +10,10 @@
 # Ignore all logfiles, tempfiles and coverage.
 /log/*
 /tmp/*
+/public/reports
 !/log/.keep
 !/tmp/.keep
+!/public/reports/.keep
 *~
 /coverage/*
 /coverage
