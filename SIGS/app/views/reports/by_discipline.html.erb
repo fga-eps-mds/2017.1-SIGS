@@ -1,0 +1,12 @@
+<h1>Relatório por Disciplina</h1>
+
+<%= form_for :reports_by_discipline, url: reports_by_discipline_post_path do |f| %>
+
+	<%= f.text_field :filter, class: 'form-control', placeholder: 'Buscar por disciplinas' %>
+  <%= f.submit "Gerar", class: 'pull-right btn btn-default btn-success' %>
+
+<% end %>
+
+<% @disciplines.each do |discipline| %>
+
+<% end %>

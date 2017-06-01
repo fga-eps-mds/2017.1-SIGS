@@ -9,6 +9,20 @@ class ReportsController < ApplicationController
     @weeks = obtain_weeks_of_period
   end
 
+  def by_discipline
+    if params[:discipline].present?
+      @disciplines = @disciplines.where("discipline like ?", "%#{params[:discipline]}%")
+    else
+      @disciplines = Discipline.all
+    end
+  end
+
+  def generate_by_discipline
+    require 'prawn/table'
+    require 'prawn'
+  end
+
+
   def generate_by_room
     require 'prawn/table'
     require 'prawn'
