@@ -24,7 +24,8 @@
 
     <td>
       <%= label_tag("Ala") %>
-      <%= select_tag 'wing_id', options_from_collection_for_select(@buildings, "id", "wing"), include_blank: true %>
+      <% itens = [["Norte", "1"], ["Central", "2"], ["Sul", "3"]] %>
+      <%= select_tag 'wing_id', options_for_select(itens, " "), include_blank: true %>
     </td>
   </tr>
 
