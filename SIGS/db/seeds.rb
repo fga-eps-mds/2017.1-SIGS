@@ -55,9 +55,13 @@ discipline_3 = Discipline.create(code: '773', name: 'Cálculo 1', department: de
 discipline_4 = Discipline.create(code: '774', name: 'Artes Visuais', department: department_2)
 
 #SchoolRooms
-school_room = SchoolRoom.create(name:"A",active:true, capacity: 50, discipline: discipline)
-school_room2 = SchoolRoom.create(name:"B",active:true, capacity: 35, discipline: discipline)
-school_room2 = SchoolRoom.create(name:"B",active:true, capacity: 35, discipline: discipline_4)
+school_room = SchoolRoom.create(name:"A", capacity: 50, discipline: discipline)
+school_room2 = SchoolRoom.create(name:"B", capacity: 35, discipline: discipline)
+school_room2 = SchoolRoom.create(name:"B", capacity: 35, discipline: discipline_3)
+school_room3 = SchoolRoom.create(name:"A", capacity: 35, discipline: discipline_3)
+school_room4 = SchoolRoom.create(name:"C", capacity: 35, discipline: discipline_3)
+school_room4 = SchoolRoom.create(name:"A", capacity: 45, discipline: discipline_4)
+school_room5 = SchoolRoom.create(name:"B", capacity: 45, discipline: discipline_4)
 
 #Categoris
 category = Category.create(name: 'Retroprojetor')
