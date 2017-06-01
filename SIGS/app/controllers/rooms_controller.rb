@@ -38,8 +38,8 @@ class RoomsController < ApplicationController
 
   def filter_by_wings
     if params[:building_id].present?
-      @rooms = @rooms.where(building_id: params[:building_id].to_s)
-      puts @rooms
+      @building = @building.where(building_id: params[:building_id].to_s)
+      @rooms = @rooms.where(building_id: params[:wing_id].to_s)
     else
       @rooms
     end
