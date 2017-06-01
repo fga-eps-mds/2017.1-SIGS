@@ -76,6 +76,7 @@ Rails.application.routes.draw do
   get 'reports/json_of_rooms_with_parts_of_name' => 'reports#json_of_rooms_with_parts_of_name'
   post 'reports/generate_by_room' => 'reports#generate_by_room'
 
+  post 'reports/generate_by_discipline' => 'reports#generate_by_discipline', as: 'generate_by_discipline'
   get 'reports/by_discipline' => 'reports#by_discipline', as: 'reports_by_discipline'
   post 'reports/by_discipline' => 'reports#by_discipline', as: 'reports_by_discipline_post'
 

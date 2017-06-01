@@ -11,7 +11,7 @@ class ReportsController < ApplicationController
 
   def by_discipline
     if params[:discipline].present?
-      @disciplines = @disciplines.where("discipline like ?", "%#{params[:discipline]}%")
+      @disciplines = @disciplines.where("name like ?", "%#{params[:discipline]}%")
     else
       @disciplines = Discipline.all
     end

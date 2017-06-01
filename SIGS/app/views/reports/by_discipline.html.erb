@@ -2,11 +2,27 @@
 
 <%= form_for :reports_by_discipline, url: reports_by_discipline_post_path do |f| %>
 
-	<%= f.text_field :filter, class: 'form-control', placeholder: 'Buscar por disciplinas' %>
+	<%= f.text_field :discipline, class: 'form-control', placeholder: 'Buscar por disciplinas' %>
   <%= f.submit "Gerar", class: 'pull-right btn btn-default btn-success' %>
 
 <% end %>
 
-<% @disciplines.each do |discipline| %>
-
+<h1>Salas</h1>
+<% if @disciplines.count == 0 %>
+  <h3>Não há salas registradas no momento.</h3>
+<% else %>
+  <table class="table table-hover">
+    <tr>
+      <td>Disciplina</td>
+      <td>Departamento</td>
+      <td>Relatório</td>
+    </tr>
+    <% @disciplines.each do |discipline| %>
+      <tr>
+        <td><%= discipline.name %></td>
+        <td><%= discipline.department.name %></td>
+				<td style="text-align:center"><%= link_to image_tag("icon_pdf.png"), generate_by_discipline_path(discipline.id) %></td>
+      </tr>
+    <% end %>
 <% end %>
+</table>
