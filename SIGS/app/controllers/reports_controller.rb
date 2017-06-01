@@ -44,6 +44,30 @@ class ReportsController < ApplicationController
     render inline: obtain_room_list_with_name_id(rooms).to_json
   end
 
+  def report_school_room_all
+    @school_room = SchoolRoom.all
+    @allocation = Allocation.all
+  end
+
+
+  def report_school_room_allocation
+    @allocation = Allocation.all
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "report_school_room_allocation",
+        layout: 'pdf'
+      end
+    end
+  end
+
+
+  def report_school_room_not_allocation
+    @allocation = Allocation.all
+    @school_room = SchoolRoom.select(@allocation.school_room.id).distinct
+  end
+
   private
 
   def report_by_room_params
@@ -84,4 +108,5 @@ class ReportsController < ApplicationController
       initial_day += 7.days
     end
   end
+
 end

@@ -75,6 +75,9 @@ Rails.application.routes.draw do
   get 'reports/json_of_rooms_by_department' => 'reports#json_of_rooms_by_department'
   get 'reports/json_of_rooms_with_parts_of_name' => 'reports#json_of_rooms_with_parts_of_name'
   post 'reports/generate_by_room' => 'reports#generate_by_room'
+  get 'reports/school_room_all' => 'reports#report_school_room_all'
+  get 'reports/school_room_allocation' => 'reports#report_school_room_allocation'
+  get 'reports/school_room_not_allocation' => 'reports#report_school_room_not_allocation'
 
   # Allocation
   get 'allocations/new' => 'allocations#new' , :as => 'allocations_new'
