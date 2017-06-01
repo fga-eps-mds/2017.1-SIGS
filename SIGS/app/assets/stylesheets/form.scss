@@ -9,8 +9,13 @@
   margin-bottom:20px;
 }
 
-.myContainer input[type="number"]{
+.myContainer input[type="number"] {
   width: 100px;
+}
+
+.myContainer input[type="date"],
+.myContainer input[type="time"] {
+  width: 150px;
 }
 
 .myContainer input[type="submit"] {
@@ -55,6 +60,10 @@
     width: auto;
     margin-right: 10px;
   }
+}
+
+.short_input {
+  max-width: 50%;
 }
 
 .short_input select{

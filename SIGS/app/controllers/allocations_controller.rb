@@ -66,7 +66,7 @@ class AllocationsController < ApplicationController
         if @allocation.save
           flash[:success] = 'Alocação feita com sucesso'
         else
-          flash[:error] = 'Alocação não realizada'
+          flash[:error] = 'Falha ao realizar alocação'
         end
       end
       redirect_to allocations_new_path
@@ -87,7 +87,6 @@ class AllocationsController < ApplicationController
                                :school_room_id,
                                :day,
                                :start_time,
-                               :final_time
-                               )
+                               :final_time)
   end
 end

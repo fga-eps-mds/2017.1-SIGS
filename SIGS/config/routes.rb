@@ -74,6 +74,13 @@ Rails.application.routes.draw do
   post 'allocations/create' => 'allocations#create' , :as => 'allocations_create'
   get 'allocations/destroy/:id', controller: 'allocations', action: 'destroy', as: 'allocations_destroy'
 
+  # allocation_extension
+  get 'allocation_extensions/new' => 'allocation_extensions#new' , :as => 'allocation_extensions_new'
+  post 'allocation_extensions/create' => 'allocation_extensions#create' , :as => 'allocation_extensions_create'
+
+  # Extension
+  post 'extensions/create' => 'extensions#create' , :as => 'extensions_create'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end
