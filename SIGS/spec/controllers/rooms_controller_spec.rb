@@ -1,5 +1,4 @@
 require 'rails_helper'
-include SessionsHelper
 
 RSpec.describe RoomsController, type: :controller do
 
@@ -33,15 +32,8 @@ RSpec.describe RoomsController, type: :controller do
     end
 
     it 'should return all room' do
-      sign_in(@user)
       get :index
       expect(response).to have_http_status(200)
-    end
-
-    it 'should return nil' do
-      sign_in(@user)
-      get :index
-      expect(@rooms).to be_nil
     end
 
     it 'should return edit room' do
