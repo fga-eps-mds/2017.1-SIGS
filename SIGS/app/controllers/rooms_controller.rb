@@ -8,12 +8,13 @@ class RoomsController < ApplicationController
     @rooms = Room.all
     @buildings = Building.all
 
-    if params[:name].present? || params[:code].present? ||
+    if params[:name].present? || params[:code].present? || params[:wing_id].present? ||
        params[:capacity].present? || params[:building_id].present?
 
       filter_by_name_and_code
       filter_by_capacity
       filter_by_buildings
+      filter_by_wings
     else
       @rooms = Room.all
     end
@@ -30,6 +31,15 @@ class RoomsController < ApplicationController
   def filter_by_buildings
     if params[:building_id].present?
       @rooms = @rooms.where(building_id: params[:building_id].to_s)
+    else
+      @rooms
+    end
+  end
+
+  def filter_by_wings
+    if params[:building_id].present?
+      @rooms = @rooms.where(building_id: params[:building_id].to_s)
+      puts @rooms
     else
       @rooms
     end
