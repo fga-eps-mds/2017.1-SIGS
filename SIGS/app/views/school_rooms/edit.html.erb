@@ -4,11 +4,11 @@
   <label>Disciplina </label>
   <%= school_room.select :discipline_id, get_disciplines(current_user).collect {|d| [d.name, d.id] }%>
 
-  <div class="short_input">
+  <div>
     <%= school_room.label :name, "Turma" %>
     <%= school_room.text_field :name, class: 'form-control', id: 'school_room_name', :disabled => true  %>
-    <%= school_room.label :capacity, "Capacidade" %>
-    <%= school_room.number_field :capacity, class: 'form-control' %>
+    <%= school_room.label :vacancies, "Capacidade" %>
+    <%= school_room.number_field :vacancies, class: 'form-control' %>
   </div>
 
   <p> Cursos</p>
