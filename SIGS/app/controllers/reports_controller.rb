@@ -80,6 +80,13 @@ class ReportsController < ApplicationController
                (initial_day + 5.days).strftime('%d/%m/%Y').to_s,
                size: 18, style: :bold
       pdf.text "Sala: #{room_name}", size: 18, style: :bold, align: :center
+      data = [[' ', 'Segunda-feira', 'Terça-feira',
+               'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado']]
+      pdf.table(data, width: 750) do |t|
+        t.before_rendering_page do |page|
+          page.row(0).font_style = :bold
+        end
+      end
       new_page = true
       initial_day += 7.days
     end
