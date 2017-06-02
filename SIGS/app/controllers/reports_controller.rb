@@ -45,8 +45,7 @@ class ReportsController < ApplicationController
   end
 
   def report_school_room_all
-    @school_room = SchoolRoom.all
-    @allocation = Allocation.all
+    report_school_room_not_allocation
   end
 
   def report_school_room_allocation
@@ -55,7 +54,14 @@ class ReportsController < ApplicationController
 
   def report_school_room_not_allocation
     @allocation = Allocation.all
-    @school_room = SchoolRoom.where('id NOT IN (?)', @allocation)
+    id_school_room = []
+    cont_id = 0;
+    @allocation.each do |allocation|
+      id_school_room[cont_id] = allocation.school_room_id
+      cont_id += 1
+    end
+
+    @school_room = SchoolRoom.where('id NOT IN (?)', id_school_room)
   end
 
   private
