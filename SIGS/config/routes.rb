@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'categories/destroy/:id', controller: 'categories', action: 'destroy', as: 'categories_destroy'
 
 
+
   # Sessions
   get 'sign_in' => 'sessions#new'
   post 'sign_in' => 'sessions#create'
@@ -78,6 +79,7 @@ Rails.application.routes.draw do
   get 'reports/school_room_all' => 'reports#report_school_room_all'
   get 'reports/school_room_allocation' => 'reports#report_school_room_allocation'
   get 'reports/school_room_not_allocation' => 'reports#report_school_room_not_allocation'
+  get 'reports/school_room_turmas' => 'reports#turmas_reports'
 
   # Allocation
   get 'allocations/new' => 'allocations#new' , :as => 'allocations_new'

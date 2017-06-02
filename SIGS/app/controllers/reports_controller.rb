@@ -48,16 +48,12 @@ class ReportsController < ApplicationController
     @school_room = SchoolRoom.all
     @allocation = Allocation.all
   end
+  def turmas_reports
+
+  end
 
   def report_school_room_allocation
     @allocation = Allocation.all
-    respond_to do |format|
-      format.html
-      format.pdf do
-        render pdf: 'report_school_room_allocation',
-               layout: 'pdf'
-      end
-    end
   end
 
   def report_school_room_not_allocation
