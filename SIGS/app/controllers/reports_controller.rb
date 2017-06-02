@@ -9,10 +9,38 @@ class ReportsController < ApplicationController
     @weeks = obtain_weeks_of_period
   end
 
+  # def by_discipline
+  #   if params[:discipline].present?
+  #     @disciplines = @disciplines.where("name like ?", "%#{params[:discipline]}%")
+  #   else
+  #     @disciplines = Discipline.all
+  #   end
+  # end
+
   def by_discipline
     if params[:discipline].present?
-      @disciplines = @disciplines.where("name like ?", "%#{params[:discipline]}%")
+      @disciplines.columns.each do |attr|
+        if params[:"#{attr.name}"].present?
+          @disciplines = @disciplines.where("#{attr.name} like ?", "%#{params[attr.name]}%")
+        end
+      end
     else
+      puts "ALOOOOOOOOOOOOOOOOOOOOOO"
+      puts "ALOOOOOOOOOOOOOOOOOOOOOO"
+      puts "ALOOOOOOOOOOOOOOOOOOOOOO"
+      puts "ALOOOOOOOOOOOOOOOOOOOOOO"
+      puts "ALOOOOOOOOOOOOOOOOOOOOOO"
+      puts "ALOOOOOOOOOOOOOOOOOOOOOO"
+      puts "ALOOOOOOOOOOOOOOOOOOOOOO"
+      puts "ALOOOOOOOOOOOOOOOOOOOOOO"
+      puts "ALOOOOOOOOOOOOOOOOOOOOOO"
+      puts "ALOOOOOOOOOOOOOOOOOOOOOO"
+      puts "ALOOOOOOOOOOOOOOOOOOOOOO"
+      puts "ALOOOOOOOOOOOOOOOOOOOOOO"
+      puts "ALOOOOOOOOOOOOOOOOOOOOOO"
+      puts "ALOOOOOOOOOOOOOOOOOOOOOO"
+      puts "ALOOOOOOOOOOOOOOOOOOOOOO"
+      puts "ALOOOOOOOOOOOOOOOOOOOOOO"
       @disciplines = Discipline.all
     end
   end
