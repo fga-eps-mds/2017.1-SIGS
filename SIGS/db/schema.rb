@@ -10,13 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170530015901) do
+ActiveRecord::Schema.define(version: 20170601211446) do
 
   create_table "administrative_assistants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_administrative_assistants_on_user_id", using: :btree
+  end
+
+  create_table "all_allocation_dates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.date     "day"
+    t.integer  "allocation_id"
+    t.integer  "allocation_extension_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.index ["allocation_extension_id"], name: "index_all_allocation_dates_on_allocation_extension_id", using: :btree
+    t.index ["allocation_id"], name: "index_all_allocation_dates_on_allocation_id", using: :btree
   end
 
   create_table "allocation_extensions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -144,8 +154,8 @@ ActiveRecord::Schema.define(version: 20170530015901) do
   end
 
   create_table "periods", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.datetime "initial_date"
-    t.datetime "final_date"
+    t.date     "initial_date"
+    t.date     "final_date"
     t.string   "period_type"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
@@ -187,6 +197,8 @@ ActiveRecord::Schema.define(version: 20170530015901) do
   end
 
   add_foreign_key "administrative_assistants", "users"
+  add_foreign_key "all_allocation_dates", "allocation_extensions"
+  add_foreign_key "all_allocation_dates", "allocations"
   add_foreign_key "allocation_extensions", "extensions"
   add_foreign_key "allocation_extensions", "rooms"
   add_foreign_key "allocation_extensions", "users"
