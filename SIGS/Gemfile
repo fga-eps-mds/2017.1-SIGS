@@ -6,6 +6,8 @@ git_source(:github) do |repo_name|
 end
 
 ruby "2.3.1"
+# Gem to generate PDF
+gem 'prawn-table'
 
 gem 'rubocop', '~> 0.48.1', require: false
 
