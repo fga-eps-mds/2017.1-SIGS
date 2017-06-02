@@ -48,9 +48,6 @@ class ReportsController < ApplicationController
     @school_room = SchoolRoom.all
     @allocation = Allocation.all
   end
-  def turmas_reports
-
-  end
 
   def report_school_room_allocation
     @allocation = Allocation.all
@@ -58,7 +55,7 @@ class ReportsController < ApplicationController
 
   def report_school_room_not_allocation
     @allocation = Allocation.all
-    @school_room = SchoolRoom.select(@allocation.school_room.id).distinct
+    @school_room = SchoolRoom.where('id NOT IN (?)', @allocation)
   end
 
   private
