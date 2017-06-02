@@ -110,8 +110,8 @@ class ReportsController < ApplicationController
   end
 
   def generate_discipline_page_report(pdf, discipline_name)
-    pdf.text "Relatório de Alocação por Disciplina"
-    pdf.text "#{discipline_name.name}"
+    pdf.text 'Relatório de Alocação por Disciplina'
+    pdf.text discipline_name.name.to_s
     pdf.text "Departamento de #{discipline_name.department.name}"
   end
 
