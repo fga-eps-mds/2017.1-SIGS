@@ -23,26 +23,11 @@ class ReportsController < ApplicationController
     if params[:name].present?
       @disciplines.columns.each do |attr|
         if params[:"#{attr.name}"].present?
-          @disciplines = @disciplines.where("#{attr.name} like ?", "%#{params[attr.name]}%")
+          @disciplines = @disciplines.where("#{attr.name} like ?",
+                                            "%#{params[attr.name]}%")
         end
       end
     else
-      puts "ALOOOOOOOOOOOOOOOOOOOOOO"
-      puts "ALOOOOOOOOOOOOOOOOOOOOOO"
-      puts "ALOOOOOOOOOOOOOOOOOOOOOO"
-      puts "ALOOOOOOOOOOOOOOOOOOOOOO"
-      puts "ALOOOOOOOOOOOOOOOOOOOOOO"
-      puts "ALOOOOOOOOOOOOOOOOOOOOOO"
-      puts "ALOOOOOOOOOOOOOOOOOOOOOO"
-      puts "ALOOOOOOOOOOOOOOOOOOOOOO"
-      puts "ALOOOOOOOOOOOOOOOOOOOOOO"
-      puts "ALOOOOOOOOOOOOOOOOOOOOOO"
-      puts "ALOOOOOOOOOOOOOOOOOOOOOO"
-      puts "ALOOOOOOOOOOOOOOOOOOOOOO"
-      puts "ALOOOOOOOOOOOOOOOOOOOOOO"
-      puts "ALOOOOOOOOOOOOOOOOOOOOOO"
-      puts "ALOOOOOOOOOOOOOOOOOOOOOO"
-      puts "ALOOOOOOOOOOOOOOOOOOOOOO"
       @disciplines = Discipline.all
     end
   end
@@ -51,7 +36,6 @@ class ReportsController < ApplicationController
     require 'prawn/table'
     require 'prawn'
   end
-
 
   def generate_by_room
     require 'prawn/table'
