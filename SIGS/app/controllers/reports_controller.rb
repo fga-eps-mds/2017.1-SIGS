@@ -35,6 +35,15 @@ class ReportsController < ApplicationController
   def generate_by_discipline
     require 'prawn/table'
     require 'prawn'
+
+    discipline_name = Discipline.find(params[:id])
+
+    Prawn::Document.generate("public/reports/#{discipline_name.name}.pdf",
+                             page_size: 'A4',
+                             page_layout: :landscape) do |pdf|
+      generate_discipline_page_report(pdf, discipline_name)
+    end
+    redirect_to "/reports/#{discipline_name.name}.pdf"
   end
 
   def generate_by_room
@@ -98,6 +107,12 @@ class ReportsController < ApplicationController
       puts date.to_s
     end
     weeks
+  end
+
+  def generate_discipline_page_report(pdf, discipline_name)
+    pdf.text "Relatório de Alocação por Disciplina"
+    pdf.text "#{discipline_name.name}"
+    pdf.text "Departamento de #{discipline_name.department.name}"
   end
 
   def generate_room_page_report(pdf, room_name, initial_day, last_day)
