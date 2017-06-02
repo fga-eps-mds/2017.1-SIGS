@@ -2,8 +2,8 @@
 
 <%= form_tag(reports_by_discipline_post_path, :method => :post) do %>
 
-	<%= text_field_tag 'discipline', nil, class: 'form-control', placeholder: 'Buscar por disciplinas' %>
-  <%= f.submit "Pesquisar", class: 'pull-right btn btn-default btn-success' %>
+	<%= text_field_tag 'name', nil, class: 'form-control', placeholder: 'Buscar por disciplinas' %>
+  <%= submit_tag "Pesquisar", class: 'pull-right btn btn-default btn-success' %>
 
 <% end %>
 
