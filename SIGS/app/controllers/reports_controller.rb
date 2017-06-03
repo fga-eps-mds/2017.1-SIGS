@@ -9,14 +9,6 @@ class ReportsController < ApplicationController
     @weeks = obtain_weeks_of_period
   end
 
-  # def by_discipline
-  #   if params[:discipline].present?
-  #     @disciplines = @disciplines.where("name like ?", "%#{params[:discipline]}%")
-  #   else
-  #     @disciplines = Discipline.all
-  #   end
-  # end
-
   def by_discipline
     @disciplines = Discipline.all
 
@@ -36,14 +28,21 @@ class ReportsController < ApplicationController
     require 'prawn/table'
     require 'prawn'
 
-    discipline_id = Discipline.find(params[:id])
+    discipline = Discipline.find(params[:id])
 
-    Prawn::Document.generate("public/reports/#{discipline_id.name}.pdf",
+    Prawn::Document.generate("public/reports/#{discipline.name}.pdf",
                              page_size: 'A4',
                              page_layout: :landscape) do |pdf|
-      generate_discipline_page_report(pdf, discipline_id)
+      pdf.image 'app/assets/images/logo_pdf.jpg', width: 770, height: 66
+      pdf.move_down 20
+      pdf.text 'Relatório de Alocação por Disciplina', size: 18, align: :center
+      pdf.move_down 10
+      pdf.text discipline.name.to_s, size: 14, style: :bold, align: :center
+      pdf.text "Departamento de #{discipline.department.name}", align: :center
+      pdf.move_down 20
+      generate_discipline_page_report(pdf, discipline)
     end
-    redirect_to "/reports/#{discipline_id.name}.pdf"
+    redirect_to "/reports/#{discipline.name}.pdf"
   end
 
   def generate_by_room
@@ -59,10 +58,6 @@ class ReportsController < ApplicationController
                              page_size: 'A4',
                              page_layout: :landscape) do |pdf|
       generate_room_page_report(pdf, room_name, initial_day, last_day)
-      # table_data = Array.new
-      # table_data << ["Product name", "Product category"]
-      # table_data << ['teste', 'teste2']
-      # pdf.table(table_data, :width => 500, :cell_style => { :inline_format => true })
     end
     redirect_to "/reports/#{time}.pdf"
   end
@@ -109,55 +104,39 @@ class ReportsController < ApplicationController
     weeks
   end
 
-  def generate_discipline_page_report(pdf, discipline_id)
-    pdf.image "app/assets/images/logo_pdf.jpg", :width => 770, :height => 66
-    pdf.move_down 20
-    pdf.text 'Relatório de Alocação por Disciplina', size: 18, align: :center
-    pdf.move_down 10
-    pdf.text discipline_id.name.to_s, size: 14, style: :bold, align: :center
-    pdf.text "Departamento de #{discipline_id.department.name}", align: :center
-    pdf.move_down 20
-
-    @school_rooms = SchoolRoom.where('discipline_id' => discipline_id.id)
-    # abort @school_rooms.inspect
+  def generate_discipline_page_report(pdf, discipline)
+    @school_rooms = SchoolRoom.where('discipline' => discipline.id)
     if @school_rooms.empty?
       pdf.text 'Disciplina sem turmas.'
     else
       @school_rooms.each do |school_room|
-
         @allocations = Allocation.where('school_room_id' => school_room.id)
         if @allocations.empty?
           pdf.text 'Disciplina sem turmas alocadas.'
         else
-          pdf.table([[ "Turma: #{school_room.name}" , "Vagas: #{school_room.vacancies}" ]], :row_colors =>["F0F0F0"], :column_widths =>[360,360])do
+          pdf.table([
+                      ["Turma: #{school_room.name}", "Vagas: #{school_room.vacancies}"]
+                    ], row_colors: ['F0F0F0'], column_widths: [360, 360]) do
             row(0).font_style = :bold
           end
 
-          pdf.table([[ "Dia", "Sala", "Início", "Término" ]], :column_widths =>[180,180,180,180], :row_colors =>["F0F0F0"])
+          pdf.table([
+                      %w[Dia Sala Início Término]
+                    ], column_widths: [180, 180, 180, 180], row_colors: ['F0F0F0'])
 
           @allocations.each do |allocation|
-
-            pdf.table([[ allocation.day, Room.find_by_id(allocation.room_id).name, allocation.start_time.strftime("%H:%M"), allocation.final_time.strftime("%H:%M") ]], :column_widths =>[180,180,180,180])do
-              column(0).style :align => :center
-              column(1).style :align => :center
-              column(2).style :align => :center
-              column(3).style :align => :center
+            pdf.table([
+                        [allocation.day, Room.find_by_id(allocation.room_id).name,
+                         allocation.start_time.strftime('%H:%M'),
+                         allocation.final_time.strftime('%H:%M')]
+                      ], column_widths: [180, 180, 180, 180]) do
+              column(0..3).style align: :center
             end
-
           end
           pdf.move_down 20
         end
       end
     end
-    #
-    # pdf.table(items,
-    #   :row_colors => ["FFFFFF","DDDDDD"]
-    # ) do
-    #   row(0).style :align => :center
-    #   column(0).style :align => :left
-    #   column(1).style :align => :center
-    #   column(2).style :align => :center
-    # end
   end
 
   def generate_room_page_report(pdf, room_name, initial_day, last_day)
