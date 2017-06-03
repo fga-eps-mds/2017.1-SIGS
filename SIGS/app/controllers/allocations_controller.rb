@@ -12,37 +12,6 @@ class AllocationsController < ApplicationController
     @school_rooms_coordinator = current_user.coordinator.course.school_rooms
   end
 
-  def same_schedule_and_diferent_school_room(allocation)
-    allocatios_vacancies = 0
-    allocations_same = Allocation.where(room_id: allocation.room_id,
-                                             day: allocation.day,
-                                             start_time: allocation.start_time,
-                                             final_time: allocation.final_time)
-    allocations_same.each do |allocation_aux|
-      if  allocation.school_room == allocation_aux.school_room ||
-          allocation.school_room.discipline != allocation_aux.school_room.discipline
-          return false
-      end
-      allocatios_vacancies = allocatios_vacancies + allocation_aux.school_room.vacancies
-    end
-      if allocatios_vacancies + allocation.school_room.vacancies <= allocation.room.capacity
-        return true
-      else
-        return false
-      end
-  end
-
-  def time_invalid allocation
-    start = allocation.start_time.strftime('%H').to_i
-    final = allocation.final_time.strftime('%H').to_i
-
-    if ((start - final)* -1 < 1) ||
-       ((start - final)* -1 > 3) ||
-       (allocation.school_room.courses.first.shift == 1 && final > 18) ||
-       (allocation.school_room.courses.first.shift == 2 && start < 18)
-         return true
-    end
-  end
 
   def create
     @allocation = Allocation.new(allocation_params)
@@ -81,44 +50,77 @@ class AllocationsController < ApplicationController
     redirect_to current_user
   end
 
+
+  private
+
+  def time_invalid allocation
+    start = allocation.start_time.strftime('%H').to_i
+    final = allocation.final_time.strftime('%H').to_i
+
+    if ((start - final)* -1 < 1) ||
+      ((start - final)* -1 > 3) ||
+      (allocation.school_room.courses.first.shift == 1 && final > 18) ||
+      (allocation.school_room.courses.first.shift == 2 && start < 18)
+      return true
+    end
+  end
+
+  def same_schedule_and_diferent_school_room(allocation)
+    allocatios_vacancies = 0
+    allocations_same = Allocation.where(room_id: allocation.room_id,
+    day: allocation.day,
+    start_time: allocation.start_time,
+    final_time: allocation.final_time)
+    allocations_same.each do |allocation_aux|
+      if  allocation.school_room == allocation_aux.school_room ||
+        allocation.school_room.discipline != allocation_aux.school_room.discipline
+        return false
+      end
+      allocatios_vacancies = allocatios_vacancies + allocation_aux.school_room.vacancies
+    end
+    if allocatios_vacancies + allocation.school_room.vacancies <= allocation.room.capacity
+      return true
+    else
+      return false
+    end
+  end
+
   def pass_to_all_allocation_dates allocation
 
     period = Period.find_by(period_type: 'Letivo')
     date = period.initial_date
-      while date != period.final_date do
-        all_allocation_date = AllAllocationDate.new
-        all_allocation_date.allocation_id = allocation.id
+    while date != period.final_date do
+      all_allocation_date = AllAllocationDate.new
+      all_allocation_date.allocation_id = allocation.id
 
-        if allocation.day == "Segunda" && date.wday == 1
-          all_allocation_date.day = date
-          all_allocation_date.save
-          all_allocation_date = nil
-        elsif allocation.day == "Terça" && date.wday == 2
-          all_allocation_date.day = date
-          all_allocation_date.save
-          all_allocation_date = nil
-        elsif allocation.day == "Quarta" && date.wday == 3
-          all_allocation_date.day = date
-          all_allocation_date.save
-          all_allocation_date = nil
-        elsif allocation.day == "Quinta" && date.wday == 4
-          all_allocation_date.day = date
-          all_allocation_date.save
-          all_allocation_date = nil
-        elsif allocation.day == "Sexta" && date.wday == 5
-          all_allocation_date.day = date
-          all_allocation_date.save
-          all_allocation_date = nil
-        elsif allocation.day == "Sabado" && date.wday == 6
-          all_allocation_date.day = date
-          all_allocation_date.save
-          all_allocation_date = nil
-        end
-        date = date + 1
+      if allocation.day == "Segunda" && date.wday == 1
+        all_allocation_date.day = date
+        all_allocation_date.save
+        all_allocation_date = nil
+      elsif allocation.day == "Terça" && date.wday == 2
+        all_allocation_date.day = date
+        all_allocation_date.save
+        all_allocation_date = nil
+      elsif allocation.day == "Quarta" && date.wday == 3
+        all_allocation_date.day = date
+        all_allocation_date.save
+        all_allocation_date = nil
+      elsif allocation.day == "Quinta" && date.wday == 4
+        all_allocation_date.day = date
+        all_allocation_date.save
+        all_allocation_date = nil
+      elsif allocation.day == "Sexta" && date.wday == 5
+        all_allocation_date.day = date
+        all_allocation_date.save
+        all_allocation_date = nil
+      elsif allocation.day == "Sabado" && date.wday == 6
+        all_allocation_date.day = date
+        all_allocation_date.save
+        all_allocation_date = nil
+      end
+      date = date + 1
     end
   end
-
-  private
 
   def allocation_params
     params[:allocation].permit(:room_id,
