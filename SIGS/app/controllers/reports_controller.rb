@@ -111,31 +111,33 @@ class ReportsController < ApplicationController
     else
       @school_rooms.each do |school_room|
         @allocations = Allocation.where('school_room_id' => school_room.id)
-        if @allocations.empty?
-          pdf.text 'Disciplina sem turmas alocadas.'
-        else
+        make_discipline_tables(pdf, school_room, @allocations)
+        @allocations.each do |allocation|
           pdf.table([
-                      ["Turma: #{school_room.name}", "Vagas: #{school_room.vacancies}"]
-                    ], row_colors: ['F0F0F0'], column_widths: [360, 360]) do
-            row(0).font_style = :bold
+                      [allocation.day, Room.find_by_id(allocation.room_id).name,
+                       allocation.start_time.strftime('%H:%M'),
+                       allocation.final_time.strftime('%H:%M')]
+                    ], column_widths: [180, 180, 180, 180]) do
+            column(0..3).style align: :center
           end
-
-          pdf.table([
-                      %w[Dia Sala Início Término]
-                    ], column_widths: [180, 180, 180, 180], row_colors: ['F0F0F0'])
-
-          @allocations.each do |allocation|
-            pdf.table([
-                        [allocation.day, Room.find_by_id(allocation.room_id).name,
-                         allocation.start_time.strftime('%H:%M'),
-                         allocation.final_time.strftime('%H:%M')]
-                      ], column_widths: [180, 180, 180, 180]) do
-              column(0..3).style align: :center
-            end
-          end
-          pdf.move_down 20
         end
       end
+      pdf.move_down 20
+    end
+  end
+
+  def make_discipline_tables(pdf, school_room, allocations)
+    if allocations.empty?
+      pdf.text 'Disciplina sem turmas alocadas.'
+    else
+      pdf.table([
+                  ["Turma: #{school_room.name}", "Vagas: #{school_room.vacancies}"]
+                ], row_colors: ['F0F0F0'], column_widths: [360, 360]) do
+        row(0).font_style = :bold
+      end
+      pdf.table([
+                  %w[Dia Sala Início Término]
+                ], column_widths: [180, 180, 180, 180], row_colors: ['F0F0F0'])
     end
   end
 
