@@ -8,12 +8,14 @@ class RoomsController < ApplicationController
     @rooms = Room.all
     @buildings = Building.all
 
-    if params[:name].present? || params[:code].present? || params[:wing_id].present? ||
-       params[:capacity].present? || params[:building_id].present?
+    if params[:name].present? || params[:code].present? ||
+       params[:capacity].present? || params[:building_id].present? ||
+       params[:wing].present?
 
       filter_by_name_and_code
       filter_by_capacity
       filter_by_buildings
+      #filter_build_by_wings
       filter_by_wings
     else
       @rooms = Room.all
@@ -36,12 +38,30 @@ class RoomsController < ApplicationController
     end
   end
 
+  #    if params[:wing].present?
+  #      @building_wing = @buildings.where(wing: params[:wing])
+  #    else
+  #      @buildings
+  #    end
+
   def filter_by_wings
-    if params[:building_id].present?
-      @building = @building.where(building_id: params[:building_id].to_s)
-      @rooms = @rooms.where(building_id: params[:wing_id].to_s)
+    if params[:wing].present?
+      @buildings = filter_build_by_wings
+      @rooms = @rooms.where(building_id: params[@buildings])
     else
       @rooms
+    end
+  end
+
+  def filter_build_by_wings
+    if params[:wing].present?
+      @buildings.columns.each do |attr|
+        if params[:"#{attr.wing}"].present?
+          @buildings = @buildings.where("#{attr.wing} like ?", "%#{params[attr.wing]}%")
+        end
+      end
+    else
+      @buildings
     end
   end
 
