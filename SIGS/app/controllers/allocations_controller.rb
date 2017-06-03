@@ -3,10 +3,8 @@
 # class that create allocations
 class AllocationsController < ApplicationController
   before_action :logged_in?
+  before_action :validade_permission_1
 
-  def index
-    @allocations = Allocation.all
-  end
 
   def new
     @allocation = Allocation.new
