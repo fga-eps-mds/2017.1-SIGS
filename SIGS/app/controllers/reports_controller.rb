@@ -129,17 +129,19 @@ class ReportsController < ApplicationController
         if @allocations.empty?
           pdf.text 'Disciplina sem turmas alocadas.'
         else
-          pdf.table([[ "Turma: #{school_room.name}" , "Vagas: #{school_room.vacancies}" ]], :column_widths =>[360,360])
+          pdf.table([[ "Turma: #{school_room.name}" , "Vagas: #{school_room.vacancies}" ]], :row_colors =>["F0F0F0"], :column_widths =>[360,360])do
+            row(0).font_style = :bold
+          end
 
-          pdf.table([[ "Dia", "Sala", "Início", "Término" ]], :column_widths =>[180,180,180,180])
+          pdf.table([[ "Dia", "Sala", "Início", "Término" ]], :column_widths =>[180,180,180,180], :row_colors =>["F0F0F0"])
 
           @allocations.each do |allocation|
 
             pdf.table([[ allocation.day, Room.find_by_id(allocation.room_id).name, allocation.start_time.strftime("%H:%M"), allocation.final_time.strftime("%H:%M") ]], :column_widths =>[180,180,180,180])do
-              column(0).style :align => :right
-              column(1).style :align => :right
-              column(2).style :align => :right
-              column(3).style :align => :right
+              column(0).style :align => :center
+              column(1).style :align => :center
+              column(2).style :align => :center
+              column(3).style :align => :center
             end
 
           end
