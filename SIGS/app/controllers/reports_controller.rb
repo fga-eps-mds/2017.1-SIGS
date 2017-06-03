@@ -13,21 +13,15 @@ class ReportsController < ApplicationController
     require 'prawn/table'
     require 'prawn'
 
-    time = Time.now.getutc
-    room_name = Room.find(params[:reports_by_room][:room_code]).code
-    initial_day = params[:reports_by_room][:initial_week].split(' à ')[0].to_date
-    last_day = params[:reports_by_room][:last_week].split(' à ')[1].to_date
+    # time = Time.now.getutc
+    room = Room.find(params[:reports_by_room][:room_code])
+    # initial_day = params[:reports_by_room][:initial_week].split(' a ')[0].to_date
+    # last_day = params[:reports_by_room][:last_week].split(' a ')[1].to_date
 
-    Prawn::Document.generate("public/reports/#{time}.pdf",
-                             page_size: 'A4',
-                             page_layout: :landscape) do |pdf|
-      generate_room_page_report(pdf, room_name, initial_day, last_day)
-      # table_data = Array.new
-      # table_data << ["Product name", "Product category"]
-      # table_data << ['teste', 'teste2']
-      # pdf.table(table_data, :width => 500, :cell_style => { :inline_format => true })
+    report = Prawn::Document.new(page_size: 'A4', page_layout: :landscape) do |pdf|
+      generate_room_page_report(pdf, room)
     end
-    redirect_to "/reports/#{time}.pdf"
+    send_data report.render, type: 'application/pdf', disposition: 'inline'
   end
 
   def json_of_rooms_by_department
@@ -72,23 +66,36 @@ class ReportsController < ApplicationController
     weeks
   end
 
-  def generate_room_page_report(pdf, room_name, initial_day, last_day)
-    new_page = false
-    while initial_day < last_day
-      pdf.start_new_page if new_page
-      pdf.text "Semana: #{initial_day.strftime('%d/%m/%Y')} à ".to_s +
-               (initial_day + 5.days).strftime('%d/%m/%Y').to_s,
-               size: 18, style: :bold
-      pdf.text "Sala: #{room_name}", size: 18, style: :bold, align: :center
-      data = [[' ', 'Segunda-feira', 'Terça-feira',
-               'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado']]
-      pdf.table(data, width: 750) do |t|
-        t.before_rendering_page do |page|
-          page.row(0).font_style = :bold
-        end
-      end
-      new_page = true
-      initial_day += 7.days
+  def generate_room_page_report(pdf, room)
+    pdf.text "Sala: #{room.code}", size: 18, style: :bold, align: :center
+    data = [[' ', 'Segunda-feira', 'Terça-feira',
+             'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado']]
+    (0..17).each do |j|
+      data << make_rows(room, j)
     end
+    pdf.table(data, width: 750) do |t|
+      t.before_rendering_page do |page|
+        page.row(0).font_style = :bold
+      end
+    end
+  end
+
+  def make_rows(room, j)
+    row = [(6 + j).to_s + ':00']
+    %w[Segunda Terça Quarta Quinta Sexta Sabado].each do |week|
+      allocations = Allocation.where(room_id: room.id).where(day: week)
+                              .where('DATE_FORMAT(start_time, "%H") = ?', 6 + j)
+      if allocations.size.zero?
+        row << ' '
+      else
+        cell = ''
+        allocations.each do |allocation|
+          cell += allocation.school_room.discipline.name + '    Turma:' +
+                  allocation.school_room.name
+        end
+        row << cell
+      end
+    end
+    row
   end
 end
