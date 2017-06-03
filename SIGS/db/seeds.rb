@@ -17,7 +17,6 @@ course = Course.create(code: '12', name: 'Engenharia Eletrônica', department: d
 course1 = Course.create(code: '12', name: 'Engenharia Automotiva', department: department, shift: 2)
 course2 = Course.create(code: '09', name: 'Artes Visuais', department: department_2, shift: 1)
 
-
 # Users - Coordinator
 user_1 = User.create(name: 'Caio Filipe', email: 'caio@unb.br', cpf: '05012345678', registration: '1234567', active: true, password: '123456')
 coordinator = Coordinator.create(user: user_1, course: course)
@@ -52,6 +51,7 @@ category = Category.create(name: 'Laboratório Químico')
 room_1 = Room.create(code: '124325', name: 'S10', capacity: 50, active: true, time_grid_id: 1, department: department, building: buildings[1], category_ids: [category.id])
 room_2 = Room.create(code: '987653', name: 'SS', capacity: 40, active: false, time_grid_id: 2, department: department, building: buildings[2], category_ids: [category.id])
 room_3 = Room.create(code: '987655', name: 'S9', capacity: 40, active: false, time_grid_id: 2, department: department_1, building: buildings[2], category_ids: [category.id])
+room_4 = Room.create(code: '987654', name: 'S8', capacity: 80, active: true, time_grid_id: 1, department: department, building: buildings[1], category_ids: [category.id])
 
 # Disciplines
 discipline = Discipline.create(code: '876', name: 'Cálculo 3', department: department)
@@ -63,6 +63,7 @@ discipline_4 = Discipline.create(code: '774', name: 'Artes Visuais', department:
 school_room_1 = SchoolRoom.create(name:'A', active:true, discipline: discipline, vacancies: 40, course_ids: [course.id])
 school_room_2 = SchoolRoom.create(name:'B', active:true, discipline: discipline, vacancies: 60, course_ids: [course1.id])
 school_room_3 = SchoolRoom.create(name:'C', active:true, discipline: discipline_2, vacancies: 40, course_ids: [course.id])
+school_room_4 = SchoolRoom.create(name:'D', active:true, discipline: discipline, vacancies: 40, course_ids: [course.id])
 
 # Periods
 period_1 = Period.create(period_type:'Alocação', initial_date: '10-01-2018', final_date: '01-02-2018')
