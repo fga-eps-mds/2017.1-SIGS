@@ -20,10 +20,4 @@
 # Ignore Byebug command history file.
 .byebug_history
 
-<<<<<<< HEAD
-.vagrant
-.gitignore 
-SIGS/script/dbScript
-=======
 .vagrant/
->>>>>>> development
