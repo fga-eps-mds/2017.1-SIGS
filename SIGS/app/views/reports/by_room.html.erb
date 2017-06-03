@@ -16,10 +16,10 @@
 	<span style="color: red;"></span>
 	<%=f.select :room_code, @rooms.collect {|d| [d.name, d.id] }, class: 'form-control' %>
 
-	<%=f.label :initial_week, 'Primeira semana:' %>
+<!-- 	<%=f.label :initial_week, 'Primeira semana:' %>
 	<%=f.select :initial_week, @weeks, class: 'form-control' %>
 	<%=f.label :last_week, 'Última semana:' %>
-	<%=f.select :last_week, @weeks, class: 'form-control' %>
+	<%=f.select :last_week, @weeks, class: 'form-control' %> -->
 
   <%= f.submit "Gerar", class: 'pull-right btn btn-default btn-success' %>
 
