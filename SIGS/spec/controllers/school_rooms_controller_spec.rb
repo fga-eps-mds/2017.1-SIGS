@@ -40,49 +40,58 @@ RSpec.describe SchoolRoomsController, type: :controller do
     end
 
     it 'should create a new school room' do
+
       post :create, params:{school_room: {name: 'AA', vacancies: 5, discipline_id: @discipline1.id, course: @course.id}}
       expect(flash[:success]).to eq('Turma criada')
       expect(SchoolRoom.count).to be(2)
     end
 
     it 'should create school room with null name' do
+
       post :create, params:{school_room: {name: '', vacancies: 5, discipline_id: @discipline1.id, course: @course.id}}
       expect(flash[:error]).to eq('Turma não pode ser vazia')
     end
 
     it 'should create school room with existent name' do
+
       post :create, params:{school_room: {name: 'AA',  vacancies: 5, discipline_id: @discipline1.id, course: @course.id}}
       post :create, params:{school_room: {name: 'AA',  vacancies: 5, discipline_id: @discipline1.id, course: @course.id}}
       expect(flash[:error]).to eq('Turma com nome já cadastrado')
     end
 
     it 'not should create school room with null discipline' do
+
       post :create, params:{school_room: {name: 'AA',  vacancies: 200, discipline: '', course: @course.id}}
       expect(flash[:error]).to include('Disciplina não pode ser vazia')
     end
 
     it 'not should create school room with low vacancies' do
+
       post :create, params:{school_room: {name: 'AA',  vacancies: 4, discipline: @discipline2, course: @course.id}}
       expect(flash[:error]).to include('A capacidade mínima é 5 vagas')
     end
 
     it 'not should create school room with high vacancies' do
+
       post :create, params:{school_room: {name: 'AA',  vacancies: 800, discipline: Discipline.last, course: @course.id}}
       expect(flash[:error]).to include('A capacidade máxima é 500 vagas')
     end
 
     it 'not should create school room with blank vacancies' do
+
       post :create, params:{school_room: {name: 'AA', vacancies: '', discipline: @discipline2, course: @course.id}}
       expect(flash[:error]).to include('Capacidade não pode ser vazia')
     end
 
     it 'returns http success' do
+
       school_room = SchoolRoom.create(name: 'AA',vacancies: 50, discipline_id: @discipline1.id)
       get :edit, params:{id: school_room.id}
       expect(response).to have_http_status(200)
     end
 
     it 'should update with valid data' do
+
       school_room = SchoolRoom.create(name: 'AA',vacancies: 50, discipline_id: @discipline1.id)
       get :update, params:{id: school_room.id, school_room:{discipline_id: @discipline2.id}}
       expect(SchoolRoom.find(school_room.id).discipline_id).to eq(@discipline2.id)
