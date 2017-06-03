@@ -24,8 +24,8 @@
 
     <td>
       <%= label_tag("Ala") %>
-      <% itens = [["Norte", "1"], ["Central", "2"], ["Sul", "3"]] %>
-      <%= select_tag 'wing_id', options_for_select(itens, " "), include_blank: true %>
+      <% itens = [["norte"], ["central"], ["sul"]] %>
+      <%= select_tag 'wing', options_for_select(itens, " "), include_blank: true %>
     </td>
   </tr>
 
