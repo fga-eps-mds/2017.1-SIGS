@@ -36,14 +36,14 @@ class ReportsController < ApplicationController
     require 'prawn/table'
     require 'prawn'
 
-    discipline_name = Discipline.find(params[:id])
+    discipline_id = Discipline.find(params[:id])
 
-    Prawn::Document.generate("public/reports/#{discipline_name.name}.pdf",
+    Prawn::Document.generate("public/reports/#{discipline_id.name}.pdf",
                              page_size: 'A4',
                              page_layout: :landscape) do |pdf|
-      generate_discipline_page_report(pdf, discipline_name)
+      generate_discipline_page_report(pdf, discipline_id)
     end
-    redirect_to "/reports/#{discipline_name.name}.pdf"
+    redirect_to "/reports/#{discipline_id.name}.pdf"
   end
 
   def generate_by_room
@@ -109,15 +109,22 @@ class ReportsController < ApplicationController
     weeks
   end
 
-  def generate_discipline_page_report(pdf, discipline_name)
+  def generate_discipline_page_report(pdf, discipline_id)
     pdf.text 'Relatório de Alocação por Disciplina'
-    pdf.text discipline_name.name.to_s
-    pdf.text "Departamento de #{discipline_name.department.name}"
+    pdf.text discipline_id.name.to_s
+    pdf.text "Departamento de #{discipline_id.department.name}"
 
-    @allocations = Allocation.all
-    @allocations.each do |allocation|
-        @allocations = @allocations.where(allocation.school_room.discipline.id.to_s => discipline_name.id)
-        pdf.text "#{allocation.school_room.name}"
+    @school_rooms = SchoolRoom.where('discipline_id' => discipline_id)
+    @school_rooms.each do |school_room|
+
+      pdf.table([[ "Turma", school_room.name, "Vagas", school_room.vacancies ], [ "Dia", "Sala", "Início", "Término" ]])
+
+      @allocations = Allocation.where('school_room_id' => school_room.id)
+      @allocations.each do |allocation|
+
+        pdf.table([[ allocation.day.to_s, Room.find_by_id(allocation.room_id).name.to_s, allocation.start_time.strftime("%H:%M"), allocation.final_time.strftime("%H:%M") ]])
+
+      end
     end
   end
 
