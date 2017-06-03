@@ -17,18 +17,22 @@
 <% if @disciplines.count == 0 %>
   <h3>Não há salas registradas no momento.</h3>
 <% else %>
-  <table class="table table-hover">
-    <tr>
-      <td>Disciplina</td>
-      <td>Departamento</td>
-      <td>Relatório</td>
-    </tr>
-    <% @disciplines.each do |discipline| %>
-      <tr>
-        <td><%= discipline.name %></td>
-        <td><%= discipline.department.name %></td>
-				<td><%= link_to image_tag("icon_pdf.png"), generate_by_discipline_path(discipline.id) %></td>
-      </tr>
-    <% end %>
+  <table class="table table-striped table-hover">
+		<thead>
+	    <tr>
+	      <th>Disciplina</th>
+	      <th>Departamento</th>
+	      <th>Relatório</th>
+	    </tr>
+		</thead>
+		<tbody>
+	    <% @disciplines.each do |discipline| %>
+	      <tr>
+	        <td><%= discipline.name %></td>
+	        <td><%= discipline.department.name %></td>
+					<td><%= link_to image_tag("icon_pdf.png"), generate_by_discipline_path(discipline.id) %></td>
+	      </tr>
+	    <% end %>
+		</tbody>
+	</table>
 <% end %>
-</table>

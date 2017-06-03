@@ -63,6 +63,7 @@ discipline_4 = Discipline.create(code: '774', name: 'Artes Visuais', department:
 school_room_1 = SchoolRoom.create(name:'A', active:true, discipline: discipline, vacancies: 40, course_ids: [course.id])
 school_room_2 = SchoolRoom.create(name:'B', active:true, discipline: discipline_3, vacancies: 60, course_ids: [course1.id])
 school_room_3 = SchoolRoom.create(name:'C', active:true, discipline: discipline_2, vacancies: 40, course_ids: [course.id])
+school_room_4 = SchoolRoom.create(name:'D', active:true, discipline: discipline_2, vacancies: 80, course_ids: [course.id])
 
 # Periods
 period_1 = Period.create(period_type:'Alocação', initial_date: '10-01-2018', final_date: '01-02-2018')
@@ -72,6 +73,10 @@ period_3 = Period.create(period_type:'Letivo', initial_date: '08-03-2018', final
 # Allocations
 allocation1 = Allocation.create(user_id: user_1.id,room_id: room_1.id, school_room_id: school_room_2.id, day: "Segunda", start_time: '12:00:00', final_time: '14:00:00')
 allocation2 = Allocation.create(user_id: user_1.id,room_id: room_2.id, school_room_id: school_room_2.id, day: "Quarta", start_time: '12:00:00', final_time: '14:00:00')
-allocation3 = Allocation.create(user_id: user_1.id,room_id: room_2.id, school_room_id: school_room_3.id, day: "Quarta", start_time: '12:00:00', final_time: '14:00:00')
-allocation4 = Allocation.create(user_id: user_1.id,room_id: room_2.id, school_room_id: school_room_3.id, day: "Quarta", start_time: '2017-07-07 12:00:00', final_time: '2017-07-07 14:00:00')
-allocation5 = Allocation.create(user_id: user_1.id,room_id: room_2.id, school_room_id: school_room_3.id, day: "Quarta", start_time: '2017-07-07 12:00:00', final_time: '2017-07-07 14:00:00')
+allocation3 = Allocation.create(user_id: user_1.id,room_id: room_2.id, school_room_id: school_room_2.id, day: "Sexta", start_time: '12:00:00', final_time: '14:00:00')
+allocation4 = Allocation.create(user_id: user_1.id,room_id: room_2.id, school_room_id: school_room_3.id, day: "Segunda", start_time: '12:00:00', final_time: '14:00:00')
+allocation5 = Allocation.create(user_id: user_1.id,room_id: room_2.id, school_room_id: school_room_3.id, day: "Quarta", start_time: '12:00:00', final_time: '14:00:00')
+allocation6 = Allocation.create(user_id: user_1.id,room_id: room_2.id, school_room_id: school_room_3.id, day: "Sexta", start_time: '12:00:00', final_time: '14:00:00')
+allocation7 = Allocation.create(user_id: user_1.id,room_id: room_2.id, school_room_id: school_room_4.id, day: "Segunda", start_time: '12:00:00', final_time: '14:00:00')
+allocation8 = Allocation.create(user_id: user_1.id,room_id: room_2.id, school_room_id: school_room_4.id, day: "Quarta", start_time: '12:00:00', final_time: '14:00:00')
+allocation9 = Allocation.create(user_id: user_1.id,room_id: room_2.id, school_room_id: school_room_4.id, day: "Sexta", start_time: '12:00:00', final_time: '14:00:00')
