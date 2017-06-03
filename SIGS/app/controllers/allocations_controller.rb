@@ -29,6 +29,8 @@ class AllocationsController < ApplicationController
     end
       if allocatios_vacancies + allocation.school_room.vacancies <= allocation.room.capacity
         return true
+      else
+        return false
       end
   end
 
@@ -64,13 +66,14 @@ class AllocationsController < ApplicationController
         flash[:error] = 'Alocação com horário não vago ou capacidade da sala cheia'
       else
         if @allocation.save
+          pass_to_all_allocation_dates @allocation
           flash[:success] = 'Alocação feita com sucesso'
         else
-          flash[:error] = 'Alocação não realizada'
+          flash[:error] = 'Falha ao realizar alocação'
         end
       end
-      redirect_to allocations_new_path
     end
+    redirect_to allocations_new_path
   end
 
   def destroy
@@ -80,6 +83,43 @@ class AllocationsController < ApplicationController
     redirect_to current_user
   end
 
+  def pass_to_all_allocation_dates allocation
+
+    period = Period.find_by(period_type: 'Letivo')
+    date = period.initial_date
+      while date != period.final_date do
+        all_allocation_date = AllAllocationDate.new
+        all_allocation_date.allocation_id = allocation.id
+
+        if allocation.day == "Segunda" && date.wday == 1
+          all_allocation_date.day = date
+          all_allocation_date.save
+          all_allocation_date = nil
+        elsif allocation.day == "Terça" && date.wday == 2
+          all_allocation_date.day = date
+          all_allocation_date.save
+          all_allocation_date = nil
+        elsif allocation.day == "Quarta" && date.wday == 3
+          all_allocation_date.day = date
+          all_allocation_date.save
+          all_allocation_date = nil
+        elsif allocation.day == "Quinta" && date.wday == 4
+          all_allocation_date.day = date
+          all_allocation_date.save
+          all_allocation_date = nil
+        elsif allocation.day == "Sexta" && date.wday == 5
+          all_allocation_date.day = date
+          all_allocation_date.save
+          all_allocation_date = nil
+        elsif allocation.day == "Sabado" && date.wday == 6
+          all_allocation_date.day = date
+          all_allocation_date.save
+          all_allocation_date = nil
+        end
+        date = date + 1
+    end
+  end
+
   private
 
   def allocation_params
@@ -87,7 +127,6 @@ class AllocationsController < ApplicationController
                                :school_room_id,
                                :day,
                                :start_time,
-                               :final_time
-                               )
+                               :final_time)
   end
 end
