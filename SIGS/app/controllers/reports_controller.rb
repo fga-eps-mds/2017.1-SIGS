@@ -114,7 +114,6 @@ class ReportsController < ApplicationController
         make_discipline_tables(pdf, school_room, @allocations)
         make_rows_discipline_table(pdf, @allocations)
       end
-      pdf.move_down 20
     end
   end
 
@@ -143,6 +142,7 @@ class ReportsController < ApplicationController
         column(0..3).style align: :center
       end
     end
+    pdf.move_down 20
   end
 
   def generate_room_page_report(pdf, room_name, initial_day, last_day)
