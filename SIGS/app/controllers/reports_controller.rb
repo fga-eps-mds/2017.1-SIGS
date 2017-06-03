@@ -113,6 +113,12 @@ class ReportsController < ApplicationController
     pdf.text 'Relatório de Alocação por Disciplina'
     pdf.text discipline_name.name.to_s
     pdf.text "Departamento de #{discipline_name.department.name}"
+
+    @allocations = Allocation.all
+    @allocations.each do |allocation|
+        @allocations = @allocations.where(allocation.school_room.discipline.id.to_s => discipline_name.id)
+        pdf.text "#{allocation.school_room.name}"
+    end
   end
 
   def generate_room_page_report(pdf, room_name, initial_day, last_day)
