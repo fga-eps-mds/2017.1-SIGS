@@ -116,15 +116,7 @@ class ReportsController < ApplicationController
       @school_rooms.each do |school_room|
         @allocations = Allocation.where('school_room_id' => school_room.id)
         make_discipline_tables(pdf, school_room, @allocations)
-        @allocations.each do |allocation|
-          pdf.table([
-                      [allocation.day, Room.find_by_id(allocation.room_id).name,
-                       allocation.start_time.strftime('%H:%M'),
-                       allocation.final_time.strftime('%H:%M')]
-                    ], column_widths: [180, 180, 180, 180]) do
-            column(0..3).style align: :center
-          end
-        end
+        make_rows_discipline_table(pdf, @allocations)
       end
       pdf.move_down 20
     end
@@ -142,6 +134,18 @@ class ReportsController < ApplicationController
       pdf.table([
                   %w[Dia Sala Início Término]
                 ], column_widths: [180, 180, 180, 180], row_colors: ['F0F0F0'])
+    end
+  end
+
+  def make_rows_discipline_table(pdf, allocations)
+    allocations.each do |allocation|
+      pdf.table([
+                  [allocation.day, Room.find_by_id(allocation.room_id).name,
+                   allocation.start_time.strftime('%H:%M'),
+                   allocation.final_time.strftime('%H:%M')]
+                ], column_widths: [180, 180, 180, 180]) do
+        column(0..3).style align: :center
+      end
     end
   end
 
