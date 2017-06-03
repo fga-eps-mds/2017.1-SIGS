@@ -3,4 +3,11 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
   include SessionsHelper
   include UserHelper
+  include SchoolRoomsHelper
+
+  def ocurred_errors(object)
+    object.errors.messages.each do |_attrib, messages|
+      flash[:error] = messages.join(', ')
+    end
+  end
 end

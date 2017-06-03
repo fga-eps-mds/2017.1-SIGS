@@ -43,13 +43,19 @@ Rails.application.routes.draw do
   get 'rooms/show/:id' => 'rooms#show', as: 'room'
   # get 'rooms/filter_rooms' => 'rooms#filter_rooms', as: 'room_filter'
   post 'rooms/filter_rooms' => 'rooms#filter_rooms', as: 'rooms_filter'
+  get 'room/destroy/:id', controller: 'rooms', action: 'destroy', as: 'destroy_room'
 
   # Course
   get 'courses/courses_by_user' => 'courses#courses_by_user', :as => 'courses_by_user'
 
   #SchoolRooms
-  get 'school_rooms/new' => 'school_rooms#new', :as => 'school_rooms_new'
-  post 'school_rooms/create' => 'school_rooms#create', :as => 'school_rooms_create'
+  get 'school_rooms/index' => 'school_rooms#index', as: 'school_rooms_index'
+  get 'school_rooms/new' => 'school_rooms#new', as: 'school_rooms_new'
+  post 'school_rooms/create' => 'school_rooms#create'
+  get 'school_rooms/edit/:id' => 'school_rooms#edit', as: 'school_rooms_edit'
+  patch 'school_rooms/update/:id', controller: 'school_rooms', action: 'update', as: 'school_rooms_update'
+  post 'school_rooms/search_disciplines' => 'school_rooms#search_disciplines', as: 'search_disciplines'
+  get 'school_rooms/destroy/:id', controller: 'school_rooms', action: 'destroy', as: 'destroy_school_room'
 
   # Parsers
   post "/upload_buildings", controller: 'parsers', action: 'upload_buildings'

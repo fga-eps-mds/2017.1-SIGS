@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>SIGS</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.ico" />
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Sistema de Alocação de Salas Inteligente da UnB.">
+    <link rel="stylesheet" media="all" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" media="all" href="../assets/css/style.css" />
+    <link rel="stylesheet" media="all" href="../assets/css/navbar.css" />
+    <link rel="stylesheet" media="all" href="../assets/css/form.css" />
+    <script src="../assets/js/jquery-1.12.4.min.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/menu.js"></script>
+  </head>
+  <body>
+    <div class="container container-fluid myContainer">
+      <header class="navbar-default myNav">
+        <figure class="logo">
+          <img src="../assets/img/sigs_logo.png" alt="SIGS Logos" />
+        </figure>
+
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+
+        <ul class="nav navbar-nav" id="myNavBar"></ul>
+
+        <figure class="unbLogo">
+          <a href="http://www.unb.br" target="_blank">
+            <img src="../assets/img/rodape_unb.png" alt="SIGS Logos" />
+          </a>
+        </figure>
+      </header>
+      <main class="mainConteiner">
+        <h1>Turma</h1>
+        <label>Disciplina</label>
+        <select>
+          <option>Literatura</option>
+          <option>Cálculo 1</option>
+          <option>História da Arte</option>
+          <option>Matemática Discreta</option>
+        </select>
+
+        <h3>Literatura</h3>
+        <table class="table">
+            <tr>
+              <th>Turma</th>
+              <th>Cursos</th>
+              <th>Recursos</th>
+              <th>Editar</th>
+              <th>Excluir</th>
+            </tr>
+          <tr>
+            <td>A</td>
+            <td>Letras, Jornalismo</td>
+            <td></td>
+            <td><a href="alterar_turma.html"><img src="../assets/img/icon_edit.png" alt="Icon edit" /></a></td>
+            <td><a href="#!" data-toggle="modal" data-target=".modalDelete"><img src="../assets/img/icon_trash.png" alt="excluir"></a></td>
+          </tr>
+          <tr>
+            <td>B</td>
+            <td>Direito</td>
+            <td>Retroprojetor</td>
+            <td><a href="alterar_turma.html"><img src="../assets/img/icon_edit.png" alt="Icon edit" /></a></td>
+            <td><a href="#!" data-toggle="modal" data-target=".modalDelete"><img src="../assets/img/icon_trash.png" alt="excluir"></a></td>
+          </tr>
+          <tr>
+            <td>C</td>
+            <td></td>
+            <td></td>
+            <td><a href="alterar_turma.html"><img src="../assets/img/icon_edit.png" alt="Icon edit" /></a></td>
+            <td><a href="#!" data-toggle="modal" data-target=".modalDelete"><img src="../assets/img/icon_trash.png" alt="excluir"></a></td>
+          </tr>
+        </table>
+
+        <!-- Modal -->
+        <div class="modal fade modalDelete" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Excluir Sala</h4>
+              </div>
+              <div class="modal-body">
+                <p>Esta ação não poderá ser desfeita, tem certeza que deseja continuar?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-success btnDelete" data-dismiss="modal">Confirmar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

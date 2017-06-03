@@ -21,3 +21,5 @@
 
 # Ignore csv files
 public/csv/*.csv
+
+!public/csv/

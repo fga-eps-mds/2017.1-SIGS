@@ -14,6 +14,7 @@
     <script src="../assets/js/jquery-1.12.4.min.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/menu.js"></script>
   </head>
   <body>
     <div class="container container-fluid myContainer">
@@ -30,26 +31,7 @@
 				</button>
 
 
-        <ul class="nav navbar-nav">
-          <li><a href="minha_conta.html">Minha Conta</a></li>
-          <li><a href="../index.html">Logout</a></li>
-          <li><a href="#">Turmas</a></li>
-            <li class="dropdown">
-            <a data-toggle="collapse" href="#salas">Salas
-              <ul class="collapse" id="salas">
-                <li><a href="salas.html">Salas</a></li>
-                <li><a href="categorias.html">Categorias</a></li>
-              </ul>
-            </li>
-          <li class="dropdown">
-            <a data-toggle="collapse" href="#demo">Usuários
-              <ul class="collapse" id="demo">
-                <li><a href="cadastros_pendentes.html">Cadastros Pendentes</a></li>
-                <li><a href="usuarios_registrados.html">Usuários Cadastrados</a></li>
-              </ul>
-            </li>
-          <li><a href="#">Alocações</a></li>
-        </ul>
+        <ul class="nav navbar-nav" id="myNavBar"></ul>
 
         <figure class="unbLogo">
           <a href="http://www.unb.br" target="_blank">

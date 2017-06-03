@@ -3,22 +3,25 @@
 <%= form_for @school_room, url: school_rooms_create_path do |school_room| %>
 
   <label>Disciplina </label>
-  <%= school_room.collection_select(:discipline_id,Discipline.all,:id,:name, include_blank: true)%>
+  <%= school_room.select :discipline_id, get_disciplines(current_user).collect {|d| [d.name, d.id] }%>
 
   <div class="short_input">
     <%= school_room.label :name, "Turma" %>
     <%= school_room.text_field :name, class: 'form-control' %>
-  </div>
-
-  <p> Cursos</p>
-  <div class="checkbox-group">
-    <%= school_room.collection_check_boxes(:course_ids,courses_by_user,:id,:name, include_blank: true)%>
+    <%= school_room.label :capacity, "Capacidade" %>
+    <%= school_room.number_field :capacity, class: 'form-control' %>
   </div>
   <br>
-  <p> Categorias</p>
+  <%= school_room.label :course_ids, "Cursos" %>
+  <div class="checkbox-group">
+    <%= school_room.collection_check_boxes(:course_ids, @all_courses, :id, :name, include_blank: true)%>
+  </div>
+  <br>
+  <%= school_room.label :category_ids, "Categorias" %>
   <div class="checkbox-group">
     <%= school_room.collection_check_boxes(:category_ids,all_categories,:id,:name, include_blank: true)%>
   </div>
+  <br>
 
   <%= school_room.submit "Salvar", class: 'pull-right btn btn-default btn-success' %>
 
