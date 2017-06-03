@@ -14,13 +14,25 @@ class ReportsController < ApplicationController
     require 'prawn'
 
     # time = Time.now.getutc
-    room = Room.find(params[:reports_by_room][:room_code])
     # initial_day = params[:reports_by_room][:initial_week].split(' a ')[0].to_date
     # last_day = params[:reports_by_room][:last_week].split(' a ')[1].to_date
 
     report = Prawn::Document.new(page_size: 'A4', page_layout: :landscape) do |pdf|
-      generate_room_page_report(pdf, room)
+      if params[:reports_by_room][:all_rooms] == '0'
+        room_selected = Room.find(params[:reports_by_room][:room_code])
+        generate_room_page_report(pdf, room_selected)
+      else
+        new_page = false
+        rooms = Room.where(department: params[:reports_by_room][:departments])
+        rooms.each do |room|
+          pdf.start_new_page if new_page
+          generate_room_page_report(pdf, room)
+          new_page = true
+        end
+
+      end
     end
+
     send_data report.render, type: 'application/pdf', disposition: 'inline'
   end
 
@@ -81,21 +93,28 @@ class ReportsController < ApplicationController
   end
 
   def make_rows(room, j)
-    row = [(6 + j).to_s + ':00']
+    @row = [(6 + j).to_s + ':00']
     %w[Segunda Terça Quarta Quinta Sexta Sabado].each do |week|
       allocations = Allocation.where(room_id: room.id).where(day: week)
-                              .where('DATE_FORMAT(start_time, "%H") = ?', 6 + j)
-      if allocations.size.zero?
-        row << ' '
-      else
-        cell = ''
-        allocations.each do |allocation|
-          cell += allocation.school_room.discipline.name + '    Turma:' +
-                  allocation.school_room.name
-        end
-        row << cell
-      end
+      allocations_start = allocations.where('DATE_FORMAT(start_time, "%H") = ?', 6 + j)
+      make_cell(allocations_start, j, allocations)
     end
-    row
+    @row
+  end
+
+  def make_cell(allocations_start, j, allocations)
+    if allocations_start.size.zero?
+      @row << ' ' if allocations.where('DATE_FORMAT(start_time, "%H") < ?', 6 + j)
+                                .where('DATE_FORMAT(final_time, "%H") > ?', 6 + j)
+                                .size.zero?
+    else
+      cell = ''
+      allocations_start.each do |allocation|
+        cell += allocation.school_room.discipline.name + '    Turma:' +
+                allocation.school_room.name
+      end
+      @row << { content: cell, rowspan: (allocations_start[0].final_time.hour -
+                        allocations_start[0].start_time.hour) }
+    end
   end
 end
