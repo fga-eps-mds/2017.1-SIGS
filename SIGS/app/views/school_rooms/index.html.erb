@@ -29,7 +29,7 @@
         <td><%= school_room.discipline.name %></td>
         <td><%= school_room.name %></td>
         <td>
-          <% school_room.course.each do |course| %>
+          <% school_room.courses.each do |course| %>
             <%= course.name %> <br>
           <% end %>
         <td><%= school_room.vacancies %></td>
