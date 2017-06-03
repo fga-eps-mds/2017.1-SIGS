@@ -7,7 +7,6 @@ $(document).ready(function (){
   menuDropdown("Turmas");
   addItem("Nova Turma", "criar_turma", "Turmas");
   addItem("Meu Departamento", "visualizar_turmas", "Turmas");
-  addItem("Relatório", "relatorio_turmas", "Turmas");
   menuDropdown("Salas");
   addItem("Salas", "salas", "Salas");
   addItem("Categorias", "categorias", "Salas");

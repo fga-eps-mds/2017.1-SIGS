@@ -130,31 +130,3 @@
   font-weight: normal;
   font-style: normal;
 }
-
-/* report school room*/
-
-.school_room_reports{
-  padding-right: 20px;
-}
-
-.align-left{
-  float: left !important;
-  margin-top: 20px;
-}
-
-*CSS para impressão*/
-@media print {
-  * {
-  background:transparent !important;
-  color:#000 !important;
-  text-shadow:none !important;
-  filter:none !important;
-  -ms-filter:none !important;
-}
-
-body {
-  margin:0;
-  padding:0;
-  line-height: 1.4em;
-}
-}

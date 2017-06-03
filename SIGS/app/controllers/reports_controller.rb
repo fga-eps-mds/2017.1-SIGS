@@ -81,26 +81,6 @@ class ReportsController < ApplicationController
     render inline: obtain_room_list_with_name_id(rooms).to_json
   end
 
-  def report_school_room_all
-    report_school_room_not_allocation
-  end
-
-  def report_school_room_allocation
-    @allocation = Allocation.all
-  end
-
-  def report_school_room_not_allocation
-    @allocation = Allocation.all
-    id_school_room = []
-    cont_id = 0;
-    @allocation.each do |allocation|
-      id_school_room[cont_id] = allocation.school_room_id
-      cont_id += 1
-    end
-
-    @school_room = SchoolRoom.where('id NOT IN (?)', id_school_room)
-  end
-
   private
 
   def report_by_room_params
