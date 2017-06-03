@@ -27,6 +27,15 @@
       <% itens = [["NORTE"], ["CENTRAL"], ["SUL"]] %>
       <%= select_tag 'wing', options_for_select(itens, " "), include_blank: true %>
     </td>
+    <td>
+      <p> Categorias</p>
+      <div class="checkbox-group">
+        <% Category.all.each do |category| %>
+          <%= check_box_tag 'category_ids', category.id -%>
+          <%= category.name -%>
+        <% end %>
+      </div>
+    </td>
   </tr>
 
   <tr>
