@@ -37,32 +37,19 @@ class RoomsController < ApplicationController
       @rooms
     end
   end
-
-  #    if params[:wing].present?
-  #      @building_wing = @buildings.where(wing: params[:wing])
-  #    else
-  #      @buildings
-  #    end
-
+  
   def filter_by_wings
     if params[:wing].present?
-      @buildings = filter_build_by_wings
-      @rooms = @rooms.where(building_id: params[@buildings])
-    else
-      @rooms
-    end
-  end
-
-  def filter_build_by_wings
-    if params[:wing].present?
-      @buildings.columns.each do |attr|
-        if params[:"#{attr.wing}"].present?
-          @buildings = @buildings.where("#{attr.wing} like ?", "%#{params[attr.wing]}%")
-        end
+      @rooms = []
+      buildings = Building.where(wing: params[:wing]).load
+      buildings.each do |building|
+        building_rooms = Room.where(building_id: building.id)
+        @rooms = @rooms + building_rooms
       end
     else
-      @buildings
+      @rooms = Room.all
     end
+    return @rooms
   end
 
   def filter_by_name_and_code

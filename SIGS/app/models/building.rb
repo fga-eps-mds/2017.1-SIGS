@@ -16,7 +16,6 @@ class Building < ApplicationRecord
   private
 
   def params_upcase
-    code.upcase!
     wing.upcase!
   end
 end
