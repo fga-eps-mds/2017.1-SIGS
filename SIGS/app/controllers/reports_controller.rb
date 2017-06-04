@@ -3,6 +3,8 @@
 # Classe responsavel por gerar relatorio
 class ReportsController < ApplicationController
   before_action :logged_in?
+  Prawn::Font::AFM.hide_m17n_warning = true
+
   def by_room
     @departments = Department.all
     @rooms = Room.where(department: @departments[0])
@@ -11,7 +13,6 @@ class ReportsController < ApplicationController
   def generate_by_room
     require 'prawn/table'
     require 'prawn'
-    Prawn::Font::AFM.hide_m17n_warning = true
     report = Prawn::Document.new(page_size: 'A4', page_layout: :landscape) do |pdf|
       if params[:reports_by_room][:all_rooms] == '0'
         room_selected = Room.find(params[:reports_by_room][:room_code])
