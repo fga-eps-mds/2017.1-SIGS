@@ -7,7 +7,8 @@ end
 
 When (/^click on link 'Salas'$/) do
   #first(:link, 'Salas').click
-  visit 'http://192.168.2.15:3000/rooms/index'
+  #visit 'http://192.168.2.15:3000/rooms/index'
+  find("a[href='/rooms/index']").click
 end
 
 And (/^I press 'Icon edit' button$/) do
