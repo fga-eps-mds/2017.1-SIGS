@@ -24,8 +24,8 @@ class AllocationsController < ApplicationController
 
     [:Segunda, :Terça, :Quarta, :Quinta, :Sexta, :Sábado].each do |day_of_week|
       exist = false
-      (0..(params[day_of_week].count-1)).each do |index|
-        next if params[day_of_week][index].count == 1
+      (0..(params[day_of_week].size - 1)).each do |index|
+        next if params[day_of_week][index].size == 1
         if params[day_of_week][index][:active] == '1' && !exist
           group_allocation.push params[day_of_week][index]
           exist = true
@@ -39,8 +39,6 @@ class AllocationsController < ApplicationController
     group_allocation.each do |allocation|
       save_allocation(allocation)
     end
-    puts "=" * 30
-    puts params[:Segunda][0].inspect
     redirect_to allocations_new_path(params[:Segunda][0][:school_room_id])
   end
 

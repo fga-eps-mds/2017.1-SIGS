@@ -20,16 +20,15 @@ RSpec.describe AllocationsController, type: :controller do
       @period = Period.create(period_type:'Letivo', initial_date: '08-03-2018', final_date: '14-07-2018')
     end
 
-
     # New
     it 'should return new view' do
-      get  :new
+      get  :new, params: {school_room_id: @school_room.id}
       expect(response).to have_http_status(200)
     end
 
-    it 'should return a new catogory' do
+    it 'should return a new allocation' do
       sign_in(@user)
-      get :new
+      get  :new, params: {school_room_id: @school_room.id}
       expect(@allocation).to be_nil
     end
 
@@ -37,106 +36,122 @@ RSpec.describe AllocationsController, type: :controller do
 
     it 'should create a new allocation' do
       sign_in(@user)
-      post :create, params: {allocation: {user_id:@user.id,room_id:@room.id,school_room_id:@school_room.id, day:"segunda",start_time:"12:00",final_time:"14:00"}}
-      expect(response).to redirect_to(allocations_new_path)
+      post :create, params: {
+        Segunda: [{room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: 1}],
+        Terça: [{room_id:@room.id,school_room_id:@school_room.id, day:"Terça",start_time:"12:00",final_time:"14:00", active: 1}],
+        Quarta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Quarta",start_time:"12:00",final_time:"14:00", active: 1}],
+        Quinta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Quinta",start_time:"12:00",final_time:"14:00", active: 1}],
+        Sexta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Sexta",start_time:"12:00",final_time:"14:00", active: 1}],
+        Sábado: [{room_id:@room.id,school_room_id:@school_room.id, day:"Sábado",start_time:"12:00",final_time:"14:00", active: 1}]
+      }
+      expect(response).to redirect_to(allocations_new_path(@school_room.id))
       expect(flash[:success]).to eq('Alocação feita com sucesso')
     end
 
 
     it "shouldn't create an allocation without some arguments" do
       sign_in(@user)
-      post :create, params: {allocation: {user_id:@user.id,school_room_id:@school_room.id, day:"segunda",start_time:"12:00",final_time:"14:00"}}
-      expect(response).to redirect_to(allocations_new_path)
+      post :create, params: {
+        # Monday allocation without room id
+        Segunda: [{school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: 1}],
+        Terça: [{room_id:@room.id,school_room_id:@school_room.id, day:"Terça",start_time:"12:00",final_time:"14:00", active: 1}],
+        Quarta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Quarta",start_time:"12:00",final_time:"14:00", active: 1}],
+        Quinta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Quinta",start_time:"12:00",final_time:"14:00", active: 1}],
+        Sexta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Sexta",start_time:"12:00",final_time:"14:00", active: 1}],
+        Sábado: [{room_id:@room.id,school_room_id:@school_room.id, day:"Sábado",start_time:"12:00",final_time:"14:00", active: 1}]
+      }
+      expect(response).to redirect_to(allocations_new_path(@school_room.id))
       expect(flash[:error]).to eq('Falha ao realizar alocação')
     end
 
     it 'should not create an allocation with invalid time' do
       sign_in(@user)
-      post :create, params: {allocation: {user_id:@user.id,room_id:@room.id,school_room_id:@school_room.id, day:"segunda",start_time:"12:00",final_time:"12:00"}}
-      expect(response).to redirect_to(allocations_new_path)
+      post :create, params: {
+        Segunda: [{room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"11:00",final_time:"11:00", active: 1}],
+        Terça: [{room_id:@room.id,school_room_id:@school_room.id, day:"Terça",start_time:"12:00",final_time:"14:00", active: 1}],
+        Quarta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Quarta",start_time:"12:00",final_time:"14:00", active: 1}],
+        Quinta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Quinta",start_time:"12:00",final_time:"14:00", active: 1}],
+        Sexta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Sexta",start_time:"12:00",final_time:"14:00", active: 1}],
+        Sábado: [{room_id:@room.id,school_room_id:@school_room.id, day:"Sábado",start_time:"12:00",final_time:"14:00", active: 1}]
+      }
+      expect(response).to redirect_to(allocations_new_path(@school_room.id))
       expect(flash[:error]).to eq('Horário inválido')
     end
 
     it "should not create an allocation with invalid shift" do
       sign_in(@user)
-      post :create, params: {allocation: {user_id:@user.id,room_id:@room.id,school_room_id:@school_room.id, day:"segunda",start_time:"18:00",final_time:"19:00"}}
-      expect(response).to redirect_to(allocations_new_path)
+      post :create, params:{
+        Segunda: [{room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"19:00",final_time:"21:00", active: 1}],
+        Terça: [{room_id:@room.id,school_room_id:@school_room.id, day:"Terça",start_time:"12:00",final_time:"14:00", active: 1}],
+        Quarta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Quarta",start_time:"12:00",final_time:"14:00", active: 1}],
+        Quinta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Quinta",start_time:"12:00",final_time:"14:00", active: 1}],
+        Sexta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Sexta",start_time:"12:00",final_time:"14:00", active: 1}],
+        Sábado: [{room_id:@room.id,school_room_id:@school_room.id, day:"Sábado",start_time:"12:00",final_time:"14:00", active: 1}]
+      }
+      expect(response).to redirect_to(allocations_new_path(@school_room.id))
       expect(flash[:error]).to eq('Horário inválido')
     end
 
     it "should not create an allocation if already exists an allocation with the same time and different discipline" do
       sign_in(@user)
-      @allocation = Allocation.create(user_id:@user.id,room_id:@room.id,school_room_id:@school_room3.id, day:"Quinta",start_time:"12:00",final_time:"14:00")
-      post :create, params: {allocation: {user_id:@user.id,room_id:@room.id,school_room_id:@school_room.id, day:"Quinta",start_time:"12:00",final_time:"14:00"}}
-      expect(response).to redirect_to(allocations_new_path)
+      @allocation = Allocation.create(room_id:@room.id,school_room_id:@school_room3.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: true, user: @user )
+      post :create, params: {
+        Segunda: [{room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: 1}],
+        Terça: [{room_id:@room.id,school_room_id:@school_room.id, day:"Terça",start_time:"12:00",final_time:"14:00", active: 1}],
+        Quarta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Quarta",start_time:"12:00",final_time:"14:00", active: 1}],
+        Quinta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Quinta",start_time:"12:00",final_time:"14:00", active: 1}],
+        Sexta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Sexta",start_time:"12:00",final_time:"14:00", active: 1}],
+        Sábado: [{room_id:@room.id,school_room_id:@school_room.id, day:"Sábado",start_time:"12:00",final_time:"14:00", active: 1}]
+      }
+      expect(response).to redirect_to(allocations_new_path(@school_room.id))
       expect(flash[:error]).to eq('Alocação com horário não vago ou capacidade da sala cheia')
     end
 
     it "should not create an allocation if already exists an allocation with the same time and school_room" do
       sign_in(@user)
-      @allocation = Allocation.create(user_id:@user.id,room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00")
-      post :create, params: {allocation: {user_id:@user.id,room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00"}}
-      expect(response).to redirect_to(allocations_new_path)
+      @allocation = Allocation.create(room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: true, user: @user )
+      post :create, params: {
+        Segunda: [{room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: 1}],
+        Terça: [{room_id:@room.id,school_room_id:@school_room.id, day:"Terça",start_time:"12:00",final_time:"14:00", active: 1}],
+        Quarta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Quarta",start_time:"12:00",final_time:"14:00", active: 1}],
+        Quinta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Quinta",start_time:"12:00",final_time:"14:00", active: 1}],
+        Sexta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Sexta",start_time:"12:00",final_time:"14:00", active: 1}],
+        Sábado: [{room_id:@room.id,school_room_id:@school_room.id, day:"Sábado",start_time:"12:00",final_time:"14:00", active: 1}]
+      }
+      expect(response).to redirect_to(allocations_new_path(@school_room.id))
       expect(flash[:error]).to eq('Alocação com horário não vago ou capacidade da sala cheia')
     end
 
     it "should not create an allocation if already exists an allocation
     with the same time,discipline and different school_room and capacity of room is above the permitted" do
       sign_in(@user)
-      @allocation = Allocation.create(user_id:@user.id,room_id:@room.id,school_room_id:@school_room.id, day:"Quarta",start_time:"12:00",final_time:"14:00")
-      post :create, params: {allocation: {user_id:@user.id,room_id:@room.id,school_room_id:@school_room2.id, day:"Quarta",start_time:"12:00",final_time:"14:00"}}
-      expect(response).to redirect_to(allocations_new_path)
+      @allocation = Allocation.create(room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: true, user: @user )
+      post :create, params: {
+        Segunda: [{room_id:@room.id,school_room_id:@school_room2.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: 1}],
+        Terça: [{room_id:@room.id,school_room_id:@school_room.id, day:"Terça",start_time:"12:00",final_time:"14:00", active: 1}],
+        Quarta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Quarta",start_time:"12:00",final_time:"14:00", active: 1}],
+        Quinta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Quinta",start_time:"12:00",final_time:"14:00", active: 1}],
+        Sexta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Sexta",start_time:"12:00",final_time:"14:00", active: 1}],
+        Sábado: [{room_id:@room.id,school_room_id:@school_room.id, day:"Sábado",start_time:"12:00",final_time:"14:00", active: 1}]
+      }
+      expect(response).to redirect_to(allocations_new_path(@school_room2.id))
       expect(flash[:error]).to eq('Alocação com horário não vago ou capacidade da sala cheia')
     end
 
     it "should create an allocation if already exists an allocation with the same time and discipline and different school_room" do
       sign_in(@user)
-      @allocation = Allocation.create(user_id:@user.id,room_id:@room.id,school_room_id:@school_room4.id, day:"Terça",start_time:"12:00",final_time:"14:00")
-      post :create, params: {allocation: {user_id:@user.id,room_id:@room.id,school_room_id:@school_room5.id, day:"Terça",start_time:"12:00",final_time:"14:00"}}
-      expect(response).to redirect_to(allocations_new_path)
+      @allocation = Allocation.create(room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: true, user: @user )
+      post :create, params: {
+        Segunda: [{room_id:@room.id,school_room_id:@school_room4.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: 1}],
+        Terça: [{room_id:@room.id,school_room_id:@school_room.id, day:"Terça",start_time:"12:00",final_time:"14:00", active: 1}],
+        Quarta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Quarta",start_time:"12:00",final_time:"14:00", active: 1}],
+        Quinta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Quinta",start_time:"12:00",final_time:"14:00", active: 1}],
+        Sexta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Sexta",start_time:"12:00",final_time:"14:00", active: 1}],
+        Sábado: [{room_id:@room.id,school_room_id:@school_room.id, day:"Sábado",start_time:"12:00",final_time:"14:00", active: 1}]
+      }
+      expect(response).to redirect_to(allocations_new_path(@school_room4.id))
       expect(flash[:success]).to eq('Alocação feita com sucesso')
     end
-
-
-    it "test create allocation with day friday" do
-      sign_in(@user)
-      post :create, params: {allocation: {user_id:@user.id,room_id:@room.id,school_room_id:@school_room5.id, day:"Sexta",start_time:"12:00",final_time:"14:00"}}
-      expect(flash[:success]).to eq('Alocação feita com sucesso')
-    end
-
-    it "test create allocation with day Saturday" do
-      sign_in(@user)
-      post :create, params: {allocation: {user_id:@user.id,room_id:@room.id,school_room_id:@school_room5.id, day:"Sabado",start_time:"12:00",final_time:"14:00"}}
-      expect(flash[:success]).to eq('Alocação feita com sucesso')
-    end
-
-    it "test create allocation with day Monday" do
-      sign_in(@user)
-      post :create, params: {allocation: {user_id:@user.id,room_id:@room.id,school_room_id:@school_room5.id, day:"Segunda",start_time:"12:00",final_time:"14:00"}}
-      expect(flash[:success]).to eq('Alocação feita com sucesso')
-    end
-
-    it "test create allocation with day Wednesday" do
-      sign_in(@user)
-      post :create, params: {allocation: {user_id:@user.id,room_id:@room.id,school_room_id:@school_room5.id, day:"Quarta",start_time:"12:00",final_time:"14:00"}}
-      expect(flash[:success]).to eq('Alocação feita com sucesso')
-    end
-
-    it "test create allocation with day Thursday" do
-      sign_in(@user)
-      post :create, params: {allocation: {user_id:@user.id,room_id:@room.id,school_room_id:@school_room5.id, day:"Quinta",start_time:"12:00",final_time:"14:00"}}
-      expect(flash[:success]).to eq('Alocação feita com sucesso')
-    end
-
-
-
-
-
-
-
-
-
-
 
     # Destroy
 
