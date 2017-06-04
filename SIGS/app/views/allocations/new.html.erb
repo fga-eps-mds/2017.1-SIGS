@@ -2,6 +2,8 @@
 
 <%= render partial: "school_rooms/show", locals: {school_room: @school_room} %>
 
+<%= hidden_field_tag :school_room, @school_room.id %>
+
 <%= form_tag allocations_create_path do %>
 
   <% days = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"] %>
@@ -27,36 +29,86 @@
         </td>
       <% end %>
     </tr>
-    <% allocation_index = 0 %>
-    <% (8..22).each do |hour| %>
-      <tr>
-        <th><%= hour %>:00</th>
-
-        <% days.each do |day| %>
-            <% school_room_is_alloc = get_school_room_allocation(@school_room_allocations, hour, day) %>
-            <% if school_room_is_alloc.nil? %>
-            <td>
-              <%= fields_for 'allocations[]', @allocations[allocation_index] do |a| %>
-                <%= a.check_box :active %>
-                <%= a.hidden_field :room_id, value: 1 %>
-                <%= a.hidden_field :school_room_id, value: @school_room.id %>
-                <%= a.hidden_field :day, value: day %>
-                <%= a.hidden_field :start_time, value: hour %>
-                <%= a.hidden_field :final_time, value: (hour+1) %>
-              <% end %>
-            </td>
-            <% else %>
-              <td class="school-room-allocated">
-                <%= get_room_name_by_allocation(school_room_is_alloc) %>
-              </td>
-            <% end %>
-        <% end %>
-        <% allocation_index += 1 %>
-    <% end %>
+  </table>
+  <table class="table table-hover" id="hours_table">
   </table>
   <%= submit_tag "Salvar", class: 'pull-right btn btn-default btn-success' %>
 <% end %>
 
-<scrip>
+<script>
 
+  $(document).ready(function(){
+    ajaxReloadTable();
+  });
+
+  $(".autofill-field").change(function() {
+    ajaxReloadTable();
+  });
+
+  function ajaxReloadTable() {
+    $.getJSON('../room_allocations_by_day?Segunda=' + $("#select-Segunda").val() +
+    '&Terça=' + $("#select-Terça").val()  +
+    '&Quarta=' + $("#select-Quarta").val() +
+    '&Quinta=' + $("#select-Quinta").val() +
+    '&Sexta=' + $("#select-Sexta").val() +
+    '&Sabado=' + $("#select-Sábado").val() +
+    '&school_room=' + $("#school_room").val(), {
+      format: 'json'
+    }).success(function(data){
+      generateTable(data);
+    }).error(function(){
+      alert("Falha no Processamento");
+    });
+  }
+
+  function generateTable(data) {
+    var string = "";
+    var day = ["", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
+    var shift = data[0][1][5];
+    var disabled;
+    for(row = 0; row < 17; row++) {
+      if((row <= 11 && shift == 1) || (row > 11 && shift == 2))
+        disabled = false;
+      else {
+        disabled = true;
+      }
+      string += "<tr>"
+      for(col = 0; col < 7; col++){
+        if (col == 0){
+          string += "<th>" + data[row][col] + "</th>";
+        } else if (data[row][col][0] == " ") {
+          string += '<td>';
+          if(disabled) {
+            string += '<input type="checkbox" value="1" name="' + day[col] + '[][active]" disabled/>';
+          } else {
+            string += '<input type="checkbox" value="1" name="' + day[col] + '[][active]"/>';
+          }
+          string += '<input value="' + data[row][col][2] + '" type="hidden" name="' + day[col] + '[][room_id]" />' +
+          '<input value="' + data[row][col][1] + '" type="hidden" name="' + day[col] + '[][school_room_id]" />' +
+          '<input value="' + day[col] + '" type="hidden" name="' + day[col] + '[][day]" />' +
+          '<input value="' + data[row][col][3] + '" type="hidden" name="' + day[col] + '[][start_time]" />' +
+          '<input value="' + data[row][col][4] + '" type="hidden" name="' + day[col] + '[][final_time]" />' +
+        '</td>';
+        } else {
+          string += "<td>" + data[row][col][0] + "</td>";
+        }
+      }
+      string += "</tr>";
+    }
+
+    $("#hours_table").html(string);
+
+    $("td").on("click",function(event) {
+    var target = $(event.target);
+    if (target.is('input:checkbox')) return;
+
+    var checkbox = $(this).find("input[type='checkbox']");
+
+    if( !checkbox.prop("checked") && !checkbox.attr("disabled")){
+        checkbox.prop("checked",true);
+    } else {
+        checkbox.prop("checked",false);
+    }
+});
+  }
 </script>
