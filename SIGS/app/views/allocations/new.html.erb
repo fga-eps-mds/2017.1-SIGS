@@ -77,7 +77,7 @@
         if (col == 0){
           string += "<th>" + data[row][col] + "</th>";
         } else if (data[row][col][0] == " ") {
-          string += '<td>';
+          string += '<td id="check_' + day[col] + "_" + (row + 6) + '">';
           if(disabled) {
             string += '<input type="checkbox" value="1" name="' + day[col] + '[][active]" disabled/>';
           } else {

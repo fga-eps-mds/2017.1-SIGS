@@ -6,72 +6,19 @@ And (/^click on link 'Graduação'$/) do
   click_link('Graduação')
 end
 
-And (/^select Turma 'A' of Turma droplist$/) do
-  expect(page).to have_content('Turma')
-  select('A', from: 'sala')
-  @school_room_id = find('#sala').value
-  # page.execute_script("$('hidden_field_id').my_function()")
+And (/^click on button 'Alocar' to 'Cálculo 1'$/) do
+  first(:link, 'Icon alloc').click
 end
 
-And (/^select Turma 'D' of Turma droplist$/) do
-  expect(page).to have_content('Turma')
-  select('D', from: 'sala')
-  @school_room_id = find('#sala').value
-  # page.execute_script("$('hidden_field_id').my_function()")
+And (/^select Sala 'S10' of select-room droplist'$/) do
+  select('S10', from: 'select-room')
 end
 
-And (/^click on button 'Segunda'$/) do
-  click_button('Segunda')
-  expect(page).to have_content('Alocar Segunda')
+And (/^click on checkbox 'check_Quinta_18'$/) do
+  page.execute_script("ajaxReloadTable()")
+  check 'check_Quinta_18'
 end
 
-And (/^click on button 'Quarta'$/) do
-  click_button('Quarta')
-  expect(page).to have_content('Alocar Quarta')
-end
-
-And (/^click on button 'Sexta'$/) do
-  click_button('Sexta')
-  expect(page).to have_content('Alocar Sexta')
-end
-
-And (/^select Sala 'S10' of Sala droplist$/) do
-  select('S10', from: 'allocation_room_id', match: :first)
-  first('input#allocation_school_room_id', visible: false, match: :first).set("#{@school_room_id}")
-end
-
-And (/^select Sala 'S8' of Sala droplist$/) do
-  select('S8', from: 'allocation_room_id', match: :first)
-  first('input#allocation_school_room_id', visible: false, match: :first).set("#{@school_room_id}")
-end
-
-And (/^I fill in 'allocation-start_time' with '10:00'$/) do
-  fill_in('allocation[start_time]', :with=> '10:00', match: :first)
-end
-
-And (/^I fill in 'allocation-start_time' with '12:00'$/) do
-  fill_in('allocation[start_time]', :with=> '12:00', match: :first)
-end
-
-And (/^I fill in 'allocation-final_time' with '12:00'$/) do
-  fill_in('allocation[final_time]', :with=> '12:00', match: :first)
-end
-
-And (/^I fill in 'allocation-final_time' with '10:00'$/) do
-  fill_in('allocation[final_time]', :with=> '10:00', match: :first)
-end
-
-When (/^I press 'Salvar' button of 'Segunda'$/) do
-  click_button('Salvar', match: :first)
-end
-
-When (/^I press 'Salvar' button of 'Quarta'$/) do
-  page.all(:button, 'Salvar')[2].click
-end
-
-When (/^I press 'Salvar' button of 'Sexta'$/) do
-  page.all(:button, 'Salvar')[4].click
-end
 
 Then(/^the 'Alocação' page should load with notice message 'Alocação feita com sucesso'$/) do
   expect(page).to have_content('Alocação feita com sucesso')
