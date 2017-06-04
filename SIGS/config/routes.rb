@@ -69,6 +69,25 @@ Rails.application.routes.draw do
   get 'periods/edit/:id' => 'periods#edit', as: 'period_edit'
   post 'periods/update' => 'periods#update', as: 'period_update'
 
+  # Reports
+  get 'reports/by_room'=> 'reports#by_room', as: 'reports_by_room'
+  get 'reports/generate_by_room' => 'reports#generate_by_room', as: 'generate_by_room'
+  get 'reports/json_of_rooms_by_department' => 'reports#json_of_rooms_by_department'
+  get 'reports/json_of_rooms_with_parts_of_name' => 'reports#json_of_rooms_with_parts_of_name'
+  post 'reports/generate_by_room' => 'reports#generate_by_room'
+
+  # Allocation
+  get 'allocations/new' => 'allocations#new' , :as => 'allocations_new'
+  post 'allocations/create' => 'allocations#create' , :as => 'allocations_create'
+  get 'allocations/destroy/:id', controller: 'allocations', action: 'destroy', as: 'allocations_destroy'
+
+  # allocation_extension
+  get 'allocation_extensions/new' => 'allocation_extensions#new' , :as => 'allocation_extensions_new'
+  post 'allocation_extensions/create' => 'allocation_extensions#create' , :as => 'allocation_extensions_create'
+
+  # Extension
+  post 'extensions/create' => 'extensions#create' , :as => 'extensions_create'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end

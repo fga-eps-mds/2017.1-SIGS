@@ -43,6 +43,11 @@
   justify-content: space-between;
 }
 
+.flexContainer .flexStart {
+  display: flex;
+  justify-content: flex-start;
+}
+
 .flexColumn {
   flex-direction: column;
 }
