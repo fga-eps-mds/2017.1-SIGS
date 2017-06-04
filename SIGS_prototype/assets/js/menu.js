@@ -14,6 +14,7 @@ $(document).ready(function (){
   addItem("Graduação", "home", "Alocações")
   addItem("Extensão", "home", "Alocações")
   menuDropdown("Relatórios");
+  addItem("por Disciplina", "relatorio_por_disciplina", "Relatórios")
   addItem("por Sala", "relatorio_por_sala", "Relatórios")
 });
 
