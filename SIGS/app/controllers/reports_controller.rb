@@ -6,17 +6,12 @@ class ReportsController < ApplicationController
   def by_room
     @departments = Department.all
     @rooms = Room.where(department: @departments[0])
-    @weeks = obtain_weeks_of_period
   end
 
   def generate_by_room
     require 'prawn/table'
     require 'prawn'
-
-    # time = Time.now.getutc
-    # initial_day = params[:reports_by_room][:initial_week].split(' a ')[0].to_date
-    # last_day = params[:reports_by_room][:last_week].split(' a ')[1].to_date
-
+    Prawn::Font::AFM.hide_m17n_warning = true
     report = Prawn::Document.new(page_size: 'A4', page_layout: :landscape) do |pdf|
       if params[:reports_by_room][:all_rooms] == '0'
         room_selected = Room.find(params[:reports_by_room][:room_code])
@@ -29,7 +24,6 @@ class ReportsController < ApplicationController
           generate_room_page_report(pdf, room)
           new_page = true
         end
-
       end
     end
 
@@ -52,30 +46,12 @@ class ReportsController < ApplicationController
 
   private
 
-  def report_by_room_params
-    params[:reports_by_room].permit(:departments, :all_rooms, :room_code,
-                                    :initial_week, :last_week)
-  end
-
   def obtain_room_list_with_name_id(rooms)
     rooms.map do |u|
       {
         id: u.id, name: u.name
       }
     end
-  end
-
-  def obtain_weeks_of_period
-    weeks = []
-    date = Period.find(1).initial_date.at_beginning_of_week
-    last = Period.find(3).final_date.at_end_of_week
-    while date <= last
-      weeks.push date.strftime('%d/%m/%Y') + ' à ' + (date + 5.days)
-                                                     .strftime('%d/%m/%Y')
-      date += 7.days
-      puts date.to_s
-    end
-    weeks
   end
 
   def generate_room_page_report(pdf, room)
