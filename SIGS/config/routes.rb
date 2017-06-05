@@ -79,7 +79,7 @@ Rails.application.routes.draw do
   get 'reports/school_room_all' => 'reports#report_school_room_all'
   get 'reports/school_room_allocation' => 'reports#report_school_room_allocation'
   get 'reports/school_room_not_allocation' => 'reports#report_school_room_not_allocation'
-  get 'reports/school_room_turmas' => 'reports#turmas_reports'
+  get 'reports/school_room' => 'reports#school_reports'
 
   # Allocation
   get 'allocations/new' => 'allocations#new' , :as => 'allocations_new'

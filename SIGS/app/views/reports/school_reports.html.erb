@@ -1,0 +1,15 @@
+<main class="mainConteiner">
+  <h1>Relatório por Turmas</h1>
+  <form class="report_school">
+    <input type="radio" name="relatorio">
+    <label class="school_room_reports">Todas</label>
+    <%= link_to "Gerar Relatório", reports_school_room_allocation_path(format: :pdf), class:"btn btn-danger" %>
+    <input type="radio" name="relatorio">
+    <label class="school_room_reports">Alocadas</label>
+     <%= link_to "Gerar Relatório", reports_school_room_allocation_path(format: :pdf), class:"btn btn-danger" %>
+    <input type="radio" name="relatorio">
+    <label class="school_room_reports">Não Alocadas</label>
+     <%= link_to "Gerar Relatório", reports_school_room_allocation_path(format: :pdf), class:"btn btn-danger" %>
+    <br>
+  </form>
+</main>
