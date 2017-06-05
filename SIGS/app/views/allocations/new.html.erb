@@ -10,7 +10,7 @@
   <select id="select-room">
     <%= options_from_collection_for_select(@coordinator_rooms, :id, :name) %>
   </select>
-  <table class="table table-hover">
+  <table class="table table-hover time_grid">
     <tr>
       <th>Horários</th>
       <% days.each do |day| %>
@@ -20,7 +20,7 @@
       <% end %>
     </tr>
     <tr>
-      <td></td>
+      <th></th>
       <% days.each do |day| %>
         <td>
           <select id="select-<%=day%>" class="autofill-field">
@@ -30,7 +30,7 @@
       <% end %>
     </tr>
   </table>
-  <table class="table table-hover" id="hours_table">
+  <table class="table table-hover time_grid" id="hours_table">
   </table>
   <%= submit_tag "Salvar", class: 'pull-right btn btn-default btn-success' %>
 <% end %>
@@ -42,6 +42,10 @@
   });
 
   $(".autofill-field").change(function() {
+    ajaxReloadTable();
+  });
+
+  $("#select-room").change(function() {
     ajaxReloadTable();
   });
 
@@ -62,6 +66,7 @@
   }
 
   function generateTable(data) {
+    var school_room = $("#school_room").val();
     var string = "";
     var day = ["", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
     var shift = data[0][1][5];
@@ -98,17 +103,4 @@
 
     $("#hours_table").html(string);
   }
-
-  $("td").on("click",function(event) {
-    var target = $(event.target);
-    if (target.is('input:checkbox')) return;
-
-    var checkbox = $(this).find("input[type='checkbox']");
-
-    if( !checkbox.prop("checked") && !checkbox.attr("disabled")){
-        checkbox.prop("checked",true);
-    } else {
-        checkbox.prop("checked",false);
-    }
-  });
 </script>
