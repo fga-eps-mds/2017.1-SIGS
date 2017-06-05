@@ -18,8 +18,8 @@ course_3 = Course.create(code: '12', name: 'Engenharia Automotiva', department: 
 course_4 = Course.create(code: '09', name: 'Artes Visuais', department: department_3, shift: 2)
 
 # Users - Coordinator
-user = User.create(name: 'Caio Filipe', email: 'caio@unb.br', cpf: '05012345678', registration: '1234567', active: true, password: '123456')
-coordinator = Coordinator.create(user: user, course: course_2)
+user_1 = User.create(name: 'Caio Filipe', email: 'caio@unb.br', cpf: '05012345678', registration: '1234567', active: true, password: '123456')
+coordinator = Coordinator.create(user: user_1, course: course_2)
 user_2 = User.create(name: 'João Busche', email: 'joao@unb.br', cpf: '05044448888', registration: '1234544', active: false, password: '123456')
 coordinator_2 = Coordinator.create(user: user_2, course: course_4)
 
@@ -48,7 +48,7 @@ category = Category.create(name: 'Laboratório Químico')
 category_2 = Category.create(name: 'Retroprojetor')
 
 # Rooms
-room = Room.create(code: '124325', name: 'S10', capacity: 50, active: true, time_grid_id: 1, department: department, building: buildings[1], category_ids: [category.id])
+room_1 = Room.create(code: '124325', name: 'S10', capacity: 50, active: true, time_grid_id: 1, department: department, building: buildings[1], category_ids: [category.id])
 room_2 = Room.create(code: '987653', name: 'SS', capacity: 40, active: false, time_grid_id: 2, department: department, building: buildings[2], category_ids: [category.id])
 room_3 = Room.create(code: '987655', name: 'S9', capacity: 40, active: false, time_grid_id: 2, department: department_2, building: buildings[2], category_ids: [category.id])
 room_4 = Room.create(code: '987654', name: 'S8', capacity: 80, active: true, time_grid_id: 1, department: department, building: buildings[1], category_ids: [category.id])
