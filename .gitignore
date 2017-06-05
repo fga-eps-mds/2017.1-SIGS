@@ -22,7 +22,11 @@
 # Ignore Byebug command history file.
 .byebug_history
 
+<<<<<<< HEAD
+.vagrant/
+=======
 .vagrant
 .gitignore
 SIGS/coverage
 SIGS/script/dbScript
+>>>>>>> origin/development

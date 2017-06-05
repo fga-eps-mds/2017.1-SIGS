@@ -7,7 +7,8 @@ end
 
 When (/^click on link 'Salas'$/) do
   #first(:link, 'Salas').click
-  visit 'http://192.168.2.15:3000/rooms/index'
+  #visit 'http://192.168.2.15:3000/rooms/index'
+  find("a[href='/rooms/index']").click
 end
 
 And (/^I press 'Icon edit' button$/) do
@@ -90,8 +91,8 @@ And (/^the 'Alterar Sala' page should load with a error message of capacity fiel
 end
 
 Then (/^the 'Visualizar Sala' page should load with informations of that room$/) do
-  expect(page).to have_content('Sala: Superior 10')
-  expect(page).to have_content('Código: S10')
+  expect(page).to have_content('Sala: S10')
+  expect(page).to have_content('Código: 124325')
   expect(page).to have_content('Capacidade: 50')
   expect(page).to have_content('Ativo: Sim')
   expect(page).to have_content('Prédio: Pavilhão Anísio Teixeira')

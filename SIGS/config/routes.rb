@@ -82,9 +82,17 @@ Rails.application.routes.draw do
   get 'reports/school_room_turmas' => 'reports#turmas_reports'
 
   # Allocation
-  get 'allocations/new' => 'allocations#new' , :as => 'allocations_new'
+  get 'allocations/new/:school_room_id' => 'allocations#new' , :as => 'allocations_new'
   post 'allocations/create' => 'allocations#create' , :as => 'allocations_create'
   get 'allocations/destroy/:id', controller: 'allocations', action: 'destroy', as: 'allocations_destroy'
+  get 'allocations/room_allocations_by_day' => 'allocations#room_allocations_by_day', :as => 'room_allocations_by_day'
+
+  # allocation_extension
+  get 'allocation_extensions/new' => 'allocation_extensions#new' , :as => 'allocation_extensions_new'
+  post 'allocation_extensions/create' => 'allocation_extensions#create' , :as => 'allocation_extensions_create'
+
+  # Extension
+  post 'extensions/create' => 'extensions#create' , :as => 'extensions_create'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

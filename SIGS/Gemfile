@@ -10,6 +10,10 @@ ruby "2.3.1"
 gem 'prawn-rails'
 gem 'prawn-table'
 
+#Gem to test pdf
+gem 'pdf-inspector', :group => :test, require: "pdf/inspector"
+gem 'pdf-reader', :group => :test
+
 gem 'rubocop', '~> 0.48.1', require: false
 
 gem 'simplecov' , :require => false  , :group => :test

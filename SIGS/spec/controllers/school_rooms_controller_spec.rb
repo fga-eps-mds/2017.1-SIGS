@@ -1,9 +1,10 @@
 require 'rails_helper'
+include SessionsHelper
+include SchoolRoomsHelper
+include UserHelper
 
 RSpec.describe SchoolRoomsController, type: :controller do
-
   describe 'SchoolRooms methods' do
-
     before(:each) do
       @user = User.create(name: 'joao silva', email: 'joaosilva@unb.br',
         password: '123456', registration:'1100061', cpf:'05601407380', active: true)

@@ -17,6 +17,7 @@ RSpec.describe ReportsController, type: :controller do
       @discipline = Discipline.create(name: 'Análise Combinatória', code: '123', department: @department)
       @school_room = SchoolRoom.create(name:"YY", vacancies: 50, discipline: @discipline)
       @school_room_2 = SchoolRoom.create(name:"XY", vacancies: 50, discipline: @discipline)
+
       @room = Room.create(code: 'S10', name: 'Superior 10', capacity: 50, active: true, time_grid_id: 1, building: @building, department: @department )
       @room_2 = Room.create(code: 'S11', name: 'Superior 10', capacity: 50, active: true, time_grid_id: 1, building: @building, department: @department )
 
@@ -79,10 +80,13 @@ RSpec.describe ReportsController, type: :controller do
       expect(analysis.strings).to include ("Sala: #{@room_2.code}")
     end
 
+<<<<<<< HEAD
     it "should return all school rooms" do
       get :report_school_room_all
 
       expect(Allocation.count).to eq(2)
     end
+=======
+>>>>>>> 82442fa50c44bc0c04b7444b44ee50f0e2bc4002
   end
 end
