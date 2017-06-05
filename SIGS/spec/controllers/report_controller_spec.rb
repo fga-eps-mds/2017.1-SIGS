@@ -80,13 +80,10 @@ RSpec.describe ReportsController, type: :controller do
       expect(analysis.strings).to include ("Sala: #{@room_2.code}")
     end
 
-<<<<<<< HEAD
     it "should return all school rooms" do
       get :report_school_room_all
 
       expect(Allocation.count).to eq(2)
     end
-=======
->>>>>>> 82442fa50c44bc0c04b7444b44ee50f0e2bc4002
   end
 end
