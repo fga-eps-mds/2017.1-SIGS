@@ -20,14 +20,36 @@ class AllocationsController < ApplicationController
 
   def create
     group_allocation = []
-    allocation = params[:Segunda][1]
-
+    valid = []
     [:Segunda, :Terça, :Quarta, :Quinta, :Sexta, :Sábado].each do |day_of_week|
       exist = false
-      (0..(params[day_of_week].size - 1)).each do |index|
-        next if params[day_of_week][index].size == 1
+
+      ['6',
+       '7',
+       '8',
+       '9',
+       '10',
+       '11',
+       '12',
+       '13',
+       '14',
+       '15',
+       '16',
+       '17',
+       '18',
+       '19',
+       '20',
+       '21',
+       '22',
+       '23'
+       ].each do |index|
+
+        next if params[day_of_week][index].nil?
+
         if params[day_of_week][index][:active] == '1' && !exist
           group_allocation.push params[day_of_week][index]
+          valid.push index
+          valid.push day_of_week
           exist = true
         elsif params[day_of_week][index][:active] == '1'
           group_allocation.last[:final_time] = params[day_of_week][index][:final_time]
@@ -39,7 +61,7 @@ class AllocationsController < ApplicationController
     group_allocation.each do |allocation|
       save_allocation(allocation)
     end
-    redirect_to allocations_new_path(params[:Segunda][0][:school_room_id])
+    redirect_to allocations_new_path(params[valid[1]][valid[0]][:school_room_id])
   end
 
   def save_allocation(allocation)
@@ -84,7 +106,7 @@ class AllocationsController < ApplicationController
     require 'json'
 
     data = []
-    (6..23).each do |hour|
+    (6..24).each do |hour|
       data << make_rows(hour)
     end
     render inline: data.to_json

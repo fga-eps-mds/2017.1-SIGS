@@ -37,12 +37,12 @@ RSpec.describe AllocationsController, type: :controller do
     it 'should create a new allocation' do
       sign_in(@user)
       post :create, params: {
-        Segunda: [{room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: 1}],
-        Terça: [{room_id:@room.id,school_room_id:@school_room.id, day:"Terça",start_time:"12:00",final_time:"14:00", active: 1}],
-        Quarta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Quarta",start_time:"12:00",final_time:"14:00", active: 1}],
-        Quinta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Quinta",start_time:"12:00",final_time:"14:00", active: 1}],
-        Sexta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Sexta",start_time:"12:00",final_time:"14:00", active: 1}],
-        Sábado: [{room_id:@room.id,school_room_id:@school_room.id, day:"Sábado",start_time:"12:00",final_time:"14:00", active: 1}]
+        Segunda: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: 1}},
+        Terça: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Terça",start_time:"12:00",final_time:"14:00", active: 1}},
+        Quarta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Quarta",start_time:"12:00",final_time:"14:00", active: 1}},
+        Quinta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Quinta",start_time:"12:00",final_time:"14:00", active: 1}},
+        Sexta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Sexta",start_time:"12:00",final_time:"14:00", active: 1}},
+        Sábado: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Sábado",start_time:"12:00",final_time:"14:00", active: 1}}
       }
       expect(response).to redirect_to(allocations_new_path(@school_room.id))
       expect(flash[:success]).to eq('Alocação feita com sucesso')
@@ -53,12 +53,12 @@ RSpec.describe AllocationsController, type: :controller do
       sign_in(@user)
       post :create, params: {
         # Monday allocation without room id
-        Segunda: [{school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: 1}],
-        Terça: [{room_id:@room.id,school_room_id:@school_room.id, day:"Terça",start_time:"12:00",final_time:"14:00", active: 1}],
-        Quarta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Quarta",start_time:"12:00",final_time:"14:00", active: 1}],
-        Quinta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Quinta",start_time:"12:00",final_time:"14:00", active: 1}],
-        Sexta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Sexta",start_time:"12:00",final_time:"14:00", active: 1}],
-        Sábado: [{room_id:@room.id,school_room_id:@school_room.id, day:"Sábado",start_time:"12:00",final_time:"14:00", active: 1}]
+        Segunda: {"12": {school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: 1}},
+        Terça: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Terça",start_time:"12:00",final_time:"14:00", active: 1}},
+        Quarta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Quarta",start_time:"12:00",final_time:"14:00", active: 1}},
+        Quinta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Quinta",start_time:"12:00",final_time:"14:00", active: 1}},
+        Sexta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Sexta",start_time:"12:00",final_time:"14:00", active: 1}},
+        Sábado: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Sábado",start_time:"12:00",final_time:"14:00", active: 1}}
       }
       expect(response).to redirect_to(allocations_new_path(@school_room.id))
       expect(flash[:error]).to eq('Falha ao realizar alocação')
@@ -67,12 +67,12 @@ RSpec.describe AllocationsController, type: :controller do
     it 'should not create an allocation with invalid time' do
       sign_in(@user)
       post :create, params: {
-        Segunda: [{room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"11:00",final_time:"11:00", active: 1}],
-        Terça: [{room_id:@room.id,school_room_id:@school_room.id, day:"Terça",start_time:"12:00",final_time:"14:00", active: 1}],
-        Quarta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Quarta",start_time:"12:00",final_time:"14:00", active: 1}],
-        Quinta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Quinta",start_time:"12:00",final_time:"14:00", active: 1}],
-        Sexta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Sexta",start_time:"12:00",final_time:"14:00", active: 1}],
-        Sábado: [{room_id:@room.id,school_room_id:@school_room.id, day:"Sábado",start_time:"12:00",final_time:"14:00", active: 1}]
+        Segunda: {"11": {room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"11:00",final_time:"11:00", active: 1}},
+        Terça: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Terça",start_time:"12:00",final_time:"14:00", active: 1}},
+        Quarta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Quarta",start_time:"12:00",final_time:"14:00", active: 1}},
+        Quinta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Quinta",start_time:"12:00",final_time:"14:00", active: 1}},
+        Sexta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Sexta",start_time:"12:00",final_time:"14:00", active: 1}},
+        Sábado: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Sábado",start_time:"12:00",final_time:"14:00", active: 1}}
       }
       expect(response).to redirect_to(allocations_new_path(@school_room.id))
       expect(flash[:error]).to eq('Horário inválido')
@@ -81,12 +81,12 @@ RSpec.describe AllocationsController, type: :controller do
     it "should not create an allocation with invalid shift" do
       sign_in(@user)
       post :create, params:{
-        Segunda: [{room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"19:00",final_time:"21:00", active: 1}],
-        Terça: [{room_id:@room.id,school_room_id:@school_room.id, day:"Terça",start_time:"12:00",final_time:"14:00", active: 1}],
-        Quarta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Quarta",start_time:"12:00",final_time:"14:00", active: 1}],
-        Quinta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Quinta",start_time:"12:00",final_time:"14:00", active: 1}],
-        Sexta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Sexta",start_time:"12:00",final_time:"14:00", active: 1}],
-        Sábado: [{room_id:@room.id,school_room_id:@school_room.id, day:"Sábado",start_time:"12:00",final_time:"14:00", active: 1}]
+        Segunda: {"19": {room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"19:00",final_time:"21:00", active: 1}},
+        Terça: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Terça",start_time:"12:00",final_time:"14:00", active: 1}},
+        Quarta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Quarta",start_time:"12:00",final_time:"14:00", active: 1}},
+        Quinta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Quinta",start_time:"12:00",final_time:"14:00", active: 1}},
+        Sexta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Sexta",start_time:"12:00",final_time:"14:00", active: 1}},
+        Sábado: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Sábado",start_time:"12:00",final_time:"14:00", active: 1}}
       }
       expect(response).to redirect_to(allocations_new_path(@school_room.id))
       expect(flash[:error]).to eq('Horário inválido')
@@ -96,12 +96,12 @@ RSpec.describe AllocationsController, type: :controller do
       sign_in(@user)
       @allocation = Allocation.create(room_id:@room.id,school_room_id:@school_room3.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: true, user: @user )
       post :create, params: {
-        Segunda: [{room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: 1}],
-        Terça: [{room_id:@room.id,school_room_id:@school_room.id, day:"Terça",start_time:"12:00",final_time:"14:00", active: 1}],
-        Quarta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Quarta",start_time:"12:00",final_time:"14:00", active: 1}],
-        Quinta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Quinta",start_time:"12:00",final_time:"14:00", active: 1}],
-        Sexta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Sexta",start_time:"12:00",final_time:"14:00", active: 1}],
-        Sábado: [{room_id:@room.id,school_room_id:@school_room.id, day:"Sábado",start_time:"12:00",final_time:"14:00", active: 1}]
+        Segunda: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: 1}},
+        Terça: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Terça",start_time:"12:00",final_time:"14:00", active: 1}},
+        Quarta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Quarta",start_time:"12:00",final_time:"14:00", active: 1}},
+        Quinta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Quinta",start_time:"12:00",final_time:"14:00", active: 1}},
+        Sexta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Sexta",start_time:"12:00",final_time:"14:00", active: 1}},
+        Sábado: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Sábado",start_time:"12:00",final_time:"14:00", active: 1}}
       }
       expect(response).to redirect_to(allocations_new_path(@school_room.id))
       expect(flash[:error]).to eq('Alocação com horário não vago ou capacidade da sala cheia')
@@ -111,12 +111,12 @@ RSpec.describe AllocationsController, type: :controller do
       sign_in(@user)
       @allocation = Allocation.create(room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: true, user: @user )
       post :create, params: {
-        Segunda: [{room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: 1}],
-        Terça: [{room_id:@room.id,school_room_id:@school_room.id, day:"Terça",start_time:"12:00",final_time:"14:00", active: 1}],
-        Quarta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Quarta",start_time:"12:00",final_time:"14:00", active: 1}],
-        Quinta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Quinta",start_time:"12:00",final_time:"14:00", active: 1}],
-        Sexta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Sexta",start_time:"12:00",final_time:"14:00", active: 1}],
-        Sábado: [{room_id:@room.id,school_room_id:@school_room.id, day:"Sábado",start_time:"12:00",final_time:"14:00", active: 1}]
+        Segunda: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: 1}},
+        Terça: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Terça",start_time:"12:00",final_time:"14:00", active: 1}},
+        Quarta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Quarta",start_time:"12:00",final_time:"14:00", active: 1}},
+        Quinta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Quinta",start_time:"12:00",final_time:"14:00", active: 1}},
+        Sexta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Sexta",start_time:"12:00",final_time:"14:00", active: 1}},
+        Sábado: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Sábado",start_time:"12:00",final_time:"14:00", active: 1}}
       }
       expect(response).to redirect_to(allocations_new_path(@school_room.id))
       expect(flash[:error]).to eq('Alocação com horário não vago ou capacidade da sala cheia')
@@ -127,12 +127,12 @@ RSpec.describe AllocationsController, type: :controller do
       sign_in(@user)
       @allocation = Allocation.create(room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: true, user: @user )
       post :create, params: {
-        Segunda: [{room_id:@room.id,school_room_id:@school_room2.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: 1}],
-        Terça: [{room_id:@room.id,school_room_id:@school_room.id, day:"Terça",start_time:"12:00",final_time:"14:00", active: 1}],
-        Quarta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Quarta",start_time:"12:00",final_time:"14:00", active: 1}],
-        Quinta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Quinta",start_time:"12:00",final_time:"14:00", active: 1}],
-        Sexta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Sexta",start_time:"12:00",final_time:"14:00", active: 1}],
-        Sábado: [{room_id:@room.id,school_room_id:@school_room.id, day:"Sábado",start_time:"12:00",final_time:"14:00", active: 1}]
+        Segunda: {"12": {room_id:@room.id,school_room_id:@school_room2.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: 1}},
+        Terça: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Terça",start_time:"12:00",final_time:"14:00", active: 1}},
+        Quarta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Quarta",start_time:"12:00",final_time:"14:00", active: 1}},
+        Quinta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Quinta",start_time:"12:00",final_time:"14:00", active: 1}},
+        Sexta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Sexta",start_time:"12:00",final_time:"14:00", active: 1}},
+        Sábado: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Sábado",start_time:"12:00",final_time:"14:00", active: 1}}
       }
       expect(response).to redirect_to(allocations_new_path(@school_room2.id))
       expect(flash[:error]).to eq('Alocação com horário não vago ou capacidade da sala cheia')
@@ -142,12 +142,12 @@ RSpec.describe AllocationsController, type: :controller do
       sign_in(@user)
       @allocation = Allocation.create(room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: true, user: @user )
       post :create, params: {
-        Segunda: [{room_id:@room.id,school_room_id:@school_room4.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: 1}],
-        Terça: [{room_id:@room.id,school_room_id:@school_room.id, day:"Terça",start_time:"12:00",final_time:"14:00", active: 1}],
-        Quarta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Quarta",start_time:"12:00",final_time:"14:00", active: 1}],
-        Quinta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Quinta",start_time:"12:00",final_time:"14:00", active: 1}],
-        Sexta: [{room_id:@room.id,school_room_id:@school_room.id, day:"Sexta",start_time:"12:00",final_time:"14:00", active: 1}],
-        Sábado: [{room_id:@room.id,school_room_id:@school_room.id, day:"Sábado",start_time:"12:00",final_time:"14:00", active: 1}]
+        Segunda: {"12": {room_id:@room.id,school_room_id:@school_room4.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: 1}},
+        Terça: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Terça",start_time:"12:00",final_time:"14:00", active: 1}},
+        Quarta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Quarta",start_time:"12:00",final_time:"14:00", active: 1}},
+        Quinta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Quinta",start_time:"12:00",final_time:"14:00", active: 1}},
+        Sexta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Sexta",start_time:"12:00",final_time:"14:00", active: 1}},
+        Sábado: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Sábado",start_time:"12:00",final_time:"14:00", active: 1}}
       }
       expect(response).to redirect_to(allocations_new_path(@school_room4.id))
       expect(flash[:success]).to eq('Alocação feita com sucesso')
@@ -162,6 +162,11 @@ RSpec.describe AllocationsController, type: :controller do
       expect(response).to redirect_to(current_user)
       expect(flash[:success]).to eq('Alocação excluída com sucesso')
     end
+
+
+
+
+
 
 
 
