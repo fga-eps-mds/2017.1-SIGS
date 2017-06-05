@@ -10,8 +10,8 @@ And (/^select in 'Departamento' option 'Engenharia'$/) do
 	select('Engenharia', from: 'reports_by_room_departments')
 end
 
-And (/^select in 'Código da sala' option 'Inferior 9'$/) do
-	select('Inferior 9', from: 'reports_by_room_room_code')
+And (/^select in 'Código da sala' option 'S10'$/) do
+	select('S10', from: 'reports_by_room_room_code')
 end
 
 When (/^I press 'Gerar' button$/) do

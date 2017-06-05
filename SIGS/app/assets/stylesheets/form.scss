@@ -73,3 +73,18 @@
 .day_button{
   width: 140px;
 }
+
+
+/*Time Grid*/
+
+.time_grid th {
+  width: 10%;
+}
+
+.time_grid td {
+  width: 15%;
+}
+
+.time_grid td:hover {
+  background-color: inherit;
+}

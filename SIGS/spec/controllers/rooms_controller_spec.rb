@@ -83,14 +83,14 @@ RSpec.describe RoomsController, type: :controller do
       expect(flash.now[:error]).to eq('Dados não foram atualizados')
     end
 
-    it 'should delete the room from the database, by coordinator' do 
+    it 'should delete the room from the database, by coordinator' do
       get :destroy, params:{id: @room_2.id}
       expect(flash[:success]).to eq('Sala excluida com sucesso')
       expect(response).to redirect_to(room_index_path)
     end
 
     it 'should delete the room from the database, by administrative assistant' do
-    sign_in(@user_2) 
+    sign_in(@user_2)
       get :destroy, params:{id: @room.id}
       expect(flash[:success]).to eq('Sala excluida com sucesso')
       expect(response).to redirect_to(room_index_path)
@@ -100,7 +100,7 @@ RSpec.describe RoomsController, type: :controller do
       get :destroy, params:{id: @room.id}
       expect(flash[:error]).to eq('Não possui permissão para excluir sala')
       expect(response).to redirect_to(room_index_path)
-    end 
+    end
 
   end
 end
