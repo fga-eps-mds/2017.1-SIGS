@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>SIGS</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.ico" />
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Sistema de Alocação de Salas Inteligente da UnB.">
+    <link rel="stylesheet" media="all" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" media="all" href="../assets/css/style.css" />
+    <link rel="stylesheet" media="all" href="../assets/css/navbar.css" />
+    <script src="../assets/js/jquery-1.12.4.min.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/menu.js"></script>
+    <style type="text/css">
+      .red {
+        color:red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container container-fluid myContainer">
+      <header class="navbar-default myNav">
+        <figure class="logo">
+          <img src="../assets/img/sigs_logo.png" alt="SIGS Logos" />
+        </figure>
+
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+
+        <ul class="nav navbar-nav" id="myNavBar"></ul>
+
+        <figure class="unbLogo">
+          <a href="http://www.unb.br" target="_blank">
+            <img src="../assets/img/rodape_unb.png" alt="SIGS Logos" />
+          </a>
+        </figure>
+      </header>
+      <main class="mainConteiner">
+        <form>
+          <h1>Solicitar Alocação - (Período de Ajuste)</h1>
+          <hr>
+          <label>Inicio</label><br><input type="text" name="" value="__:__"><br>
+          <label>Fim</label><br><input type="text" name="" value="__:__"><br>
+          <hr>
+          <label>Departamento:</label><br>
+            <p><input type="checkbox" name="" checked> XXXX</p>
+            <p><input type="checkbox" name="" checked> YYYY</p>
+            <p><input type="checkbox" name="" checked> <span class='red'>ZZZZ</span></p>
+          <hr>
+          <h2>Departamento: XXXX</h2>
+          <h3>Salas Disponíveis: </h3>
+            <p><input type="checkbox" name=""> BSAS88</p>
+            <p><input type="checkbox" name=""> BSAS98</p>
+            <p><input type="checkbox" name=""> <span class='red'>BSAS100</span></p>
+            <p><input type="checkbox" name=""> <span class='red'>BSAS58</span></p>
+            <p><input type="checkbox" name=""> <span class='red'>BSAS08</span></p>
+
+          <h2>Departamento: YYYY</h2>
+          <h3>Salas Disponíveis: </h3>
+            <p><input type="checkbox" name=""> Linf88</p>
+            <p><input type="checkbox" name=""> Linf98</p>
+            <p><input type="checkbox" name=""> <span class='red'>Linf08</span></p>
+
+          <h2>Departamento: ZZZZ</h2>
+          <h3>Salas Disponíveis: </h3>
+            <p><input type="checkbox" name=""> <span class='red'>QUI100</span></p>
+            <p><input type="checkbox" name=""> <span class='red'>QUI58</span></p>
+            <p><input type="checkbox" name=""> <span class='red'>QUI08</span></p>
+          <hr>
+          
+        
+          <label>Justificativa:</label><br>
+          <textarea style="width: 100%; height: 100px"></textarea>
+
+
+          <div class='actions'>
+            <input type="submit" name="commit" value="Solicitar" class="pull-right btn btn-default btn-success" data-disable-with="Gerar" />
+          </div>
+        </form>
+      </main>
+    </div>
+  </body>
+</html>
