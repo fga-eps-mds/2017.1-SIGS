@@ -153,6 +153,50 @@ RSpec.describe AllocationsController, type: :controller do
       expect(flash[:success]).to eq('Alocação feita com sucesso')
     end
 
+    it 'should create a new allocation with sequential hours' do
+      sign_in(@user)
+      post :create, params: {
+        Segunda: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"13:00", active: 1},
+        "13": {room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: 1}},
+        Terça: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Terça",start_time:"12:00",final_time:"14:00", active: 1}},
+        Quarta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Quarta",start_time:"12:00",final_time:"14:00", active: 1}},
+        Quinta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Quinta",start_time:"12:00",final_time:"14:00", active: 1}},
+        Sexta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Sexta",start_time:"12:00",final_time:"14:00", active: 1}},
+        Sábado: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Sábado",start_time:"12:00",final_time:"14:00", active: 1}}
+      }
+      expect(response).to redirect_to(allocations_new_path(@school_room.id))
+      expect(flash[:success]).to eq('Alocação feita com sucesso')
+    end
+
+    it 'should get json response' do
+      sign_in(@user)
+      Allocation.create(room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: true, user: @user )
+      get :room_allocations_by_day, params: { Segunda: @room.id, Terça: @room.id, Quarta: @room.id, Quinta: @room.id, Sexta: @room.id, Sabado: @room.id, school_room: @school_room.id}, :format => :json
+      expect(response).to have_http_status(200)
+    end
+
+    it 'should save all allocations in AllAllocationDate table in letive period' do
+      sign_in(@user)
+      start = @period.initial_date
+      final = @period.final_date
+      my_day = [1]
+      mondays = (start..final).to_a.select {|k| my_day.include?(k.wday)}
+      total_mondays = mondays.count
+      inital_allocations = AllAllocationDate.count
+
+      post :create, params: {
+        Segunda: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: 1}},
+        Terça: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Terça",start_time:"12:00",final_time:"14:00", active: 0}},
+        Quarta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Quarta",start_time:"12:00",final_time:"14:00", active: 0}},
+        Quinta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Quinta",start_time:"12:00",final_time:"14:00", active: 0}},
+        Sexta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Sexta",start_time:"12:00",final_time:"14:00", active: 0}},
+        Sábado: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Sábado",start_time:"12:00",final_time:"14:00", active: 0}}
+      }
+
+      final_allocations = AllAllocationDate.count
+      expect(final_allocations).to eq(inital_allocations + total_mondays)
+    end
+
     # Destroy
 
     it "should destroy an allocation" do
@@ -162,18 +206,5 @@ RSpec.describe AllocationsController, type: :controller do
       expect(response).to redirect_to(current_user)
       expect(flash[:success]).to eq('Alocação excluída com sucesso')
     end
-
-
-
-
-
-
-
-
-
-
-
-
-
   end
 end
