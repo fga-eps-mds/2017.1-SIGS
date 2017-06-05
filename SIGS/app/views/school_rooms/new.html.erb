@@ -8,12 +8,11 @@
   <div class="short_input">
     <%= school_room.label :name, "Turma" %>
     <%= school_room.text_field :name, class: 'form-control' %>
-    <%= school_room.number_field :vacancies, class: 'form-control' %>
   </div>
-  <br>
 
   <p>Vagas</p>
   <div class="checkbox-group">
+    <%= school_room.number_field :vacancies %>
   </div>
   <br>
 

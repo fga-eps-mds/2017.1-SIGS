@@ -53,7 +53,6 @@ class RoomsController < ApplicationController
       :code,
       :name,
       :capacity,
-      :actual_capacity,
       :active,
       :time_grid_id,
       :build_id,
