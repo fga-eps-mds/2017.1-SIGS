@@ -61,14 +61,21 @@
                   </ul>
               </li>
             <% end %>
-            <li class="dropdown">
-              <a data-toggle="collapse" href="#alocar">Alocações</a>
-                <ul class="collapse" id="alocar">
-                  <li><%= link_to "Graduação", school_rooms_index_path %></a></li>
-                  <li><a href="#">Extensão</a></li>
-                </ul>
-            </li>
+              <li class="dropdown">
+                <a data-toggle="collapse" href="#alocar">Alocações</a>
+                  <ul class="collapse" id="alocar">
+                    <li><%= link_to "Graduação", school_rooms_index_path %></a></li>
+                    <li><a href="#">Extensão</a></li>
+                  </ul>
+              </li>
+             <li class="dropdown">
+                <a data-toggle="collapse" href="#relatorios">Relatórios
+                  <ul class="collapse" id="relatorios">
+                    <li><%= link_to "Salas", reports_by_room_path %></li>
+                  </ul>
+              </li>
           </ul>
+
 
           <figure class="unbLogo"><a href="http://www.unb.br"><%= image_tag("rodape_unb.png") %></a></figure>
         </header>

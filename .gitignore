@@ -14,10 +14,19 @@
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
+/SIGS/public/reports
 !/log/.keep
 !/tmp/.keep
+!/SIGS/public/reports/.keep
 
 # Ignore Byebug command history file.
 .byebug_history
 
+<<<<<<< HEAD
 .vagrant/
+=======
+.vagrant
+.gitignore
+SIGS/coverage
+SIGS/script/dbScript
+>>>>>>> origin/development

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>SIGS</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.ico" />
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Sistema de Alocação de Salas Inteligente da UnB.">
+    <link rel="stylesheet" media="all" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" media="all" href="../assets/css/style.css" />
+    <link rel="stylesheet" media="all" href="../assets/css/navbar.css" />
+    <script src="../assets/js/jquery-1.12.4.min.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="../assets/js/menu.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <style type="text/css">
+      select{width:100%;}
+    </style>
+
+  </head>
+  <body>
+    <div class="container container-fluid myContainer">
+      <header class="navbar-default myNav">
+        <figure class="logo">
+          <img src="../assets/img/sigs_logo.png" alt="SIGS Logos" />
+        </figure>
+
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <ul class="nav navbar-nav" id="myNavBar"></ul>
+
+        <figure class="unbLogo">
+          <a href="http://www.unb.br" target="_blank">
+            <img src="../assets/img/rodape_unb.png" alt="SIGS Logos" />
+          </a>
+        </figure>
+      </header>
+      <main class="mainConteiner">
+        <h1>Relatório por Sala</h1>
+        <form action="Relatório_salas.pdf">
+          <label>Departamento</label>
+          <select>
+            <option>Departamento de Física</option>
+            <option>Departamento de Matemática</option>
+            <option>Departamento de Artes</option>
+            <option>Departamento de Design</option>
+          </select>
+
+          <br>
+
+
+          <input type="checkbox" name="" id="salas">
+          <label>Todas as Salas</label>
+
+          <br>
+
+          <label>Filtrar salas pelo código:(A pessoa digita parte do código e o select abaixo atualiza de acordo com cada tecla digitada)</label><br>
+          <span style="color: red;"></span>
+          <div class="search-elements">
+            <input placeholder="Digite o código da Sala" id="input-search-field" class="search-input" type="text" name="current_search[search]" style="width:100%" />
+          </div>
+
+          <label>Código da Sala:</label><br>
+          <span style="color: red;"></span>
+          <select class="sala_select">
+            <option>S10</option>
+            <option>BSAS11</option>
+            <option>BSAS12</option>
+            <option>BSAN08</option>
+          </select>
+
+          <br>
+
+          <label>1ª Semana</label><br>
+
+          <select>
+            <option selected="selected">Aqui terão todas as semanas desde o inicio do período de alocação até o fim do período letivo</option>
+            <option>06/03/2017 à 11/03/2017</option>
+            <option>13/03/2017 à 18/03/2017</option>
+            <option>20/03/2017 à 25/03/2017</option>
+            <option>27/03/2017 à 01/04/2017</option>
+          </select>
+
+          <br>
+
+          <label>Última Semana</label>
+          <br>
+          <select>
+            <option selected="selected">Aqui terão todas as semanas desde o inicio do período de alocação até o fim do período letivo</option>
+            <option>06/03/2017 à 11/03/2017</option>
+            <option>13/03/2017 à 18/03/2017</option>
+            <option>20/03/2017 à 25/03/2017</option>
+            <option>27/03/2017 à 01/04/2017</option>
+          </select>
+          <br>
+          <br>
+
+
+          <div class='actions'>
+            <input type="submit" name="commit" value="Gerar" class="pull-right btn btn-default btn-success" data-disable-with="Gerar" />
+          </div>
+        </form>
+      </main>
+    </div>
+  </body>
+</html>
+
+<script type="text/javascript">
+
+  $('input:checkbox').click(function (){
+    $("#input-search-field").prop('disabled', $(this).prop('checked'));
+    $("#sala_select").prop('disabled', $(this).prop('checked'));
+    if($(this).prop('checked')){
+      $("span").html("Campo desativado");
+
+    }else {
+      $("span").html("");
+    }
+  });
+</script>
