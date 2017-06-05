@@ -3,17 +3,16 @@
 # Classe responsavel por gerar relatorio
 class ReportsController < ApplicationController
   before_action :logged_in?
+  Prawn::Font::AFM.hide_m17n_warning = true
 
   def by_room
     @departments = Department.all
     @rooms = Room.where(department: @departments[0])
-    @weeks = obtain_weeks_of_period
   end
 
   def generate_by_room
     require 'prawn/table'
     require 'prawn'
-
     report = Prawn::Document.new(page_size: 'A4', page_layout: :landscape) do |pdf|
       if params[:reports_by_room][:all_rooms] == '0'
         room_selected = Room.find(params[:reports_by_room][:room_code])
@@ -26,7 +25,6 @@ class ReportsController < ApplicationController
           generate_room_page_report(pdf, room)
           new_page = true
         end
-
       end
     end
     send_data report.render, type: 'application/pdf', disposition: 'inline'
@@ -48,30 +46,12 @@ class ReportsController < ApplicationController
 
   private
 
-  def report_by_room_params
-    params[:reports_by_room].permit(:departments, :all_rooms, :room_code,
-                                    :initial_week, :last_week)
-  end
-
   def obtain_room_list_with_name_id(rooms)
     rooms.map do |u|
       {
         id: u.id, name: u.name
       }
     end
-  end
-
-  def obtain_weeks_of_period
-    weeks = []
-    date = Period.find(1).initial_date.at_beginning_of_week
-    last = Period.find(3).final_date.at_end_of_week
-    while date <= last
-      weeks.push date.strftime('%d/%m/%Y') + ' à ' + (date + 5.days)
-                                                     .strftime('%d/%m/%Y')
-      date += 7.days
-      puts date.to_s
-    end
-    weeks
   end
 
   def generate_room_page_report(pdf, room)

@@ -177,7 +177,6 @@ ActiveRecord::Schema.define(version: 20170601211446) do
 
   create_table "school_rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
-    t.boolean  "active"
     t.integer  "vacancies"
     t.integer  "discipline_id"
     t.datetime "created_at",    null: false
