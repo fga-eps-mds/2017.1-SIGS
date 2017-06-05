@@ -43,19 +43,22 @@ class ReportsDisciplinesController < ApplicationController
   def generate_discipline_page_report(pdf, discipline)
     @school_rooms = SchoolRoom.where('discipline' => discipline.id)
     if @school_rooms.empty?
-      pdf.text 'Disciplina sem turmas.'
+      pdf.table([
+                  ['Disciplina sem turmas']
+                ], row_colors: ['F0F0F0'], column_widths: [720]) do
+        row(0).font_style = :bold
+      end
     else
       @school_rooms.each do |school_room|
         @allocations = Allocation.where('school_room_id' => school_room.id)
         make_discipline_tables(pdf, school_room, @allocations)
-        make_rows_discipline_table(pdf, @allocations)
       end
     end
   end
 
   def make_discipline_tables(pdf, school_room, allocations)
     if allocations.empty?
-      pdf.text 'Disciplina sem turmas alocadas.'
+      make_row_school_room_not_alocate(pdf, school_room)
     else
       pdf.table([
                   ["Turma: #{school_room.name}", "Vagas: #{school_room.vacancies}"]
@@ -65,6 +68,7 @@ class ReportsDisciplinesController < ApplicationController
       pdf.table([
                   %w[Dia Sala Início Término]
                 ], column_widths: [180, 180, 180, 180], row_colors: ['F0F0F0'])
+      make_rows_discipline_table(pdf, allocations)
     end
   end
 
@@ -77,6 +81,16 @@ class ReportsDisciplinesController < ApplicationController
                 ], column_widths: [180, 180, 180, 180]) do
         column(0..3).style align: :center
       end
+    end
+    pdf.move_down 20
+  end
+
+  def make_row_school_room_not_alocate(pdf, school_room)
+    pdf.table([
+                ["Turma: #{school_room.name}"],
+                ['Não alocada']
+              ], row_colors: ['F0F0F0'], column_widths: [720]) do
+      row(0).font_style = :bold
     end
     pdf.move_down 20
   end

@@ -14,27 +14,27 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2017-06-05T23:29:06+00:00">2017-06-05T23:29:06+00:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2017-06-05T23:55:14+00:00">2017-06-05T23:55:14+00:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="green">96.63%</span></span>
+    (<span class="covered_percent"><span class="green">96.36%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         55.46
+         55.26
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>76</b> files in total.
-    <b>1396</b> relevant lines. 
-    <span class="green"><b>1349</b> lines covered</span> and
-    <span class="red"><b>47</b> lines missed </span>
+    <b>1401</b> relevant lines. 
+    <span class="green"><b>1350</b> lines covered</span> and
+    <span class="red"><b>51</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -122,11 +122,11 @@
       
       <tr>
         <td class="strong"><a href="#a8d7db22c52ce4191d97c44849c249c24b011dfc" class="src_link" title="app/controllers/reports_disciplines_controller.rb">app/controllers/reports_disciplines_controller.rb</a></td>
-        <td class="red strong">18.6 %</td>
-        <td>83</td>
-        <td>43</td>
-        <td>8</td>
-        <td>35</td>
+        <td class="red strong">18.75 %</td>
+        <td>97</td>
+        <td>48</td>
+        <td>9</td>
+        <td>39</td>
         <td>0.2</td>
       </tr>
       
@@ -3823,11 +3823,11 @@
         <div class="source_table" id="a8d7db22c52ce4191d97c44849c249c24b011dfc">
   <div class="header">
     <h3>app/controllers/reports_disciplines_controller.rb</h3>
-    <h4><span class="red">18.6 %</span> covered</h4>
+    <h4><span class="red">18.75 %</span> covered</h4>
     <div>
-      <b>43</b> relevant lines. 
-      <span class="green"><b>8</b> lines covered</span> and
-      <span class="red"><b>35</b> lines missed.</span>
+      <b>48</b> relevant lines. 
+      <span class="green"><b>9</b> lines covered</span> and
+      <span class="red"><b>39</b> lines missed.</span>
     </div>
   </div>
   
@@ -4104,229 +4104,313 @@
           <code class="ruby">    if @school_rooms.empty?</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="46">
+        <li class="never" data-hits="" data-linenumber="46">
           
           
-          <code class="ruby">      pdf.text &#39;Disciplina sem turmas.&#39;</code>
+          <code class="ruby">      pdf.table([</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="47">
           
           
-          <code class="ruby">    else</code>
+          <code class="ruby">                  [&#39;Disciplina sem turmas&#39;]</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="48">
           
           
-          <code class="ruby">      @school_rooms.each do |school_room|</code>
+          <code class="ruby">                ], row_colors: [&#39;F0F0F0&#39;], column_widths: [720]) do</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="49">
           
           
-          <code class="ruby">        @allocations = Allocation.where(&#39;school_room_id&#39; =&gt; school_room.id)</code>
+          <code class="ruby">        row(0).font_style = :bold</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="50">
-          
-          
-          <code class="ruby">        make_discipline_tables(pdf, school_room, @allocations)</code>
-        </li>
-      
-        <li class="missed" data-hits="0" data-linenumber="51">
-          
-          
-          <code class="ruby">        make_rows_discipline_table(pdf, @allocations)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="52">
+        <li class="never" data-hits="" data-linenumber="50">
           
           
           <code class="ruby">      end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="53">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="54">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="55">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="56">
-          <span class="hits">1</span>
-          
-          <code class="ruby">  def make_discipline_tables(pdf, school_room, allocations)</code>
-        </li>
-      
-        <li class="missed" data-hits="0" data-linenumber="57">
-          
-          
-          <code class="ruby">    if allocations.empty?</code>
-        </li>
-      
-        <li class="missed" data-hits="0" data-linenumber="58">
-          
-          
-          <code class="ruby">      pdf.text &#39;Disciplina sem turmas alocadas.&#39;</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="59">
+        <li class="never" data-hits="" data-linenumber="51">
           
           
           <code class="ruby">    else</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="60">
+        <li class="missed" data-hits="0" data-linenumber="52">
           
           
-          <code class="ruby">      pdf.table([</code>
+          <code class="ruby">      @school_rooms.each do |school_room|</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="61">
+        <li class="missed" data-hits="0" data-linenumber="53">
           
           
-          <code class="ruby">                  [&quot;Turma: #{school_room.name}&quot;, &quot;Vagas: #{school_room.vacancies}&quot;]</code>
+          <code class="ruby">        @allocations = Allocation.where(&#39;school_room_id&#39; =&gt; school_room.id)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="62">
+        <li class="missed" data-hits="0" data-linenumber="54">
           
           
-          <code class="ruby">                ], row_colors: [&#39;F0F0F0&#39;], column_widths: [360, 360]) do</code>
+          <code class="ruby">        make_discipline_tables(pdf, school_room, @allocations)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="63">
-          
-          
-          <code class="ruby">        row(0).font_style = :bold</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="64">
+        <li class="never" data-hits="" data-linenumber="55">
           
           
           <code class="ruby">      end</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="65">
-          
-          
-          <code class="ruby">      pdf.table([</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="66">
-          
-          
-          <code class="ruby">                  %w[Dia Sala Início Término]</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="67">
-          
-          
-          <code class="ruby">                ], column_widths: [180, 180, 180, 180], row_colors: [&#39;F0F0F0&#39;])</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="68">
+        <li class="never" data-hits="" data-linenumber="56">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="69">
+        <li class="never" data-hits="" data-linenumber="57">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="70">
+        <li class="never" data-hits="" data-linenumber="58">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="71">
+        <li class="covered" data-hits="1" data-linenumber="59">
           <span class="hits">1</span>
           
-          <code class="ruby">  def make_rows_discipline_table(pdf, allocations)</code>
+          <code class="ruby">  def make_discipline_tables(pdf, school_room, allocations)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="72">
+        <li class="missed" data-hits="0" data-linenumber="60">
           
           
-          <code class="ruby">    allocations.each do |allocation|</code>
+          <code class="ruby">    if allocations.empty?</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="73">
+        <li class="missed" data-hits="0" data-linenumber="61">
+          
+          
+          <code class="ruby">      make_row_school_room_not_alocate(pdf, school_room)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="62">
+          
+          
+          <code class="ruby">    else</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="63">
           
           
           <code class="ruby">      pdf.table([</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="74">
+        <li class="never" data-hits="" data-linenumber="64">
           
           
-          <code class="ruby">                  [allocation.day, Room.find_by_id(allocation.room_id).name,</code>
+          <code class="ruby">                  [&quot;Turma: #{school_room.name}&quot;, &quot;Vagas: #{school_room.vacancies}&quot;]</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="75">
+        <li class="missed" data-hits="0" data-linenumber="65">
           
           
-          <code class="ruby">                   allocation.start_time.strftime(&#39;%H:%M&#39;),</code>
+          <code class="ruby">                ], row_colors: [&#39;F0F0F0&#39;], column_widths: [360, 360]) do</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="76">
+        <li class="missed" data-hits="0" data-linenumber="66">
           
           
-          <code class="ruby">                   allocation.final_time.strftime(&#39;%H:%M&#39;)]</code>
+          <code class="ruby">        row(0).font_style = :bold</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="77">
-          
-          
-          <code class="ruby">                ], column_widths: [180, 180, 180, 180]) do</code>
-        </li>
-      
-        <li class="missed" data-hits="0" data-linenumber="78">
-          
-          
-          <code class="ruby">        column(0..3).style align: :center</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="79">
+        <li class="never" data-hits="" data-linenumber="67">
           
           
           <code class="ruby">      end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="80">
+        <li class="missed" data-hits="0" data-linenumber="68">
+          
+          
+          <code class="ruby">      pdf.table([</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="69">
+          
+          
+          <code class="ruby">                  %w[Dia Sala Início Término]</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="70">
+          
+          
+          <code class="ruby">                ], column_widths: [180, 180, 180, 180], row_colors: [&#39;F0F0F0&#39;])</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="71">
+          
+          
+          <code class="ruby">      make_rows_discipline_table(pdf, allocations)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="72">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="81">
-          
-          
-          <code class="ruby">    pdf.move_down 20</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="82">
+        <li class="never" data-hits="" data-linenumber="73">
           
           
           <code class="ruby">  end</code>
         </li>
       
+        <li class="never" data-hits="" data-linenumber="74">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="75">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def make_rows_discipline_table(pdf, allocations)</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="76">
+          
+          
+          <code class="ruby">    allocations.each do |allocation|</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="77">
+          
+          
+          <code class="ruby">      pdf.table([</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="78">
+          
+          
+          <code class="ruby">                  [allocation.day, Room.find_by_id(allocation.room_id).name,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="79">
+          
+          
+          <code class="ruby">                   allocation.start_time.strftime(&#39;%H:%M&#39;),</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="80">
+          
+          
+          <code class="ruby">                   allocation.final_time.strftime(&#39;%H:%M&#39;)]</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="81">
+          
+          
+          <code class="ruby">                ], column_widths: [180, 180, 180, 180]) do</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="82">
+          
+          
+          <code class="ruby">        column(0..3).style align: :center</code>
+        </li>
+      
         <li class="never" data-hits="" data-linenumber="83">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="84">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="85">
+          
+          
+          <code class="ruby">    pdf.move_down 20</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="86">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="87">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="88">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def make_row_school_room_not_alocate(pdf, school_room)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="89">
+          
+          
+          <code class="ruby">    pdf.table([</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="90">
+          
+          
+          <code class="ruby">                [&quot;Turma: #{school_room.name}&quot;],</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="91">
+          
+          
+          <code class="ruby">                [&#39;Não alocada&#39;]</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="92">
+          
+          
+          <code class="ruby">              ], row_colors: [&#39;F0F0F0&#39;], column_widths: [720]) do</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="93">
+          
+          
+          <code class="ruby">      row(0).font_style = :bold</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="94">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="95">
+          
+          
+          <code class="ruby">    pdf.move_down 20</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="96">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="97">
           
           
           <code class="ruby">end</code>
