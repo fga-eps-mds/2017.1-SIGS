@@ -1,5 +1,5 @@
 And (/^click on link 'Turmas' in 'Relatório'$/) do
-  find("a[href='/reports/school_room']").click
+  find("a[href='/reports_school_rooms/school_room']").click
 end
 
 And (/^I fill in 'relatorio' with 'Todas'$/) do

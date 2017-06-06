@@ -1,8 +1,8 @@
 require 'rails_helper'
 include SessionsHelper
 
-RSpec.describe ReportsController, type: :controller do
-  describe 'report controller methods' do
+RSpec.describe ReportsSchoolRoomsController, type: :controller do
+  describe 'report school room controller methods' do
     before(:each) do
       @user = User.create(name: 'joao silva', email: 'joaosilva@unb.br', password: '123456', registration:'1100061', cpf:'05601407380', active: true)
       @department = Department.create(name: 'Departamento de Matemática', code: '007')
@@ -29,46 +29,22 @@ RSpec.describe ReportsController, type: :controller do
       sign_in(@user)
     end
 
-    it 'should return report page' do
-      get :by_room
-      expect(response).to have_http_status(200)
+    it "should return all school rooms allocations" do
+      get :report_school_room_allocated
+
+      expect(Allocation.count).to eq(1)
     end
 
-    it 'should return room of department json page' do
-      get :json_of_rooms_by_department, params:{department_code: @department.id}
-      expect(response).to have_http_status(200)
+    it "should return not school rom allocation" do
+      get :report_school_room_not_allocated
+      method_report = assigns(:school_room)
+      expect(method_report).to include(@school_room_2)
     end
 
-    it 'should return room with part of name json page' do
-      get :json_of_rooms_with_parts_of_name, params:{department_code: @department.id}
-      expect(response).to have_http_status(200)
-    end
-
-    it 'should return report' do
-      post :generate_by_room, params:{reports_by_room:{all_rooms: 0,
-                                                       room_code: @room.id,
-                                                       departments: @department.id
-                                                      }}
-      expect(response).to have_http_status(200)
-    end
-
-    it 'should return report all rooms' do
-      post :generate_by_room, params:{reports_by_room:{all_rooms: 1,
-                                                       departments: @department.id
-                                                      }}
-      expect(response).to have_http_status(200)
-    end
-
-
-    it 'check pdf created of many page' do
-      post :generate_by_room, params:{reports_by_room:{all_rooms: 1,
-                                                       departments: @department.id
-                                                      }}, format: :pdf
-
-      analysis = PDF::Inspector::Text.analyze response.body
-
-      expect(analysis.strings).to include ("Sala: #{@room.code}")
-      expect(analysis.strings).to include ("Sala: #{@room_2.code}")
+    it "should return allocation school rom" do
+      get :report_school_room_all
+      method_report = assigns(:allocation)
+      expect(method_report).to include(@allocation)
     end
   end
 end
