@@ -10,8 +10,8 @@
   </form>
   <div class="btn_relatorio_schoolroom">
     <%= link_to "Gerar Relatório", reports_school_room_all_path(format: :pdf), class:"btn btn-danger reports_all" %>
-    <%= link_to "Gerar Relatório", reports_school_room_allocation_path(format: :pdf), class:"btn btn-danger reports_allocation display_none" %>
-     <%= link_to "Gerar Relatório", reports_school_room_not_allocation_path(format: :pdf), class:"btn btn-danger reports_no_all display_none" %>
+    <%= link_to "Gerar Relatório", reports_school_room_allocated_path(format: :pdf), class:"btn btn-danger reports_allocation display_none" %>
+     <%= link_to "Gerar Relatório", reports_school_room_not_allocated_path(format: :pdf), class:"btn btn-danger reports_no_all display_none" %>
     <br>
   </div>
 </main>

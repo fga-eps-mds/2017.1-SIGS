@@ -75,10 +75,12 @@ Rails.application.routes.draw do
   get 'reports/json_of_rooms_by_department' => 'reports#json_of_rooms_by_department'
   get 'reports/json_of_rooms_with_parts_of_name' => 'reports#json_of_rooms_with_parts_of_name'
   post 'reports/generate_by_room' => 'reports#generate_by_room'
-  get 'reports/school_room_all' => 'reports#report_school_room_all'
-  get 'reports/school_room_allocation' => 'reports#report_school_room_allocation'
-  get 'reports/school_room_not_allocation' => 'reports#report_school_room_not_allocation'
-  get 'reports/school_room' => 'reports#school_reports'
+  
+  # Reports School Rooms
+  get 'reports_school_rooms/school_room_all' => 'reports_school_rooms#report_school_room_all', as: 'reports_school_room_all'
+  get 'reports_school_rooms/school_rooms_allocated' => 'reports_school_rooms#report_school_room_allocated', as: 'reports_school_room_allocated'
+  get 'reports_school_rooms/school_room_not_allocated' => 'reports_school_rooms#report_school_room_not_allocated', as: 'reports_school_room_not_allocated'
+  get 'reports_school_rooms/school_room' => 'reports_school_rooms#school_reports', as: 'reports_school_room'
 
   #Reports Disciplines
   get 'reports_disciplines/generate_by_discipline/:id' => 'reports_disciplines#generate_by_discipline', as: 'generate_by_discipline'
