@@ -2,6 +2,8 @@ prawn_document(page_layout: :portrait) do |pdf|
   
   pdf.text "SIGS - Sistema Gerenciamento Salas", :size => 10, :color=>"bbbbbb", :align=>:center
 
+  df.move_down 10
+
   pdf.text @sem_school_room_not_allocation
 
   pdf.formatted_text [{:text =>"Relatorio gerado para todas as turmas não alocadas" ,:styles =>[:bold], :size => 20, :color=>"333333"}]

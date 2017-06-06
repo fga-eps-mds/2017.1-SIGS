@@ -131,3 +131,50 @@
   font-weight: normal;
   font-style: normal;
 }
+/*school room report*/
+
+
+.report_school label{
+  padding-right: 20px !important;
+  margin-top: -7px !important;
+}
+
+.report_all_school_room p{
+  margin-top: 20px;
+  font-size: 14px;
+  color: #bbbbbb; 
+  text-align: center;
+}
+
+.report_all_school_room h1{
+  font-size: 20; 
+  color: #333333;
+  margin-left: 20px;
+}
+
+.school_room_reports{
+  margin-top: -7px !important;
+  text-align: center;
+
+}
+
+.btn_relatorio_schoolroom{
+   width: 124px;
+  height:34px;
+}
+
+.reports_all, .reports_allocation, .reports_no_all{
+  position: absolute;
+}
+
+.display_none{
+  display: none !important; 
+}
+
+.display_block{
+  display:inline-block !important;
+}
+.title-report{
+  margin-left: -200px !important;
+  margin-top: -50px !important;
+}
