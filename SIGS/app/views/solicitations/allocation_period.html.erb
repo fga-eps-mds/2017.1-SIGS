@@ -1,0 +1,45 @@
+<h1>Solicitar Alocação - Período de Alocação</h1>
+<%= render partial: "school_rooms/show", locals: {school_room: @school_room} %>
+
+<%= form_for :solicitation, url: save_allocation_period_path do |f| %>
+  <%=f.label :departments, 'Departamento:' %>
+  <%=f.select :departments, @departments.collect {|d| [d.name, d.id] }, class: 'form-control' %>
+
+  <table class="hours_table table">
+
+  </table>
+
+  <%=f.label :justify, 'Justificativa:' %>
+  <%=f.text_area :justify, class: 'form-control' %>
+  <br>
+  <%= f.submit "Enviar", class: 'pull-right btn btn-default btn-success' %>
+
+<% end -%>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    table = "<tr>";
+    table += "<th></th>";
+    table += "<th>Segunda</th>";
+    table += "<th>Terça</th>";
+    table += "<th>Quarta</th>";
+    table += "<th>Quinta</th>";
+    table += "<th>Sexta</th>";
+    table += "<th>Sábado</th>";
+    table += "</tr>";
+    week = ["segunda", "terca","quarta","quinta","sexta", "sabado"]
+    for (var row = 0; row < 18; row++) {
+      table +="<tr>";
+      table += "<td>" + (6 + row) + ":00</td>";
+
+      for (var col = 0; col < 6; col++) {
+        table += "<td><input type='checkbox' name='" + week[col] + "[" + (6 + row) + "]' /></td>";
+      }
+      table += "</tr>";
+    }
+    $(".hours_table").html(table);
+  });
+</script>
+<style type="text/css">
+  td, th{text-align: center;}
+</style>
