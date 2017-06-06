@@ -19,7 +19,34 @@
       .red {
         color:red;
       }
+      td, th{
+        text-align: center;
+      }
     </style>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        string = '<table class="table"><tr>';
+        string += '<th>Horários</th>';
+        string += '  <th>Segunda</th>';
+        string += '  <th>Terça</th>';
+        string += '  <th>Quarta</th>';
+        string += '  <th>Quinta</th>';
+        string += '  <th>Sexta</th>';
+        string += '  <th>Sábado</th>';
+        string += '</tr>';
+        for (var i = 6; i < 24; i++) {
+          string += "<tr>";
+          string += "<td><strong>"+ i+":00</strong></td>";
+          for (var j = 0; j < 6; j++) {
+            string += "<td><input type='checkbox'></td>";
+          }
+          string += "</tr>";
+        }
+        string += "</table>"
+        $('#horarios').html(string);
+      });
+    </script>
   </head>
   <body>
     <div class="container container-fluid myContainer">
@@ -46,9 +73,28 @@
       <main class="mainConteiner">
         <form>
           <h1>Solicitar Alocação - (Período de Ajuste)</h1>
+          <table class="table">
+            <tr>
+              <th>Turma</th>
+              <th>Disciplina</th>
+              <th>Nº de Vagas</th>
+              <th>Cursos</th>
+              <th>Recursos</th>
+            </tr>
+
+            <tr>
+              <td>C</td>
+              <td>Cálculo 1</td>
+              <td>35</td>
+              <td>
+                  Matemática Licenciatura<br>
+              </td>
+              <td>
+              </td>
+            </tr>
+          </table>
           <hr>
-          <label>Inicio</label><br><input type="text" name="" value="__:__"><br>
-          <label>Fim</label><br><input type="text" name="" value="__:__"><br>
+            <div id="horarios"></div>
           <hr>
           <label>Departamento:</label><br>
             <p><input type="checkbox" name="" checked> XXXX</p>
