@@ -18,6 +18,10 @@ And (/^fill 'name' with 'X'$/) do
     fill_in('name', :with => 'X')
 end
 
+And (/^fill 'name' with ''$/) do
+    fill_in('name', :with => '')
+end
+
 Then (/^the 'Relatório por Disciplina' page show some disciplines$/) do
     expect(page).to have_content('Cálculo 3')
     expect(page).to have_content('Cálculo 2')
