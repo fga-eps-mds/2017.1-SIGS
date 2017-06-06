@@ -2,18 +2,19 @@ $(document).ready(function (){
   addItem("Minha Conta", "minha_conta", "myNavBar");
   addItem("Logout", "../index", "myNavBar");
   menuDropdown("Usuários");
-  addItem("Cadastros Pendentes", "cadastros_pendentes", "Usuários")
-  addItem("Usuários Registrados", "usuarios_registrados", "Usuários")
-  menuDropdown("Turmas")
+  addItem("Cadastros Pendentes", "cadastros_pendentes", "Usuários");
+  addItem("Usuários Registrados", "usuarios_registrados", "Usuários");
+  menuDropdown("Turmas");
   addItem("Nova Turma", "criar_turma", "Turmas");
   addItem("Meu Departamento", "visualizar_turmas", "Turmas");
   menuDropdown("Salas");
-  addItem("Salas", "salas", "Salas")
-  addItem("Categorias", "categorias", "Salas")
+  addItem("Salas", "salas", "Salas");
+  addItem("Categorias", "categorias", "Salas");
   menuDropdown("Alocações");
   addItem("Graduação", "home", "Alocações")
   addItem("Extensão", "home", "Alocações")
   menuDropdown("Relatórios");
+  addItem("por Disciplina", "relatorio_por_disciplina", "Relatórios")
   addItem("por Sala", "relatorio_por_sala", "Relatórios")
 });
 
