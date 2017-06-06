@@ -16,7 +16,7 @@ class ReportsController < ApplicationController
     report = Prawn::Document.new(page_size: 'A4', page_layout: :landscape) do |pdf|
       if params[:reports_by_room][:all_rooms] == '0'
         room_selected = Room.find(params[:reports_by_room][:room_code])
-        generate_room_page_report(pdf, room_selected)
+      #  generate_room_page_report(pdf, room_selected)
       else
         new_page = false
         rooms = Room.where(department: params[:reports_by_room][:departments])
@@ -46,7 +46,6 @@ class ReportsController < ApplicationController
   end
 
   def school_reports
-
   end
 
   def report_school_room_all
@@ -55,17 +54,27 @@ class ReportsController < ApplicationController
 
   def report_school_room_allocation
     @allocation = Allocation.all
+    if @allocation.nil?
+      return @sem_allocation = 'Não foram encontradas  turmas alocadas'
+    else
+      return @allocation
+    end
   end
 
   def report_school_room_not_allocation
     @allocation = Allocation.all
     id_school_room = []
-    cont_id = 0;
+    cont_id = 0
     @allocation.each do |allocation|
       id_school_room[cont_id] = allocation.school_room_id
       cont_id += 1
     end
-  @school_room = SchoolRoom.where('id NOT IN (?)', id_school_room)
+    @school_room = SchoolRoom.where('id NOT IN (?)', id_school_room)
+    if @school_room.nil?
+      return @sem_school_room_not_allocation = 'Não foram encontradas  turmas sem alocação'
+    else
+      return @school_room
+    end
   end
 
   private

@@ -65,6 +65,7 @@ group :development, :test do
   gem 'cucumber-rails', :require => false
   gem 'launchy'
   gem 'rspec-rails'
+  gem 'rails-controller-testing'
   #gem 'capybara'
   gem 'database_cleaner'
   #gem 'selenium-webdriver', '~> 2.53'

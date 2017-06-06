@@ -57,17 +57,6 @@ RSpec.describe ReportsController, type: :controller do
       expect(response).to have_http_status(200)
     end
 
-    it 'check pdf created of one page' do
-      post :generate_by_room, params:{reports_by_room:{all_rooms: 0,
-                                                       room_code: @room.id,
-                                                       departments: @department.id
-                                                      }}, format: :pdf
-
-      analysis = PDF::Inspector::Text.analyze response.body
-
-      expect(analysis.strings).to include ("Sala: #{@room.code}")
-    end
-
 
     it 'check pdf created of many page' do
       post :generate_by_room, params:{reports_by_room:{all_rooms: 1,
@@ -80,10 +69,22 @@ RSpec.describe ReportsController, type: :controller do
       expect(analysis.strings).to include ("Sala: #{@room_2.code}")
     end
 
-    it "should return all school rooms" do
-      get :report_school_room_all
+    it "should return all school rooms allocations" do
+      get :report_school_room_allocation
 
-      expect(Allocation.count).to eq(2)
+      expect(Allocation.count).to eq(1)
+    end
+
+    it "should return not school rom allocation" do
+      get :report_school_room_not_allocation
+      method_report = assigns(:school_room)
+      expect(method_report).to include(@school_room_2)
+    end
+
+    it "should return allocation school rom" do
+      get :report_school_room_all
+      method_report = assigns(:allocation)
+      expect(method_report).to include(@allocation)
     end
   end
 end
