@@ -28,7 +28,7 @@ Feature: Generate discipline allocation reports
         Then the 'Relatório por Disciplina' page show some disciplines
         And fill 'name' with ''
         And click on button 'searchButton'
-        And click on link 'Disciplinas' in 'Relatório'
+        Then the 'Relatório por Disciplina' page show some disciplines
         And click on link 'Icon pdf'
         Then generate a PDF
 
