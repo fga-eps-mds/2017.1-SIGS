@@ -16,11 +16,14 @@ RSpec.describe ReportsDisciplinesController, type: :controller do
       @discipline3 = Discipline.create(name: 'Teologia', code: '666', department: @department)
 
       @school_room = SchoolRoom.create(name:"YY", vacancies: 50, discipline: @discipline)
+      @school_room2 = SchoolRoom.create(name:"AAA", vacancies: 50, discipline: @discipline3)
+      @school_room3 = SchoolRoom.create(name:"BBB", vacancies: 50, discipline: @discipline3)
       @room = Room.create(code: 'S10', name: 'Superior 10', capacity: 50, active: true, time_grid_id: 1, building: @building, department: @department )
       @room_2 = Room.create(code: 'S11', name: 'Superior 10', capacity: 50, active: true, time_grid_id: 1, building: @building, department: @department )
 
       @allocation = Allocation.create(active: true, start_time: '14:00', final_time: '16:00', day: 'Segunda',user: @user, room: @room, school_room: @school_room)
       @allocation2 = Allocation.create(active: true, start_time: '14:00', final_time: '16:00', day: 'Terça',user: @user, room: @room2, school_room: @school_room)
+      @allocation3 = Allocation.create(active: true, start_time: '14:00', final_time: '16:00', day: 'Quinta',user: @user, room: @room2, school_room: @school_room2)
 
       sign_in(@user)
     end
@@ -49,7 +52,20 @@ RSpec.describe ReportsDisciplinesController, type: :controller do
     end
 
     it 'should generate_by_discipline' do
-      get :generate_by_discipline
-      expect(response).to have_http_status(200)
+      get :generate_by_discipline, params:{id: @discipline.id}
+      analysis = PDF::Inspector::Text.analyze response.body
+      expect(analysis.strings).to include ("Turma: #{@school_room.name}")
+    end
+
+    it 'should generate_by_discipline with no school_room' do
+      get :generate_by_discipline, params:{id: @discipline2}
+      analysis = PDF::Inspector::Text.analyze response.body
+      expect(analysis.strings).to include ("Disciplina sem turmas")
+    end
+
+    it 'should generate_by_discipline with school_rooms variables' do
+      get :generate_by_discipline, params:{id: @discipline3}
+      analysis = PDF::Inspector::Text.analyze response.body
+      expect(analysis.strings).to include ("Não alocada")
     end
 end

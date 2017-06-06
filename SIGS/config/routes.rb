@@ -80,7 +80,7 @@ Rails.application.routes.draw do
   get 'reports_disciplines/generate_by_discipline/:id' => 'reports_disciplines#generate_by_discipline', as: 'generate_by_discipline'
   get 'reports_disciplines/by_discipline' => 'reports_disciplines#by_discipline', as: 'reports_by_discipline'
   post 'reports_disciplines/by_discipline' => 'reports_disciplines#by_discipline', as: 'reports_by_discipline_post'
-
+  
   # Allocation
   get 'allocations/new/:school_room_id' => 'allocations#new' , :as => 'allocations_new'
   post 'allocations/create' => 'allocations#create' , :as => 'allocations_create'
