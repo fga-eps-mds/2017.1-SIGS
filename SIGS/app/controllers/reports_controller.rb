@@ -15,8 +15,8 @@ class ReportsController < ApplicationController
     require 'prawn'
     report = Prawn::Document.new(page_size: 'A4', page_layout: :landscape) do |pdf|
       if params[:reports_by_room][:all_rooms] == '0'
-        room_selected = Room.find(params[:reports_by_room][:room_code])
-        generate_room_page_report(pdf, room_selected)
+      # room_selected = Room.find(params[:reports_by_room][:room_code])
+      #  generate_room_page_report(pdf, room_selected)
       else
         new_page = false
         rooms = Room.where(department: params[:reports_by_room][:departments])
@@ -27,7 +27,6 @@ class ReportsController < ApplicationController
         end
       end
     end
-
     send_data report.render, type: 'application/pdf', disposition: 'inline'
   end
 
@@ -56,9 +55,11 @@ class ReportsController < ApplicationController
   end
 
   def generate_room_page_report(pdf, room)
-    pdf.text "Sala: #{room.code}", size: 18, style: :bold, align: :center
+    pdf.text "Sala: #{room.code}", size: 18,
+                                   style: :bold, align: :center
     data = [[' ', 'Segunda-feira', 'Terça-feira',
-             'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado']]
+             'Quarta-feira', 'Quinta-feira',
+             'Sexta-feira', 'Sábado']]
     (0..17).each do |j|
       data << make_rows(room, j)
     end

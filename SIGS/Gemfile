@@ -6,8 +6,12 @@ git_source(:github) do |repo_name|
 end
 
 ruby "2.3.1"
-# Gem to generate PDF
+
+gem 'prawn-rails'
+
 gem 'prawn-table'
+
+gem 'rails-controller-testing'
 
 #Gem to test pdf
 gem 'pdf-inspector', :group => :test, require: "pdf/inspector"
@@ -64,6 +68,7 @@ group :development, :test do
   gem 'cucumber-rails', :require => false
   gem 'launchy'
   gem 'rspec-rails'
+  gem 'rails-controller-testing'
   #gem 'capybara'
   gem 'database_cleaner'
   #gem 'selenium-webdriver', '~> 2.53'

@@ -64,6 +64,13 @@ And (/^click on link 'Usuários Registrados'$/) do
   click_link('Usuários Registrados')
 end
 
+And (/^I delete all the allocations of this user$/) do
+	@allocations = Allocation.all
+	@allocations.each do |allocation|
+		allocation.destroy
+	end
+end
+
 When (/^I press 'Delete' button$/) do
   first(:link, 'Icon trash').click
 end

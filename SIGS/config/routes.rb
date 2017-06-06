@@ -75,7 +75,18 @@ Rails.application.routes.draw do
   get 'reports/json_of_rooms_by_department' => 'reports#json_of_rooms_by_department'
   get 'reports/json_of_rooms_with_parts_of_name' => 'reports#json_of_rooms_with_parts_of_name'
   post 'reports/generate_by_room' => 'reports#generate_by_room'
+  
+  # Reports School Rooms
+  get 'reports_school_rooms/school_room_all' => 'reports_school_rooms#report_school_room_all', as: 'reports_school_room_all'
+  get 'reports_school_rooms/school_rooms_allocated' => 'reports_school_rooms#report_school_room_allocated', as: 'reports_school_room_allocated'
+  get 'reports_school_rooms/school_room_not_allocated' => 'reports_school_rooms#report_school_room_not_allocated', as: 'reports_school_room_not_allocated'
+  get 'reports_school_rooms/school_room' => 'reports_school_rooms#school_reports', as: 'reports_school_room'
 
+  #Reports Disciplines
+  get 'reports_disciplines/generate_by_discipline/:id' => 'reports_disciplines#generate_by_discipline', as: 'generate_by_discipline'
+  get 'reports_disciplines/by_discipline' => 'reports_disciplines#by_discipline', as: 'reports_by_discipline'
+  post 'reports_disciplines/by_discipline' => 'reports_disciplines#by_discipline', as: 'reports_by_discipline_post'
+  
   # Allocation
   get 'allocations/new/:school_room_id' => 'allocations#new' , :as => 'allocations_new'
   post 'allocations/create' => 'allocations#create' , :as => 'allocations_create'
