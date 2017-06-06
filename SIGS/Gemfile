@@ -11,6 +11,8 @@ gem 'prawn-rails'
 
 gem 'prawn-table'
 
+gem 'rails-controller-testing'
+
 #Gem to test pdf
 gem 'pdf-inspector', :group => :test, require: "pdf/inspector"
 gem 'pdf-reader', :group => :test
