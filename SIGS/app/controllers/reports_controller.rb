@@ -27,7 +27,6 @@ class ReportsController < ApplicationController
         end
       end
     end
-
     send_data report.render, type: 'application/pdf', disposition: 'inline'
   end
 

@@ -87,6 +87,39 @@
   width: 100%;
 }
 
+.tableDisciplineReport > tbody > tr > td {
+     vertical-align: middle;
+}
+/* report school room*/
+
+.search-elements {
+  display: inline-block;
+}
+
+.icon-search-submit {
+  border: 0px;
+  background-color: #FFFFFF;
+}
+
+
+.search-input {
+  padding: 5%;
+  border-top-style: none;
+  border-right-style: none;
+  border-bottom-style: solid;
+  border-left-style: none;
+  border-bottom-color: black;
+  border-bottom-width: 1px;
+}
+
+.search-input:focus {
+  border-bottom-width: 2px;
+}
+
+.formDisciplineSearch {
+  margin: 30px auto;
+}
+
 /* #erro-message {
    max-width: 200px;
 } */
@@ -97,31 +130,4 @@
   src:url('../fonts/Sawasdee.ttf');
   font-weight: normal;
   font-style: normal;
-}
-/* report school room*/
-
-.school_room_reports{
-  padding-right: 20px;
-}
-
-.align-left{
-  float: left !important;
-  margin-top: 20px;
-}
-
-*CSS para impressão*/
-@media print {
-  * {
-  background:transparent !important;
-  color:#000 !important;
-  text-shadow:none !important;
-  filter:none !important;
-  -ms-filter:none !important;
-}
-
-body {
-  margin:0;
-  padding:0;
-  line-height: 1.4em;
-}
 }

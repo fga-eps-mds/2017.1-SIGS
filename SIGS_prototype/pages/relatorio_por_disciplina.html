@@ -11,11 +11,14 @@
     <link rel="stylesheet" media="all" href="../assets/css/bootstrap.min.css" />
     <link rel="stylesheet" media="all" href="../assets/css/style.css" />
     <link rel="stylesheet" media="all" href="../assets/css/navbar.css" />
-    <link rel="stylesheet" media="all" href="../assets/css/form.css" />
     <script src="../assets/js/jquery-1.12.4.min.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/menu.js"></script>
+    <style type="text/css">
+      select{width:100%;}
+    </style>
+
   </head>
   <body>
     <div class="container container-fluid myContainer">
@@ -39,21 +42,47 @@
           </a>
         </figure>
       </header>
-
       <main class="mainConteiner">
-        <h1>Relatório por Turmas</h1>
-        <form action="relatorios_turmas.html">
-         <%= link_to "alocadas" reports_school_room_allocation_path(format: :pdf), class:"btn btn-danger" %>
-          <input type="radio" name="relatorio">
-          <label class="school_room_reports">Alocadas</label>
-          <input type="radio" name="relatorio">
-          <label class="school_room_reports">Não Alocadas</label>
-          <br>
-          <div class='actions col-xs-12 col-sm-12 col-md-12 col-lg-12'>
-            <input type="submit" value="Gerar" class=" btn btn-default btn-success align-left"/>
+        <h1>Relatório por Disciplina</h1>
+
+        <form action="" accept-charset="UTF-8" class="formDisciplineSearch">
+          <div class="search-elements">
+            <input placeholder="Buscar por disciplinas" id="input-search-field" class="search-input" type="text" name="current_search[search]" />
+          </div>
+          <div class="search-elements">
+            <button name="button" type="submit" class="icon-search-submit" id="searchButton">
+              <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            </button>
           </div>
         </form>
-      </main>
+
+        <table class="table table-striped tableDisciplineReport">
+          <thead>
+            <tr>
+              <th>Disciplina</th>
+              <th>Departamento</th>
+              <th>Relatório</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Cálculo 1</td>
+              <td>Departamento de Matemática</td>
+              <td><a href="Relatório_disciplinas.pdf"><img src="../assets/img/icon_pdf.png" alt="Gerar Relatório" /></a></td>
+            </tr>
+            <tr>
+              <td>Cálculo 2</td>
+              <td>Departamento de Matemática</td>
+              <td><a href="Relatório_disciplinas.pdf"><img src="../assets/img/icon_pdf.png" alt="Gerar Relatório" /></a></td>
+            </tr>
+            <tr>
+              <td>Cálculo 3</td>
+              <td>Departamento de Matemática</td>
+              <td><a href="Relatório_disciplinas.pdf"><img src="../assets/img/icon_pdf.png" alt="Gerar Relatório" /></a></td>
+            </tr>
+          </tbody>
+        </table>
+
     </div>
   </body>
 </html>

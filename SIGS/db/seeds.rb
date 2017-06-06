@@ -18,8 +18,8 @@ course_3 = Course.create(code: '12', name: 'Engenharia Automotiva', department: 
 course_4 = Course.create(code: '09', name: 'Artes Visuais', department: department_3, shift: 2)
 
 # Users - Coordinator
-user = User.create(name: 'Caio Filipe', email: 'caio@unb.br', cpf: '05012345678', registration: '1234567', active: true, password: '123456')
-coordinator = Coordinator.create(user: user, course: course_2)
+user_1 = User.create(name: 'Caio Filipe', email: 'caio@unb.br', cpf: '05012345678', registration: '1234567', active: true, password: '123456')
+coordinator = Coordinator.create(user: user_1, course: course_2)
 user_2 = User.create(name: 'João Busche', email: 'joao@unb.br', cpf: '05044448888', registration: '1234544', active: false, password: '123456')
 coordinator_2 = Coordinator.create(user: user_2, course: course_4)
 
@@ -48,7 +48,7 @@ category = Category.create(name: 'Laboratório Químico')
 category_2 = Category.create(name: 'Retroprojetor')
 
 # Rooms
-room = Room.create(code: '124325', name: 'S10', capacity: 50, active: true, time_grid_id: 1, department: department, building: buildings[1], category_ids: [category.id])
+room_1 = Room.create(code: '124325', name: 'S10', capacity: 50, active: true, time_grid_id: 1, department: department, building: buildings[1], category_ids: [category.id])
 room_2 = Room.create(code: '987653', name: 'SS', capacity: 40, active: false, time_grid_id: 2, department: department, building: buildings[2], category_ids: [category.id])
 room_3 = Room.create(code: '987655', name: 'S9', capacity: 40, active: false, time_grid_id: 2, department: department_2, building: buildings[2], category_ids: [category.id])
 room_4 = Room.create(code: '987654', name: 'S8', capacity: 80, active: true, time_grid_id: 1, department: department, building: buildings[1], category_ids: [category.id])
@@ -71,4 +71,12 @@ period_2 = Period.create(period_type:'Ajuste', initial_date: '23-02-2018', final
 period_3 = Period.create(period_type:'Letivo', initial_date: '08-03-2018', final_date: '14-07-2018')
 
 # Allocations
-allocation1 = Allocation.create(user_id: user.id,room_id: room.id, school_room_id: school_room_2.id, day: "Segunda", start_time: '12:00:00', final_time: '14:00:00')
+allocation1 = Allocation.create(user_id: user_1.id,room_id: room_1.id, school_room_id: school_room_2.id, day: "Segunda", start_time: '12:00:00', final_time: '14:00:00')
+allocation2 = Allocation.create(user_id: user_1.id,room_id: room_2.id, school_room_id: school_room_2.id, day: "Quarta", start_time: '12:00:00', final_time: '14:00:00')
+allocation3 = Allocation.create(user_id: user_1.id,room_id: room_2.id, school_room_id: school_room_2.id, day: "Sexta", start_time: '12:00:00', final_time: '14:00:00')
+allocation4 = Allocation.create(user_id: user_1.id,room_id: room_2.id, school_room_id: school_room_3.id, day: "Segunda", start_time: '12:00:00', final_time: '14:00:00')
+allocation5 = Allocation.create(user_id: user_1.id,room_id: room_2.id, school_room_id: school_room_3.id, day: "Quarta", start_time: '12:00:00', final_time: '14:00:00')
+allocation6 = Allocation.create(user_id: user_1.id,room_id: room_2.id, school_room_id: school_room_3.id, day: "Sexta", start_time: '12:00:00', final_time: '14:00:00')
+allocation7 = Allocation.create(user_id: user_1.id,room_id: room_2.id, school_room_id: school_room_4.id, day: "Segunda", start_time: '12:00:00', final_time: '14:00:00')
+allocation8 = Allocation.create(user_id: user_1.id,room_id: room_2.id, school_room_id: school_room_4.id, day: "Quarta", start_time: '12:00:00', final_time: '14:00:00')
+allocation9 = Allocation.create(user_id: user_1.id,room_id: room_2.id, school_room_id: school_room_4.id, day: "Sexta", start_time: '12:00:00', final_time: '14:00:00')

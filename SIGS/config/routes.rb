@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   get 'categories/destroy/:id', controller: 'categories', action: 'destroy', as: 'categories_destroy'
 
 
-
   # Sessions
   get 'sign_in' => 'sessions#new'
   post 'sign_in' => 'sessions#create'
@@ -75,12 +74,16 @@ Rails.application.routes.draw do
   get 'reports/generate_by_room' => 'reports#generate_by_room', as: 'generate_by_room'
   get 'reports/json_of_rooms_by_department' => 'reports#json_of_rooms_by_department'
   get 'reports/json_of_rooms_with_parts_of_name' => 'reports#json_of_rooms_with_parts_of_name'
-  post 'reports/generate_by_room' => 'reports#generate_by_room'
   get 'reports/school_room_all' => 'reports#report_school_room_all'
   get 'reports/school_room_allocation' => 'reports#report_school_room_allocation'
   get 'reports/school_room_not_allocation' => 'reports#report_school_room_not_allocation'
   get 'reports/school_room' => 'reports#school_reports'
 
+  #Reports Disciplines
+  get 'reports_disciplines/generate_by_discipline/:id' => 'reports_disciplines#generate_by_discipline', as: 'generate_by_discipline'
+  get 'reports_disciplines/by_discipline' => 'reports_disciplines#by_discipline', as: 'reports_by_discipline'
+  post 'reports_disciplines/by_discipline' => 'reports_disciplines#by_discipline', as: 'reports_by_discipline_post'
+  
   # Allocation
   get 'allocations/new/:school_room_id' => 'allocations#new' , :as => 'allocations_new'
   post 'allocations/create' => 'allocations#create' , :as => 'allocations_create'
