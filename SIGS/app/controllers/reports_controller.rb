@@ -15,7 +15,7 @@ class ReportsController < ApplicationController
     require 'prawn'
     report = Prawn::Document.new(page_size: 'A4', page_layout: :landscape) do |pdf|
       if params[:reports_by_room][:all_rooms] == '0'
-        room_selected = Room.find(params[:reports_by_room][:room_code])
+      # room_selected = Room.find(params[:reports_by_room][:room_code])
       #  generate_room_page_report(pdf, room_selected)
       else
         new_page = false
@@ -45,8 +45,7 @@ class ReportsController < ApplicationController
     render inline: obtain_room_list_with_name_id(rooms).to_json
   end
 
-  def school_reports
-  end
+  def school_reports; end
 
   def report_school_room_all
     report_school_room_not_allocation
@@ -55,7 +54,7 @@ class ReportsController < ApplicationController
   def report_school_room_allocation
     @allocation = Allocation.all
     if @allocation.nil?
-      return @sem_allocation = 'Não foram encontradas  turmas alocadas'
+      return @sem_allocation = 'Não foram encontradas turmas alocadas'
     else
       return @allocation
     end
@@ -71,7 +70,8 @@ class ReportsController < ApplicationController
     end
     @school_room = SchoolRoom.where('id NOT IN (?)', id_school_room)
     if @school_room.nil?
-      return @sem_school_room_not_allocation = 'Não foram encontradas  turmas sem alocação'
+      return @sem_school_room_not_allocation = 'Não foram encontradas
+                                                turmas sem alocação'
     else
       return @school_room
     end
@@ -88,9 +88,11 @@ class ReportsController < ApplicationController
   end
 
   def generate_room_page_report(pdf, room)
-    pdf.text "Sala: #{room.code}", size: 18, style: :bold, align: :center
+    pdf.text "Sala: #{room.code}", size: 18,
+                                   style: :bold, align: :center
     data = [[' ', 'Segunda-feira', 'Terça-feira',
-             'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado']]
+             'Quarta-feira', 'Quinta-feira',
+             'Sexta-feira', 'Sábado']]
     (0..17).each do |j|
       data << make_rows(room, j)
     end

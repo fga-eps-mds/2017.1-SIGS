@@ -14,7 +14,7 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2017-06-06T01:59:16+00:00">2017-06-06T01:59:16+00:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2017-06-06T03:35:01+00:00">2017-06-06T03:35:01+00:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -113,7 +113,7 @@
       <tr>
         <td class="strong"><a href="#63a8b94d106518a2fb17f1f900642ad9a1661f19" class="src_link" title="app/controllers/reports_controller.rb">app/controllers/reports_controller.rb</a></td>
         <td class="green strong">97.3 %</td>
-        <td>132</td>
+        <td>129</td>
         <td>74</td>
         <td>72</td>
         <td>2</td>
@@ -3501,502 +3501,484 @@
         <li class="never" data-hits="" data-linenumber="49">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="50">
           
           
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="51">
-          
-          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="52">
+        <li class="covered" data-hits="1" data-linenumber="51">
           <span class="hits">1</span>
           
           <code class="ruby">  def report_school_room_all</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="53">
+        <li class="covered" data-hits="1" data-linenumber="52">
           <span class="hits">1</span>
           
           <code class="ruby">    report_school_room_not_allocation</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="54">
+        <li class="never" data-hits="" data-linenumber="53">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="55">
+        <li class="never" data-hits="" data-linenumber="54">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="56">
+        <li class="covered" data-hits="1" data-linenumber="55">
           <span class="hits">1</span>
           
           <code class="ruby">  def report_school_room_allocation</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="57">
+        <li class="covered" data-hits="1" data-linenumber="56">
           <span class="hits">1</span>
           
           <code class="ruby">    @allocation = Allocation.all</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="58">
-          
-          
-          <code class="ruby">    </code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="59">
+        <li class="covered" data-hits="1" data-linenumber="57">
           <span class="hits">1</span>
           
           <code class="ruby">    if @allocation.nil?</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="60">
+        <li class="missed" data-hits="0" data-linenumber="58">
           
           
-          <code class="ruby">      return @sem_allocation = &quot;Não foram encontradas  turmas alocadas&quot;;</code>
+          <code class="ruby">      return @sem_allocation = &#39;Não foram encontradas  turmas alocadas&#39;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="61">
+        <li class="never" data-hits="" data-linenumber="59">
           
           
           <code class="ruby">    else</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="62">
+        <li class="covered" data-hits="1" data-linenumber="60">
           <span class="hits">1</span>
           
           <code class="ruby">      return @allocation</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="63">
+        <li class="never" data-hits="" data-linenumber="61">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="64">
+        <li class="never" data-hits="" data-linenumber="62">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="65">
+        <li class="never" data-hits="" data-linenumber="63">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="66">
+        <li class="covered" data-hits="1" data-linenumber="64">
           <span class="hits">1</span>
           
           <code class="ruby">  def report_school_room_not_allocation</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="67">
+        <li class="covered" data-hits="2" data-linenumber="65">
           <span class="hits">2</span>
           
           <code class="ruby">    @allocation = Allocation.all</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="68">
+        <li class="covered" data-hits="2" data-linenumber="66">
           <span class="hits">2</span>
           
           <code class="ruby">    id_school_room = []</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="69">
+        <li class="covered" data-hits="2" data-linenumber="67">
           <span class="hits">2</span>
           
-          <code class="ruby">    cont_id = 0;</code>
+          <code class="ruby">    cont_id = 0</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="70">
+        <li class="covered" data-hits="2" data-linenumber="68">
           <span class="hits">2</span>
           
           <code class="ruby">    @allocation.each do |allocation|</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="71">
+        <li class="covered" data-hits="2" data-linenumber="69">
           <span class="hits">2</span>
           
           <code class="ruby">      id_school_room[cont_id] = allocation.school_room_id</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="72">
+        <li class="covered" data-hits="2" data-linenumber="70">
           <span class="hits">2</span>
           
           <code class="ruby">      cont_id += 1</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="73">
+        <li class="never" data-hits="" data-linenumber="71">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="74">
+        <li class="covered" data-hits="2" data-linenumber="72">
           <span class="hits">2</span>
           
           <code class="ruby">    @school_room = SchoolRoom.where(&#39;id NOT IN (?)&#39;, id_school_room)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="75">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="2" data-linenumber="76">
+        <li class="covered" data-hits="2" data-linenumber="73">
           <span class="hits">2</span>
           
           <code class="ruby">    if @school_room.nil?</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="77">
+        <li class="missed" data-hits="0" data-linenumber="74">
           
           
-          <code class="ruby">      return @sem_school_room_not_allocation = &quot;Não foram encontradas  turmas sem alocação&quot;;</code>
+          <code class="ruby">      return @sem_school_room_not_allocation = &#39;Não foram encontradas  turmas sem alocação&#39;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="78">
+        <li class="never" data-hits="" data-linenumber="75">
           
           
           <code class="ruby">    else</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="79">
+        <li class="covered" data-hits="2" data-linenumber="76">
           <span class="hits">2</span>
           
           <code class="ruby">      return @school_room</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="80">
+        <li class="never" data-hits="" data-linenumber="77">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="81">
+        <li class="never" data-hits="" data-linenumber="78">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="82">
+        <li class="never" data-hits="" data-linenumber="79">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="83">
+        <li class="covered" data-hits="1" data-linenumber="80">
           <span class="hits">1</span>
           
           <code class="ruby">  private</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="84">
+        <li class="never" data-hits="" data-linenumber="81">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="85">
+        <li class="covered" data-hits="1" data-linenumber="82">
           <span class="hits">1</span>
           
           <code class="ruby">  def obtain_room_list_with_name_id(rooms)</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="86">
+        <li class="covered" data-hits="2" data-linenumber="83">
           <span class="hits">2</span>
           
           <code class="ruby">    rooms.map do |u|</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="87">
+        <li class="never" data-hits="" data-linenumber="84">
           
           
           <code class="ruby">      {</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="88">
+        <li class="never" data-hits="" data-linenumber="85">
           
           
           <code class="ruby">        id: u.id, name: u.name</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="89">
+        <li class="covered" data-hits="4" data-linenumber="86">
           <span class="hits">4</span>
           
           <code class="ruby">      }</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="90">
+        <li class="never" data-hits="" data-linenumber="87">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="91">
+        <li class="never" data-hits="" data-linenumber="88">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="92">
+        <li class="never" data-hits="" data-linenumber="89">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="93">
+        <li class="covered" data-hits="1" data-linenumber="90">
           <span class="hits">1</span>
           
           <code class="ruby">  def generate_room_page_report(pdf, room)</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="94">
+        <li class="covered" data-hits="4" data-linenumber="91">
           <span class="hits">4</span>
           
           <code class="ruby">    pdf.text &quot;Sala: #{room.code}&quot;, size: 18, style: :bold, align: :center</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="95">
+        <li class="covered" data-hits="4" data-linenumber="92">
           <span class="hits">4</span>
           
           <code class="ruby">    data = [[&#39; &#39;, &#39;Segunda-feira&#39;, &#39;Terça-feira&#39;,</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="96">
+        <li class="never" data-hits="" data-linenumber="93">
           
           
           <code class="ruby">             &#39;Quarta-feira&#39;, &#39;Quinta-feira&#39;, &#39;Sexta-feira&#39;, &#39;Sábado&#39;]]</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="97">
+        <li class="covered" data-hits="4" data-linenumber="94">
           <span class="hits">4</span>
           
           <code class="ruby">    (0..17).each do |j|</code>
         </li>
       
-        <li class="covered" data-hits="72" data-linenumber="98">
+        <li class="covered" data-hits="72" data-linenumber="95">
           <span class="hits">72</span>
           
           <code class="ruby">      data &lt;&lt; make_rows(room, j)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="99">
+        <li class="never" data-hits="" data-linenumber="96">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="100">
+        <li class="covered" data-hits="4" data-linenumber="97">
           <span class="hits">4</span>
           
           <code class="ruby">    pdf.table(data, width: 750) do |t|</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="101">
+        <li class="covered" data-hits="4" data-linenumber="98">
           <span class="hits">4</span>
           
           <code class="ruby">      t.before_rendering_page do |page|</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="102">
+        <li class="covered" data-hits="4" data-linenumber="99">
           <span class="hits">4</span>
           
           <code class="ruby">        page.row(0).font_style = :bold</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="103">
+        <li class="never" data-hits="" data-linenumber="100">
           
           
           <code class="ruby">      end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="104">
+        <li class="never" data-hits="" data-linenumber="101">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="105">
+        <li class="never" data-hits="" data-linenumber="102">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="106">
+        <li class="never" data-hits="" data-linenumber="103">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="107">
+        <li class="covered" data-hits="1" data-linenumber="104">
           <span class="hits">1</span>
           
           <code class="ruby">  def make_rows(room, j)</code>
         </li>
       
-        <li class="covered" data-hits="72" data-linenumber="108">
+        <li class="covered" data-hits="72" data-linenumber="105">
           <span class="hits">72</span>
           
           <code class="ruby">    @row = [(6 + j).to_s + &#39;:00&#39;]</code>
         </li>
       
-        <li class="covered" data-hits="72" data-linenumber="109">
+        <li class="covered" data-hits="72" data-linenumber="106">
           <span class="hits">72</span>
           
           <code class="ruby">    %w[Segunda Terça Quarta Quinta Sexta Sabado].each do |week|</code>
         </li>
       
-        <li class="covered" data-hits="432" data-linenumber="110">
+        <li class="covered" data-hits="432" data-linenumber="107">
           <span class="hits">432</span>
           
           <code class="ruby">      allocations = Allocation.where(room_id: room.id).where(day: week)</code>
         </li>
       
-        <li class="covered" data-hits="432" data-linenumber="111">
+        <li class="covered" data-hits="432" data-linenumber="108">
           <span class="hits">432</span>
           
           <code class="ruby">      allocations_start = allocations.where(&#39;DATE_FORMAT(start_time, &quot;%H&quot;) = ?&#39;, 6 + j)</code>
         </li>
       
-        <li class="covered" data-hits="432" data-linenumber="112">
+        <li class="covered" data-hits="432" data-linenumber="109">
           <span class="hits">432</span>
           
           <code class="ruby">      make_cell(allocations_start, j, allocations)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="113">
+        <li class="never" data-hits="" data-linenumber="110">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="72" data-linenumber="114">
+        <li class="covered" data-hits="72" data-linenumber="111">
           <span class="hits">72</span>
           
           <code class="ruby">    @row</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="115">
+        <li class="never" data-hits="" data-linenumber="112">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="116">
+        <li class="never" data-hits="" data-linenumber="113">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="117">
+        <li class="covered" data-hits="1" data-linenumber="114">
           <span class="hits">1</span>
           
           <code class="ruby">  def make_cell(allocations_start, j, allocations)</code>
         </li>
       
-        <li class="covered" data-hits="432" data-linenumber="118">
+        <li class="covered" data-hits="432" data-linenumber="115">
           <span class="hits">432</span>
           
           <code class="ruby">    if allocations_start.size.zero?</code>
         </li>
       
-        <li class="covered" data-hits="428" data-linenumber="119">
+        <li class="covered" data-hits="428" data-linenumber="116">
           <span class="hits">428</span>
           
           <code class="ruby">      @row &lt;&lt; &#39; &#39; if allocations.where(&#39;DATE_FORMAT(start_time, &quot;%H&quot;) &lt; ?&#39;, 6 + j)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="120">
+        <li class="never" data-hits="" data-linenumber="117">
           
           
           <code class="ruby">                                .where(&#39;DATE_FORMAT(final_time, &quot;%H&quot;) &gt; ?&#39;, 6 + j)</code>
         </li>
       
-        <li class="covered" data-hits="430" data-linenumber="121">
+        <li class="covered" data-hits="430" data-linenumber="118">
           <span class="hits">430</span>
           
           <code class="ruby">                                .size.zero?</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="122">
+        <li class="never" data-hits="" data-linenumber="119">
           
           
           <code class="ruby">    else</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="123">
+        <li class="covered" data-hits="2" data-linenumber="120">
           <span class="hits">2</span>
           
           <code class="ruby">      cell = &#39;&#39;</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="124">
+        <li class="covered" data-hits="2" data-linenumber="121">
           <span class="hits">2</span>
           
           <code class="ruby">      allocations_start.each do |allocation|</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="125">
+        <li class="covered" data-hits="2" data-linenumber="122">
           <span class="hits">2</span>
           
           <code class="ruby">        cell += allocation.school_room.discipline.name + &#39;    Turma:&#39; +</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="126">
+        <li class="never" data-hits="" data-linenumber="123">
           
           
           <code class="ruby">                allocation.school_room.name</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="127">
+        <li class="never" data-hits="" data-linenumber="124">
           
           
           <code class="ruby">      end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="128">
+        <li class="never" data-hits="" data-linenumber="125">
           
           
           <code class="ruby">      @row &lt;&lt; { content: cell, rowspan: (allocations_start[0].final_time.hour -</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="129">
+        <li class="covered" data-hits="2" data-linenumber="126">
           <span class="hits">2</span>
           
           <code class="ruby">                        allocations_start[0].start_time.hour) }</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="130">
+        <li class="never" data-hits="" data-linenumber="127">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="131">
+        <li class="never" data-hits="" data-linenumber="128">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="132">
+        <li class="never" data-hits="" data-linenumber="129">
           
           
           <code class="ruby">end</code>
