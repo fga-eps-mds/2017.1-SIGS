@@ -45,13 +45,13 @@
             <ul class="list-group">
               <li class="list-group-item">Código: S10</li>
               <li class="list-group-item">Capacidade: 50</li>
-              <li class="list-group-item">Ativo: Sim</li>
+              <li class="list-group-item">Status: Ativo</li>
               <li class="list-group-item">Prédio: Pavilhão João Calmon</li>
             </ul>
           </div>
           <div class="col-md-6">
             <ul class="list-group">
-              <li class="list-group-item"><h4>Categorias:</h4></li>
+              <li class="list-group-item"><h4>Recursos:</h4></li>
               <li class="list-group-item">Sala de informática</li>
               <li class="list-group-item">Ar condicionado</li>
             </ul>
@@ -120,7 +120,7 @@
               <td rowspan="2">
                 <p>Cálculo 2</p>
                 <small>
-                  <a href="!#" data-toggle="modal" data-target="#myModal">
+                  <a href="!#" data-toggle="modal" data-target="#modalSchollRoom">
                     Turma: C
                   </a>
                 </small>
@@ -128,11 +128,11 @@
               <td rowspan="2">
                 <p>Introdução à Álgebra Linear</p>
                 <small>
-                  <a href="!#" data-toggle="modal" data-target="#myModal">
+                  <a href="!#" data-toggle="modal" data-target="#modalSchollRoom">
                     Turma: A
                   </a>
                    |
-                  <a href="!#" data-toggle="modal" data-target="#myModal">
+                  <a href="!#" data-toggle="modal" data-target="#modalSchollRoom">
                     Turma: B
                   </a>
                 </small>
@@ -140,7 +140,7 @@
               <td rowspan="2">
                 <p>Cálculo 2</p>
                 <small>
-                  <a href="!#" data-toggle="modal" data-target="#myModal">
+                  <a href="!#" data-toggle="modal" data-target="#modalSchollRoom">
                     Turma: C
                   </a>
                 </small>
@@ -148,11 +148,11 @@
               <td rowspan="2">
                 <p>Introdução à Álgebra Linear</p>
                 <small>
-                  <a href="!#" data-toggle="modal" data-target="#myModal">
+                  <a href="!#" data-toggle="modal" data-target="#modalSchollRoom">
                     Turma: A
                   </a>
                    |
-                  <a href="!#" data-toggle="modal" data-target="#myModal">
+                  <a href="!#" data-toggle="modal" data-target="#modalSchollRoom">
                     Turma: B
                   </a>
                 </small>
@@ -160,7 +160,7 @@
               <td rowspan="2">
                 <p>Cálculo 2</p>
                 <small>
-                  <a href="!#" data-toggle="modal" data-target="#myModal">
+                  <a href="!#" data-toggle="modal" data-target="#modalSchollRoom">
                     Turma: C
                   </a>
                 </small>
@@ -171,7 +171,24 @@
               <th>17:00</th><td></td>
             </tr>
             <tr>
-              <th>18:00</th><td>Inglês</td><td></td><td>Inglês</td><td></td><td>Inglês</td><td></td>
+              <th>18:00</th>
+              <td>
+                <a href="!#" data-toggle="modal" data-target="#modalExtension">
+                  Inglês
+                </a>
+              </td>
+              <td></td>
+              <td>
+                <a href="!#" data-toggle="modal" data-target="#modalExtension">
+                  Inglês
+                </a>
+              </td><td>
+              </td><td>
+                <a href="!#" data-toggle="modal" data-target="#modalExtension">
+                  Inglês
+                </a>
+              </td>
+              <td></td>
             </tr>
             <tr>
               <th>19:00</th><td></td><td></td><td></td><td></td><td></td><td></td>
@@ -193,22 +210,23 @@
       </main>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <!-- Modal School Room -->
+    <div class="modal fade" id="modalSchollRoom" tabindex="-1" role="dialog" aria-labelledby="modalTitle">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Turma: X</h4>
+            <h4 class="modal-title" id="modalTitle">Turma: X</h4>
           </div>
           <div class="modal-body">
             <ul class="list-group">
               <li class="list-group-item">Curso: XXXXXXXXX</li>
               <li class="list-group-item">Disciplina: XXXXXXXX</li>
+              <li class="list-group-item">Departamento: XXXXXXXXXXXXXXXXXX</li>
               <li class="list-group-item">Capacidade: 50</li>
             </ul>
             <ul class="list-group">
-              <li class="list-group-item"><h4>Categorias:</h4></li>
+              <li class="list-group-item"><h4>Recursos:</h4></li>
               <li class="list-group-item">Sala de informática</li>
               <li class="list-group-item">Ar condicionado</li>
             </ul>
@@ -245,5 +263,54 @@
         </div>
       </div>
     </div>
+
+    <!-- Modal Extension -->
+    <div class="modal fade" id="modalExtension" tabindex="-1" role="dialog" aria-labelledby="modalTitle">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="modalTitle">Inglês</h4>
+          </div>
+          <div class="modal-body">
+            <ul class="list-group">
+              <li class="list-group-item">Responsável: XXXXXXXXX</li>
+              <li class="list-group-item">Capacidade: XXXXXXXX</li>
+              <li class="list-group-item">Periodicidade: XXXXXXXXXXXXXXXXXX</li>
+            </ul>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Horário</th>
+                  <th>Dia</th>
+                  <th>Sala</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>18:00</td>
+                  <td>Segunda</td>
+                  <td>Superior 10</td>
+                </tr>
+                <tr>
+                  <td>18:00</td>
+                  <td>Quarta</td>
+                  <td>Superior 10</td>
+                </tr>
+                <tr>
+                  <td>18:00</td>
+                  <td>Sexta</td>
+                  <td>Inferior 9</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </body>
 </html>
