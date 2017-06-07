@@ -6,8 +6,8 @@ class CreateRoomSolicitations < ActiveRecord::Migration[5.0]
       t.string :day, null: false
       t.string :justify
       t.date :response_date
-      t.references :responder, index: true, foreign_key: { to_table: :users }
-      t.references :room, foreign_key: true
+      t.references :responder, index: true
+      t.references :room
       t.references :solicitation, foreign_key: true, null: true
 
       t.timestamps

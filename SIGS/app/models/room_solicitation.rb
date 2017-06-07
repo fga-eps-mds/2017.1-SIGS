@@ -3,9 +3,8 @@
 # Class t save responder solicitation
 class RoomSolicitation < ApplicationRecord
   belongs_to :solicitation
-  has_many :room_solicitation
-  belongs_to :responder, class_name: 'User'
-  belongs_to :room
+  belongs_to :responder, class_name: 'User', optional: true
+  belongs_to :room, optional: true
 
   # Not null values
   validates_presence_of :start, message: 'Indique o horário de início'
@@ -32,7 +31,7 @@ class RoomSolicitation < ApplicationRecord
   end
 
   def verify_time_shock_room_day
-    return false unless room.nil?
+    return false if room.nil?
     allocations_room = Allocation.where(day: day, room_id: room)
     allocations_room.each do |allocation_room|
       return true if verify_time_shock(allocation_room)
