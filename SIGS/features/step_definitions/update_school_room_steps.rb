@@ -1,8 +1,4 @@
 
-And (/^click on link 'Meu Departamento'$/) do
-	click_link ('Meu Departamento')
-end
-
 And (/^click on edit first$/) do
     first(:link, 'Icon edit').click
 end
@@ -21,6 +17,10 @@ end
 
 And (/^I uncheck 'Engenharia Eletronica'$/) do
    find(:css, "#school_room_course_ids_2").set(false)
+end
+
+And (/^I uncheck 'Engenharia Automotiva'$/) do
+   find(:css, "#school_room_course_ids_3").set(false)
 end
 
 And (/^I uncheck 'Artes Visuais'$/) do

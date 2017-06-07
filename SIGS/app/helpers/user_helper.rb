@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-# user module
+# Module to attributes from coordinator
 module UserHelper
 end

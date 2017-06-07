@@ -13,8 +13,8 @@ And (/^I select '1' in 'discipline_id'$/) do
 	find_field('school_room_discipline_id').find("option[value='1']").text
 end
 
-And (/^I fill in 'name' with 'D'$/) do
-  find(:css, "input[id$='school_room_name']").set("D")
+And (/^I fill in 'name' with 'DD'$/) do
+  find(:css, "input[id$='school_room_name']").set("DD")
 end
 
 And (/^I fill in 'capacity' with '50'$/) do
