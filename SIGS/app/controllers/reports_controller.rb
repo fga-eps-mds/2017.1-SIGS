@@ -15,14 +15,14 @@ class ReportsController < ApplicationController
     require 'prawn'
     report = Prawn::Document.new(page_size: 'A4', page_layout: :landscape) do |pdf|
       if params[:reports_by_room][:all_rooms] == '0'
-      # room_selected = Room.find(params[:reports_by_room][:room_code])
-      #  generate_room_page_report(pdf, room_selected)
+        room_selected = Room.find(params[:reports_by_room][:room_code])
+        TableRoom.generate_room_page_report(pdf, room_selected)
       else
         new_page = false
         rooms = Room.where(department: params[:reports_by_room][:departments])
         rooms.each do |room|
           pdf.start_new_page if new_page
-          generate_room_page_report(pdf, room)
+          TableRoom.generate_room_page_report(pdf, room)
           new_page = true
         end
       end
@@ -53,6 +53,7 @@ class ReportsController < ApplicationController
       }
     end
   end
+<<<<<<< b27ae9b1203978f079ba8803ba81286197c1733c
 
   def generate_room_page_report(pdf, room)
     pdf.text "Sala: #{room.code}", size: 18,
@@ -95,4 +96,6 @@ class ReportsController < ApplicationController
                         allocations_start[0].start_time.hour) }
     end
   end
+=======
+>>>>>>> Translate some methods of report controller to a module
 end
