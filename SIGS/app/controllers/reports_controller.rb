@@ -16,13 +16,13 @@ class ReportsController < ApplicationController
     report = Prawn::Document.new(page_size: 'A4', page_layout: :landscape) do |pdf|
       if params[:reports_by_room][:all_rooms] == '0'
         room_selected = Room.find(params[:reports_by_room][:room_code])
-        generate_room_page_report(pdf, room_selected)
+        TableRoom.generate_room_page_report(pdf, room_selected)
       else
         new_page = false
         rooms = Room.where(department: params[:reports_by_room][:departments])
         rooms.each do |room|
           pdf.start_new_page if new_page
-          generate_room_page_report(pdf, room)
+          TableRoom.generate_room_page_report(pdf, room)
           new_page = true
         end
       end
@@ -51,46 +51,6 @@ class ReportsController < ApplicationController
       {
         id: u.id, name: u.name
       }
-    end
-  end
-
-  def generate_room_page_report(pdf, room)
-    pdf.text "Sala: #{room.code}", size: 18, style: :bold, align: :center
-    data = [[' ', 'Segunda-feira', 'Terça-feira',
-             'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado']]
-    (0..17).each do |j|
-      data << make_rows(room, j)
-    end
-    pdf.table(data, width: 750) do |t|
-      t.before_rendering_page do |page|
-        page.row(0).font_style = :bold
-      end
-    end
-  end
-
-  def make_rows(room, j)
-    @row = [(6 + j).to_s + ':00']
-    %w[Segunda Terça Quarta Quinta Sexta Sabado].each do |week|
-      allocations = Allocation.where(room_id: room.id).where(day: week)
-      allocations_start = allocations.where('DATE_FORMAT(start_time, "%H") = ?', 6 + j)
-      make_cell(allocations_start, j, allocations)
-    end
-    @row
-  end
-
-  def make_cell(allocations_start, j, allocations)
-    if allocations_start.size.zero?
-      @row << ' ' if allocations.where('DATE_FORMAT(start_time, "%H") < ?', 6 + j)
-                                .where('DATE_FORMAT(final_time, "%H") > ?', 6 + j)
-                                .size.zero?
-    else
-      cell = ''
-      allocations_start.each do |allocation|
-        cell += allocation.school_room.discipline.name + '    Turma:' +
-                allocation.school_room.name
-      end
-      @row << { content: cell, rowspan: (allocations_start[0].final_time.hour -
-                        allocations_start[0].start_time.hour) }
     end
   end
 end
