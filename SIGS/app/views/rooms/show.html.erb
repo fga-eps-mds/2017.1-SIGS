@@ -20,10 +20,7 @@
 
 <table class="table tableViewAllocation table-hover table-bordered">
   <thead>
-    <%
-      days = %w(Segunda Terça Quarta Quinta Sexta Sábado)
-      # abort days.inspect
-    %>
+    <% days = %w(Segunda Terça Quarta Quinta Sexta Sábado) %>
     <tr>
       <th>Horários</th>
       <% days.each do |day| %>
@@ -38,7 +35,7 @@
           <%= (i < 10 ? "0#{i}" : i) %>:00
         </th>
         <% days.each do |day| %>
-          <td data-day="<%= day %>" data-time="<%= (i < 10 ? "0#{i}" : i) %>:00"></td>
+          <td data-day-hour="<%= "#{day}#{i}" %>"></td>
         <% end %>
       </tr>
     <% end %>
@@ -46,26 +43,43 @@
 </table>
 
 <div class="hide">
-  <% @allocations.each do |allocation| %>
-  <p data-day=""></p>
-  <h2><%= allocation.id %><br></h2>
-  <h2><%= allocation.day %><br></h2>
-  <h2><%= allocation.start_time.strftime('%H:%M') %><br></h2>
-  <h2><%= allocation.final_time.strftime('%H:%M') %><br></h2>
-  <h2><%= allocation.school_room.discipline.name %><br></h2>
-  <h2><%= allocation.school_room  .name %><br></h2>
+  <% @allocations.each do |allocation|
+    start_time = allocation.start_time.strftime('%H:%M').to_i
+    rowspan = allocation.final_time.strftime('%H').to_i - start_time
+  %>
+    <p class="dataAllocation" data-day="<%= allocation.day %>" data-hour="<%= start_time %>" data-rowspan="<%= rowspan %>" data-id="<%= allocation.id %>">
+      <%= allocation.school_room.discipline.name %>
+        <a href="!#" data-toggle="modal" data-target="#modalSchollRoom">
+          <small>Turma: <%= allocation.school_room.name %></small>
+        </a>
+    </p>
   <% end %>
+</div>
 
-  <% @allocations_extensions.each do |allocation_extension| %>
+  <!-- <% @allocations_extensions.each do |allocation_extension| %>
   <h2><%= allocation_extension.id %><br></h2>
   <h2><%= allocation_extension.periodicity %><br></h2>
   <h2><%= allocation_extension.start_time.strftime('%H:%M') %><br></h2>
   <h2><%= allocation_extension.final_time.strftime('%H:%M') %><br></h2>
   <h2><%= allocation_extension.inicial_date %><br></h2>
   <h2><%= allocation_extension.final_date %><br></h2>
-  <% end %>
-</div>
+  <% end %> -->
+
 
 <script type="text/javascript">
-
+  $(document).ready(function() {
+    $('.dataAllocation').each(function() {
+      var day = $(this).attr("data-day");
+      var hour = $(this).attr("data-hour");
+      var rowspan = $(this).attr("data-rowspan");
+      $(this).appendTo('.tableViewAllocation td[data-day-hour="' + day + hour + '"]').find('a').appendTo('.tableViewAllocation td[data-day-hour="' + day + hour + '"]');
+      if (rowspan > 1 ) {
+        $('.tableViewAllocation td[data-day-hour="' + day + hour + '"]').attr("rowspan", rowspan);
+        for (i = 1; i < rowspan; i++) {
+          var finalHour = parseInt(hour) + i;
+          $('.tableViewAllocation td[data-day-hour="' + day + finalHour + '"]').remove();
+        }
+      }
+    });
+  });
 </script>
