@@ -1,7 +1,7 @@
 module TableRoom
 	
  def self.generate_room_page_report(pdf, room)
-    pdf.text "Sala: #{room.code}", size: 18, style: :bold, align: :center
+    pdf.text "Sala: #{room.name}", size: 14, style: :bold, align: :center
     data = [[' ', 'Segunda-feira', 'Terça-feira',
              'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado']]
     (0..17).each do |j|

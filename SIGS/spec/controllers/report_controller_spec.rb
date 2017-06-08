@@ -59,6 +59,16 @@ RSpec.describe ReportsController, type: :controller do
       expect(response).to have_http_status(200)
     end
 
+    it 'check pdf created of one page' do
+      post :generate_by_room, params:{reports_by_room:{all_rooms: 0,
+                                                       room_code: @room.id,
+                                                       departments: @department.id
+                                                      }}, format: :pdf
+
+      analysis = PDF::Inspector::Text.analyze response.body
+
+      expect(analysis.strings).to include ("Sala: #{@room.name}")
+    end
 
     it 'check pdf created of many page' do
       post :generate_by_room, params:{reports_by_room:{all_rooms: 1,
@@ -67,8 +77,8 @@ RSpec.describe ReportsController, type: :controller do
 
       analysis = PDF::Inspector::Text.analyze response.body
 
-      expect(analysis.strings).to include ("Sala: #{@room.code}")
-      expect(analysis.strings).to include ("Sala: #{@room_2.code}")
+      expect(analysis.strings).to include ("Sala: #{@room.name}")
+      expect(analysis.strings).to include ("Sala: #{@room_2.name}")
     end
   end
 end
