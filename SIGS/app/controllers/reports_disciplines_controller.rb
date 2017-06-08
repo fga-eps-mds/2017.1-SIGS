@@ -25,8 +25,8 @@ class ReportsDisciplinesController < ApplicationController
 
     discipline = Discipline.find(params[:id])
 
-    report = Prawn::Document.new(page_size: 'A4', page_layout: :landscape) do |pdf|
-      pdf.image 'app/assets/images/logo_pdf.jpg', width: 770, height: 66
+    report = Prawn::Document.new(page_size: 'A4', page_layout: :portrait) do |pdf|
+      pdf.image 'app/assets/images/logo_pdf.jpg', width: 520, height: 44
       pdf.move_down 20
       pdf.text 'Relatório de Alocação por Disciplina', size: 18, align: :center
       pdf.move_down 10
@@ -45,7 +45,7 @@ class ReportsDisciplinesController < ApplicationController
     if @school_rooms.empty?
       pdf.table([
                   ['Disciplina sem turmas']
-                ], row_colors: ['F0F0F0'], column_widths: [720]) do
+                ], row_colors: ['F0F0F0'], column_widths: [520]) do
         row(0).font_style = :bold
       end
     else
@@ -62,12 +62,12 @@ class ReportsDisciplinesController < ApplicationController
     else
       pdf.table([
                   ["Turma: #{school_room.name}", "Vagas: #{school_room.vacancies}"]
-                ], row_colors: ['F0F0F0'], column_widths: [360, 360]) do
+                ], row_colors: ['F0F0F0'], column_widths: [260, 260]) do
         row(0).font_style = :bold
       end
       pdf.table([
                   %w[Dia Sala Início Término]
-                ], column_widths: [180, 180, 180, 180], row_colors: ['F0F0F0'])
+                ], column_widths: [130, 130, 130, 130], row_colors: ['F0F0F0'])
       make_rows_discipline_table(pdf, allocations)
     end
   end
@@ -78,7 +78,7 @@ class ReportsDisciplinesController < ApplicationController
                   [allocation.day, Room.find_by_id(allocation.room_id).name,
                    allocation.start_time.strftime('%H:%M'),
                    allocation.final_time.strftime('%H:%M')]
-                ], column_widths: [180, 180, 180, 180]) do
+                ], column_widths: [130, 130, 130, 130]) do
         column(0..3).style align: :center
       end
     end
@@ -89,7 +89,7 @@ class ReportsDisciplinesController < ApplicationController
     pdf.table([
                 ["Turma: #{school_room.name}"],
                 ['Não alocada']
-              ], row_colors: ['F0F0F0'], column_widths: [720]) do
+              ], row_colors: ['F0F0F0'], column_widths: [520]) do
       row(0).font_style = :bold
     end
     pdf.move_down 20

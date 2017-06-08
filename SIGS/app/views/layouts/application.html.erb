@@ -19,7 +19,7 @@
     <% if current_user %>
       <div class="container container-fluid myContainer">
         <header class="navbar-default myNav">
-          <figure class="logo"><%= image_tag("sigs_logo.png") %></figure>
+          <figure class="logo"><%=link_to image_tag("sigs_logo.png"), root_path %></figure>
 
 
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">

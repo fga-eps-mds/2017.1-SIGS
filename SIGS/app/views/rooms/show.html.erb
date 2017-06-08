@@ -1,9 +1,36 @@
 <h1>Sala: <%= @room.name %></h1>
-<h2>Código: <%= @room.code %></h2>
-<h2>Capacidade: <%= @room.capacity %></h2>
-<h2>Ativo: <%= ((@room.active) ? 'Sim' : 'Não') %></h2>
-<h2>Prédio: <%= @room.building.name %></h2>
-<h1>Categorias:</h1>
-<% @room_categories.each do |room_category| %>
-<h2><%= room_category.name %><br></h2>
+<div class="row">
+  <div class="col-md-6">
+    <ul class="list-group">
+      <li class="list-group-item">Código: <%= @room.code %></li>
+      <li class="list-group-item">Capacidade: <%= @room.capacity %></li>
+      <li class="list-group-item">Status: <%= ((@room.active) ? 'Ativo' : 'Inativo') %></li>
+      <li class="list-group-item">Prédio: <%= @room.building.name %></li>
+    </ul>
+  </div>
+  <div class="col-md-6">
+    <ul class="list-group">
+      <li class="list-group-item"><h4>Recursos:</h4></li>
+      <% @room_categories.each do |room_category| %>
+        <li class="list-group-item"><%= room_category.name %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<% @allocations.each do |allocation| %>
+<h2><%= allocation.id %><br></h2>
+<h2><%= allocation.day %><br></h2>
+<h2><%= allocation.start_time.strftime('%H:%M') %><br></h2>
+<h2><%= allocation.final_time.strftime('%H:%M') %><br></h2>
+<h2><%= allocation.school_room.discipline.name %><br></h2>
+<% end %>
+
+<% @allocations_extensions.each do |allocation_extension| %>
+<h2><%= allocation_extension.id %><br></h2>
+<h2><%= allocation_extension.periodicity %><br></h2>
+<h2><%= allocation_extension.start_time.strftime('%H:%M') %><br></h2>
+<h2><%= allocation_extension.final_time.strftime('%H:%M') %><br></h2>
+<h2><%= allocation_extension.inicial_date %><br></h2>
+<h2><%= allocation_extension.final_date %><br></h2>
 <% end %>

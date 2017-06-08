@@ -80,3 +80,5 @@ allocation6 = Allocation.create(user_id: user_1.id,room_id: room_2.id, school_ro
 allocation7 = Allocation.create(user_id: user_1.id,room_id: room_2.id, school_room_id: school_room_4.id, day: "Segunda", start_time: '12:00:00', final_time: '14:00:00')
 allocation8 = Allocation.create(user_id: user_1.id,room_id: room_2.id, school_room_id: school_room_4.id, day: "Quarta", start_time: '12:00:00', final_time: '14:00:00')
 allocation9 = Allocation.create(user_id: user_1.id,room_id: room_2.id, school_room_id: school_room_4.id, day: "Sexta", start_time: '12:00:00', final_time: '14:00:00')
+
+allocation_extension_1 = AllocationExtension.create(user_id: user_1.id, room_id: room_1.id, start_time: '18:00:00', final_time: '19:00:00', inicial_date: '06-07-2017', final_date: '06-07-2017', periodicity: "Quinzenal")

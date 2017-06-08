@@ -45,6 +45,12 @@ class RoomsController < ApplicationController
   def find_rooms
     @room = Room.find(params[:id])
     @room_categories = @room.category
+    find_allocation(@room)
+  end
+
+  def find_allocation(room)
+    @allocations = Allocation.where(room_id: room.id)
+    @allocations_extensions = AllocationExtension.where(room_id: room.id)
   end
 
   def room_params
