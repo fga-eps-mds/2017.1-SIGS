@@ -20,8 +20,8 @@
 
 <table class="table tableViewAllocation table-hover table-bordered">
   <thead>
-    <% days = %w(Segunda Terça Quarta Quinta Sexta Sábado) %>
     <tr>
+      <% days = %w(Segunda Terça Quarta Quinta Sexta Sábado) %>
       <th>Horários</th>
       <% days.each do |day| %>
         <th><%= day %></th>
@@ -29,13 +29,11 @@
     </tr>
   </thead>
   <tbody>
-    <% (6..23).each do |i| %>
+    <% (6..23).each do |hour| %>
       <tr>
-        <th>
-          <%= (i < 10 ? "0#{i}" : i) %>:00
-        </th>
+        <th><%= (hour < 10 ? "0#{hour}" : hour) %>:00</th>
         <% days.each do |day| %>
-          <td data-day-hour="<%= "#{day}#{i}" %>"></td>
+          <td data-day-hour="<%= "#{day}#{hour}" %>"></td>
         <% end %>
       </tr>
     <% end %>
@@ -47,9 +45,9 @@
     start_time = allocation.start_time.strftime('%H:%M').to_i
     rowspan = allocation.final_time.strftime('%H').to_i - start_time
   %>
-    <p class="dataAllocation" data-day="<%= allocation.day %>" data-hour="<%= start_time %>" data-rowspan="<%= rowspan %>" data-id="<%= allocation.id %>">
+    <p class="dataAllocation" data-day="<%= allocation.day %>" data-hour="<%= start_time %>" data-rowspan="<%= rowspan %>">
       <%= allocation.school_room.discipline.name %>
-        <a href="!#" data-toggle="modal" data-target="#modalSchollRoom">
+        <a href="#!" class="openModal" data-school-room="<%= allocation.school_room.id %>" data-courses="<% allocation.school_room.courses.each do |course| %><%= (course == allocation.school_room.courses.last ? course.name : "#{course.name}") %><% end %>" data-discipline="<%= allocation.school_room.discipline.name %>" data-vacancies="<%= allocation.school_room.vacancies %>" data-department="<%= allocation.school_room.discipline.department.name %>">
           <small>Turma: <%= allocation.school_room.name %></small>
         </a>
     </p>
@@ -65,6 +63,59 @@
   <h2><%= allocation_extension.final_date %><br></h2>
   <% end %> -->
 
+<!-- Modal School Room -->
+<div class="modal fade" id="modalSchollRoom" tabindex="-1" role="dialog" aria-labelledby="modalTitle">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="schoolRoomTitle"></h4>
+      </div>
+      <div class="modal-body">
+        <ul class="list-group listSchoolRoom">
+          <li class="list-group-item" id="itemCourse"></li>
+          <li class="list-group-item" id="itemDiscipline"></li>
+          <li class="list-group-item" id="itemDepartment"></li>
+          <li class="list-group-item" id="itemVacancies"></li>
+        </ul>
+        <ul class="list-group listResources">
+          <li class="list-group-item"><h4>Recursos:</h4></li>
+          <li class="list-group-item">Sala de informática</li>
+          <li class="list-group-item">Ar condicionado</li>
+        </ul>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Horário</th>
+              <th>Dia</th>
+              <th>Sala</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>16:00</td>
+              <td>Segunda</td>
+              <td>Superior 10</td>
+            </tr>
+            <tr>
+              <td>16:00</td>
+              <td>Quarta</td>
+              <td>Superior 10</td>
+            </tr>
+            <tr>
+              <td>14:00</td>
+              <td>Sexta</td>
+              <td>Inferior 9</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script type="text/javascript">
   $(document).ready(function() {
@@ -80,6 +131,21 @@
           $('.tableViewAllocation td[data-day-hour="' + day + finalHour + '"]').remove();
         }
       }
+    });
+    $('.openModal').on('click', function() {
+      var school_room_id = $(this).attr('data-school-room');
+      $('#schoolRoomTitle').text($(this).find('small').text());
+      $('#itemCourse').text('Curso: ' + $(this).attr('data-courses'));
+      $('#itemDepartment').text('Departamento: ' + $(this).attr('data-department'));
+      $('#itemDiscipline').text('Disciplina: ' + $(this).attr('data-discipline'));
+      $('#itemVacancies').text('vagas: ' + $(this).attr('data-vacancies'));
+      // $.getJSON(
+      //   url,
+      //   { format: "json" },
+      //   function(data) {
+      //   }
+      // );
+      $('#modalSchollRoom').modal('show');
     });
   });
 </script>
