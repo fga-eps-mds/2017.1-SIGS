@@ -2,7 +2,8 @@
 
 # Modulo responsavel por criar a tabela de salas no pdf
 module TableRoom
-  def self.generate_room_page_report(pdf, room)
+	
+ def self.generate_room_page_report(pdf, room)
     pdf.text "Sala: #{room.name}", size: 14, style: :bold, align: :center
     data = [[' ', 'Segunda-feira', 'Terça-feira',
              'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado']]

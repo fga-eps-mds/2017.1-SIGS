@@ -82,7 +82,6 @@ Rails.application.routes.draw do
   get 'reports_school_rooms/school_room_not_allocated' => 'reports_school_rooms#report_school_room_not_allocated', as: 'reports_school_room_not_allocated'
   get 'reports_school_rooms/school_room' => 'reports_school_rooms#school_reports', as: 'reports_school_room'
 
-
   #Reports by building
   get 'reports/by_building'=> 'reports#by_building', as: 'reports_by_building'
   get 'reports/generate_by_building/:id' => 'reports#generate_by_building', as: 'generate_by_building'
