@@ -64,7 +64,7 @@ RSpec.describe ReportsController, type: :controller do
 
       analysis = PDF::Inspector::Text.analyze response.body
 
-      expect(analysis.strings).to include ("Sala: #{@room.code}")
+      expect(analysis.strings).to include ("Sala: #{@room.name}")
     end
 
 
@@ -75,8 +75,8 @@ RSpec.describe ReportsController, type: :controller do
 
       analysis = PDF::Inspector::Text.analyze response.body
 
-      expect(analysis.strings).to include ("Sala: #{@room.code}")
-      expect(analysis.strings).to include ("Sala: #{@room_2.code}")
+      expect(analysis.strings).to include ("Sala: #{@room.name}")
+      expect(analysis.strings).to include ("Sala: #{@room_2.name}")
     end
 
   end
