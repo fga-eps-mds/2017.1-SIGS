@@ -18,19 +18,54 @@
   </div>
 </div>
 
-<% @allocations.each do |allocation| %>
-<h2><%= allocation.id %><br></h2>
-<h2><%= allocation.day %><br></h2>
-<h2><%= allocation.start_time.strftime('%H:%M') %><br></h2>
-<h2><%= allocation.final_time.strftime('%H:%M') %><br></h2>
-<h2><%= allocation.school_room.discipline.name %><br></h2>
-<% end %>
+<table class="table tableViewAllocation table-hover table-bordered">
+  <thead>
+    <%
+      days = %w(Segunda Terça Quarta Quinta Sexta Sábado)
+      # abort days.inspect
+    %>
+    <tr>
+      <th>Horários</th>
+      <% days.each do |day| %>
+        <th><%= day %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% (6..23).each do |i| %>
+      <tr>
+        <th>
+          <%= (i < 10 ? "0#{i}" : i) %>:00
+        </th>
+        <% days.each do |day| %>
+          <td data-day="<%= day %>" data-time="<%= (i < 10 ? "0#{i}" : i) %>:00"></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-<% @allocations_extensions.each do |allocation_extension| %>
-<h2><%= allocation_extension.id %><br></h2>
-<h2><%= allocation_extension.periodicity %><br></h2>
-<h2><%= allocation_extension.start_time.strftime('%H:%M') %><br></h2>
-<h2><%= allocation_extension.final_time.strftime('%H:%M') %><br></h2>
-<h2><%= allocation_extension.inicial_date %><br></h2>
-<h2><%= allocation_extension.final_date %><br></h2>
-<% end %>
+<div class="hide">
+  <% @allocations.each do |allocation| %>
+  <p data-day=""></p>
+  <h2><%= allocation.id %><br></h2>
+  <h2><%= allocation.day %><br></h2>
+  <h2><%= allocation.start_time.strftime('%H:%M') %><br></h2>
+  <h2><%= allocation.final_time.strftime('%H:%M') %><br></h2>
+  <h2><%= allocation.school_room.discipline.name %><br></h2>
+  <h2><%= allocation.school_room  .name %><br></h2>
+  <% end %>
+
+  <% @allocations_extensions.each do |allocation_extension| %>
+  <h2><%= allocation_extension.id %><br></h2>
+  <h2><%= allocation_extension.periodicity %><br></h2>
+  <h2><%= allocation_extension.start_time.strftime('%H:%M') %><br></h2>
+  <h2><%= allocation_extension.final_time.strftime('%H:%M') %><br></h2>
+  <h2><%= allocation_extension.inicial_date %><br></h2>
+  <h2><%= allocation_extension.final_date %><br></h2>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+
+</script>
