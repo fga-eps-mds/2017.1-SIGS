@@ -1,0 +1,81 @@
+<h1>Alocação de extensão</h1> <br><br>
+
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Criar Extensão</button>
+
+<div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <h4 class="modal-title">Criar Extensão</h4>
+          </div>
+          <div class="modal-body">
+            <%= form_for @extension, url: extensions_create_path do |extension| %>
+
+              <label> Nome </label>
+              <%= extension.text_field :name %>
+              <br><br>
+
+              <label> Responsavel </label>
+              <%= extension.text_field :responsible %>
+              <br><br>
+
+              <label> Vagas </label>
+              <%= extension.number_field :vacancies %>
+              <br><br>
+
+              <%= extension.submit "Salvar", class: 'pull-right btn btn-default btn-success' %>
+
+            <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div>
+  <%= form_for @allocation_extension, url: allocation_extensions_create_path do |extension| %>
+
+    <label> Sala </label>
+    <%= extension.collection_select(:room_id,@rooms,:id,:name, include_blank: true)%>
+
+    <label> Extensão </label>
+    <%= extension.collection_select(:extension_id,@extensions,:id,:name, include_blank: true)%>
+
+    <fieldset>
+      <% periodicity = ["Diário","Semanal","Mensal"] %>
+      <label> Periodicidade:</label>
+      <div>
+        <% periodicity.each do |x| %>
+          <%= extension.radio_button :periodicity, x %>
+          <%= x %><br>
+        <% end %>
+      </div>
+    </fieldset>
+
+    <div class="flexContainer short_input" style="background-color:green; padding:10px;">
+      <div>
+        <label> Data de inicio: </label><br>
+        <%= extension.date_field :inicial_date %>
+      </div>
+      <div>
+        <label> Data de fim: </label><br>
+        <%= extension.date_field :final_date %>
+      </div>
+    </div>
+    <br>
+    <div class="flexContainer short_input">
+      <div>
+        <label> Hora de inicio: </label><br>
+        <%= extension.time_field(:start_time) %>
+      </div>
+      <div>
+        <label> Hora de términio: </label><br>
+        <%= extension.time_field(:final_time) %>
+      </div>
+    </div>
+
+    <%= extension.submit "Salvar", class: 'pull-right btn btn-default btn-success' %>
+
+  <% end %>
+</div>

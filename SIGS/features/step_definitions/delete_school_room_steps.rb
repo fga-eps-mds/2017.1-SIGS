@@ -5,11 +5,11 @@ Given (/^I am logged in as Caio, an coordinator$/) do
   click_button('Entrar')
 end
 
-And (/^I choose SchoolRoom with name 'D'$/) do 
-  expect(page).to have_content('D')  
+And (/^I choose SchoolRoom with name 'D'$/) do
+  expect(page).to have_content('D')
 end
 
-And (/^I click on view icon$/) do 
+And (/^I click on view icon$/) do
   page.find("#icon_visualizarD").click
 end
 
@@ -20,4 +20,3 @@ end
 Then (/^notice message 'A turma foi excluída com sucesso'$/) do
   expect(page).to have_content('Suas Turmas')
 end
-

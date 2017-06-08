@@ -17,6 +17,7 @@ AllCops:
     - 'test/**/*'
     - 'lib/**/*'
     - 'script/*'
+    - 'app/controllers/allocations_controller.rb'
 
 Style/Encoding:
   EnforcedStyle: never

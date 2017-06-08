@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>SIGS</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.ico" />
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Sistema de Alocação de Salas Inteligente da UnB.">
+    <link rel="stylesheet" media="all" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" media="all" href="../assets/css/style.css" />
+    <link rel="stylesheet" media="all" href="../assets/css/navbar.css" />
+    <script src="../assets/js/jquery-1.12.4.min.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/menu.js"></script>
+    <style type="text/css">
+      select{width:100%;}
+    </style>
+
+  </head>
+  <body>
+    <div class="container container-fluid myContainer">
+      <header class="navbar-default myNav">
+        <figure class="logo">
+          <img src="../assets/img/sigs_logo.png" alt="SIGS Logos" />
+        </figure>
+
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <ul class="nav navbar-nav" id="myNavBar"></ul>
+
+        <figure class="unbLogo">
+          <a href="http://www.unb.br" target="_blank">
+            <img src="../assets/img/rodape_unb.png" alt="SIGS Logos" />
+          </a>
+        </figure>
+      </header>
+      <main class="mainConteiner">
+        <h1>Relatório por Disciplina</h1>
+
+        <form action="" accept-charset="UTF-8" class="formDisciplineSearch">
+          <div class="search-elements">
+            <input placeholder="Buscar por disciplinas" id="input-search-field" class="search-input" type="text" name="current_search[search]" />
+          </div>
+          <div class="search-elements">
+            <button name="button" type="submit" class="icon-search-submit" id="searchButton">
+              <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            </button>
+          </div>
+        </form>
+
+        <table class="table table-striped tableDisciplineReport">
+          <thead>
+            <tr>
+              <th>Disciplina</th>
+              <th>Departamento</th>
+              <th>Relatório</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Cálculo 1</td>
+              <td>Departamento de Matemática</td>
+              <td><a href="Relatório_disciplinas.pdf"><img src="../assets/img/icon_pdf.png" alt="Gerar Relatório" /></a></td>
+            </tr>
+            <tr>
+              <td>Cálculo 2</td>
+              <td>Departamento de Matemática</td>
+              <td><a href="Relatório_disciplinas.pdf"><img src="../assets/img/icon_pdf.png" alt="Gerar Relatório" /></a></td>
+            </tr>
+            <tr>
+              <td>Cálculo 3</td>
+              <td>Departamento de Matemática</td>
+              <td><a href="Relatório_disciplinas.pdf"><img src="../assets/img/icon_pdf.png" alt="Gerar Relatório" /></a></td>
+            </tr>
+          </tbody>
+        </table>
+
+    </div>
+  </body>
+</html>

@@ -29,6 +29,7 @@ Feature: Manager User
 
   Scenario: Delete another account of a user
     Given I am logged in as assistant administrative
+    And I delete all the allocations of this user
     And click on link 'Usuários'
 		And click on link 'Usuários Registrados'
     When I press 'Delete' button
@@ -36,6 +37,7 @@ Feature: Manager User
 
   Scenario: None registrate users to administer
     Given I am logged in as assistant administrative
+    And I delete all the allocations of this user
     When I delete anothers registration users
     And click on link 'Usuários'
     And click on link 'Usuários Registrados'

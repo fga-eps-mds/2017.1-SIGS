@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>-->
 <html lang="pt-br">
 <head>
     <meta charset="utf-8">
@@ -51,7 +51,7 @@
                     <li><%= link_to "Usuários Registrados", user_index_path %></li>
                   </ul>
               </li>
-              <li><%= link_to "Período", period_index_path %> </li>  
+              <li><%= link_to "Período", period_index_path %> </li>
             <% else %>
               <li class="dropdown">
                 <a data-toggle="collapse" href="#demo">Turmas
@@ -61,8 +61,24 @@
                   </ul>
               </li>
             <% end %>
-            <li><a href="#">Alocações</a></li>
+              <li class="dropdown">
+                <a data-toggle="collapse" href="#alocar">Alocações</a>
+                  <ul class="collapse" id="alocar">
+                    <li><%= link_to "Graduação", school_rooms_index_path %></a></li>
+                    <li><a href="#">Extensão</a></li>
+                  </ul>
+              </li>
+             <li class="dropdown">
+                <a data-toggle="collapse" href="#relatorios">Relatórios
+                  <ul class="collapse" id="relatorios">
+                    <li><%= link_to "Disciplinas", reports_by_discipline_path %></li>
+                    <li><%= link_to "Salas", reports_by_room_path %></li>
+                    <li><%= link_to "Turmas",reports_school_room_path%></li>
+
+                  </ul>
+              </li>
           </ul>
+
 
           <figure class="unbLogo"><a href="http://www.unb.br"><%= image_tag("rodape_unb.png") %></a></figure>
         </header>

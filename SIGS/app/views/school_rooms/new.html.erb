@@ -8,16 +8,21 @@
   <div class="short_input">
     <%= school_room.label :name, "Turma" %>
     <%= school_room.text_field :name, class: 'form-control' %>
-    <%= school_room.label :capacity, "Capacidade" %>
-    <%= school_room.number_field :capacity, class: 'form-control' %>
+  </div>
+
+  <p>Vagas</p>
+  <div class="checkbox-group">
+    <%= school_room.number_field :vacancies %>
   </div>
   <br>
-  <%= school_room.label :course_ids, "Cursos" %>
+
+  <p>Cursos</p>
   <div class="checkbox-group">
     <%= school_room.collection_check_boxes(:course_ids, @all_courses, :id, :name, include_blank: true)%>
   </div>
   <br>
-  <%= school_room.label :category_ids, "Categorias" %>
+
+  <p>Categorias</p>
   <div class="checkbox-group">
     <%= school_room.collection_check_boxes(:category_ids,all_categories,:id,:name, include_blank: true)%>
   </div>

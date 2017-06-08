@@ -52,5 +52,59 @@ $(document).ready(function(){
   setTimeout("$(\".alert-success\").show().fadeOut(3000);", 10000);
   setTimeout("$(\".alert-notice\").show().fadeOut(3000);", 10000);
 
-});
+  $(".sala").val($("#sala").val());
 
+  $("#select-room").change(function() {
+    if ($("#select-Segunda").hasClass("not-modify")) {}// Nothing do
+    else {$("#select-Segunda").val($("#select-room").val());}
+    if ($("#select-Terça").hasClass("not-modify")) {}// Nothing do
+    else {$("#select-Terça").val($("#select-room").val());}
+    if ($("#select-Quarta").hasClass("not-modify")) {}// Nothing do
+    else {$("#select-Quarta").val($("#select-room").val());}
+    if ($("#select-Quinta").hasClass("not-modify")) {}// Nothing do
+    else {$("#select-Quinta").val($("#select-room").val());}
+    if ($("#select-Sexta").hasClass("not-modify")) {}// Nothing do
+    else {$("#select-Sexta").val($("#select-room").val());}
+    if ($("#select-Sábado").hasClass("not-modify")) {}// Nothing do
+    else {$("#select-Sábado").val($("#select-room").val());}
+  });
+
+  $('#select-Segunda').on('click',
+    function () {
+      $(this).addClass("not-modify");
+  });
+
+  $('#select-Terça').on('click',
+    function () {
+      $(this).addClass("not-modify");
+  });
+
+  $('#select-Quarta').on('click',
+    function () {
+      $(this).addClass("not-modify");
+  });
+
+  $('#select-Quinta').on('click',
+    function () {
+      $(this).addClass("not-modify");
+  });
+
+  $('#select-Sexta').on('click',
+    function () {
+      $(this).addClass("not-modify");
+  });
+
+  $('#select-Sábado').on('click',
+    function () {
+      $(this).addClass("not-modify");
+  });
+
+
+  $(".autofill-field").on('click',
+    function () {
+      $(this).addClass("not-modify");
+  });
+
+  $('.label-check').empty();
+
+});

@@ -1,4 +1,4 @@
-<h1>Turmas - <%= courses_by_user %></h1>
+<h1>Pesquisa de Turmas</h1>
 
 <%= form_for(:current_search, url: search_disciplines_path) do |f|%>
 
@@ -22,6 +22,7 @@
 			<th>Turma</th>
       <th>Cursos</th>
       <th>Nº de Vagas</th>
+      <th style="text-align:center">Alocar</th>
       <th style="text-align:center">Alterar</th>
       <th style="text-align:center">Excluir</th>
     </tr>
@@ -30,11 +31,12 @@
 				<td><%= school_room.discipline.name %></td>
         <td><%= school_room.name %></td>
         <td>
-          <% school_room.course.each do |course| %>
+          <% school_room.courses.each do |course| %>
             <%= course.name %> <br>
           <% end %>
         </td>
-        <td><%= school_room.capacity %></td>
+        <td><%= school_room.vacancies %></td>
+        <td style="text-align:center"><%= link_to image_tag("icon_alloc.png"), allocations_new_path(school_room.id) %></td>
         <td style="text-align:center"><%= link_to image_tag("icon_edit.png"), school_rooms_edit_path(school_room.id) %></td>
 				<td style="text-align:center"><%= link_to image_tag("icon_trash.png"), destroy_school_room_path(school_room.id), data: {confirm: "Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?"} %></td>
         </td>
