@@ -40,6 +40,12 @@ class RoomsController < ApplicationController
     find_rooms
   end
 
+  def json_of_categories_by_school_room
+    school_room_id = params[:school_room_id]
+    allocations = Allocation.where(school_room_id: school_room_id)
+    render inline: allocations.to_json
+  end
+
   private
 
   def find_rooms

@@ -64,6 +64,8 @@ school_room = SchoolRoom.create(name:'A', discipline: discipline, vacancies: 40,
 school_room_2 = SchoolRoom.create(name:'B', discipline: discipline, vacancies: 60, course_ids: [course_3.id])
 school_room_3 = SchoolRoom.create(name:'C', discipline: discipline_3, vacancies: 35, course_ids: [course_3.id])
 school_room_4 = SchoolRoom.create(name:'D', discipline: discipline, vacancies: 40, course_ids: [course_2.id])
+school_room_5 = SchoolRoom.create(name:'AA', discipline: discipline_4, vacancies: 40, course_ids: [course_4.id])
+school_room_6 = SchoolRoom.create(name:'BB', discipline: discipline_4, vacancies: 40, course_ids: [course_4.id])
 
 # Periods
 period = Period.create(period_type:'Alocação', initial_date: '10-01-2018', final_date: '01-02-2018')
@@ -80,5 +82,9 @@ allocation6 = Allocation.create(user_id: user_1.id,room_id: room_2.id, school_ro
 allocation7 = Allocation.create(user_id: user_1.id,room_id: room_2.id, school_room_id: school_room_4.id, day: "Segunda", start_time: '10:00:00', final_time: '12:00:00')
 allocation8 = Allocation.create(user_id: user_1.id,room_id: room_2.id, school_room_id: school_room_4.id, day: "Quarta", start_time: '10:00:00', final_time: '12:00:00')
 allocation9 = Allocation.create(user_id: user_1.id,room_id: room_2.id, school_room_id: school_room_4.id, day: "Sexta", start_time: '10:00:00', final_time: '12:00:00')
+allocation10 = Allocation.create(user_id: user_1.id,room_id: room_4.id, school_room_id: school_room_5.id, day: "Terça", start_time: '10:00:00', final_time: '12:00:00')
+allocation11 = Allocation.create(user_id: user_1.id,room_id: room_4.id, school_room_id: school_room_6.id, day: "Terça", start_time: '10:00:00', final_time: '12:00:00')
+allocation10 = Allocation.create(user_id: user_1.id,room_id: room_4.id, school_room_id: school_room_5.id, day: "Quinta", start_time: '10:00:00', final_time: '12:00:00')
+allocation11 = Allocation.create(user_id: user_1.id,room_id: room_4.id, school_room_id: school_room_6.id, day: "Sexta", start_time: '10:00:00', final_time: '12:00:00')
 
 allocation_extension_1 = AllocationExtension.create(user_id: user_1.id, room_id: room_1.id, start_time: '18:00:00', final_time: '19:00:00', inicial_date: '06-07-2017', final_date: '06-07-2017', periodicity: "Quinzenal")

@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   patch 'rooms/update/:id' => 'rooms#update'
   get 'rooms/show/:id' => 'rooms#show', as: 'room'
   get 'room/destroy/:id', controller: 'rooms', action: 'destroy', as: 'destroy_room'
+  get 'rooms/json_of_categories_by_school_room' => 'rooms#json_of_categories_by_school_room'
 
 
   # Course
@@ -75,7 +76,7 @@ Rails.application.routes.draw do
   get 'reports/json_of_rooms_by_department' => 'reports#json_of_rooms_by_department'
   get 'reports/json_of_rooms_with_parts_of_name' => 'reports#json_of_rooms_with_parts_of_name'
   post 'reports/generate_by_room' => 'reports#generate_by_room'
-  
+
   # Reports School Rooms
   get 'reports_school_rooms/school_room_all' => 'reports_school_rooms#report_school_room_all', as: 'reports_school_room_all'
   get 'reports_school_rooms/school_rooms_allocated' => 'reports_school_rooms#report_school_room_allocated', as: 'reports_school_room_allocated'
@@ -86,7 +87,7 @@ Rails.application.routes.draw do
   get 'reports_disciplines/generate_by_discipline/:id' => 'reports_disciplines#generate_by_discipline', as: 'generate_by_discipline'
   get 'reports_disciplines/by_discipline' => 'reports_disciplines#by_discipline', as: 'reports_by_discipline'
   post 'reports_disciplines/by_discipline' => 'reports_disciplines#by_discipline', as: 'reports_by_discipline_post'
-  
+
   # Allocation
   get 'allocations/new/:school_room_id' => 'allocations#new' , :as => 'allocations_new'
   post 'allocations/create' => 'allocations#create' , :as => 'allocations_create'
