@@ -62,7 +62,7 @@ discipline_4 = Discipline.create(code: '774', name: 'Artes Visuais', department:
 #SchoolRooms
 school_room = SchoolRoom.create(name:'A', discipline: discipline, vacancies: 40, course_ids: [course_2.id])
 school_room_2 = SchoolRoom.create(name:'B', discipline: discipline, vacancies: 60, course_ids: [course_3.id])
-school_room_3 = SchoolRoom.create(name:'C', discipline: discipline_3, vacancies: 35, course_ids: [course_3.id])
+school_room_3 = SchoolRoom.create(name:'C', discipline: discipline_3, vacancies: 35, course_ids: [course_3.id, course_2.id])
 school_room_4 = SchoolRoom.create(name:'D', discipline: discipline, vacancies: 40, course_ids: [course_2.id])
 school_room_5 = SchoolRoom.create(name:'AA', discipline: discipline_4, vacancies: 40, course_ids: [course_4.id])
 school_room_6 = SchoolRoom.create(name:'BB', discipline: discipline_4, vacancies: 40, course_ids: [course_4.id])

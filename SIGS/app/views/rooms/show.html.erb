@@ -18,7 +18,7 @@
   </div>
 </div>
 
-<table class="table tableViewAllocation table-hover table-bordered">
+<table class="table tableViewAllocation table-bordered">
   <thead>
     <tr>
       <% days = %w(Segunda Terça Quarta Quinta Sexta Sábado) %>
@@ -40,14 +40,14 @@
   </tbody>
 </table>
 
-<div class="hide">
+<div class="hide allocationsDiv">
   <% @allocations.each do |allocation|
     start_time = allocation.start_time.strftime('%H:%M').to_i
     rowspan = allocation.final_time.strftime('%H').to_i - start_time
   %>
     <p class="dataAllocation" data-day="<%= allocation.day %>" data-hour="<%= start_time %>" data-rowspan="<%= rowspan %>">
       <%= allocation.school_room.discipline.name %>
-      <a href="#!" class="openModal" data-school-room="<%= allocation.school_room.id %>" data-courses="<% allocation.school_room.courses.each do |course| %><%= (course == allocation.school_room.courses.last ? course.name : "#{course.name}") %><% end %>" data-discipline="<%= allocation.school_room.discipline.name %>" data-vacancies="<%= allocation.school_room.vacancies %>" data-department="<%= allocation.school_room.discipline.department.name %>">
+      <a href="#!" class="openModal" data-school-room="<%= allocation.school_room.id %>" data-courses="<% allocation.school_room.courses.each do |course| %><%= (course == allocation.school_room.courses.last ? course.name : "#{course.name}, ") %><% end %>" data-discipline="<%= allocation.school_room.discipline.name %>" data-vacancies="<%= allocation.school_room.vacancies %>" data-department="<%= allocation.school_room.discipline.department.name %>">
         <small>Turma: <%= allocation.school_room.name %></small>
       </a>
       <% unless allocation.school_room.category.empty? %>
@@ -106,12 +106,14 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
+
     $('.dataAllocation').each(function() {
       var dataAllocation = $(this);
       var day = dataAllocation.attr("data-day");
       var hour = dataAllocation.attr("data-hour");
       var rowspan = dataAllocation.attr("data-rowspan");
       var tdMatching = $('.tableViewAllocation td[data-day-hour="' + day + hour + '"]');
+
       if (tdMatching.is(':empty')) {
         dataAllocation.appendTo(tdMatching).find('a').appendTo(tdMatching);
         if (rowspan > 1 ) {
@@ -126,20 +128,25 @@
         dataAllocation.find('a').appendTo(tdMatching);
       }
     });
+
     $('.openModal').on('click', function() {
       var school_room_id = $(this).attr('data-school-room');
       var hourDay = $(this).parent().attr('data-day-hour');
+
       $('#schoolRoomTitle').text($(this).find('small').text());
-      $('#itemCourse').text('Curso: ' + $(this).attr('data-courses'));
+      $('#itemCourse').text('Curso(s): ' + $(this).attr('data-courses'));
       $('#itemDepartment').text('Departamento: ' + $(this).attr('data-department'));
       $('#itemDiscipline').text('Disciplina: ' + $(this).attr('data-discipline'));
       $('#itemVacancies').text('vagas: ' + $(this).attr('data-vacancies'));
-      $('.listResources[data-day-hour="' + hourDay + '"]').appendTo('#modalSchollRoom .modal-body');
+      $('#modalSchollRoom .listResources').appendTo('.allocationsDiv');
+      $('.allocationsDiv .listResources[data-day-hour="' + hourDay + '"]').insertAfter('.listSchoolRoom');
+
       $.getJSON(
         '<%= request.base_url %>/rooms/json_of_categories_by_school_room?school_room_id=' + school_room_id,
-        { format: "json" },
+
         function(data) {
-          $('.tableModalSchoolRoom tbody').empty()
+          $('.tableModalSchoolRoom tbody').empty();
+
           $(data).each(function(i, d) {
             var startTime = d.start_time.split('T');
             var startTime = startTime[1].split(':');
@@ -148,11 +155,32 @@
             var finalTime = finalTime[1].split(':');
             var hourFinal = finalTime[0];
             var tr = '<tr><td>' + hourStart + ':00 - ' + hourFinal + ':00</td><td>' + d.day + '</td><td>' + d.room_id + ' (id)</td></tr>';
+
             $(tr).appendTo('.tableModalSchoolRoom tbody');
           });
         }
       );
+
       $('#modalSchollRoom').modal('show');
     });
+
+    $('.tableViewAllocation tbody td').on('mouseover', function() {
+      if (!$(this).is(':empty')) {
+        var discipline = $(this).find('p').text();
+        var schoolRoom = $(this).find('small').text();
+        $('.tableViewAllocation tbody td:contains("' + discipline + '")').find('a:contains("' + schoolRoom + '")').parent().css('backgroundColor', '#E3F4E3');
+      }
+    }).on('mouseleave', function() {
+      $('.tableViewAllocation tbody td').css('backgroundColor', '#ffffff');
+    });
+
+    // function getRandomColor() {
+    //   var nums = '0123456789ABCDEF';
+    //   var color = '#';
+    //   for (var i = 0; i < 6; i++ ) {
+    //       color += nums[Math.floor(Math.random() * 16)];
+    //   }
+    //   return color;
+    // }
   });
 </script>
