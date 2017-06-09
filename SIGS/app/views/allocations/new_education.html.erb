@@ -1,0 +1,70 @@
+<style type="text/css">
+  table tr td{
+    text-align: center;
+  }
+</style>
+
+<h1>Alocação Turma</h1>
+
+<label> Turma </label> <%= link_to "+ Criar uma nova turma" , school_rooms_new_path %><br>
+<select name='school_room_id' id="school_room_id">
+  <% @school_rooms_coordinator.each do |school| %>
+    <option value="<%= school.id %>"><%= school.name %></option>
+  <% end %>
+</select>
+
+<% days = ["Segunda","Terça","Quarta","Quinta","Sexta","Sabado"] %>
+<table style="width: 100%">
+<% days.each_with_index do |day, index| %>
+  <tr>
+    <td style="text-align: left;">
+      <input type="checkbox" value="<%=index%>" id="<%= day%>_days"> <%= day%>
+    </td>
+    <td>
+      <label>Sala:</label>
+      <select name='allocation_room_id' id='room_<%= index%>'>
+        <% @coordinator_rooms.each do |room| %>
+          <option value="<%= room.id %>"><%= room.name %></option>
+        <% end %>
+      </select>
+    </td>
+
+    <td><label for="allocation_start_time">Horário Inicial:</label>
+      <input type="time" name="allocation_start_time" id="start_time_<%= index%>" /></td>
+
+    <td><label for="allocation_start_time">Horário Final:</label>
+      <input type="time" name="allocation_start_time" id="final_time_<%= index%>" /></td>
+
+    <td>
+      <input type="button" name="save_<%= index%>" value="Salvar" class="pull-right btn btn-default btn-success" disabled>
+    </td>
+</tr>
+<% end %>
+</table>
+
+<script type="text/javascript">
+    $('input:checkbox').click(function(){
+      $("input[name='save_" + $(this).prop("value") +"'").prop('disabled', !$(this).prop('checked'));
+    });
+
+    $('input:button').click(function(){
+      $day = $(this).prop("name").split('_')[1];
+      $room_id = document.getElementById('room_'+ $day).value;
+      $start_time = document.getElementById('start_time_'+ $day).value;
+      $final_time = document.getElementById('final_time_'+ $day).value;
+      $school_room_id = document.getElementById('school_room_id').value;
+
+      $.ajax({
+        url: 'create_education?allocation[room_id]=' + $room_id + 
+                    '&allocation[start_time]=' + $start_time +
+                    '&allocation[final_time]=' + $final_time +
+                    '&school_room_id=' + $school_room_id +
+                    '&day=' + $day ,
+        success: function(data){
+          $('.alertContainer').html(data)
+        }
+      });
+    });
+</script>
+
+

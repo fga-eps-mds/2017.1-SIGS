@@ -14,11 +14,7 @@
 	color: #f23d3d;
 }
 
-.container-search-form {
-
-}
-
-.search-elements {  
+.search-elements {
   display: inline-block;
 }
 
@@ -40,4 +36,18 @@
 
 .search-input:focus {
   border-bottom-width: 2px;
+}
+
+.school-room-allocated {
+	background: #ffff99;
+}
+
+//school room reports
+
+.report_school{
+  margin-left: -340px !important;
+}
+.report_school label{
+  padding-right: 20px !important;
+  margin-top: -7px !important;
 }
