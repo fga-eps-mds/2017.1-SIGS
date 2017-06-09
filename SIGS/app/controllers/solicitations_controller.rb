@@ -30,7 +30,7 @@ class SolicitationsController < ApplicationController
                                     school_room: school_room)
 
     group = group_solicitation
-    group.each do |row| 
+    group.each do |row|
       row.each do |room_solicitation|
         start = "#{room_solicitation[:start_time]}:00"
         final = "#{room_solicitation[:final_time]}:00"
