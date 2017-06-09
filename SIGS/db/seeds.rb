@@ -60,10 +60,11 @@ discipline_3 = Discipline.create(code: '773', name: 'Cálculo 1', department: de
 discipline_4 = Discipline.create(code: '774', name: 'Artes Visuais', department: department_3)
 
 #SchoolRooms
-school_room = SchoolRoom.create(name:'A', discipline: discipline, vacancies: 40, course_ids: [course_2.id])
-school_room_2 = SchoolRoom.create(name:'B', discipline: discipline, vacancies: 60, course_ids: [course_3.id])
-school_room_3 = SchoolRoom.create(name:'C', discipline: discipline_3, vacancies: 35, course_ids: [course_3.id])
-school_room_4 = SchoolRoom.create(name:'D', discipline: discipline, vacancies: 40, course_ids: [course_2.id])
+
+school_room = SchoolRoom.create(name:'A', discipline: discipline, vacancies: 40, courses: [course_2])
+school_room_2 = SchoolRoom.create(name:'B', discipline: discipline, vacancies: 60, courses: [course_3])
+school_room_3 = SchoolRoom.create(name:'C', discipline: discipline_3, vacancies: 35, courses: [course_3])
+school_room_4 = SchoolRoom.create(name:'D', discipline: discipline, vacancies: 40, courses: [course_2])
 
 # Periods
 period = Period.create(period_type:'Alocação', initial_date: '10-01-2018', final_date: '01-02-2018')
