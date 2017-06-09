@@ -26,7 +26,11 @@ RSpec.describe RoomsController, type: :controller do
 
       @administrative_assistant = AdministrativeAssistant.create(user: @user)
 
+      @school_room = SchoolRoom.create(name:'A', vacancies: 40)
+
       @coordinator = Coordinator.create(user: @user_2, course: @course)
+
+      
 
       sign_in(@user)
     end
@@ -102,5 +106,9 @@ RSpec.describe RoomsController, type: :controller do
       expect(response).to redirect_to(room_index_path)
     end
 
+    it 'should get json response' do
+      get :json_of_categories_by_school_room, params: {id: @school_room.id}, :format => :json
+      expect(response).to have_http_status(200)
+    end
   end
 end
