@@ -102,5 +102,18 @@ RSpec.describe ReportsController, type: :controller do
       no_building = []
       expect(assigns(:buildings)).to eq(no_building)
     end
+
+    it 'shoudl create a pdf of all rooms' do
+      get :generate_by_building, params:{id: @building.id}
+      analysis = PDF::Inspector::Text.analyze response.body
+      expect(analysis.strings).to include ("Sala: #{@room.name}")
+      expect(analysis.strings).to include ("Sala: #{@room_2.name}")
+    end
+
+    it 'shoudl returun a flash message for dont have rooms' do
+      get :generate_by_building, params:{id: @building2.id}
+      expect(flash[:error]).to eq('Este prédio não possui salas')
+      expect(response).to render_template(:by_building)
+    end
   end
 end
