@@ -7,6 +7,7 @@ class SolicitationsController < ApplicationController
   before_action :logged_in?
 
   def allocation_period
+    school_room_id = params[:school_room_id]
     redirect_to adjustment_period_path(school_room_id) unless allocation_period?
 
     @school_room = SchoolRoom.find(params[:school_room_id])
@@ -33,15 +34,14 @@ class SolicitationsController < ApplicationController
     if rooms.size.zero?
       flash[:error] = 'Selecione ao menos uma sala'
       redirect_to allocation_period_path(solicitation.school_room.id)
-      return
+    else
+      save_in_period(solicitation, rooms, group_solicitation(params))
     end
-    save_in_period(solicitation, rooms, group_solicitation(params))
   end
 
   def avaliable_rooms_by_department
     require 'json'
-    rooms = params.key?('allocations') ? avaliable_rooms : []
-    render inline: rooms.to_json
+    render inline: params.key?('allocations') ? avaliable_rooms.to_json : [].to_json
   end
 
   private
