@@ -7,9 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Departaments
-department = Department.create(code: '789', name: 'Engenharia')
-department_2 = Department.create(code: '781', name: 'PRC')
-department_3 = Department.create(code: '156', name: 'Artes')
+department = Department.create(code: '789', name: 'Engenharia', wing: 'NORTE')
+department_2 = Department.create(code: '781', name: 'PRC', wing: 'SUL')
+department_3 = Department.create(code: '156', name: 'Artes', wing: 'NORTE')
 
 # Courses
 course = Course.create(code: '10', name: 'Engenharia de Software', department: department, shift: 1)

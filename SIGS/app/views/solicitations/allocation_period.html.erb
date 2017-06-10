@@ -33,7 +33,7 @@
     table += "</tr>";
     week = ["segunda", "terca","quarta","quinta","sexta", "sabado"]
     
-    period = <%= @shift %>;
+    period = <%= @school_room.courses[0].shift %>;
     start = (period == 1) ? 6 : 18
     final = (period == 1) ? 18 : 24
     for (var row = start; row < final; row++) {
