@@ -36,10 +36,10 @@
             <input type="radio" name="type" value="administrative_assistant" id="adm_as" checked>
             <label>Assistente Administrativo</label>
           </div>
-          <div class="radioButton">
+          <!-- <div class="radioButton">
             <input type="radio" name="type" value="department_assistant" id="dep_as">
             <label> Auxiliar de Departamento</label>
-          </div>
+          </div> -->
           <div class="radioButton">
             <input type="radio" name="type" value="coordinator" id="coord">
             <label>Coordenador de curso</label>
@@ -59,12 +59,12 @@
           <%= f.password_field :password_confirmation, class: 'form-control'%>
 
         <div id="dropdown-group">
-          <div id="dropdown-department-assistant">
+          <!-- <div id="dropdown-department-assistant">
               <%= f.fields_for :department_assistant do |ff| %>
                 <p> Departamento </p>
                 <%= ff.collection_select(:department_id,Department.all,:id,:name,include_blank: true) %>
               <% end %>
-          </div>
+          </div> -->
 
           <div id="dropdown-coordinator">
             <%= f.fields_for :coordinator do |ff| %>

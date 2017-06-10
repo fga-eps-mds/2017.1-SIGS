@@ -61,6 +61,7 @@
                   </ul>
               </li>
             <% end %>
+            <% if permission[:level] == 1 %>
               <li class="dropdown">
                 <a data-toggle="collapse" href="#alocar">Alocações</a>
                   <ul class="collapse" id="alocar">
@@ -68,6 +69,7 @@
                     <li><a href="#">Extensão</a></li>
                   </ul>
               </li>
+            <% end %>
              <li class="dropdown">
                 <a data-toggle="collapse" href="#relatorios">Relatórios
                   <ul class="collapse" id="relatorios">
