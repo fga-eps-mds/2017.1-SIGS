@@ -10,7 +10,7 @@ RSpec.describe AllocationsController, type: :controller do
       @building = Building.create(code: 'pjc', name: 'Pavilhão João Calmon', wing: 'Norte')
       @category = Category.create(name: 'Retroprojetor')
       @user = User.create(name: 'Caio Filipe', email: 'caio@unb.br', cpf: '05012345678', registration: '1234567', active: true, password: '123456')
-      @coordinator = Coordinator.create(user_id: @user.id,course_id:@course.id)
+      @coordinator = Coordinator.create(user: @user ,course: @course )
       @room = Room.create(code: '124325', name: 'S10', capacity: 50, active: true, time_grid_id: 1, department: @department, building: @building, category_ids: [@category.id])
       @school_room = SchoolRoom.create(name:'A', discipline: @discipline, vacancies: 40, course_ids: [@course.id])
       @school_room2 = SchoolRoom.create(name:'B', discipline: @discipline, vacancies: 40, course_ids: [@course.id])

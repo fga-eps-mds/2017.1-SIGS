@@ -24,10 +24,10 @@ user_2 = User.create(name: 'João Busche', email: 'joao@unb.br', cpf: '050444488
 coordinator_2 = Coordinator.create(user: user_2, course: course_4)
 
 # Users - DepartmentAssistant
-user_3 = User.create(name: 'João Pedro', email: 'pedro@unb.br', cpf: '05012349999', registration: '1234599', active: true, password: '123456')
-department_assistant = DepartmentAssistant.create(user: user_3, department: department)
-user_4 = User.create(name: 'Ateldy Brasil', email: 'ateldy@unb.br', cpf: '05022446688', registration: '1234333', active: false, password: '123456')
-department_assistant_2 = DepartmentAssistant.create(user: user_4, department: department)
+# user_3 = User.create(name: 'João Pedro', email: 'pedro@unb.br', cpf: '05012349999', registration: '1234599', active: true, password: '123456')
+# department_assistant = DepartmentAssistant.create(user: user_3, department: department)
+# user_4 = User.create(name: 'Ateldy Brasil', email: 'ateldy@unb.br', cpf: '05022446688', registration: '1234333', active: false, password: '123456')
+# department_assistant_2 = DepartmentAssistant.create(user: user_4, department: department)
 
 # Users - AdministrativeAssistant
 user_5 = User.create(name: 'Wallacy Braz', email: 'wallacy@unb.br', cpf: '05012348888', registration: '1234588', active: true, password: '123456')

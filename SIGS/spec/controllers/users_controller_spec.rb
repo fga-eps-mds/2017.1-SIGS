@@ -47,14 +47,6 @@ RSpec.describe UsersController, type: :controller do
       expect(User.count).to be(0)
     end
 
-    it 'should create a new department assistent user' do
-      @department = Department.create(name: 'Departamento de Computação')
-      post :create, params:{user: {name: 'joao silva', email: 'joaosilva@unb.br',
-        password: '123456', registration:'1100061', cpf:'01505038137', active: false, department_assistant_attributes: {department_id: @department.id}}, type: 'department_assistant'}
-      expect(User.count).to be(1)
-      expect(DepartmentAssistant.count).to be(1)
-    end
-
     it 'should create a new coordinator user' do
       @department = Department.create(name: 'Departamento de Computação')
       @course = Course.create(name: 'Engenharia de Software', department: @department)
@@ -79,7 +71,7 @@ RSpec.describe UsersController, type: :controller do
         password: '123456', registration:'1100061', cpf:'05601407380', active: true)
       @user_adm = User.create(name: 'Luiz Guilherme', email: 'luiz@unb.br',
         password: '123456', registration:'1103061', cpf:'05601407350', active: true)
-      @administrative_assistant = AdministrativeAssistant.create(user_id: @user_adm.id)
+      @administrative_assistant = AdministrativeAssistant.create(user: @user_adm)
     end
 
     it 'should return edit user' do
@@ -102,7 +94,8 @@ RSpec.describe UsersController, type: :controller do
       @user = User.create(name: 'joao silva', email: 'joaosilva@unb.br',
         password: '123456', registration:'1100061', cpf:'05601407380', active: true)
       @department = Department.create(name: 'Departamento de Computação')
-      @department_assistant = DepartmentAssistant.create(department_id: @department.id,user_id: @user.id)
+      @course = Course.create(name: 'Engenharia de Software', department: @department)
+      @coordinator = Coordinator.create(user: @user, course: @course)
       @user_adm = User.create(name: 'Luiz Guilherme', email: 'luiz@unb.br',
         password: '123456', registration:'1103061', cpf:'05601407350', active: true)
       @administrative_assistant = AdministrativeAssistant.create(user_id: @user_adm.id)
@@ -146,18 +139,16 @@ RSpec.describe UsersController, type: :controller do
       @user_1 = User.create(name: 'joao silva', email: 'joaosilva@unb.br',
         password: '123456', registration:'1100061', cpf:'05601407380', active: true)
       @department = Department.create(name: 'Departamento de Computação')
-      @department_assistant = DepartmentAssistant.create(department_id: @department.id,user_id: @user_1.id)
-      @user_2 = User.create(name: 'José Azevedo', email: 'jose@unb.br',
-        password: '123456', registration:'1103361', cpf:'05603307380', active: true)
-      @department_assistant = DepartmentAssistant.create(department_id: @department.id,user_id: @user_2.id)
+      @course = Course.create(name: 'Engenharia de Software', department: @department)
+      @coordinator = Coordinator.create(user: @user_1, course: @course)
       @user_adm = User.create(name: 'Luiz Guilherme', email: 'luiz@unb.br',
         password: '123456', registration:'1103061', cpf:'05601407350', active: true)
-      @administrative_assistant = AdministrativeAssistant.create(user_id: @user_adm.id)
+      @administrative_assistant = AdministrativeAssistant.create(user: @user_adm)
     end
 
     it 'should return current user show if user destroy id isn\'t current user' do
       sign_in(@user_1)
-      get :destroy, params:{id: @user_2.id}
+      get :destroy, params:{id: @user_adm.id}
       expect(flash[:error]).to eq('Acesso Negado')
       expect(response).to redirect_to(current_user)
     end

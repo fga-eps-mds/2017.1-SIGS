@@ -5,13 +5,9 @@ RSpec.describe CategoriesController, type: :controller do
   describe "Test methods of Controller Categories" do
 
     before(:each) do
-      @user = User.create(name: 'joao silva', email: 'joaosilva@unb.br',
-        password: '123456', registration:'1100061', cpf:'05601407380', active: true)
       @user_adm = User.create(name: 'Luiz Guilherme', email: 'luiz@unb.br',
         password: '123456', registration:'1103061', cpf:'05601407350', active: true)
-      @administrative_assistant = AdministrativeAssistant.create(user_id: @user_adm.id)
-      @department = Department.create(name: 'Fisica')
-      @department_assistant = DepartmentAssistant.create(department_id: @department.id,user_id: @user.id)
+      @administrative_assistant = AdministrativeAssistant.create(user: @user_adm)
     end
 
     # Method new
