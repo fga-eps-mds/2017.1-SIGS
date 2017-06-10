@@ -11,6 +11,11 @@ Rails.application.routes.draw do
   get 'categories/destroy/:id', controller: 'categories', action: 'destroy', as: 'categories_destroy'
 
 
+  # Api
+  namespace :api do
+    get 'api_school_rooms/index' => 'api_school_rooms#index', as: 'api_school_rooms_index'
+  end
+
   # Sessions
   get 'sign_in' => 'sessions#new'
   post 'sign_in' => 'sessions#create'
