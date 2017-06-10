@@ -29,14 +29,18 @@ class SolicitationsController < ApplicationController
                                     requester: current_user,
                                     school_room: school_room)
 
-    group_solicitation.each do |room_solicitation|
-      start = "#{room_solicitation[0][:start_time]}:00"
-      final = "#{room_solicitation[0][:final_time]}:00"
-      solicitation.room_solicitation.build(start: start,
-                                           final: final,
-                                           day: room_solicitation[0][:day])
+    group = group_solicitation
+    group.each do |row| 
+      row.each do |room_solicitation|
+        start = "#{room_solicitation[:start_time]}:00"
+        final = "#{room_solicitation[:final_time]}:00"
+
+        solicitation.room_solicitation.build(start: start,
+                                             final: final,
+                                             day: room_solicitation[:day])
+      end
     end
-    save(group_solicitation, solicitation, school_room)
+    save(group, solicitation, school_room)
   end
 
   def adjustment_period
@@ -73,19 +77,17 @@ class SolicitationsController < ApplicationController
     rows = []
     (6..24).each do |index|
       next if params[day_of_week].nil?
-
       if !params[day_of_week][index.to_s].nil? && !exist
         room_solicitation = { start_time: index,
                               final_time: index + 1,
                               day: day_of_week }
         rows.push room_solicitation
         exist = true
-      elsif !params[day_of_week][index].nil?
-        rows.last[:final_time] = index + 1
+      elsif !params[day_of_week][index.to_s].nil?
+        rows.last[:final_time] += 1
       else
         exist = false
       end
-      # puts rows.inspect
     end
     rows
   end
