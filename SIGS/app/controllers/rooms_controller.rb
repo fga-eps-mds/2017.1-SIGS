@@ -42,8 +42,17 @@ class RoomsController < ApplicationController
 
   def json_of_categories_by_school_room
     school_room_id = params[:school_room_id]
+    result = []
     allocations = Allocation.where(school_room_id: school_room_id)
-    render inline: allocations.to_json
+    allocations.each do |allocation|
+      result.push [
+        allocation.start_time,
+        allocation.final_time,
+        allocation.day,
+        allocation.room.name
+      ]
+    end
+    render inline: result.to_json
   end
 
   private

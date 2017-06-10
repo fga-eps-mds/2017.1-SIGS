@@ -148,13 +148,13 @@
           $('.tableModalSchoolRoom tbody').empty();
 
           $(data).each(function(i, d) {
-            var startTime = d.start_time.split('T');
+            var startTime = d[0].split('T');
             var startTime = startTime[1].split(':');
             var hourStart = startTime[0];
-            var finalTime = d.final_time.split('T');
+            var finalTime = d[1].split('T');
             var finalTime = finalTime[1].split(':');
             var hourFinal = finalTime[0];
-            var tr = '<tr><td>' + hourStart + ':00 - ' + hourFinal + ':00</td><td>' + d.day + '</td><td>' + d.room_id + ' (id)</td></tr>';
+            var tr = '<tr><td>' + hourStart + ':00 - ' + hourFinal + ':00</td><td>' + d[2] + '</td><td>' + d[3] + '</td></tr>';
 
             $(tr).appendTo('.tableModalSchoolRoom tbody');
           });
@@ -165,13 +165,16 @@
     });
 
     $('.tableViewAllocation tbody td').on('mouseover', function() {
-      if (!$(this).is(':empty')) {
-        var discipline = $(this).find('p').text();
-        var schoolRoom = $(this).find('small').text();
-        $('.tableViewAllocation tbody td:contains("' + discipline + '")').find('a:contains("' + schoolRoom + '")').parent().css('backgroundColor', '#E3F4E3');
+      var td = $(this);
+      if (!td.is(':empty')) {
+        var discipline = td.find('p').text();
+        td.find('small').each(function() {
+          var schoolRoom = $(this).text();
+          $('.tableViewAllocation tbody td:contains("' + discipline + '")').find('a:contains("' + schoolRoom + '")').parent().addClass('tdHover');
+        });
       }
     }).on('mouseleave', function() {
-      $('.tableViewAllocation tbody td').css('backgroundColor', '#ffffff');
+      $('.tableViewAllocation tbody td').removeClass('tdHover');
     });
 
     // function getRandomColor() {
