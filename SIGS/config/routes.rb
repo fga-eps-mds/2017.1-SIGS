@@ -75,7 +75,7 @@ Rails.application.routes.draw do
   get 'reports/json_of_rooms_by_department' => 'reports#json_of_rooms_by_department'
   get 'reports/json_of_rooms_with_parts_of_name' => 'reports#json_of_rooms_with_parts_of_name'
   post 'reports/generate_by_room' => 'reports#generate_by_room'
-  
+
   # Reports School Rooms
   get 'reports_school_rooms/school_room_all' => 'reports_school_rooms#report_school_room_all', as: 'reports_school_room_all'
   get 'reports_school_rooms/school_rooms_allocated' => 'reports_school_rooms#report_school_room_allocated', as: 'reports_school_room_allocated'
@@ -86,7 +86,7 @@ Rails.application.routes.draw do
   get 'reports_disciplines/generate_by_discipline/:id' => 'reports_disciplines#generate_by_discipline', as: 'generate_by_discipline'
   get 'reports_disciplines/by_discipline' => 'reports_disciplines#by_discipline', as: 'reports_by_discipline'
   post 'reports_disciplines/by_discipline' => 'reports_disciplines#by_discipline', as: 'reports_by_discipline_post'
-  
+
   # Allocation
   get 'allocations/new/:school_room_id' => 'allocations#new' , :as => 'allocations_new'
   post 'allocations/create' => 'allocations#create' , :as => 'allocations_create'
@@ -101,10 +101,11 @@ Rails.application.routes.draw do
   post 'extensions/create' => 'extensions#create' , :as => 'extensions_create'
 
   #solicitation
-  get 'solicitations/index/:school_room_id' => 'solicitations#index', :as => 'solicitation_index'
   get 'solicitations/allocation_period/:school_room_id' => 'solicitations#allocation_period', :as => 'allocation_period'
   get 'solicitations/adjustment_period/:school_room_id' => 'solicitations#adjustment_period', :as => 'adjustment_period'
   post 'solicitations/save_allocation_period' => 'solicitations#save_allocation_period', :as => 'save_allocation_period'
+  post 'solicitations/save_adjustment_period' => 'solicitations#save_adjustment_period', :as => 'save_adjustment_period'
+  get 'solicitations/avaliable_rooms_by_department' => 'solicitations#avaliable_rooms_by_department', :as => 'avaliable_rooms_by_department'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end

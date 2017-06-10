@@ -26,12 +26,7 @@ RSpec.describe SolicitationsController, type: :controller do
       get :allocation_period, params: {school_room_id: @school_room1.id}
       expect(response).to have_http_status(200)
     end
-
-    it 'should open allocation index' do
-      get :index, params: {school_room_id: @school_room1.id}
-      expect(response).to have_http_status(302)
-    end
-
+    
     it 'should create new solicitation' do
       post :save_allocation_period, params: {solicitation: {school_room_id: @school_room1.id, departments: @department1.id, justify: 'texto qualquer'}, segunda: {'12': '1'}}
       expect(Solicitation.all.count).to eq(1)

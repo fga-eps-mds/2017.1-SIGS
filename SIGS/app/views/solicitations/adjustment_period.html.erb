@@ -1,2 +1,120 @@
-<h1>Solicitations#asjustment_period</h1>
-<p>Find me in app/views/solicitations/asjustment_period.html.erb</p>
+<h1>Solicitar Alocação</h1>
+<p class="subtitle">Período de Ajuste</p>
+
+<%= render partial: "school_rooms/show", locals: {school_room: @school_room} %>
+
+<%= form_for :solicitation, url: save_adjustment_period_path do |f| %>
+  <%= f.hidden_field :school_room_id, value: params[:school_room_id], readonly: true %>
+
+  <%= f.label :justify, 'Justificativa:' %>
+  <%= f.text_area :justify, class: 'form-control' %>
+
+  <br>
+
+  <table class="hours_table table">
+  </table>
+
+  <strong>Solicitar ao Departamento:</strong>
+  <ul id="departments-check" class="list-unstyled">
+    <%=  collection_check_boxes(:post, :departments, @departments, :id, :name, class: 'form-control' ) do |check| %>
+      <li><%= check.label {check.check_box + check.text } %></li>
+    <% end %>
+  </ul>
+
+  <br>
+
+  <section id="rooms-list">
+  </section>
+
+  <%= f.submit "Enviar", class: 'pull-right btn btn-default btn-success' %>
+
+<% end -%>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    table = "<tr>";
+    table += "<th></th>";
+    table += "<th>Segunda</th>";
+    table += "<th>Terça</th>";
+    table += "<th>Quarta</th>";
+    table += "<th>Quinta</th>";
+    table += "<th>Sexta</th>";
+    table += "<th>Sábado</th>";
+    table += "</tr>";
+    week = ["segunda", "terca","quarta","quinta","sexta", "sabado"]
+
+    period = <%= @shift %>;
+    start = (period == 1) ? 6 : 18
+    final = (period == 1) ? 18 : 24
+    for (var row = start; row < final; row++) {
+      table +="<tr>";
+      table += "<td>" + row + ":00</td>";
+      for (var col = 0; col < 6; col++) {
+        table += "<td><input type='checkbox' name='" + week[col] + "[" + row + "]' value='1' /></td>";
+      }
+      table += "</tr>";
+    }
+    $(".hours_table").html(table);
+
+    $("#departments-check input[type=checkbox]").change(function() {
+      if ($(this).is(":checked")){
+        ajaxReloadRooms($(this).val());
+      } else {
+        $("#rooms-list #department_rooms_" + $(this).val()).remove();
+      }
+    });
+
+    $('table input[type=checkbox]').change(function () {
+      $("#departments-check input[type=checkbox]").each(function(){
+        if ($(this).is(":checked")){
+          $("#rooms-list #department_rooms_" + $(this).val()).remove();
+          ajaxReloadRooms($(this).val());
+        } 
+      });
+    });
+  });
+
+  function ajaxReloadRooms(department_id) {
+
+    reservations = $(".hours_table input[type=checkbox]:checked").map(function() {
+      return this.name;
+    }).get()
+
+    $.getJSON('../avaliable_rooms_by_department?department=' + department_id +
+      '&school_room=' + $("#solicitation_school_room_id").val(),
+      { allocations: reservations },
+      { format: 'json'
+    }).success(function(data){
+      console.log(data);
+      if (data.length > 0){
+        listDepartmentRooms(department_id, data);
+      }
+    }).error(function(){
+      alert("Falha no Processamento");
+    });
+  }
+
+  function listDepartmentRooms(department_id, data) {
+    var list = "<div id='department_rooms_" + department_id + "'>";
+    list += "<h2>" + data[0][2].name + "</h2><table class='table'>";
+    list += "<tr>" +
+      "<th></th>" +
+      "<th>Sala</th>" +
+      "<th>Prédio</th>" +
+      "<th>Ala</th>" +
+      "<th>Capacidade</th>" +
+      "</tr>";
+    for(var i = 0; i < data.length; i++) {
+      list += "<tr><td><input type='checkbox' name='rooms[]' value='" +
+        data[i][0].id + "'></td>" +
+        "<td>" + data[i][0].name + "</td>" +
+        "<td>" + data[i][1].name + "</td>" +
+        "<td>" + data[i][1].wing + "</td>" +
+        "<td>" + data[i][0].capacity + "</td>" +
+        "</tr>";
+    }
+    list += "</table></div>";
+    $("#rooms-list").append(list);
+  }
+
+</script>

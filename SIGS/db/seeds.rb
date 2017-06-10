@@ -52,6 +52,8 @@ room_1 = Room.create(code: '124325', name: 'S10', capacity: 50, active: true, ti
 room_2 = Room.create(code: '987653', name: 'SS', capacity: 40, active: false, time_grid_id: 2, department: department, building: buildings[2], category_ids: [category.id])
 room_3 = Room.create(code: '987655', name: 'S9', capacity: 40, active: false, time_grid_id: 2, department: department_2, building: buildings[2], category_ids: [category.id])
 room_4 = Room.create(code: '987654', name: 'S8', capacity: 80, active: true, time_grid_id: 1, department: department, building: buildings[1], category_ids: [category.id])
+room_5 = Room.create(code: '987624', name: 'S1', capacity: 80, active: true, time_grid_id: 1, department: department_2, building: buildings[2], category_ids: [category.id])
+room_6 = Room.create(code: '987644', name: 'S2', capacity: 80, active: true, time_grid_id: 1, department: department_2, building: buildings[2], category_ids: [category.id])
 
 # Disciplines
 discipline = Discipline.create(code: '876', name: 'Cálculo 3', department: department)
