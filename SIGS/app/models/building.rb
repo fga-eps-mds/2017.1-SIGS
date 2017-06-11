@@ -12,7 +12,11 @@ class Building < ApplicationRecord
                    uniqueness: { message: 'Um prédio com esse código já
                    foi cadastro' }
 
-  # Validates end Here
+  # Validates end here
+  def self.search(search)
+    where('name LIKE :search OR code LIKE :search', search: "%#{search}%")
+  end
+
   private
 
   def params_upcase
