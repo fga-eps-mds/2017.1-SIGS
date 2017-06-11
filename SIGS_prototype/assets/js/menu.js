@@ -16,6 +16,7 @@ $(document).ready(function (){
   menuDropdown("Relatórios");
   addItem("por Disciplina", "relatorio_por_disciplina", "Relatórios")
   addItem("por Sala", "relatorio_por_sala", "Relatórios")
+  addItem("por Prédio", "relatorio_por_predio", "Relatórios")
 });
 
 function addItem(name, page, father) {

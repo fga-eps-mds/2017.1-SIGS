@@ -1,0 +1,40 @@
+<h1>Relatório por Prédio</h1>
+
+<%= form_tag(reports_by_building_post_path, :method => :post) do %>
+
+<div class="search-elements">
+	<%= text_field_tag 'search', nil, id: 'input-search-field', class: 'search-input', placeholder: 'Buscar por prédios' %>
+</div>
+<div class="search-elements">
+	<%= button_tag type: 'submit', class: "icon-search-submit", id: "searchButton" do %>
+		<i class="fa fa-search fa-lg"></i>
+	<% end %>
+</div>
+
+<% end %>
+
+<h2>Prédios</h2>
+<% if @buildings.count == 0 %>
+  <h3>Não há prédios registrados.</h3>
+<% else %>
+  <table class="table table-striped">
+		<thead>
+	    <tr>
+	      <th>Código</th>
+	      <th>Prédio</th>
+	      <th>Ala</th>
+	      <th>Relatório</th>
+	    </tr>
+		</thead>
+		<tbody>
+	    <% @buildings.each do |building| %>
+	      <tr>
+	        <td><%= building.code %></td>
+	        <td><%= building.name %></td>
+	        <td><%= building.wing %></td>
+			<td><%= link_to image_tag("icon_pdf.png"), generate_by_building_path(building.id) %></td>
+	      </tr>
+	    <% end %>
+		</tbody>
+	</table>
+<% end %>
