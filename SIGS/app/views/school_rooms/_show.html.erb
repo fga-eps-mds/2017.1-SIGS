@@ -18,9 +18,15 @@
         <%= course.name %><br>
       <% end %>
     </td>
-    <td>
+    <td id = "school_room_ressources">
+      <% line = false %>
       <% get_categories(school_room).each do |category| %>
-        <%= category.name %><br>
+        <% if line %>
+          <br>
+        <% end %>
+
+        <%= category.name %>
+        <% line = true %>
       <% end %>
     </td>
   </tr>
