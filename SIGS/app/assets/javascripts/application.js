@@ -20,19 +20,13 @@
 
 $(document).ready(function(){
 
-  // $("#dropdown-department-assistant").hide();
   $("#dropdown-coordinator").hide();
 
   $('input[name="type"]').change(function () {
     if ($('input[name="type"]:checked').val() === "coordinator") {
-      $("#dropdown-department-assistant").hide();
       $('#dropdown-coordinator').show();
-    // } else if ($('input[name="type"]:checked').val() === "department_assistant") {
-    //   $("#dropdown-coordinator").hide();
-    //   $("#dropdown-department-assistant").show();
     } else {
       $("#dropdown-coordinator").hide();
-      $("#dropdown-department-assistant").hide();
     }
   });
 
