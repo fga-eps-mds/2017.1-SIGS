@@ -1,4 +1,12 @@
+<<<<<<< 4e135e893b934d697d2d189698be2e2f11339783
 <h1>Turmas - <%= courses_by_user.department.name %></h1>
+=======
+<% if permission[:level] == 1 %>
+  <h1>Turmas - <%= courses_by_user.name %></h1>
+<% else %>
+  <h1>Turmas</h1>
+<% end %>
+>>>>>>> Change the permission of sessions
 
 <%= form_for(:current_search, url: search_disciplines_path) do |f|%>
 
@@ -21,10 +29,12 @@
       <th>Turma</th>
       <th>Cursos</th>
       <th>Nº de Vagas</th>
-      <th style="text-align:center">Alocar</th>
-      <th style="text-align:center">Solicitar Alocação</th>
-      <th style="text-align:center">Alterar</th>
-      <th style="text-align:center">Excluir</th>
+      <% if permission[:level] == 1 %>
+        <th style="text-align:center">Alocar</th>
+        <th style="text-align:center">Solicitar Alocação</th>
+        <th style="text-align:center">Alterar</th>
+        <th style="text-align:center">Excluir</th>
+      <% end %>
     </tr>
     <% @my_school_rooms.each do |school_room| %>
       <tr>
@@ -36,10 +46,12 @@
           <% end %>
         <td><%= school_room.vacancies %></td>
         </td>
-        <td style="text-align:center"><%= link_to image_tag("icon_alloc.png"), allocations_new_path(school_room.id) %></td>
-        <td style="text-align:center"><%= link_to image_tag("icon_request_alloc.png"), allocation_period_path(school_room.id) %></td>
-        <td style="text-align:center"><%= link_to image_tag("icon_edit.png"), school_rooms_edit_path(school_room.id) %></td>
-        <td style="text-align:center"><%= link_to image_tag("icon_trash.png"), destroy_school_room_path(school_room.id), data: {confirm: "Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?"} %></td>
+        <% if permission[:level] == 1 %>
+          <td style="text-align:center"><%= link_to image_tag("icon_alloc.png"), allocations_new_path(school_room.id) %></td>
+          <td style="text-align:center"><%= link_to image_tag("icon_request_alloc.png"), allocation_period_path(school_room.id) %></td>
+          <td style="text-align:center"><%= link_to image_tag("icon_edit.png"), school_rooms_edit_path(school_room.id) %></td>
+          <td style="text-align:center"><%= link_to image_tag("icon_trash.png"), destroy_school_room_path(school_room.id), data: {confirm: "Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?"} %></td>
+        <% end %>
         </td>
       </tr>
     <% end %>
