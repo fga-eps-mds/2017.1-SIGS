@@ -93,6 +93,17 @@ RSpec.describe ReportsController, type: :controller do
       expect(assigns(:buildings)).to eq(buildings)
     end
 
+    it 'should return report by building page' do
+      get :by_building
+      expect(response).to have_http_status(200)
+    end
+
+    it 'should return all buildings' do
+      get :by_building
+      buildings = [@building, @building2]
+      expect(assigns(:buildings)).to eq(buildings)
+    end
+    
     it 'should return a specific building' do
       get :by_building, params:{search: "F"}
       building = [@building2]

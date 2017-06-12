@@ -1,0 +1,2 @@
+class DegsController < ApplicationController
+end
