@@ -3,8 +3,7 @@
 # class that create allocations
 class AllocationsController < ApplicationController
   before_action :logged_in?
-  before_action :validade_permission_1, except: (:destroy)
-
+  before_action :authenticate_coordinator?
 
   def new
     @allocations = []

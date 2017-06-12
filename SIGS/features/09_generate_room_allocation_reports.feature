@@ -8,7 +8,7 @@ Feature: Generate room allocation reports
 		And click on link 'Relatórios'
 		And click on link 'Salas' in 'Relatório'
 		And select in 'Departamento' option 'Engenharia'
-		And select in 'Código da sala' option 'S10'
+		And select in 'Código da sala' option 'SS'
 		When I press 'Gerar' button
 		Then generate a PDF
 

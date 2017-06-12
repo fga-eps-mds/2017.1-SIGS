@@ -5,13 +5,12 @@ RSpec.describe CategoriesController, type: :controller do
   describe "Test methods of Controller Categories" do
 
     before(:each) do
-      @user = User.create(name: 'joao silva', email: 'joaosilva@unb.br',
-        password: '123456', registration:'1100061', cpf:'05601407380', active: true)
+      @user = User.create(name: 'joao silva', email: 'joaferrera@unb.br',
+        password: '123456', registration:'1100069', cpf:'04601407380', active: true)
       @user_adm = User.create(name: 'Luiz Guilherme', email: 'luiz@unb.br',
         password: '123456', registration:'1103061', cpf:'05601407350', active: true)
-      @administrative_assistant = AdministrativeAssistant.create(user_id: @user_adm.id)
-      @department = Department.create(name: 'Fisica')
-      @department_assistant = DepartmentAssistant.create(department_id: @department.id,user_id: @user.id)
+      @administrative_assistant = AdministrativeAssistant.create(user: @user_adm)
+      @deg = Deg.create(user: @user)
     end
 
     # Method new
@@ -30,6 +29,12 @@ RSpec.describe CategoriesController, type: :controller do
     it 'should return to sign_in if current_user is nil' do
       get :new
       expect(flash[:notice]).to eq('Você precisa estar logado')
+    end
+
+    it 'should denied the acess' do
+      sign_in(@user)
+      get :new
+      expect(flash[:error]).to eq('Acesso Negado')
     end
 
     # Method create

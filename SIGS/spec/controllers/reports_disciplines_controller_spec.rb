@@ -15,9 +15,9 @@ RSpec.describe ReportsDisciplinesController, type: :controller do
       @discipline2 = Discipline.create(name: 'Geografia', code: '321', department: @department)
       @discipline3 = Discipline.create(name: 'Teologia', code: '666', department: @department)
 
-      @school_room = SchoolRoom.create(name:"YY", vacancies: 50, discipline: @discipline)
-      @school_room2 = SchoolRoom.create(name:"AAA", vacancies: 50, discipline: @discipline3)
-      @school_room3 = SchoolRoom.create(name:"BBB", vacancies: 50, discipline: @discipline3)
+      @school_room = SchoolRoom.create(name:"YY", vacancies: 50, discipline: @discipline, course_ids: [@course.id])
+      @school_room2 = SchoolRoom.create(name:"AAA", vacancies: 50, discipline: @discipline3, course_ids: [@course.id])
+      @school_room3 = SchoolRoom.create(name:"BBB", vacancies: 50, discipline: @discipline3, course_ids: [@course.id])
       @room = Room.create(code: 'S10', name: 'Superior 10', capacity: 50, active: true, time_grid_id: 1, building: @building, department: @department )
       @room_2 = Room.create(code: 'S11', name: 'Superior 10', capacity: 50, active: true, time_grid_id: 1, building: @building, department: @department )
 

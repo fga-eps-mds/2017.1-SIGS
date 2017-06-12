@@ -19,7 +19,7 @@
     <% if current_user %>
       <div class="container container-fluid myContainer">
         <header class="navbar-default myNav">
-          <figure class="logo"><%= image_tag("sigs_logo.png") %></figure>
+          <figure class="logo"><%=link_to image_tag("sigs_logo.png"), root_path %></figure>
 
 
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -32,7 +32,7 @@
           <ul class="nav navbar-nav">
             <li><%= link_to "Minha Conta", user_edit_path(current_user) %></li>
             <li><%= link_to 'Logout', sign_out_path, method: "delete" %></li>
-            <% if permission[:level] == 3 %>
+            <% if permission[:level] == 2 %>
               <li class="dropdown">
                 <a data-toggle="collapse" href="#salas">Salas
                   <ul class="collapse" id="salas">
@@ -43,7 +43,7 @@
             <% else %>
               <li><%= link_to 'Salas', room_index_path %></li>
             <% end %>
-            <% if permission[:level] == 3 %>
+            <% if permission[:level] == 2 %>
               <li class="dropdown">
                 <a data-toggle="collapse" href="#demo">Usuários
                   <ul class="collapse" id="demo">
@@ -52,7 +52,7 @@
                   </ul>
               </li>
               <li><%= link_to "Período", period_index_path %> </li>
-            <% else %>
+            <% elsif permission[:level] == 1 %>
               <li class="dropdown">
                 <a data-toggle="collapse" href="#demo">Turmas
                   <ul class="collapse" id="demo">
@@ -60,7 +60,10 @@
                     <li><%= link_to "Meu Departamento", school_rooms_index_path %></li>
                   </ul>
               </li>
+            <%  else %>
+              <li><%= link_to 'Turmas', school_rooms_index_path %></li>
             <% end %>
+            <% if permission[:level] == 1 %>
               <li class="dropdown">
                 <a data-toggle="collapse" href="#alocar">Alocações</a>
                   <ul class="collapse" id="alocar">
@@ -68,13 +71,14 @@
                     <li><a href="#">Extensão</a></li>
                   </ul>
               </li>
+            <% end %>
              <li class="dropdown">
                 <a data-toggle="collapse" href="#relatorios">Relatórios
                   <ul class="collapse" id="relatorios">
                     <li><%= link_to "Disciplinas", reports_by_discipline_path %></li>
                     <li><%= link_to "Salas", reports_by_room_path %></li>
                     <li><%= link_to "Turmas",reports_school_room_path%></li>
-
+                    <li><%= link_to "Prédios", reports_by_building_path %></li>
                   </ul>
               </li>
           </ul>

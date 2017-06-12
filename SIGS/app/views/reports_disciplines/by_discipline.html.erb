@@ -30,7 +30,7 @@
 	      <tr>
 	        <td><%= discipline.name %></td>
 	        <td><%= discipline.department.name %></td>
-					<td><%= link_to image_tag("icon_pdf.png"), generate_by_discipline_path(discipline.id) %></td>
+					<td><%= link_to image_tag("icon_pdf.png"), generate_by_discipline_path(discipline.id), target: "_blank" %></td>
 	      </tr>
 	    <% end %>
 		</tbody>
