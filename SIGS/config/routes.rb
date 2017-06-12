@@ -107,6 +107,12 @@ Rails.application.routes.draw do
   # Extension
   post 'extensions/create' => 'extensions#create' , :as => 'extensions_create'
 
+  #solicitation
+  get 'solicitations/allocation_period/:school_room_id' => 'solicitations#allocation_period', :as => 'allocation_period'
+  get 'solicitations/adjustment_period/:school_room_id' => 'solicitations#adjustment_period', :as => 'adjustment_period'
+  post 'solicitations/save_allocation_period' => 'solicitations#save_allocation_period', :as => 'save_allocation_period'
+  post 'solicitations/save_adjustment_period' => 'solicitations#save_adjustment_period', :as => 'save_adjustment_period'
+  get 'solicitations/avaliable_rooms_by_department' => 'solicitations#avaliable_rooms_by_department', :as => 'avaliable_rooms_by_department'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end

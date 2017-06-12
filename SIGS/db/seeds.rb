@@ -7,9 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Departaments
-department = Department.create(code: '789', name: 'Engenharia')
-department_2 = Department.create(code: '781', name: 'PRC')
-department_3 = Department.create(code: '156', name: 'Artes')
+department = Department.create(code: '789', name: 'Engenharia', wing: 'SUL')
+department_2 = Department.create(code: '781', name: 'PRC', wing: 'SUL')
+department_3 = Department.create(code: '156', name: 'Artes', wing: 'NORTE')
 
 # Courses
 course = Course.create(code: '10', name: 'Engenharia de Software', department: department, shift: 1)
@@ -37,10 +37,10 @@ administrative_assistant_2 = AdministrativeAssistant.create(user: user_6)
 
 # Buildings
 buildings = Building.create([
-  {code: 'pjc', name: 'Pavilhão João Calmon', wing: 'Norte'},
-  {code: 'PAT', name: 'Pavilhão Anísio Teixeira', wing: 'norte'},
-  {code: 'BSAS', name: 'Bloco de Salas da Ala Sul', wing: 'sul'},
-  {code: 'BSAN', name: 'Bloco de Salas da Ala Norte', wing: 'norte'}
+  {code: 'pjc', name: 'Pavilhão João Calmon', wing: 'NORTE'},
+  {code: 'PAT', name: 'Pavilhão Anísio Teixeira', wing: 'NORTE'},
+  {code: 'BSAS', name: 'Bloco de Salas da Ala Sul', wing: 'SUL'},
+  {code: 'BSAN', name: 'Bloco de Salas da Ala Norte', wing: 'NORTE'}
   ])
 
 # Categories
@@ -48,10 +48,12 @@ category = Category.create(name: 'Laboratório Químico')
 category_2 = Category.create(name: 'Retroprojetor')
 
 # Rooms
-room_1 = Room.create(code: '124325', name: 'S10', capacity: 50, active: true, time_grid_id: 1, department: department, building: buildings[1], category_ids: [category.id])
+room_1 = Room.create(code: '124325', name: 'S10', capacity: 50, active: true, time_grid_id: 1, department: department_3, building: buildings[1], category_ids: [category.id])
 room_2 = Room.create(code: '987653', name: 'SS', capacity: 40, active: false, time_grid_id: 2, department: department, building: buildings[2], category_ids: [category.id])
 room_3 = Room.create(code: '987655', name: 'S9', capacity: 40, active: false, time_grid_id: 2, department: department_2, building: buildings[2], category_ids: [category.id])
 room_4 = Room.create(code: '987654', name: 'S8', capacity: 80, active: true, time_grid_id: 1, department: department, building: buildings[1], category_ids: [category.id])
+room_5 = Room.create(code: '987624', name: 'S1', capacity: 80, active: true, time_grid_id: 1, department: department_2, building: buildings[2], category_ids: [category.id])
+room_6 = Room.create(code: '987644', name: 'S2', capacity: 80, active: true, time_grid_id: 1, department: department_2, building: buildings[2], category_ids: [category.id])
 
 # Disciplines
 discipline = Discipline.create(code: '876', name: 'Cálculo 3', department: department)
