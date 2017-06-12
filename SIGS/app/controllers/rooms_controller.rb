@@ -64,8 +64,9 @@ class RoomsController < ApplicationController
   end
 
   def find_allocation(room)
-    @allocations = Allocation.where(room_id: room.id)
-    @allocations_extensions = AllocationExtension.where(room_id: room.id)
+    room_id = room.id
+    @allocations = Allocation.where(room_id: room_id)
+    @allocations_extensions = AllocationExtension.where(room_id: room_id)
   end
 
   def room_params
