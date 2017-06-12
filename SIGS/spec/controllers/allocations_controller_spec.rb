@@ -192,19 +192,49 @@ RSpec.describe AllocationsController, type: :controller do
         Sexta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Sexta",start_time:"12:00",final_time:"14:00", active: 0}},
         Sábado: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Sábado",start_time:"12:00",final_time:"14:00", active: 0}}
       }
-      
+
       final_allocations = AllAllocationDate.count
       expect(final_allocations).to eq(inital_allocations + total_mondays)
     end
 
     # Destroy
 
-    it "should destroy an allocation" do
+    it "should return destroy view" do
       sign_in(@user)
-      @allocation = Allocation.create(user_id:@user.id,room_id:@room.id,school_room_id:@school_room4.id, day:"Segunda",start_time:"12:00",final_time:"14:00")
-      get :destroy, params: {id:@allocation.id}
-      expect(response).to redirect_to(current_user)
-      expect(flash[:success]).to eq('Alocação excluída com sucesso')
+      get  :destroy, params: {id: @school_room.id}
+      expect(response).to have_http_status(200)
+      expect(@allocation_all_date_user).to be_nil
+    end
+
+    it "should destroy all allocations" do
+      sign_in(@user)
+      post :create, params: {
+        Segunda: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: 1}},
+        Terça: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Terça",start_time:"12:00",final_time:"14:00", active: 1}},
+        Quarta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Quarta",start_time:"12:00",final_time:"14:00", active: 1}},
+        Quinta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Quinta",start_time:"12:00",final_time:"14:00", active: 1}},
+        Sexta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Sexta",start_time:"12:00",final_time:"14:00", active: 1}},
+        Sábado: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Sábado",start_time:"12:00",final_time:"14:00", active: 1}}
+      }
+      get :destroy_all_allocations, params: {id: @school_room.id}
+      expect(response).to redirect_to(redirect_to allocations_destroy_path(@school_room.id))
+      expect(flash[:success]).to eq('Desalocação feita com sucesso')
+    end
+
+    it "should destroy one especifc allocation" do
+      sign_in(@user)
+      post :create, params: {
+        Segunda: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: 1}},
+        Terça: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Terça",start_time:"12:00",final_time:"14:00", active: 1}},
+        Quarta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Quarta",start_time:"12:00",final_time:"14:00", active: 1}},
+        Quinta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Quinta",start_time:"12:00",final_time:"14:00", active: 1}},
+        Sexta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Sexta",start_time:"12:00",final_time:"14:00", active: 1}},
+        Sábado: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Sábado",start_time:"12:00",final_time:"14:00", active: 1}}
+      }
+      @all_allocation_date = AllAllocationDate.find_by(allocation_id: Allocation.first.id)
+      get :destroy_all_allocation_date, params: {id: @all_allocation_date.id}
+      expect(response).to redirect_to(redirect_to allocations_destroy_path(@school_room.id))
+      expect(flash[:success]).to eq('Desalocação feita com sucesso')
     end
   end
 end
