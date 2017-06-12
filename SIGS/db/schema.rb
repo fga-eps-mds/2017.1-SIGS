@@ -124,6 +124,7 @@ ActiveRecord::Schema.define(version: 20170611133759) do
   create_table "departments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "code"
     t.string   "name"
+    t.string   "wing"
     t.string   "acronym"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -159,6 +160,22 @@ ActiveRecord::Schema.define(version: 20170611133759) do
     t.datetime "updated_at",   null: false
   end
 
+  create_table "room_solicitations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "start",           null: false
+    t.datetime "final",           null: false
+    t.string   "day",             null: false
+    t.string   "justify"
+    t.date     "response_date"
+    t.integer  "responder_id"
+    t.integer  "room_id"
+    t.integer  "solicitation_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["responder_id"], name: "index_room_solicitations_on_responder_id", using: :btree
+    t.index ["room_id"], name: "index_room_solicitations_on_room_id", using: :btree
+    t.index ["solicitation_id"], name: "index_room_solicitations_on_solicitation_id", using: :btree
+  end
+
   create_table "rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "code"
     t.string   "name"
@@ -180,6 +197,18 @@ ActiveRecord::Schema.define(version: 20170611133759) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.index ["discipline_id"], name: "index_school_rooms_on_discipline_id", using: :btree
+  end
+
+  create_table "solicitations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "justify",                    null: false
+    t.integer  "status",         default: 0, null: false
+    t.date     "request_date",               null: false
+    t.integer  "requester_id",               null: false
+    t.integer  "school_room_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["requester_id"], name: "index_solicitations_on_requester_id", using: :btree
+    t.index ["school_room_id"], name: "index_solicitations_on_school_room_id", using: :btree
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -207,6 +236,9 @@ ActiveRecord::Schema.define(version: 20170611133759) do
   add_foreign_key "courses", "departments"
   add_foreign_key "degs", "users"
   add_foreign_key "disciplines", "departments"
+  add_foreign_key "room_solicitations", "solicitations"
   add_foreign_key "rooms", "departments"
   add_foreign_key "school_rooms", "disciplines"
+  add_foreign_key "solicitations", "school_rooms"
+  add_foreign_key "solicitations", "users", column: "requester_id"
 end

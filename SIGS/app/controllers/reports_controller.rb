@@ -81,7 +81,7 @@ class ReportsController < ApplicationController
       }
     end
   end
-  
+
   def flash_message_building
     flash[:error] = 'Este prédio não possui salas'
     by_building

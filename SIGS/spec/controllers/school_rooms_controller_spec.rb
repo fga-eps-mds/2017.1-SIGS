@@ -1,4 +1,4 @@
-crequire 'rails_helper'
+require 'rails_helper'
 include SessionsHelper
 include SchoolRoomsHelper
 include UserHelper
@@ -21,8 +21,8 @@ RSpec.describe SchoolRoomsController, type: :controller do
       @department2 = Department.create(name: 'Departamento de Artes', code: '009')
       @discipline3 = Discipline.create(name: 'Artes Visuais', code: '194', department: @department2)
       @coordinator_joao = Coordinator.create(user: @user, course: @course)
-      @school_room = SchoolRoom.create(name:"YY", vacancies: 50, discipline: @discipline1)
-      @school_room2 = SchoolRoom.create(name:"AAA", vacancies: 50, discipline: @discipline3)
+      @school_room = SchoolRoom.create(name: 'YY',vacancies: 50, discipline: @discipline1, course_ids: [@course1.id, @course3.id])
+      @school_room2 = SchoolRoom.create(name:"AAA", vacancies: 50, discipline: @discipline3, course_ids: [@course1.id, @course3.id])
       @deg = Deg.create(user: @user_2)
       sign_in(@user)
     end
