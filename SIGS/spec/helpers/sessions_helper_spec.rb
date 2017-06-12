@@ -39,7 +39,7 @@ RSpec.describe SessionsHelper, type: :helper do
       sign_out
       sign_in(@user1)
       permission
-      expect(@permission[:level]).to eq(3)
+      expect(@permission[:level]).to eq(2)
     end
 
     
