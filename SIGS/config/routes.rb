@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   patch 'rooms/update/:id' => 'rooms#update'
   get 'rooms/show/:id' => 'rooms#show', as: 'room'
   get 'room/destroy/:id', controller: 'rooms', action: 'destroy', as: 'destroy_room'
+  get 'rooms/json_of_categories_by_school_room' => 'rooms#json_of_categories_by_school_room'
 
 
   # Course
