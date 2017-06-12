@@ -142,12 +142,12 @@
 .report_all_school_room p{
   margin-top: 20px;
   font-size: 14px;
-  color: #bbbbbb; 
+  color: #bbbbbb;
   text-align: center;
 }
 
 .report_all_school_room h1{
-  font-size: 20; 
+  font-size: 20;
   color: #333333;
   margin-left: 20px;
 }
@@ -168,7 +168,7 @@
 }
 
 .display_none{
-  display: none !important; 
+  display: none !important;
 }
 
 .display_block{
@@ -177,4 +177,9 @@
 .title-report{
   margin-left: -200px !important;
   margin-top: -50px !important;
+}
+
+.tableViewAllocation tr th, .tableViewAllocation tr td {
+  text-align: center;
+  vertical-align: middle !important;
 }

@@ -40,11 +40,33 @@ class RoomsController < ApplicationController
     find_rooms
   end
 
+  def json_of_categories_by_school_room
+    school_room_id = params[:school_room_id]
+    result = []
+    allocations = Allocation.where(school_room_id: school_room_id)
+    allocations.each do |allocation|
+      result.push [
+        allocation.start_time,
+        allocation.final_time,
+        allocation.day,
+        allocation.room.name
+      ]
+    end
+    render inline: result.to_json
+  end
+
   private
 
   def find_rooms
     @room = Room.find(params[:id])
     @room_categories = @room.category
+    find_allocation(@room)
+  end
+
+  def find_allocation(room)
+    room_id = room.id
+    @allocations = Allocation.where(room_id: room_id)
+    @allocations_extensions = AllocationExtension.where(room_id: room_id)
   end
 
   def room_params
