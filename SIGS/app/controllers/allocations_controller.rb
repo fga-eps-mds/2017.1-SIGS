@@ -3,7 +3,7 @@
 # class that create allocations
 class AllocationsController < ApplicationController
   before_action :logged_in?
-  before_action :validade_permission_1
+  before_action :validade_permission_1, except: (:destroy)
 
 
   def new
@@ -85,10 +85,30 @@ class AllocationsController < ApplicationController
   end
 
   def destroy
-    allocation = Allocation.find(params[:id])
-    allocation.destroy
-    flash[:success] = 'Alocação excluída com sucesso'
-    redirect_to current_user
+    @allocation_all_date_user = []
+    @school_room = SchoolRoom.find(params[:id])
+    @allocation_all_user = Allocation.where(school_room_id: @school_room.id)
+    @allocation_all_user.each do |allocation|
+      @allocation_all_date_user += AllAllocationDate.where(allocation_id: allocation.id)
+    end
+  end
+
+  def destroy_all_allocations
+    @school_room = SchoolRoom.find(params[:id])
+    allocations_sh = Allocation.where(school_room_id: @school_room.id)
+    allocations_sh.each do |allocation|
+      allocation.destroy
+    end
+    flash[:success] = 'Desalocação feita com sucesso'
+    redirect_to allocations_destroy_path(@school_room.id)
+  end
+
+  def destroy_all_allocation_date
+    @all_allocation_date_delete = AllAllocationDate.find(params[:id])
+    @school_room = SchoolRoom.find_by(id: @all_allocation_date_delete.allocation.school_room.id)
+    @all_allocation_date_delete.destroy
+    flash[:success] = 'Desalocação feita com sucesso'
+    redirect_to allocations_destroy_path(@school_room.id)
   end
 
   def room_allocations_by_day
@@ -141,24 +161,40 @@ class AllocationsController < ApplicationController
     vacancies <= allocation.room.capacity
   end
 
-  def pass_to_all_allocation_dates allocation
-
-    period = Period.find_by(period_type: 'Letivo')
-    date = period.initial_date
-    while date != period.final_date do
-      all_allocation_date = AllAllocationDate.new
-      all_allocation_date.allocation_id = allocation.id
-
-      ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sabado"].each do |day|
-        if allocation.day == day && date.wday == 1
-          all_allocation_date.day = date
-          all_allocation_date.save
-          all_allocation_date = nil
-        end
-      end
-      date = date + 1
+def pass_to_all_allocation_dates allocation
+  period = Period.find_by(period_type: 'Letivo')
+  date = period.initial_date
+  while date != period.final_date do
+    all_allocation_date = AllAllocationDate.new
+    all_allocation_date.allocation_id = allocation.id
+    if allocation.day == "Segunda" && date.wday == 1
+      all_allocation_date.day = date
+      all_allocation_date.save
+      all_allocation_date = nil
+    elsif allocation.day == "Terça" && date.wday == 2
+      all_allocation_date.day = date
+      all_allocation_date.save
+      all_allocation_date = nil
+    elsif allocation.day == "Quarta" && date.wday == 3
+      all_allocation_date.day = date
+      all_allocation_date.save
+      all_allocation_date = nil
+    elsif allocation.day == "Quinta" && date.wday == 4
+      all_allocation_date.day = date
+      all_allocation_date.save
+      all_allocation_date = nil
+    elsif allocation.day == "Sexta" && date.wday == 5
+      all_allocation_date.day = date
+      all_allocation_date.save
+      all_allocation_date = nil
+    elsif allocation.day == "Sábado" && date.wday == 6
+      all_allocation_date.day = date
+      all_allocation_date.save
+      all_allocation_date = nil
     end
+    date = date + 1
   end
+end
 
   def allocations_params(my_params)
     my_params.permit(:room_id,
