@@ -22,10 +22,12 @@ class UsersController < ApplicationController
   end
 
   def create
-  	@user = User.new(user_params)
+    @user = User.new(user_params)
     if @user.save
-      if params[:type] == "administrative_assistant"
-        @administrative_assistant = AdministrativeAssistant.create(user_id: @user.id)
+      if params[:type] == "deg"
+        @deg = Deg.create(user: @user)
+      elsif params[:type] == "administrative_assistant"
+        @administrative_assistant = AdministrativeAssistant.create(user: @user)
       end
       redirect_to sign_in_path
       flash[:notice] = 'Solicitação de cadastro efetuado com sucesso!'
@@ -73,13 +75,9 @@ class UsersController < ApplicationController
   def user_params
     if params[:type] == "coordinator"
       params[:user].permit(:id,:name, :email, :password,:registration, :cpf, :active,
-                            :coordinator_attributes =>[:course_id,:user_id])
-    elsif params[:type] == "deg"
-      params[:user].permit(:id,:name, :email, :password,:registration, :cpf, :active,
-                            :deg_attributes => [:user_id])
+                           :coordinator_attributes =>[:course_id,:user_id])
     else
-      params[:user].permit(:id,:name, :email, :password,:registration, :cpf, :active,
-                          :administrative_assistant_attributes => [:user_id])
+      params[:user].permit(:id,:name, :email, :password,:registration, :cpf, :active)
     end
   end
 

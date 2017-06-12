@@ -62,6 +62,13 @@ RSpec.describe UsersController, type: :controller do
       expect(User.count).to be(1)
       expect(AdministrativeAssistant.count).to be(1)
     end
+
+    it 'should create a new deg user' do
+      post :create, params:{user: {name: 'joao silva', email: 'joaosilva@unb.br',
+        password: '123456', registration:'1100061', cpf:'01505038137', active: false}, type: 'deg'}
+      expect(User.count).to be(1)
+      expect(Deg.count).to be(1)
+    end
   end
 
   describe 'Edit method' do
