@@ -8,6 +8,7 @@ class CreateRoomSolicitations < ActiveRecord::Migration[5.0]
       t.date :response_date
       t.references :responder, index: true
       t.references :room
+      t.references :department
       t.references :solicitation, foreign_key: true, null: true
 
       t.timestamps
