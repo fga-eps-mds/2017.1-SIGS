@@ -40,7 +40,6 @@ class SolicitationsController < ApplicationController
   end
 
   def avaliable_rooms_by_department
-    require 'json'
     render inline: params.key?('allocations') ? avaliable_rooms.to_json : [].to_json
   end
 
@@ -88,9 +87,11 @@ class SolicitationsController < ApplicationController
         final = "#{room_solicitation[:final_time]}:00"
         i = 0
         loop do
+          department = params[:solicitation][:departments]
+          department = rooms[i].department_id if department.nil?
           solicitation.room_solicitation
                       .build(start: start, final: final, day: room_solicitation[:day],
-                             room: rooms[i])
+                             room: rooms[i], department_id: department)
           i += 1
           break unless i < rooms.size
         end
@@ -107,8 +108,7 @@ class SolicitationsController < ApplicationController
   end
 
   def return_wing
-    north = 0
-    south = 0
+    north = south = 0
 
     @school_room.courses.each do |course|
       north += 1 if course.department.wing == 'NORTE'
