@@ -1,0 +1,11 @@
+<h1>Gerar Token de acesso</h1>
+
+<%= form_for @user_api, url: user_apis_create_path , method: :post do |user_api| %>
+  <%= user_api.label :name , 'Nome' %>
+  <%= user_api.text_field :name %>
+
+  <%= user_api.label :email , 'E-mail' %>
+  <%= user_api.text_field :email %>
+
+  <%= user_api.submit 'Gerar Token', class: 'pull-right btn btn-default btn-success'%>
+<% end %>

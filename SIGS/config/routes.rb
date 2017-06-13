@@ -43,7 +43,6 @@ Rails.application.routes.draw do
   get 'room/destroy/:id', controller: 'rooms', action: 'destroy', as: 'destroy_room'
   get 'rooms/json_of_categories_by_school_room' => 'rooms#json_of_categories_by_school_room'
 
-
   # Course
   get 'courses/courses_by_user' => 'courses#courses_by_user', :as => 'courses_by_user'
 
@@ -112,6 +111,16 @@ Rails.application.routes.draw do
   post 'solicitations/save_allocation_period' => 'solicitations#save_allocation_period', :as => 'save_allocation_period'
   post 'solicitations/save_adjustment_period' => 'solicitations#save_adjustment_period', :as => 'save_adjustment_period'
   get 'solicitations/avaliable_rooms_by_department' => 'solicitations#avaliable_rooms_by_department', :as => 'avaliable_rooms_by_department'
+
+  # UserApi
+  get 'user_apis/new' => 'user_apis#new', :as => 'user_apis_new'
+  post 'user_apis/create' => 'user_apis#create', :as => 'user_apis_create'
+
+  # API
+  namespace :api, default: { format: :json }, path: '/api' do
+    get 'rooms/all_rooms' => 'apis#all_rooms', :as => 'all_rooms'
+  end
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end
