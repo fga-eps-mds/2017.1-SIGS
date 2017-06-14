@@ -11,6 +11,7 @@ $(document).ready(function (){
   addItem("Salas", "salas", "Salas");
   addItem("Categorias", "categorias", "Salas");
   menuDropdown("Alocações");
+  addItem("Solicitações Pendentes", "visualizar_solicitacoes", "Alocações");
   addItem("Graduação", "home", "Alocações")
   addItem("Extensão", "home", "Alocações")
   addItem("Solicitar(alocacao)", "solicitar1", "Alocações")

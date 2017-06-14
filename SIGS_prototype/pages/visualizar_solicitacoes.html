@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>SIGS</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.ico" />
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Sistema de Alocação de Salas Inteligente da UnB.">
+    <link rel="stylesheet" media="all" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" media="all" href="../assets/css/style.css" />
+    <link rel="stylesheet" media="all" href="../assets/css/navbar.css" />
+    <link rel="stylesheet" media="all" href="../assets/css/form.css" />
+    <script src="../assets/js/jquery-1.12.4.min.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/menu.js"></script>
+  </head>
+  <body>
+    <div class="container container-fluid myContainer">
+      <header class="navbar-default myNav">
+        <figure class="logo">
+          <img src="../assets/img/sigs_logo.png" alt="SIGS Logos" />
+        </figure>
+
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+
+        <ul class="nav navbar-nav" id="myNavBar"></ul>
+
+        <figure class="unbLogo">
+          <a href="http://www.unb.br" target="_blank">
+            <img src="../assets/img/rodape_unb.png" alt="SIGS Logos" />
+          </a>
+        </figure>
+      </header>
+      <main class="mainConteiner">
+        <h1>Solicitações Pendentes</h1>
+        
+        <table class="table">
+          <th>Data</th>
+          <th>Horario</th>
+          <th>Sala</th>
+          <th>Turma</th>
+          <th>Curso</th>
+          <th>Autor</th>
+          <th></th>
+          <th></th>
+        </tr>
+          <tr class="solicitacao1">
+            <td style="text-align:left">01/02/2017</td>
+            <td style="text-align:left">10:00-12:00</td>
+            <td style="text-align:left"><a href="mostrar_sala.html">S10</a></td>>
+            <td style="text-align:left">Cálculo 1</td>
+            <td style="text-align:left"> Matemática(Licenciatura)</td>             
+            <td style="text-align:left">Caio Filipe</td>
+            <td style="text-align:left"><a href="alterar_sala.html"><img src="../assets/img/approve.png" alt="aprovar"></a></td>
+            <td style="text-align:left"><a href="#!" data-toggle="modal" data-target=".modalRecuse"><img src="../assets/img/recuse.png" alt="alterar"></a></td>
+          </tr>
+        </table>
+
+        <!-- Modal -->
+        <div class="modal fade modalRecuse" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Recusar Solicitção</h4>
+              </div>
+              <div class="modal-body">
+                <p>Justificativa:</p>
+              </div>
+              <div>
+                <textarea class="form-control" rows="3"></textarea>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-success btnRecuse" data-dismiss="modal">Confirmar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
