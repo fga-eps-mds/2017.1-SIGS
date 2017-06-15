@@ -15,10 +15,6 @@ gem 'prawn-table'
 
 gem 'rails-controller-testing'
 
-#Gem to test pdf
-gem 'pdf-inspector', :group => :test, require: "pdf/inspector"
-gem 'pdf-reader', :group => :test
-
 gem 'rubocop', '~> 0.48.1', require: false
 
 gem 'simplecov' , :require => false  , :group => :test
@@ -75,6 +71,9 @@ group :development, :test do
   gem 'database_cleaner'
   #gem 'selenium-webdriver', '~> 2.53'
   gem 'coveralls', require: false
+  # Gems to test pdf
+  gem 'pdf-inspector', require: 'pdf/inspector'
+  gem 'pdf-reader'
 end
 
 group :development do
