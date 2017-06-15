@@ -17,9 +17,16 @@
   <br>
 
   <p>Cursos</p>
-  <div class="checkbox-group">
-    <%= school_room.collection_check_boxes(:course_ids, @all_courses, :id, :name, include_blank: true)%>
+  <input type="text" id="input-search-courses">
+  <button type="button" id="add-course"> Buscar </button>
+  <div class="" id="courses-list">
+    <input type="hidden" value="" name="school_room[course_ids][]" readOnly="true">
   </div>
+
+  <div class="" id="search-result">
+    
+  </div>
+
   <br>
 
   <p>Categorias</p>
@@ -31,3 +38,44 @@
   <%= school_room.submit "Salvar", class: 'pull-right btn btn-default btn-success' %>
 
 <% end %>
+
+<script type="text/javascript">
+  $('#add-course').click(function(){
+    searchCourses();
+  });
+
+  // .click(function(){
+  //   alert('chamou buton element');
+  //   addCourseInList();
+  // });
+
+  var course;
+  console.log('valor de course = ' + course);
+
+  function searchCourses() {
+    $.getJSON(
+      '../school_rooms/search_courses/' + $('#input-search-courses').val() ,{
+      format: 'json'
+    }).success(function(data){
+      console.log(data);
+      course = data;
+      console.log('valor de course = ' + course);
+      viewResult(data);
+    }).error(function(){
+      alert("Falha no Processamento");
+    });
+  }
+
+  function viewResult(data) {
+    console.log(data.name);
+    $('#search-result').html(data.name + 
+      '<button type="button" id="button-element" onClick="addCourseInList()"> Adicionar </button>');
+  }
+
+
+  function addCourseInList() {
+    console.log('valor 3 de course = ' + course);
+    $('#courses-list').append(course.name + '<input type="hidden" value="'+course.id+'" name="school_room[course_ids][]" readOnly="true">');
+  }
+
+</script>
