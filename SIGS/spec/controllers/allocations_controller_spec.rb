@@ -9,7 +9,7 @@ RSpec.describe AllocationsController, type: :controller do
       @course = Course.create(code: '10', name: 'Engenharia de Software', department: @department, shift: 1)
       @building = Building.create(code: 'pjc', name: 'Pavilhão João Calmon', wing: 'Norte')
       @category = Category.create(name: 'Retroprojetor')
-      @user = User.create(name: 'Caio Filipe', email: 'caio@unb.br', 
+      @user = User.create(name: 'Caio Filipe', email: 'caio@unb.br',
         cpf: '05012345678', registration: '1234567', active: true, password: '123456')
       @user_2 = User.create(name: 'joao silva', email: 'joaferrera@unb.br',
         password: '123456', registration:'1100069', cpf:'04601407380', active: true)
@@ -215,6 +215,7 @@ RSpec.describe AllocationsController, type: :controller do
       expect(response).to have_http_status(200)
       expect(@allocation_all_date_user).to be_nil
     end
+
 
     it "should destroy all allocations" do
       sign_in(@user)

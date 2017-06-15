@@ -94,18 +94,18 @@ class AllocationsController < ApplicationController
   end
 
   def destroy_all_allocations
-    @school_room = SchoolRoom.find(params[:id])
-    allocations_sh = Allocation.where(school_room_id: @school_room.id)
-    allocations_sh.each do |allocation|
-      allocation.destroy
-    end
+    school_room_id= SchoolRoom.find(params[:id]).id
+    allocations_sh = Allocation.where(school_room_id: school_room_id)
+    allocations_sh.each(&:destroy)
     flash[:success] = 'Desalocação feita com sucesso'
-    redirect_to allocations_destroy_path(@school_room.id)
+    redirect_to allocations_destroy_path(school_room_id)
   end
 
   def destroy_all_allocation_date
     @all_allocation_date_delete = AllAllocationDate.find(params[:id])
-    @school_room = SchoolRoom.find_by(id: @all_allocation_date_delete.allocation.school_room.id)
+    @school_room = SchoolRoom.find_by(
+      id: @all_allocation_date_delete.allocation.school_room.id
+    )
     @all_allocation_date_delete.destroy
     flash[:success] = 'Desalocação feita com sucesso'
     redirect_to allocations_destroy_path(@school_room.id)
