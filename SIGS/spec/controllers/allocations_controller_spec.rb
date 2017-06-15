@@ -216,6 +216,14 @@ RSpec.describe AllocationsController, type: :controller do
       expect(@allocation_all_date_user).to be_nil
     end
 
+    it "should retrieve all alocations of school_room" do
+      sign_in(@user)
+      @allocation1 = Allocation.create(user_id: @user.id,room_id: @room.id, school_room_id: @school_room.id, day: "Segunda", start_time: '14:00:00', final_time: '16:00:00')
+      allocations = AllAllocationDate.create(day:"02-04-2018",allocation_id:@allocation1.id)
+      get :destroy, params: {id:@school_room.id}
+      expect(assigns(:allocation_all_date_user)).to eq([allocations])
+    end
+
 
     it "should destroy all allocations" do
       sign_in(@user)
