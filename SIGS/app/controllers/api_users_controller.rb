@@ -18,11 +18,9 @@ class ApiUsersController < ApplicationController
     @api_user = create_token_params(api_user_params, @api_user)
     if @api_user.save
       ApiUserMailer.create_email(@api_user, current_user).deliver_now
-      redirect_to api_users_index_path, flash:
-      { success: 'Usuário de API salvo' }
+      redirect_to api_users_index_path, flash: { success: 'Usuário de API salvo' }
     else
-      redirect_to api_users_new_path, flash:
-      { error: 'Usuário de API não foi salvo' }
+      redirect_to api_users_new_path, flash: { error: 'Usuário de API não foi salvo' }
     end
   end
 
@@ -50,12 +48,14 @@ class ApiUsersController < ApplicationController
 
   def destroy
     @api_user = ApiUser.find(params[:id])
-    if @api_user.destroy
-      redirect_to api_users_index_path, flash:
-      { success: 'Usuário de API excluido com sucesso' }
+    if @api_user.user_id == current_user.id
+      if @api_user.destroy
+        redirect_to api_users_index_path, flash:
+        { success: 'Usuário de API excluido com sucesso' }
+      end
     else
       redirect_to api_users_index_path, flash:
-      { success: 'Usuário de API não pode ser excluido' }
+      { error: 'Usuário de API não pode ser excluido' }
     end
   end
 
