@@ -116,9 +116,10 @@ Rails.application.routes.draw do
   get 'api_users/index' => 'api_users#index', :as => 'api_users_index'
   get 'api_users/new' => 'api_users#new', :as => 'api_users_new'
   post 'api_users/create' => 'api_users#create', :as => 'api_users_create'
-  get 'api_users/edit' => 'api_users#edit', :as => 'api_users_edit'
-  get 'api_users/update' => 'api_users#update', :as => 'api_users_update'
-  get 'api_users/destroy' => 'api_users#destroy', :as => 'api_users_destroy'
+  get 'api_users/edit/:id' => 'api_users#edit', :as => 'api_users_edit'
+  put 'api_users/update/:id' => 'api_users#update', :as => 'api_users_update'
+  get 'api_users/destroy/:id' => 'api_users#destroy', :as => 'api_users_destroy'
+
 
   # API
   namespace :api, default: { format: :json }, path: '/api' do

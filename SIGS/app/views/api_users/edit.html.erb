@@ -1,2 +1,14 @@
-<h1>ApiUsers#edit</h1>
-<p>Find me in app/views/api_users/edit.html.erb</p>
+<h1>Editar Usuário de API</h1>
+
+    <%= form_for @api_user,url: api_users_update_path , method: :put do |api_user| %>
+
+        <%= api_user.label :name, "Nome: " %>
+        <%= api_user.text_field :name, class: "form-control", placeholder: "Digite seu nome"%><br>
+
+        <%= api_user.label :email, "E-mail" %>
+        <%= api_user.text_field :email, class: "form-control", placeholder: "Digite seu email"%>
+        <div class="actions">
+          <%= api_user.submit "Salvar", class: "pull-right btn btn-default btn-success" %>
+        </div>
+    <%end%>
+
