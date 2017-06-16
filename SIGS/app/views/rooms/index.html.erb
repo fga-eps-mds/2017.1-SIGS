@@ -18,17 +18,18 @@
 
   <tr>
     <td>
-      <%= label_tag("Prédio") %>
-      <%= select_tag 'building_id', options_from_collection_for_select(@buildings, "id", "name"), include_blank: true %>
-    </td>
-
-    <td>
       <%= label_tag("Ala") %>
       <% itens = [["NORTE"], ["CENTRAL"], ["SUL"]] %>
       <%= select_tag 'wing', options_for_select(itens, " "), include_blank: true %>
     </td>
     <td>
-      <p> Categorias</p>
+      <%= label_tag("Prédio") %>
+      <%= select_tag 'building_id', options_from_collection_for_select(@buildings, "id", "name"), include_blank: true %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <%= label_tag("Categorias") %>
       <div class="checkbox-group">
         <% Category.all.each do |category| %>
           <%= check_box_tag 'category_ids', category.id -%>

@@ -10,13 +10,13 @@ class RoomsController < ApplicationController
 
     if params[:name].present? || params[:code].present? ||
        params[:capacity].present? || params[:building_id].present? ||
-       params[:wing].present?
+       params[:wing].present? || params[:category].present?
 
       filter_by_name_and_code
       filter_by_capacity
-      filter_by_buildings
-      #filter_build_by_wings
       filter_by_wings
+      filter_by_buildings
+      filter_by_category
     else
       @rooms = Room.all
     end
@@ -37,7 +37,7 @@ class RoomsController < ApplicationController
       @rooms
     end
   end
-  
+
   def filter_by_wings
     if params[:wing].present?
       @rooms = []
@@ -48,6 +48,20 @@ class RoomsController < ApplicationController
       end
     else
       @rooms = Room.all
+    end
+    return @rooms
+  end
+
+  def filter_by_category
+    if params[:category_ids].present?
+      @rooms = []
+      #categories = Category.where(category_id: params[:category_ids]).load
+      @rooms.each do |room_category|
+        category_rooms = Room.where(category_ids: room_category.id)
+        @rooms = @rooms + category_rooms
+      end
+    else
+      puts "nao deu certo"
     end
     return @rooms
   end
