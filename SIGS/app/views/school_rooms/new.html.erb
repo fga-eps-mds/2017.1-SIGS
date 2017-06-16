@@ -10,25 +10,33 @@
     <%= school_room.text_field :name, class: 'form-control' %>
   </div>
 
-  <p>Vagas</p>
+  <p>Capacidade</p>
   <div class="checkbox-group">
     <%= school_room.number_field :vacancies %>
   </div>
   <br>
 
-  <p>Cursos</p>
-  <input type="text" id="input-search-courses">
-  <button type="button" id="add-course"> Buscar </button>
-  <div class="" id="courses-list">
-    <input type="hidden" value="" name="school_room[course_ids][]" readOnly="true">
-  </div>
+  <hr>
+    <p>Cursos (código)</p>
+    <div class="search-elements">
+      <input type="text" id="input-search-courses" class="search-input">
+    </div>
+    <div class="search-elements">
+      <button type="button" id="add-course" class="icon-search-submit"> 
+        <i class="fa fa-search fa-lg"></i> 
+      </button>
+    </div>
+    <div class="search-elements" id="courses-list" style="margin-left: 30%">
+      <p>Cursos Adicionados</p>
+      <input type="hidden" value="" name="school_room[course_ids][]" readOnly="true">
+    </div>
 
-  <div class="" id="search-result">
-    
-  </div>
+    <div class="" id="search-result">
+      
+    </div>
 
-  <br>
-
+    <br>
+  <hr>
   <p>Categorias</p>
   <div class="checkbox-group">
     <%= school_room.collection_check_boxes(:category_ids,all_categories,:id,:name, include_blank: true)%>
@@ -44,11 +52,6 @@
     searchCourses();
   });
 
-  // .click(function(){
-  //   alert('chamou buton element');
-  //   addCourseInList();
-  // });
-
   var course;
   console.log('valor de course = ' + course);
 
@@ -60,22 +63,41 @@
       console.log(data);
       course = data;
       console.log('valor de course = ' + course);
-      viewResult(data);
+      viewResult();
     }).error(function(){
       alert("Falha no Processamento");
     });
   }
 
-  function viewResult(data) {
-    console.log(data.name);
-    $('#search-result').html(data.name + 
-      '<button type="button" id="button-element" onClick="addCourseInList()"> Adicionar </button>');
+  function viewResult() {
+    console.log(course.name);
+    $('#search-result').html(
+      '<button type="button" id="button-element" class="btn btn-default" onClick="addCourseInList()">' +
+        course.name + '  <i class="fa fa-plus"></i>'
+        + '</button>');
   }
 
-
   function addCourseInList() {
-    console.log('valor 3 de course = ' + course);
-    $('#courses-list').append(course.name + '<input type="hidden" value="'+course.id+'" name="school_room[course_ids][]" readOnly="true">');
+    if ($('#course-added-'+course.id).lenght == 0) {
+      console.log('entrou no if');
+      $('#courses-list').append(
+        '<p id="course-added-'+course.id+'">' +
+        '<button type="button" id="button-remove class="btn btn-default" onClick="removeCourseInList('+course.id+')">' +
+          course.name + '  <i class="fa fa-minus"></i>' +
+        '</button>' +
+        '<input type="hidden" value="'+course.id+'" name="school_room[course_ids][]" readOnly="true">' + 
+        '</p>');
+    }
+    else {
+      console.log('entrou no else');
+      //nada
+    }
+  }
+
+  function removeCourseInList(id) {
+    console.log('CHAMOU O REMOVE');
+    console.log('#course-added-'+id)
+    $('#course-added-'+id).remove();
   }
 
 </script>
