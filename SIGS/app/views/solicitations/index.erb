@@ -1,0 +1,23 @@
+<h1>Solicitacoes Pendentes</h1>
+<%  %>
+<%=  %>
+<% if @solicitaitons.count == 0 %>
+  <h3>Não há nenhum usuário registrado no momento.</h3>
+<% else %>
+  <table class="table">
+    <tr>
+      <th>Nome</th>
+      <th>Email</th>
+      <th>CPF</th>
+      <th>Matricula</th>
+    </tr>
+    <% @solicitations.each do |solicitation| %>
+    <tr>
+      <td><%= solicitation.status%></td>
+      <td><%= solicitation.request_date%></td>
+      <td><%= solicitation.requester %></td>
+      <td><%= solicitation.school_room.name %></td>
+    </tr>
+    <% end %>
+  </table>
+<% end %>

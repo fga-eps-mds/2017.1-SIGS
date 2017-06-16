@@ -114,6 +114,7 @@ Rails.application.routes.draw do
   post 'solicitations/save_allocation_period' => 'solicitations#save_allocation_period', :as => 'save_allocation_period'
   post 'solicitations/save_adjustment_period' => 'solicitations#save_adjustment_period', :as => 'save_adjustment_period'
   get 'solicitations/avaliable_rooms_by_department' => 'solicitations#avaliable_rooms_by_department', :as => 'avaliable_rooms_by_department'
+  get 'solicitations/index' => 'solicitations#index', :as => 'solicitation_index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end

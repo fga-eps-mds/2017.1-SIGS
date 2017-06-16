@@ -92,3 +92,6 @@ allocation11 = Allocation.create(user_id: user_1.id,room_id: room_4.id, school_r
 allocation12 = Allocation.create(user_id: user_1.id,room_id: room_4.id, school_room_id: school_room_6.id, day: "Quarta", start_time: '14:00:00', final_time: '18:00:00')
 
 allocation_extension_1 = AllocationExtension.create(user_id: user_1.id, room_id: room_1.id, start_time: '18:00:00', final_time: '19:00:00', inicial_date: '06-07-2017', final_date: '06-07-2017', periodicity: "Quinzenal")
+
+# Solicitation
+# solicitation_1 = Solicitation.create(justify: '', status: '0', request_date: '10-01-2018', requester_id: user_2.id, school_room_id: school_room.id)
