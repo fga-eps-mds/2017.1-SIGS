@@ -5,7 +5,7 @@ class Allocation < ApplicationRecord
   belongs_to :room
   belongs_to :school_room
   belongs_to :user
-  has_many :all_allocation_date
+  has_many :all_allocation_date, dependent: :destroy
 
   validates :school_room_id,
             presence: { message: 'Informe a Turma' }
