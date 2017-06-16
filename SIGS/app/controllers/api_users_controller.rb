@@ -17,6 +17,7 @@ class ApiUsersController < ApplicationController
     @api_user.user_id = current_user.id
     @api_user = create_token_params(api_user_params, @api_user)
     if @api_user.save
+      ApiUserMailer.create_email(@api_user, current_user).deliver_now
       redirect_to api_users_index_path, flash:
       { success: 'Usuário de API salvo' }
     else
@@ -41,6 +42,10 @@ class ApiUsersController < ApplicationController
       redirect_to api_users_edit_path, flash:
       { success: 'Usuário de API não pode ser atualizado' }
     end
+  end
+
+  def show
+    @api_user = ApiUser.find(params[:id])
   end
 
   def destroy

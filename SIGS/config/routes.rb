@@ -118,6 +118,7 @@ Rails.application.routes.draw do
   post 'api_users/create' => 'api_users#create', :as => 'api_users_create'
   get 'api_users/edit/:id' => 'api_users#edit', :as => 'api_users_edit'
   put 'api_users/update/:id' => 'api_users#update', :as => 'api_users_update'
+  get 'api_users/show/:id' => 'api_users#show', :as => 'api_users_show'
   get 'api_users/destroy/:id' => 'api_users#destroy', :as => 'api_users_destroy'
 
 

@@ -7,6 +7,7 @@
     <tr>
       <td>Nome</td>
       <td>E-mail</td>
+      <td style="text-align:center">Visualizar</td>
       <td style="text-align:center">Alterar</td>
       <td style="text-align:center">Excluir</td>
     </tr>
@@ -14,6 +15,7 @@
       <tr>
         <td><%= api_user.name %></td>
         <td><%= api_user.email %></td>
+        <td style="text-align:center"><%= link_to image_tag("icon_view.png"), api_users_show_path(api_user.id) %></td>
         <td style="text-align:center"><%= link_to image_tag("icon_edit.png"), api_users_edit_path(api_user.id) %></td>
         <td style="text-align:center"><%= link_to image_tag("icon_trash.png"), api_users_destroy_path(api_user.id), data: {confirm: "Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?"} %></td>
       </tr>
