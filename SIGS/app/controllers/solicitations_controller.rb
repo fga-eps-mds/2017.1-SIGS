@@ -43,6 +43,19 @@ class SolicitationsController < ApplicationController
     render inline: params.key?('allocations') ? avaliable_rooms.to_json : [].to_json
   end
 
+  # def index
+  #   coordinator = Coordinator.find_by(user_id: current_user.id)
+  #   @room_solicitations = RoomSolicitation.where(department: coordinator.course.department)
+  #   @solicitaions
+  #   byebug
+  #   @room_solicitations.each do |room_solicitaion|
+  #     @solicitations += solicitaion.find(room_solicitaion.solicitaion.id)
+  #   end
+  # end
+
+  # def show
+  # end
+
   private
 
   def avaliable_rooms
