@@ -1,0 +1,106 @@
+<h1>Alocar Turma</h1>
+
+<%= render partial: "school_rooms/show", locals: {school_room: @school_room} %>
+
+<%= hidden_field_tag :school_room, @school_room.id %>
+
+<%= form_tag allocations_create_path do %>
+
+  <% days = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"] %>
+  <select id="select-room">
+    <%= options_from_collection_for_select(@coordinator_rooms, :id, :name) %>
+  </select>
+  <table class="table table-hover time_grid">
+    <tr>
+      <th>Horários</th>
+      <% days.each do |day| %>
+        <td>
+          <strong><%= day %></strong>
+        </td>
+      <% end %>
+    </tr>
+    <tr>
+      <th></th>
+      <% days.each do |day| %>
+        <td>
+          <select id="select-<%=day%>" class="autofill-field">
+            <%= options_from_collection_for_select(@coordinator_rooms, :id, :name) %>
+          </select>
+        </td>
+      <% end %>
+    </tr>
+  </table>
+  <table class="table table-hover time_grid" id="hours_table">
+  </table>
+  <%= submit_tag "Salvar", class: 'pull-right btn btn-default btn-success' %>
+<% end %>
+
+<script>
+
+  $(document).ready(function(){
+    ajaxReloadTable();
+  });
+
+  $(".autofill-field").change(function() {
+    ajaxReloadTable();
+  });
+
+  $("#select-room").change(function() {
+    ajaxReloadTable();
+  });
+
+  function ajaxReloadTable() {
+    $.getJSON('../room_allocations_by_day?Segunda=' + $("#select-Segunda").val() +
+    '&Terça=' + $("#select-Terça").val()  +
+    '&Quarta=' + $("#select-Quarta").val() +
+    '&Quinta=' + $("#select-Quinta").val() +
+    '&Sexta=' + $("#select-Sexta").val() +
+    '&Sabado=' + $("#select-Sábado").val() +
+    '&school_room=' + $("#school_room").val(), {
+      format: 'json'
+    }).success(function(data){
+      generateTable(data);
+    }).error(function(){
+      alert("Falha no Processamento");
+    });
+  }
+
+  function generateTable(data) {
+    var school_room = $("#school_room").val();
+    var string = "";
+    var day = ["", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
+    var shift = data[0][1][5];
+    var disabled;
+    for(row = 0; row < 18; row++) {
+      if((row <= 11 && shift == 1) || (row > 11 && shift == 2))
+        disabled = false;
+      else {
+        disabled = true;
+      }
+      string += "<tr>"
+      for(col = 0; col < 7; col++){
+        if (col == 0){
+          string += "<th>" + data[row][col] + "</th>";
+        } else if (data[row][col][0] == " ") {
+          string += '<td id="check_' + day[col] + "_" + (row + 6) + '">';
+          if(disabled) {
+            string += '<input type="checkbox" value="1" name="' + day[col] + '[' + (6 + row) + '][active]" disabled/>';
+          } else {
+            string += '<input type="checkbox" value="1" name="' + day[col] + '[' + (6 + row) + '][active]"/>';
+          }
+          string += '<input value="' + data[row][col][2] + '" type="hidden" name="' + day[col] + '[' + (6 + row) +'][room_id]" />' +
+          '<input value="' + data[row][col][1] + '" type="hidden" name="' + day[col] + '[' + (6 + row) +'][school_room_id]" />' +
+          '<input value="' + day[col] + '" type="hidden" name="' + day[col] + '[' + (6 + row) +'][day]" />' +
+          '<input value="' + data[row][col][3] + '" type="hidden" name="' + day[col] + '[' + (6 + row) +'][start_time]" />' +
+          '<input value="' + data[row][col][4] + '" type="hidden" name="' + day[col] + '[' + (6 + row) +'][final_time]" />' +
+        '</td>';
+        } else {
+          string += "<td>" + data[row][col][0] + "</td>";
+        }
+      }
+      string += "</tr>";
+    }
+
+    $("#hours_table").html(string);
+  }
+</script>

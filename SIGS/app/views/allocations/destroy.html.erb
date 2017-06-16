@@ -1,0 +1,34 @@
+<h1>Destruir Alocação</h1>
+
+<%= render partial: "school_rooms/show", locals: {school_room: @school_room} %>
+
+<%= button_to 'Desalocar tudo', allocations_destroy_all_allocations_path(@school_room.id),
+                                data: {confirm: "Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?"},
+                                method: :get, class: "btn btn-lg btn-danger"%>
+
+<div class="deallocation-table">
+  <table class="table table-hover">
+    <tr>
+      <th>Sala</th>
+      <th>Data</th>
+      <th>Dia da semana</th>
+      <th>Inicio</th>
+      <th>Fim</th>
+      <th style="text-align:center">Desalocar</th>
+    </tr>
+    <% @allocation_all_date_user.each do |allocation_date| %>
+      <tr>
+        <td><%= allocation_date.allocation.room.name %></td>
+        <td><%= allocation_date.day%></td>
+        <td><%= allocation_date.allocation.day%></td>
+        <td><%= allocation_date.allocation.start_time.strftime('%H')%>H</td>
+        <td><%= allocation_date.allocation.final_time.strftime('%H')%>H</td>
+
+        <td style="text-align:center"><%= link_to 'Desalocar', allocations_destroy_all_allocation_date_path(allocation_date.id),
+                                                               data: {confirm: "Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?"},
+                                                               class: "btn btn-default btn-danger" %></td>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>

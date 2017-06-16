@@ -1,0 +1,33 @@
+<table class="table">
+  <tr>
+    <th>Turma</th>
+    <th>Disciplina</th>
+    <th>Departamento</th>
+    <th>Nº de Vagas</th>
+    <th>Cursos</th>
+    <th>Recursos</th>
+  </tr>
+
+  <tr>
+    <td><%= get_name(school_room) %></td>
+    <td><%= get_discipline_name(school_room) %></td>
+    <td><%= get_department_name(school_room) %></td>
+    <td><%= get_vacancies(school_room) %></td>
+    <td>
+      <% get_courses(school_room).each do |course| %>
+        <%= course.name %><br>
+      <% end %>
+    </td>
+    <td id = "school_room_ressources">
+      <% line = false %>
+      <% get_categories(school_room).each do |category| %>
+        <% if line %>
+          <br>
+        <% end %>
+
+        <%= category.name %>
+        <% line = true %>
+      <% end %>
+    </td>
+  </tr>
+</table>

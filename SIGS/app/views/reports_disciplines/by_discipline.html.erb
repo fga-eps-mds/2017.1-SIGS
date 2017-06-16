@@ -1,0 +1,38 @@
+<h1>Relatório por Disciplina</h1>
+
+<%= form_tag(reports_by_discipline_post_path, :method => :post) do %>
+
+<div class="search-elements">
+	<%= text_field_tag 'name', nil, id: 'input-search-field', class: 'search-input', placeholder: 'Buscar por disciplinas' %>
+</div>
+<div class="search-elements">
+	<%= button_tag type: 'submit', class: "icon-search-submit", id: "searchButton" do %>
+		<i class="fa fa-search fa-lg"></i>
+	<% end %>
+</div>
+
+<% end %>
+
+<h2>Disciplinas</h2>
+<% if @disciplines.count == 0 %>
+  <h3>Não há disciplinas registradas.</h3>
+<% else %>
+  <table class="table table-striped">
+		<thead>
+	    <tr>
+	      <th>Disciplina</th>
+	      <th>Departamento</th>
+	      <th>Relatório</th>
+	    </tr>
+		</thead>
+		<tbody>
+	    <% @disciplines.each do |discipline| %>
+	      <tr>
+	        <td><%= discipline.name %></td>
+	        <td><%= discipline.department.name %></td>
+					<td><%= link_to image_tag("icon_pdf.png"), generate_by_discipline_path(discipline.id), target: "_blank" %></td>
+	      </tr>
+	    <% end %>
+		</tbody>
+	</table>
+<% end %>

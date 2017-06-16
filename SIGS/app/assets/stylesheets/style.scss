@@ -23,6 +23,12 @@
   margin: 60px 0;
 }
 
+.subtitle{
+  font-size: 20px;
+  font-family: 'Sawasdee';
+  margin: -50px 0 60px 0;
+}
+
 .container.container.container-fluid.myContainer:not(#signIn) {
 
   width: 98vw !important;
@@ -41,6 +47,11 @@
 .flexContainer {
   display: flex;
   justify-content: space-between;
+}
+
+.flexContainer .flexStart {
+  display: flex;
+  justify-content: flex-start;
 }
 
 .flexColumn {
@@ -93,6 +104,13 @@
 //   max-width: 200px;
 // }
 
+.far-room {
+  background-color: #ffb3b3;
+}
+
+.near-room {
+  background-color: #99ff99;
+}
 
 /* Fontes */
 @font-face {

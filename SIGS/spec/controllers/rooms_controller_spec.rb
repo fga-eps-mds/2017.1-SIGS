@@ -1,5 +1,4 @@
 require 'rails_helper'
-include SessionsHelper
 
 RSpec.describe RoomsController, type: :controller do
 
@@ -11,13 +10,17 @@ RSpec.describe RoomsController, type: :controller do
 
       @department_2 = Department.create(code: '749', name: 'PRC')
 
+      @discipline = Discipline.create(code: '876', name: 'Cálculo 3', department: @department)
+
       @course = Course.create(name: 'Musica', department: @department)
 
+      @category = Category.create(name: 'Laboratório Químico')
+
       @room = Room.create(code: 'S10', name: 'Superior 10', capacity: 50,
-       active: true, time_grid_id: 1, building: @building, department: @department)
+       active: true, time_grid_id: 1, building: @building, department: @department, category: [@category])
 
       @room_2 = Room.create(code: 'S9', name: 'Superior 9', capacity: 50,
-       active: true, time_grid_id: 1, building: @building, department: @department_2)
+       active: true, time_grid_id: 1, building: @building, department: @department_2, category: [@category])
 
       @user = User.create(name: 'joao silva', email: 'joaosilva@unb.br',
         password: '123456', registration:'1100061', cpf:'05601407380', active: true)
@@ -27,21 +30,21 @@ RSpec.describe RoomsController, type: :controller do
 
       @administrative_assistant = AdministrativeAssistant.create(user: @user)
 
+      @school_room = SchoolRoom.create(name:'A', vacancies: 40, courses: [@course], discipline: @discipline)
+
       @coordinator = Coordinator.create(user: @user_2, course: @course)
+
+      @allocation = Allocation.create(user: @user,room: @room, school_room: @school_room, day: "Segunda", start_time: '14:00:00', final_time: '16:00:00')
+
+
+      
 
       sign_in(@user)
     end
 
     it 'should return all room' do
-      sign_in(@user)
       get :index
       expect(response).to have_http_status(200)
-    end
-
-    it 'should return nil' do
-      sign_in(@user)
-      get :index
-      expect(@rooms).to be_nil
     end
 
     it 'should return edit room' do
@@ -91,14 +94,14 @@ RSpec.describe RoomsController, type: :controller do
       expect(flash.now[:error]).to eq('Dados não foram atualizados')
     end
 
-    it 'should delete the room from the database, by coordinator' do 
+    it 'should delete the room from the database, by coordinator' do
       get :destroy, params:{id: @room_2.id}
       expect(flash[:success]).to eq('Sala excluida com sucesso')
       expect(response).to redirect_to(room_index_path)
     end
 
     it 'should delete the room from the database, by administrative assistant' do
-    sign_in(@user_2) 
+    sign_in(@user_2)
       get :destroy, params:{id: @room.id}
       expect(flash[:success]).to eq('Sala excluida com sucesso')
       expect(response).to redirect_to(room_index_path)
@@ -108,7 +111,11 @@ RSpec.describe RoomsController, type: :controller do
       get :destroy, params:{id: @room.id}
       expect(flash[:error]).to eq('Não possui permissão para excluir sala')
       expect(response).to redirect_to(room_index_path)
-    end 
+    end
 
+    it 'should get json response' do
+      get :json_of_categories_by_school_room, params: {school_room_id: @school_room.id}, :format => :json
+      expect(response).to have_http_status(200)
+    end
   end
 end
