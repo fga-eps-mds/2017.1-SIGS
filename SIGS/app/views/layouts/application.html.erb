@@ -32,7 +32,6 @@
           <ul class="nav navbar-nav">
             <li><%= link_to "Minha Conta", user_edit_path(current_user) %></li>
             <li><%= link_to 'Logout', sign_out_path, method: "delete" %></li>
-            <li><%= link_to 'API TESTE', api_all_rooms_path %></li>
             <% if permission[:level] == 2 %>
               <li class="dropdown">
                 <a data-toggle="collapse" href="#salas">Salas
@@ -80,6 +79,12 @@
                     <li><%= link_to "Salas", reports_by_room_path %></li>
                     <li><%= link_to "Turmas",reports_school_room_path%></li>
                     <li><%= link_to "Prédios", reports_by_building_path %></li>
+                  </ul>
+              </li>
+              <li class="dropdown">
+                <a data-toggle="collapse" href="#api">API
+                  <ul class="collapse" id="api">
+                    <li><%= link_to "Gerenciar Usuários", api_users_index_path %></li>
                   </ul>
               </li>
           </ul>

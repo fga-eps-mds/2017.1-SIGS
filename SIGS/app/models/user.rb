@@ -5,13 +5,16 @@ class User < ApplicationRecord
   has_one :coordinator, dependent: :destroy
   has_one :administrative_assistant, dependent: :destroy
   has_one :deg, dependent: :destroy
-  accepts_nested_attributes_for :deg, reject_if: :all_blank
   accepts_nested_attributes_for :coordinator, reject_if: :all_blank
   accepts_nested_attributes_for :administrative_assistant
-  has_secure_password
+  accepts_nested_attributes_for :deg, reject_if: :all_blank
+
   has_many :allocations
   has_many :allocationExtensions
   has_many :school_rooms
+  has_many :api_users
+
+  has_secure_password
 
   # Nome
   CHARACTERS_MINIMUM_FOR_THE_NAME_EXCEPTION = 'O Nome deve ter

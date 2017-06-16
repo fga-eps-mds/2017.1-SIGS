@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170613124616) do
+ActiveRecord::Schema.define(version: 20170616032538) do
 
   create_table "administrative_assistants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -58,6 +58,17 @@ ActiveRecord::Schema.define(version: 20170613124616) do
     t.index ["room_id"], name: "index_allocations_on_room_id", using: :btree
     t.index ["school_room_id"], name: "index_allocations_on_school_room_id", using: :btree
     t.index ["user_id"], name: "index_allocations_on_user_id", using: :btree
+  end
+
+  create_table "api_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "secret"
+    t.string   "token"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_api_users_on_user_id", using: :btree
   end
 
   create_table "buildings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -211,15 +222,6 @@ ActiveRecord::Schema.define(version: 20170613124616) do
     t.index ["school_room_id"], name: "index_solicitations_on_school_room_id", using: :btree
   end
 
-  create_table "user_apis", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "secret"
-    t.string   "token"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "email"
@@ -240,6 +242,7 @@ ActiveRecord::Schema.define(version: 20170613124616) do
   add_foreign_key "allocations", "rooms"
   add_foreign_key "allocations", "school_rooms"
   add_foreign_key "allocations", "users"
+  add_foreign_key "api_users", "users"
   add_foreign_key "coordinators", "courses"
   add_foreign_key "coordinators", "users"
   add_foreign_key "courses", "departments"

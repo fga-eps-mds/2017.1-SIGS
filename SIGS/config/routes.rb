@@ -105,16 +105,20 @@ Rails.application.routes.draw do
   # Extension
   post 'extensions/create' => 'extensions#create' , :as => 'extensions_create'
 
-  #solicitation
+  # Solicitation
   get 'solicitations/allocation_period/:school_room_id' => 'solicitations#allocation_period', :as => 'allocation_period'
   get 'solicitations/adjustment_period/:school_room_id' => 'solicitations#adjustment_period', :as => 'adjustment_period'
   post 'solicitations/save_allocation_period' => 'solicitations#save_allocation_period', :as => 'save_allocation_period'
   post 'solicitations/save_adjustment_period' => 'solicitations#save_adjustment_period', :as => 'save_adjustment_period'
   get 'solicitations/avaliable_rooms_by_department' => 'solicitations#avaliable_rooms_by_department', :as => 'avaliable_rooms_by_department'
 
-  # UserApi
-  get 'user_apis/new' => 'user_apis#new', :as => 'user_apis_new'
-  post 'user_apis/create' => 'user_apis#create', :as => 'user_apis_create'
+  # API Users
+  get 'api_users/index' => 'api_users#index', :as => 'api_users_index'
+  get 'api_users/new' => 'api_users#new', :as => 'api_users_new'
+  post 'api_users/create' => 'api_users#create', :as => 'api_users_create'
+  get 'api_users/edit' => 'api_users#edit', :as => 'api_users_edit'
+  get 'api_users/update' => 'api_users#update', :as => 'api_users_update'
+  get 'api_users/destroy' => 'api_users#destroy', :as => 'api_users_destroy'
 
   # API
   namespace :api, default: { format: :json }, path: '/api' do

@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 # User API module
-module UserApisHelper
+module ApiUsersHelper
 end
