@@ -21,7 +21,9 @@
     <div class="container container-fluid myContainer">
       <header class="navbar-default myNav">
         <figure class="logo">
-          <img src="../assets/img/sigs_logo.png" alt="SIGS Logos" />
+          <a href="home.html">
+            <img src="../assets/img/sigs_logo.png" alt="SIGS Logos" />
+          </a>
         </figure>
 
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -42,13 +44,17 @@
       <main class="mainConteiner">
         <h1>Turmas - Departamento de Matemática</h1>
         <label>Disciplina</label>
-        <select>
-          <option>Literatura</option>
-          <option>Cálculo 1</option>
-          <option>História da Arte</option>
-          <option>Matemática Discreta</option>
-        </select>
-
+            <form action="" accept-charset="UTF-8" class="formDisciplineSearch">
+              <div class="search-elements">
+                <input placeholder="Buscar por disciplinas" id="input-search-field" class="search-input" type="text" name="current_search[search]" />
+              </div>
+              <div class="search-elements">
+                <button name="button" type="submit" class="icon-search-submit" id="searchButton">
+                  <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </button>
+              </div>
+              <a href="criar_turma.html" class="btn btn-primary pull-right" role="button">Criar Nova Turma</a>
+            </form>
         <h3>Literatura</h3>
         <table class="table">
           <th>Disciplina</th>
