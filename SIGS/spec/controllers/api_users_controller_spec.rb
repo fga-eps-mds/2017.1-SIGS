@@ -62,6 +62,19 @@ RSpec.describe ApiUsersController, type: :controller do
     	get :edit, params:{id: @user_api.id}
     	expect(response).to have_http_status(200)
   	end
+
+    
+    it "should update a user api" do
+      put :update, params:{id: @user_api.id,api_user: {name: 'Wallacy Braz', email: @user_api.email}}
+      expect(response).to redirect_to(api_users_show_path(@user_api.id))
+      expect(flash[:success]).to eq('Usuário de API atualizado com sucesso')
+    end
+
+    it "should update a user api not success" do
+      put :update, params:{id: @user_api.id,api_user: {name: 'Wallacy Braz', email: ''}}
+      #expect(response).to redirect_to(api_users_show_path(@user_api.id))
+      expect(flash[:error]).to eq('Usuário de API não pode ser atualizado')
+    end
 	end
 
   describe 'Destroy method for user api' do
