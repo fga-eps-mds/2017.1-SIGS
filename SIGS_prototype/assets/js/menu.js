@@ -1,13 +1,12 @@
 $(document).ready(function (){
-  addItem("Minha Conta", "minha_conta", "myNavBar");
-  addItem("Logout", "../index", "myNavBar");
-  menuDropdown("Usuários");
+  // addItem("Minha Conta", "minha_conta", "myNavBar");
+  // addItem("Logout", "../index", "myNavBar");
+  addItem("Alocar", "visualizar_turmas", "myNavBar");
   addItem("Cadastros Pendentes", "cadastros_pendentes", "Usuários");
   addItem("Usuários Registrados", "usuarios_registrados", "Usuários");
-  menuDropdown("Turmas");
-  addItem("Nova Turma", "criar_turma", "Turmas");
-  addItem("Meu Departamento", "visualizar_turmas", "Turmas");
+  // menuDropdown("Turmas");
   menuDropdown("Salas");
+  menuDropdown("Relatórios");
   addItem("Salas", "salas", "Salas");
   addItem("Categorias", "categorias", "Salas");
   menuDropdown("Alocações");
@@ -20,6 +19,7 @@ $(document).ready(function (){
   addItem("por Disciplina", "relatorio_por_disciplina", "Relatórios")
   addItem("por Sala", "relatorio_por_sala", "Relatórios")
   addItem("por Prédio", "relatorio_por_predio", "Relatórios")
+  menuDropdown("Usuários");
 });
 
 function addItem(name, page, father) {
