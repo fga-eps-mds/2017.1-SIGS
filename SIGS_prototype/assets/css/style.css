@@ -7,7 +7,79 @@ body {
 .whiteBackground {
   background-color: white;
 }
-/*body background END*/
+
+/*nav bar*/
+.myNavBar {
+    background-color: #000000;
+    border-color: #e7e7e7;
+}
+
+.myNavBar .navbar-nav>li>a {
+    color: #ffffff;
+}
+
+.myNav>li>a:focus, .myNav>li>a:hover {
+    text-decoration: none;
+    background-color: #5FBB46;
+}
+
+.myNav .open>a, .myNav .open>a:focus, .myNav .open>a:hover {
+    background-color: #5FBB46;
+    border-color: #337ab7;
+}
+
+.myNavBar .myBrand {
+  color: #5FBB46;
+  font-weight: bold;
+}
+
+.navbar-toggle .icon-bar {
+  background-color: #5FBB46;
+}
+
+/* Sticky footer */
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 250px;
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.footer .myLogo {
+  margin: 15px 0;
+}
+
+.footer .myList {
+  margin-top: 15px;
+  list-style-type: none;
+  text-align: right;
+}
+.footer .myList li {
+  margin-top: 3px;
+}
+
+.footer .myList li a {
+  color: #ffffff;
+}
+
+.footer .myList li a:hover {
+  color: #5FBB46;
+}
+/*Sticky footer END*/
 
 .container.container-fluid{
   margin:0;
@@ -33,10 +105,10 @@ body {
   margin-bottom: 100px;
 }
 
-::selection {
+/*::selection {
   background-color: #009c4d;
   color: #FFF;
-}
+}*/
 
 .flexContainer {
   display: flex;
@@ -183,27 +255,6 @@ body {
 .tableViewAllocation tr th, .tableViewAllocation tr td {
   text-align: center;
   vertical-align: middle !important;
-}
-
-/*Top Bar*/
-.topBar {
-  width: 100%;
-  height: 60px;
-  background-color: #5FBB46;
-}
-
-.topBar a.btn {
-  margin-top: 13px;
-  margin-right: 13px;
-  background-color: #000000;
-  color: #5FBB46;
-  border-color: #000000;
-}
-
-.topBar .welcomeUser {
-  height: 60px;
-  line-height: 60px;
-  margin-right: 13px;
 }
 
 /*dash board*/
