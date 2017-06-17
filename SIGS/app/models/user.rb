@@ -12,7 +12,7 @@ class User < ApplicationRecord
   has_many :allocations
   has_many :allocationExtensions
   has_many :school_rooms
-  has_many :api_users
+  has_many :api_users, dependent: :destroy
 
   has_secure_password
 
