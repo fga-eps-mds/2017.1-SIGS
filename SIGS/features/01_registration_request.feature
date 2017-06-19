@@ -38,7 +38,7 @@ Feature: Registration Request
     And I fill in 'password-user' with '123456'
     And I fill in 'confirm_password' with '123456'
     And I fill in 'email' with 'gesiel@unb.br'
-    And I fill in 'type' with 'department_assistant'
+    And I fill in 'type' with 'deg'
     When I press 'Enviar' button
     Then the initial page should load with notice message 'Insira um Cpf válido'
 

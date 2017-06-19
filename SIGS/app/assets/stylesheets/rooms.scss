@@ -1,3 +1,18 @@
 // Place all the styles related to the rooms controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.tableViewAllocation tr th, .tableViewAllocation tr td {
+  text-align: center;
+  vertical-align: middle !important;
+}
+
+.tdHover {
+  background-color: #E3F4E3;
+}
+
+.tableViewAllocation tbody td {
+  -webkit-transition: background-color 600ms linear;
+  -ms-transition: background-color 600ms linear;
+  transition: background-color 600ms linear;
+}

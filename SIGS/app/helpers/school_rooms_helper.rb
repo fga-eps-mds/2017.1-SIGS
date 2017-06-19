@@ -7,26 +7,26 @@ module SchoolRoomsHelper
   end
 
   def get_name(id)
-    SchoolRoom.find(id).name
+    SchoolRoom.find_by(id: id).name
   end
 
   def get_discipline_name(id)
-    SchoolRoom.find(id).discipline.name
+    SchoolRoom.find_by(id: id).discipline.name
   end
 
   def get_department_name(id)
-    SchoolRoom.find(id).discipline.department.name
+    SchoolRoom.find_by(id: id).discipline.department.name
   end
 
   def get_vacancies(id)
-    SchoolRoom.find(id).vacancies
+    SchoolRoom.find_by(id: id).vacancies
   end
 
   def get_courses(id)
-    SchoolRoom.find(id).courses
+    SchoolRoom.find_by(id: id).courses
   end
 
   def get_categories(id)
-    SchoolRoom.find(id).category
+    SchoolRoom.find_by(id: id).category
   end
 end
