@@ -76,6 +76,7 @@ period_2 = Period.create(period_type:'Ajuste', initial_date: '23-02-2018', final
 period_3 = Period.create(period_type:'Letivo', initial_date: '08-03-2018', final_date: '14-07-2018')
 
 # Allocations
+<<<<<<< af3f48bf9581b0d5090c31fb2dcdf3648856eea7
 allocation = Allocation.create(user_id: user.id, room_id: room.id, school_room_id: school_room_2.id, day: "Segunda", start_time: '14:00:00', final_time: '16:00:00')
 allocation_2 = Allocation.create(user_id: user.id, room_id: room_2.id, school_room_id: school_room_2.id, day: "Quarta", start_time: '14:00:00', final_time: '16:00:00')
 allocation_3 = Allocation.create(user_id: user.id, room_id: room_2.id, school_room_id: school_room_2.id, day: "Sexta", start_time: '14:00:00', final_time: '16:00:00')

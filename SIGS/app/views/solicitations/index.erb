@@ -1,22 +1,27 @@
 <h1>Solicitacoes Pendentes</h1>
 <%  %>
 <%=  %>
-<% if @solicitaitons.count == 0 %>
+<% if @solicitations.count == 0 %>
   <h3>Não há nenhum usuário registrado no momento.</h3>
 <% else %>
   <table class="table">
     <tr>
-      <th>Nome</th>
-      <th>Email</th>
-      <th>CPF</th>
-      <th>Matricula</th>
+      <th>Data</th>
+      <th>Turma</th>
+      <th>Disciplina</th>
+      <th>Departmento</th>
+      <th>Autor</th>
+      <th style="text-align:center">Visualizar</th>
     </tr>
     <% @solicitations.each do |solicitation| %>
     <tr>
-      <td><%= solicitation.status%></td>
       <td><%= solicitation.request_date%></td>
-      <td><%= solicitation.requester %></td>
-      <td><%= solicitation.school_room.name %></td>
+      <td><%= solicitation.school_room.name%></td>
+      <td><%= solicitation.school_room.discipline.name %></td>
+      <td><%= solicitation.school_room.discipline.department.name %></td>
+      <td><%= solicitation.requester.name %></td>
+
+      <td style="text-align:center"><%= link_to image_tag("icon_view.png"), current_user %></td>
     </tr>
     <% end %>
   </table>
