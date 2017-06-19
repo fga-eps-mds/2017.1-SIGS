@@ -24,7 +24,8 @@ class RoomsController < ApplicationController
 
   def filter_by_capacity
     if params[:capacity].present?
-      @rooms = @rooms.where(capacity: params[:capacity].to_s)
+      #@rooms = @rooms.where(capacity: params[:capacity].to_s)
+      @rooms = @rooms.where('capacity >= ?', params[:capacity]) if params[:capacity]
     else
       @rooms
     end
@@ -47,7 +48,7 @@ class RoomsController < ApplicationController
         @rooms = @rooms + building_rooms
       end
     else
-      @rooms = Room.all
+      #@rooms = Room.all
     end
     return @rooms
   end
