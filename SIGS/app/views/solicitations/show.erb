@@ -1,0 +1,48 @@
+<h1>Solicitação</h1>
+
+<br><h2>Data</h2>
+<%= @solicitation.request_date%>
+<br><h2>Turma</h2>
+<%= @solicitation.school_room.name%>
+<br><h2>Disciplina</h2>
+<%= @solicitation.school_room.discipline.name %>
+<br><h2>Departamento</h2>
+<%= @solicitation.school_room.discipline.department.name %>
+<br><h2>Autor</h2>
+<%= @solicitation.requester.name %>
+<br><h2>Justificativa</h2>
+<%= @solicitation.justify %>
+
+<% if @period == true %>
+  <br><h2>Hora de inicio</h2>
+  <%= @room_solicitations.first.start %>
+  <br><h2>Hora de fim</h2>
+  <%= @room_solicitations.first.final %>
+  <br><h2>Dia</h2>
+  <%= @room_solicitations.first.day %>
+
+<% else %>
+<!-- <h2>Solicitações</h2>
+
+<table class="table">
+  <tr>
+    <th>Data</th>
+    <th>Turma</th>
+    <th>Disciplina</th>
+    <th>Departmento</th>
+    <th>Autor</th>
+    <th style="text-align:center">Visualizar</th>
+  </tr>
+  <% @solicitations.each do |solicitation| %>
+  <tr>
+    <td><%= solicitation.request_date%></td>
+    <td><%= solicitation.school_room.name%></td>
+    <td><%= solicitation.school_room.discipline.name %></td>
+    <td><%= solicitation.school_room.discipline.department.name %></td>
+    <td><%= solicitation.requester.name %></td>
+
+    <td style="text-align:center"><%= link_to image_tag("icon_view.png"), current_user %></td>
+  </tr>
+  <% end %>
+</table> -->
+<% end %>

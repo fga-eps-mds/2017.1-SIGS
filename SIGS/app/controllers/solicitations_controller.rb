@@ -55,6 +55,17 @@ class SolicitationsController < ApplicationController
     end
   end
 
+  def show
+    if allocation_period?
+      @period = true
+    else
+      @period = false
+    end  
+    @solicitation = Solicitation.find(params[:id])
+    @room_solicitations = RoomSolicitation.where(solicitation_id:
+                                                 @solicitation.id)
+  end
+
   private
 
   def avaliable_rooms
