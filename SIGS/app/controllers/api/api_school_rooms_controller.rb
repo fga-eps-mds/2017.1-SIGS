@@ -1,7 +1,10 @@
-class Api::ApiSchoolRoomsController < ApplicationController
+# frozen_string_literal: true
 
-  def index
-    @school_rooms = SchoolRoom.all
+module Api
+  # class that find school rooms from api
+  class ApiSchoolRoomsController < ApplicationController
+    def index
+      @school_rooms = SchoolRoom.all
+    end
   end
-
 end
