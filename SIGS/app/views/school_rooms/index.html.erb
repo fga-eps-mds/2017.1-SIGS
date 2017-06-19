@@ -14,7 +14,9 @@
       <i class="fa fa-search fa-lg"></i>
     <% end %>
   </div>
+  <%= link_to "Criar Nova Turma", school_rooms_new_path, class: "btn btn-primary pull-right", role: "button" %>
 <% end %>
+
 
 <% if @my_school_rooms.count == 0 %>
   <h3>Não há turmas cadastradas no momento.</h3>
