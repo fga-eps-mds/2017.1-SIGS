@@ -1,5 +1,5 @@
-And (/^click on link 'Meu Departamento'$/) do
-	click_link ('Meu Departamento')
+And (/^click on link 'Alocar'$/) do
+	first(:link,'Alocar').click
 end
 
 And (/^I fill in 'search' with 'Cal'$/) do
