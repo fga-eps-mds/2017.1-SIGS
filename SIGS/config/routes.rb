@@ -10,12 +10,6 @@ Rails.application.routes.draw do
   patch 'categories/update/:id', controller: 'categories', action: 'update', as: 'categories_update'
   get 'categories/destroy/:id', controller: 'categories', action: 'destroy', as: 'categories_destroy'
 
-
-  # Api
-  namespace :api do
-    get 'api_school_rooms/index' => 'api_school_rooms#index', as: 'api_school_rooms_index'
-  end
-
   # Sessions
   get 'sign_in' => 'sessions#new'
   post 'sign_in' => 'sessions#create'
@@ -132,6 +126,7 @@ Rails.application.routes.draw do
   # API
   namespace :api, default: { format: :json }, path: '/api' do
     get 'rooms/all_rooms' => 'apis#all_rooms', :as => 'all_rooms'
+    get 'school_rooms/all_school_rooms' => 'apis#all_school_rooms', as: 'all_school_rooms'
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

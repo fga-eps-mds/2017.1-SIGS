@@ -13,11 +13,11 @@ RSpec.describe Api::ApisController, type: :controller do
 			@category = Category.create(name: 'Laboratório Químico')
 			@building = Building.create(code: 'pjc', name: 'Pavilhão João Calmon', wing: 'NORTE')
 			@room = Room.create(code: '124325', name: 'S10', capacity: 50, active: true, time_grid_id: 1, department: @department, building: @building, category_ids: [@category.id])
+			@request.env['HTTP_ACCEPT'] = 'application/vnd.api+json'
+			@request.env['HTTP_AUTHORIZATION'] = 'Token ' + @api_user.token
 		end
 
 		it 'should return the all rooms json' do
-			@request.env['HTTP_ACCEPT'] = 'application/vnd.api+json'
-			@request.env['HTTP_AUTHORIZATION'] = 'Token ' + @api_user.token
 			get :all_rooms, params: { default: { format: :json } }
 			expect(response).to have_http_status(200)
 			expect(JSON.parse(response.body)) == @room.to_json
@@ -29,5 +29,11 @@ RSpec.describe Api::ApisController, type: :controller do
 			get :all_rooms, params: { default: { format: :json } }
 			expect(response).to have_http_status(401)
 		end
+
+		it 'should get json response' do
+		  get :all_school_rooms, params: { default: { format: :json } }
+		  expect(response).to have_http_status(200)
+		end
+
 	end
 end

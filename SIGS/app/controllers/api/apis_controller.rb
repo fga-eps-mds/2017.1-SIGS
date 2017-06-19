@@ -13,6 +13,11 @@ module Api
       render json: @rooms
     end
 
+    def all_school_rooms
+      @school_rooms = SchoolRoom.all
+      render json: @school_rooms
+    end
+
     private
 
     def authenticate?
