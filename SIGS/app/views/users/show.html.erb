@@ -40,24 +40,24 @@
     <table class="table table-hover whiteBackground">
       <thead>
         <tr>
-          <td>Período</td>
-          <td>Início</td>
-          <td>Fim</td>
+          <th>Período</th>
+          <th>Início</th>
+          <th>Fim</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><%=@periods.first.period_type%></td>
+          <th><%=@periods.first.period_type%></th>
           <td><%=@periods.first.initial_date.strftime('%d/%m/%Y')%></td>
           <td><%=@periods.first.final_date.strftime('%d/%m/%Y')%></td>
         </tr>
         <tr>
-          <td><%=@periods.second.period_type%></td>
+          <th><%=@periods.second.period_type%></th>
           <td><%=@periods.second.initial_date.strftime('%d/%m/%Y')%></td>
           <td><%=@periods.second.final_date.strftime('%d/%m/%Y')%></td>
         </tr>
         <tr>
-          <td><%=@periods.third.period_type%></td>
+          <th><%=@periods.third.period_type%></th>
           <td><%=@periods.third.initial_date.strftime('%d/%m/%Y')%></td>
           <td><%=@periods.third.final_date.strftime('%d/%m/%Y')%></td>
         </tr>
