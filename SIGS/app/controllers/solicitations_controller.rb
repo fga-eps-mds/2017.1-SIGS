@@ -54,7 +54,7 @@ class SolicitationsController < ApplicationController
                                            status: 0)
     end
   end
-  
+
   private
 
   def avaliable_rooms

@@ -1,5 +1,5 @@
 Given(/^click on link 'Solicitações'$/) do
-    click_link('Solicitações')
+    first('.myList').click_link('Solicitações')
 end
 
 
