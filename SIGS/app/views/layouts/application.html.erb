@@ -65,6 +65,7 @@
               <%  else %>
                 <li><%= link_to 'Turmas', school_rooms_index_path %></li>
               <% end %>
+              <li><%= link_to "Solicitações", solicitations_index_path %></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Relatórios <span class="caret"></span></a>
                 <ul class="dropdown-menu">
@@ -74,31 +75,6 @@
                   <li><%= link_to "Prédios", reports_by_building_path %></li>
                 </ul>
               </li>
-
-            <%  else %>
-              <li><%= link_to 'Turmas', school_rooms_index_path %></li>
-            <% end %>
-            <% if permission[:level] == 1 %>
-              <li class="dropdown">
-                <a data-toggle="collapse" href="#alocar">Alocações</a>
-                  <ul class="collapse" id="alocar">
-                    <li><%= link_to "Graduação", school_rooms_index_path %></a></li>
-                    <li><a href="#">Extensão</a></li>
-                  </ul>
-              </li>
-            <% end %>
-             <li class="dropdown">
-                <a data-toggle="collapse" href="#relatorios">Relatórios
-                  <ul class="collapse" id="relatorios">
-                    <li><%= link_to "Disciplinas", reports_by_discipline_path %></li>
-                    <li><%= link_to "Salas", reports_by_room_path %></li>
-                    <li><%= link_to "Turmas",reports_school_room_path%></li>
-                    <li><%= link_to "Prédios", reports_by_building_path %></li>
-                  </ul>
-              </li>
-              <li><%= link_to "Solicitações", solicitations_index_path %></li>
-          </ul>
-
             </ul>
             <ul class="nav navbar-nav navbar-right myNav">
               <li><%= link_to "Minha Conta", user_edit_path(current_user) %></li>
@@ -136,6 +112,7 @@
                 <%  else %>
                   <li><%= link_to 'Turmas', school_rooms_index_path %></li>
                 <% end %>
+                <li><%= link_to "Solicitações", solicitations_index_path %></li>
               </ul>
             </div>
             <div class="col-sm-3">
