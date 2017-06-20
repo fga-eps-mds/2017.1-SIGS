@@ -122,11 +122,6 @@ class AllocationsController < ApplicationController
     render inline: data.to_json
   end
 
-  def allocation_by_solicitation
-    save_allocation(params[:allocation])
-    redirect_to solicitations_index_path
-  end
-
   private
 
   def time_invalid(allocation)
