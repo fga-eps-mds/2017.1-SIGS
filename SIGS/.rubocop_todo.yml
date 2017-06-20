@@ -10,6 +10,11 @@
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyleAlignWith, SupportedStylesAlignWith, AutoCorrect.
 # SupportedStylesAlignWith: start_of_line, def
+Lint/DefEndAlignment:
+  Exclude:
+    - 'app/controllers/users_controller.rb'
+
+# Offense count: 3
 Metrics/AbcSize:
   Max: 27
 
@@ -32,26 +37,140 @@ Metrics/PerceivedComplexity:
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles, IndentationWidth.
 # SupportedStyles: with_first_parameter, with_fixed_indentation
+Style/AlignParameters:
+  Exclude:
+    - 'app/controllers/users_controller.rb'
+
+# Offense count: 3
 Style/Documentation:
   Exclude:
     - 'spec/**/*'
     - 'test/**/*'
-    - 'app/controllers/application_controller.rb'   
+    - 'app/controllers/application_controller.rb'
+    - 'app/controllers/sessions_controller.rb'
+    - 'app/controllers/users_controller.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
+Style/EmptyLinesAroundAccessModifier:
+  Exclude:
+    - 'app/controllers/users_controller.rb'
+
+# Offense count: 2
+# Cop supports --auto-correct.
+# Configuration parameters: AllowForAlignment, ForceEqualSignAlignment.
+Style/ExtraSpacing:
+  Exclude:
+    - 'app/controllers/sessions_controller.rb'
+
+# Offense count: 6
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyle, SupportedStyles.
+# SupportedStyles: when_needed, always, never
 Style/FrozenStringLiteralComment:
   Exclude:
     - 'app/controllers/application_controller.rb'
     - 'app/controllers/coordinators_controller.rb'
     - 'app/controllers/department_assistants_controller.rb'
-    - 'app/controllers/degs_controller.rb'
+    - 'app/controllers/sessions_controller.rb'
+    - 'app/controllers/users_controller.rb'
     - 'config.ru'
 
 # Offense count: 3
 # Configuration parameters: MinBodyLength.
+Style/GuardClause:
+  Exclude:
+    - 'app/controllers/users_controller.rb'
+
+# Offense count: 5
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyle, SupportedStyles, UseHashRocketsWithSymbolValues, PreferHashRocketsForNonAlnumEndingSymbols.
+# SupportedStyles: ruby19, hash_rockets, no_mixed_keys, ruby19_no_mixed_keys
+Style/HashSyntax:
+  Exclude:
+    - 'app/controllers/users_controller.rb'
+
+# Offense count: 6
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyle, SupportedStyles.
+# SupportedStyles: normal, rails
+Style/IndentationConsistency:
+  Exclude:
+    - 'app/controllers/sessions_controller.rb'
+    - 'app/controllers/users_controller.rb'
+
+# Offense count: 3
+# Cop supports --auto-correct.
+# Configuration parameters: Width, IgnoredPatterns.
+Style/IndentationWidth:
+  Exclude:
+    - 'app/controllers/users_controller.rb'
+
+# Offense count: 4
+# Cop supports --auto-correct.
+# Configuration parameters: AllowSafeAssignment.
+Style/ParenthesesAroundCondition:
+  Exclude:
+    - 'app/controllers/users_controller.rb'
+
+# Offense count: 1
+# Cop supports --auto-correct.
+Style/RedundantParentheses:
+  Exclude:
+    - 'app/controllers/users_controller.rb'
+
+# Offense count: 4
+# Cop supports --auto-correct.
+Style/SpaceAfterColon:
+  Exclude:
+    - 'app/controllers/users_controller.rb'
+
+# Offense count: 9
+# Cop supports --auto-correct.
+Style/SpaceAfterComma:
+  Exclude:
+    - 'app/controllers/users_controller.rb'
+
+# Offense count: 4
+# Cop supports --auto-correct.
+# Configuration parameters: AllowForAlignment.
+Style/SpaceAroundOperators:
+  Exclude:
+    - 'app/controllers/sessions_controller.rb'
+    - 'app/controllers/users_controller.rb'
+
+# Offense count: 3
+# Cop supports --auto-correct.
+Style/SpaceBeforeComma:
+  Exclude:
+    - 'app/controllers/sessions_controller.rb'
+
+# Offense count: 8
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyle, SupportedStyles, EnforcedStyleForEmptyBraces, SupportedStylesForEmptyBraces.
+# SupportedStyles: space, no_space, compact
+# SupportedStylesForEmptyBraces: space, no_space
+Style/SpaceInsideHashLiteralBraces:
+  Exclude:
+    - 'app/controllers/users_controller.rb'
+
+# Offense count: 12
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyle, SupportedStyles, ConsistentQuotesInMultiline.
+# SupportedStyles: single_quotes, double_quotes
+Style/StringLiterals:
+  Exclude:
+    - 'app/controllers/users_controller.rb'
+
+# Offense count: 3
+# Cop supports --auto-correct.
+# Configuration parameters: SupportedStyles.
+# SupportedStyles: percent, brackets
 Style/SymbolArray:
   EnforcedStyle: brackets
 
 # Offense count: 3
 # Cop supports --auto-correct.
+Style/Tab:
+  Exclude:
+    - 'app/controllers/users_controller.rb'

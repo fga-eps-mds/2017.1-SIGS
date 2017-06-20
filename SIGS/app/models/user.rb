@@ -4,8 +4,8 @@
 class User < ApplicationRecord
   has_one :coordinator, dependent: :destroy
   has_one :administrative_assistant, dependent: :destroy
-  has_one :deg, dependent: :destroy
-  accepts_nested_attributes_for :deg, reject_if: :all_blank
+  has_one :department_assistant, dependent: :destroy
+  accepts_nested_attributes_for :department_assistant, reject_if: :all_blank
   accepts_nested_attributes_for :coordinator, reject_if: :all_blank
   accepts_nested_attributes_for :administrative_assistant
   has_secure_password
@@ -40,7 +40,7 @@ class User < ApplicationRecord
 
   validates :password, length: { minimum: 6, maximum: 20,
                                  message: INVALID_LENGHT_PASSWORD },
-                       confirmation: true
+                       confirmation: true, on: :create
 
   # Cpf
   VALID_CPF_REGEX = /\A[0-9]{3}?[0-9]{3}?[0-9]{3}?[0-9]{2}\z/i

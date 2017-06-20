@@ -3,10 +3,13 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .school_room_reports{
+	margin-top: -7px !important;
 	text-align: center;
+
 }
 
 .btn_relatorio_schoolroom{
+	margin-left: -340px !important;
 	width: 124px;
 	height:34px;
 }
@@ -16,9 +19,14 @@
 }
 
 .display_none{
-	display: none !important;
+	display: none !important;	
 }
 
 .display_block{
 	display:inline-block !important;
 }
+.title-report{
+	margin-left: -200px !important;
+	margin-top: -50px !important;
+}
+

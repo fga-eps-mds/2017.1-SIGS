@@ -3,7 +3,7 @@
 # class that create school rooms
 class SchoolRoomsController < ApplicationController
   before_action :logged_in?
-  before_action :authenticate_coordinator?, except: [:index]
+  before_action :validade_permission_1
 
   def new
     @school_room = SchoolRoom.new
@@ -28,16 +28,12 @@ class SchoolRoomsController < ApplicationController
   end
 
   def index
-    if permission[:level] == 1
-      @my_school_rooms = SchoolRoom.joins(:discipline).merge(
-        Discipline.order(:name).where(department_id: department_by_coordinator)
-      ).order(:name)
-      @disciplines = discipline_of_department(department_by_coordinator)
-                     .order(:name)
-                     .map(&:name)
-    else
-      @my_school_rooms = SchoolRoom.all
-    end
+    @my_school_rooms = SchoolRoom.joins(:discipline).merge(
+      Discipline.order(:name).where(department_id: department_by_coordinator)
+    ).order(:name)
+    @disciplines = discipline_of_department(department_by_coordinator)
+                   .order(:name)
+                   .map(&:name)
   end
 
   def search_disciplines

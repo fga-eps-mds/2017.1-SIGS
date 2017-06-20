@@ -1,5 +1,5 @@
 <h1>Solicitar Alocação</h1>
-<p class="subtitleRequest">Período de Alocação</p>
+<p class="subtitle">Período de Alocação</p>
 
 <%= render partial: "school_rooms/show", locals: {school_room: @school_room} %>
 
@@ -9,7 +9,6 @@
   <%= f.select :departments, @departments.collect {|d| [d.name, d.id] }, class: 'form-control' %>
 
   <%= f.label :justify, 'Justificativa:' %>
-  <br><br>
   <%= f.text_area :justify, class: 'form-control' %>
 
   <table class="hours_table table">

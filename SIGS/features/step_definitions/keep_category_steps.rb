@@ -1,5 +1,5 @@
 And (/^click on link 'Categorias'$/) do
-  first(:link,'Categorias').click
+  click_link('Categorias')
 end
 
 And (/^click on link 'Criar nova categoria'$/) do

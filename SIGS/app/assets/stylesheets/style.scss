@@ -1,3 +1,13 @@
+/* NAV BAR COLORS
+ #1c1c20: navbar background
+ #1c1c20;/**/ /* navbar border
+ #FFF: default color
+ #EEE: hover color (#FFFFFF for .nav-brand)
+ #555: active color
+ #D5D5D5: active background
+ #37c945: Verde Logo
+*/
+
 .container.container-fluid{
   margin:0;
   padding:0;
@@ -13,17 +23,14 @@
   margin: 60px 0;
 }
 
-.subtitle, .subtitleRequest {
+.subtitle{
   font-size: 20px;
   font-family: 'Sawasdee';
   margin: -50px 0 60px 0;
 }
 
-.subtitleRequest {
-  margin-top: 0;
-}
-
 .container.container.container-fluid.myContainer:not(#signIn) {
+
   width: 98vw !important;
 }
 

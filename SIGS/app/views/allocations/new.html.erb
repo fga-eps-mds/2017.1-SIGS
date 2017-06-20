@@ -7,7 +7,6 @@
 <%= form_tag allocations_create_path do %>
 
   <% days = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"] %>
-  <label for="select-room">Selecionar sala: </label>
   <select id="select-room">
     <%= options_from_collection_for_select(@coordinator_rooms, :id, :name) %>
   </select>
@@ -24,7 +23,7 @@
       <th></th>
       <% days.each do |day| %>
         <td>
-          <select id="select-<%=day%>" class="autofill-field selectAlocar">
+          <select id="select-<%=day%>" class="autofill-field">
             <%= options_from_collection_for_select(@coordinator_rooms, :id, :name) %>
           </select>
         </td>

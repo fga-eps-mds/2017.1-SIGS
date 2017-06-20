@@ -5,7 +5,6 @@ class RoomSolicitation < ApplicationRecord
   belongs_to :solicitation
   belongs_to :responder, class_name: 'User', optional: true
   belongs_to :room, optional: true
-  belongs_to :department, optional: true
 
   # Not null values
   validates_presence_of :start, message: 'Indique o horário de início'

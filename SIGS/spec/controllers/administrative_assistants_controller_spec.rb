@@ -9,7 +9,7 @@ RSpec.describe AdministrativeAssistantsController, type: :controller do
 	    @user_adm = User.create(name: 'teste12', email: 'test@unb.br', cpf:'00000000000', registration:'0000009', password: '123456', active: true)
 	    @inactive_user = User.create(name: 'teste12', email: 'test1@unb.br', cpf:'00000000001', registration:'0000000', password: '123333', active: false)
       @user = User.create(name: 'teste122', email: 'test2@unb.br', cpf:'00000000002', registration:'0000001', password: '123333', active: true)
-      @administrative_assistant = AdministrativeAssistant.create(user: @user_adm)
+      @administrative_assistant = AdministrativeAssistant.create(user_id:@user_adm.id)
       sign_in(@user_adm)
     end
 

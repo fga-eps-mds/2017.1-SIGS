@@ -9,11 +9,11 @@
 	<br>
 	<br>
 	<%=f.label :filter, 'Filtrar salas pelo código:' %>
-	<span style="color: red;" class="returnMsg"></span>
+	<span style="color: red;"></span>
 	<%=f.text_field :filter, class: 'form-control', placeholder: 'Digite o código da sala' %>
 
 	<%=f.label :room_code, 'Código da sala:' %>
-	<span style="color: red;" class="returnMsg"></span>
+	<span style="color: red;"></span>
 	<%=f.select :room_code, @rooms.collect {|d| [d.name, d.id] }, class: 'form-control' %>
 
   <%= f.submit "Gerar", class: 'pull-right btn btn-default btn-success' %>
@@ -26,14 +26,14 @@
     $("#reports_by_room_filter").prop('disabled', $(this).prop('checked'));
     $("#reports_by_room_room_code").prop('disabled', $(this).prop('checked'));
     if($(this).prop('checked')){
-      $(".returnMsg").html("Campo desativado");
-
+      $("span").html("Campo desativado");
+      
     }else {
-      $(".returnMsg").html("");
+      $("span").html("");
     }
   });
 
-  $('#reports_by_room_departments').change(function(){
+  $('#reports_by_room_departments').change(function(){	
   	ajax('json_of_rooms_by_department?department_code=' + $(this).val());
   });
 

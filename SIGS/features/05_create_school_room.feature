@@ -5,8 +5,7 @@ Feature: Create school room
 
 	Scenario: create school room with valid attributes
 		Given I am logged in as coordinator
-		And click on link 'Alocar'
-		And click on link 'Criar Nova Turma'
+		And click on link 'Nova Turma'
 		And I select '1' in 'discipline_id'
 		And I check 'Engenharia Eletronica'
 		And I fill in 'name' with 'DD'
@@ -16,8 +15,7 @@ Feature: Create school room
 
 	Scenario: create school room with valid attributes adding category
 		Given I am logged in as coordinator
-		And click on link 'Alocar'
-		And click on link 'Criar Nova Turma'
+		And click on link 'Nova Turma'
 		And I select '1' in 'discipline_id'
 		And I check 'Engenharia Eletronica'
 		And I check 'Retroprojetor'
@@ -28,8 +26,7 @@ Feature: Create school room
 
 	Scenario: create school room with null name attributes
 		Given I am logged in as coordinator
-		And click on link 'Alocar'
-		And click on link 'Criar Nova Turma'
+		And click on link 'Nova Turma'
 		And I select '1' in 'discipline_id'
 		And I check 'Engenharia Eletronica'
 		And I fill in 'vacancies' with '50'
@@ -39,15 +36,13 @@ Feature: Create school room
 
 	Scenario: create school room with existent name attributes
 		Given I am logged in as coordinator
-		And click on link 'Alocar'
-		And click on link 'Criar Nova Turma'
+		And click on link 'Nova Turma'
 		And I select '1' in 'discipline_id'
 		And I check 'Engenharia Eletronica'
 		And I fill in 'name' with 'A'
 		And I fill in 'vacancies' with '50'
 		When I press 'Salvar' button
-		And click on link 'Alocar'
-		And click on link 'Criar Nova Turma'
+		And click on link 'Nova Turma'
 		And I select '1' in 'discipline_id'
 		And I check 'Engenharia Eletronica'
 		And I fill in 'name' with 'A'
@@ -57,8 +52,7 @@ Feature: Create school room
 
 	Scenario: create school room with null vacancies
 		Given I am logged in as coordinator
-		And click on link 'Alocar'
-		And click on link 'Criar Nova Turma'
+		And click on link 'Nova Turma'
 		And I select '1' in 'discipline_id'
 		And I check 'Engenharia Eletronica'
 		And I fill in 'name' with 'DD'
@@ -68,8 +62,7 @@ Feature: Create school room
 
 	Scenario: create school room with lower vacancies
 		Given I am logged in as coordinator
-		And click on link 'Alocar'
-		And click on link 'Criar Nova Turma'
+		And click on link 'Nova Turma'
 		And I select '1' in 'discipline_id'
 		And I check 'Engenharia Eletronica'
 		And I fill in 'name' with 'DD'
@@ -80,8 +73,7 @@ Feature: Create school room
 
 	Scenario: create school room with high vacancies
 		Given I am logged in as coordinator
-		And click on link 'Alocar'
-		And click on link 'Criar Nova Turma'
+		And click on link 'Nova Turma'
 		And I select '1' in 'discipline_id'
 		And I check 'Engenharia Eletronica'
 		And I fill in 'name' with 'DD'
@@ -91,8 +83,7 @@ Feature: Create school room
 
 	Scenario: create school room with courses with diferents periods
 		Given I am logged in as coordinator
-		And click on link 'Alocar'
-		And click on link 'Criar Nova Turma'
+		And click on link 'Nova Turma'
 		And I select '1' in 'discipline_id'
 		And I check 'Engenharia Eletronica'
 		And I check 'Engenharia Automotiva'

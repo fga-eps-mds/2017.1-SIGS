@@ -1,67 +1,12 @@
-<div class="row">
-  <div class="col-sm-12 welcomeUser">Bem-vindo(a), <%= @user.name  %>.</div>
-  <div class="col-md-4 col-sm-6 col-xs-12">
-    <div class="info-box">
-      <span class="info-box-icon bg-aqua"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></span>
-
-      <div class="info-box-content">
-        <span class="info-box-text">Total de Turmas</span>
-        <span class="info-box-number"><%=@school_room_count%></span>
-      </div>
-      <!-- /.info-box-content -->
-    </div>
-  </div>
-  <div class="col-md-4 col-sm-6 col-xs-12">
-    <div class="info-box">
-      <span class="info-box-icon bg-red"><span class="glyphicon glyphicon-book" aria-hidden="true"></span></span>
-
-      <div class="info-box-content">
-        <span class="info-box-text">Turmas Alocadas</span>
-        <span class="info-box-number">  <%=@school_rooms_allocated_count%></span>
-      </div>
-      <!-- /.info-box-content -->
-    </div>
-  </div>
-  <div class="col-md-4 col-sm-6 col-xs-12">
-    <div class="info-box">
-      <span class="info-box-icon bg-yellow"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></span>
-
-      <div class="info-box-content">
-        <span class="info-box-text">Solicitações</span>
-        <span class="info-box-number"><%=@solicitation_count%></span>
-      </div>
-      <!-- /.info-box-content -->
-    </div>
-  </div>
-</div><!-- /.row -->
-<h2>Calendário</h2>
-<div class="row">
-  <div class="col-sm-8">
-    <table class="table table-hover whiteBackground">
-      <thead>
-        <tr>
-          <th>Período</th>
-          <th>Início</th>
-          <th>Fim</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th><%=@periods.first.period_type%></th>
-          <td><%=@periods.first.initial_date.strftime('%d/%m/%Y')%></td>
-          <td><%=@periods.first.final_date.strftime('%d/%m/%Y')%></td>
-        </tr>
-        <tr>
-          <th><%=@periods.second.period_type%></th>
-          <td><%=@periods.second.initial_date.strftime('%d/%m/%Y')%></td>
-          <td><%=@periods.second.final_date.strftime('%d/%m/%Y')%></td>
-        </tr>
-        <tr>
-          <th><%=@periods.third.period_type%></th>
-          <td><%=@periods.third.initial_date.strftime('%d/%m/%Y')%></td>
-          <td><%=@periods.third.final_date.strftime('%d/%m/%Y')%></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+<h1> <%= @user.name  %></h1>
+  <% case permission[:level]%>
+   <% when 1 %>
+   <%= render partial: "users/coordinators_show",
+        locals: {user: @user} %>
+   <% when 2 %>
+   <%= render partial: "users/department_assistants_show",
+        locals: {user: @user} %>
+    <% when 3 %>
+    <%= render partial: "users/administrative_assistants_show",
+         locals: {user: @user} %>
+    <% end %>

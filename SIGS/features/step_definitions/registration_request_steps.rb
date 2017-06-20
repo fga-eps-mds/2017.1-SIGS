@@ -46,8 +46,8 @@ And (/^I fill in 'type' with 'coordinator'$/) do
 	choose('coord')
 end
 
-And (/^I fill in 'type' with 'deg'$/) do
-	choose('deg_user')
+And (/^I fill in 'type' with 'department_assistant'$/) do
+	choose('dep_as')
 end
 
 When (/^I press 'Enviar' button$/) do

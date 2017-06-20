@@ -7,7 +7,7 @@ And (/^click on button 'searchButton'$/) do
 end
 
 And (/^click on link 'Disciplinas' in 'Relatório'$/) do
-    first('.dropdown-menu').click_link('Disciplinas')
+    find("a[href='/reports_disciplines/by_discipline']").click
 end
 
 And (/^fill 'name' with 'Artes'$/) do

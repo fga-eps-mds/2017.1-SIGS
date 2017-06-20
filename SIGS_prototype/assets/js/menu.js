@@ -1,22 +1,31 @@
-$(document).ready(function () {
-  addItem("Alocar", "visualizar_turmas", "myNav", "col2");
+$(document).ready(function (){
+  addItem("Minha Conta", "minha_conta", "myNavBar");
+  addItem("Logout", "../index", "myNavBar");
   menuDropdown("Usuários");
-  addItem("Cadastros Pendentes", "cadastros_pendentes", "Usuários", "col1");
-  addItem("Usuários Registrados", "usuarios_registrados", "Usuários", "col1");
+  addItem("Cadastros Pendentes", "cadastros_pendentes", "Usuários");
+  addItem("Usuários Registrados", "usuarios_registrados", "Usuários");
+  menuDropdown("Turmas");
+  addItem("Nova Turma", "criar_turma", "Turmas");
+  addItem("Meu Departamento", "visualizar_turmas", "Turmas");
   menuDropdown("Salas");
+  addItem("Salas", "salas", "Salas");
+  addItem("Categorias", "categorias", "Salas");
+  menuDropdown("Alocações");
+  addItem("Graduação", "home", "Alocações")
+  addItem("Extensão", "home", "Alocações")
+  addItem("Solicitar(alocacao)", "solicitar1", "Alocações")
+  addItem("Solicitar(ajuste)", "solicitar2", "Alocações")
   menuDropdown("Relatórios");
-  addItem("Salas", "salas", "Salas", "col1");
-  addItem("Categorias", "categorias", "Salas", "col1");
-  addItem("Relatório por Disciplina", "relatorio_por_disciplina", "Relatórios", "col2");
-  addItem("Relatório por Sala", "relatorio_por_sala", "Relatórios", "col2");
-  addItem("Relatório por Prédio", "relatorio_por_predio", "Relatórios", "col2");
+  addItem("por Disciplina", "relatorio_por_disciplina", "Relatórios")
+  addItem("por Sala", "relatorio_por_sala", "Relatórios")
+  addItem("por Prédio", "relatorio_por_predio", "Relatórios")
 });
 
-function addItem(name, page, father, colFooter) {
-  $("#" + father).append("<li><a href='" + page + ".html'>" + name + "</a></li>");
-  $("#" + colFooter).find(".myList").append("<li><a href='" + page + ".html'>" + name + "</a></li>");
+function addItem(name, page, father) {
+  father = "#" + father
+  $(father).append("<li><a href='" + page + ".html'>" + name + "</a></li>")
 }
 
 function menuDropdown(name) {
-  $("#myNav").append('<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">' + name + '<span class="caret"></span></a><ul class="dropdown-menu" id="' + name + '"></ul></li>');
+  $("#myNavBar").append("<li class='dropdown'><a data-toggle='collapse' href='#" + name + "'>" + name + "</a><ul class='collapse' id='" + name + "'></ul></li>")
 }

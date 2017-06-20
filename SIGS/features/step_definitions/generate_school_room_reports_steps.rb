@@ -1,5 +1,5 @@
 And (/^click on link 'Turmas' in 'Relatório'$/) do
-  first('.dropdown-menu').click_link('Turmas')
+  find("a[href='/reports_school_rooms/school_room']").click
 end
 
 And (/^I fill in 'relatorio' with 'Todas'$/) do

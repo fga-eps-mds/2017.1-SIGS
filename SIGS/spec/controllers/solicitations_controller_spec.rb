@@ -117,27 +117,27 @@ RSpec.describe SolicitationsController, type: :controller do
     end
     
     it 'should create new solicitation wing' do
-      post :save_adjustment_period, params: {solicitation: {school_room_id: @school_room1.id, justify: 'texto qualquer'},
+      post :save_adjustment_period, params: {solicitation: {school_room_id: @school_room1.id, departments: @department1.id, justify: 'texto qualquer'},
                                              segunda: {'12': '1'},
                                              rooms: [@room.id]}
       expect(Solicitation.all.count).to eq(1)
     end
 
     it 'should create new solicitation with merge hours' do
-      post :save_adjustment_period, params: {solicitation: {school_room_id: @school_room1.id, justify: 'texto qualquer'},
+      post :save_adjustment_period, params: {solicitation: {school_room_id: @school_room1.id, departments: @department1.id, justify: 'texto qualquer'},
                                              segunda: {'12': '1', '13': '1'},
                                              rooms: [@room.id]}
       expect(Solicitation.all.count).to eq(1)
     end
 
     it 'should not create new solicitation because no have hours' do
-      post :save_adjustment_period, params: {solicitation: {school_room_id: @school_room1.id, justify: 'texto qualquer'},
+      post :save_adjustment_period, params: {solicitation: {school_room_id: @school_room1.id, departments: @department1.id, justify: 'texto qualquer'},
                                              rooms: [@room.id]}
       expect(flash[:error]).to eq('Selecione o horário que deseja')
     end
 
     it 'should not create new solicitation because no have justify' do
-      post :save_adjustment_period, params: {solicitation: {school_room_id: @school_room1.id},
+      post :save_adjustment_period, params: {solicitation: {school_room_id: @school_room1.id, departments: @department1.id},
                                              segunda: {'12': '1'},
                                              rooms: [@room.id]}
       expect(flash[:error]).to eq('A solicitação deve conter uma justificativa')
@@ -145,7 +145,7 @@ RSpec.describe SolicitationsController, type: :controller do
 
     it 'should not create new solicitation because no have permission' do
       sign_in(@user2)
-      post :save_adjustment_period, params: {solicitation: {school_room_id: @school_room1.id, justify: 'texto qualquer'},
+      post :save_adjustment_period, params: {solicitation: {school_room_id: @school_room1.id, departments: @department1.id, justify: 'texto qualquer'},
                                              segunda: {'12': '1'},
                                              rooms: [@room.id]}
       expect(flash[:error]).to eq('Você não tem permissão para alocar essa turma')
@@ -153,14 +153,14 @@ RSpec.describe SolicitationsController, type: :controller do
 
     it 'should not create new solicitation because user is not a coordinator' do
       sign_in(@user3)
-      post :save_adjustment_period, params: {solicitation: {school_room_id: @school_room1.id, justify: 'texto qualquer'},
+      post :save_adjustment_period, params: {solicitation: {school_room_id: @school_room1.id, departments: @department1.id, justify: 'texto qualquer'},
                                              segunda: {'12': '1'},
                                              rooms: [@room.id]}
       expect(flash[:error]).to eq('Acesso negado.')
     end
 
     it 'should not create new solicitation because no select rooms' do
-      post :save_adjustment_period, params: {solicitation: {school_room_id: @school_room1.id, justify: 'texto qualquer'},
+      post :save_adjustment_period, params: {solicitation: {school_room_id: @school_room1.id, departments: @department1.id, justify: 'texto qualquer'},
                                              segunda: {'12': '1', '13': '1'}
                                            }
       expect(flash[:error]).to eq('Selecione ao menos uma sala')

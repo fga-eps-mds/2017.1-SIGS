@@ -83,6 +83,7 @@ Rails.application.routes.draw do
   get 'reports_school_rooms/school_room_not_allocated' => 'reports_school_rooms#report_school_room_not_allocated', as: 'reports_school_room_not_allocated'
   get 'reports_school_rooms/school_room' => 'reports_school_rooms#school_reports', as: 'reports_school_room'
 
+
   #Reports by building
   get 'reports/by_building'=> 'reports#by_building', as: 'reports_by_building'
   get 'reports/generate_by_building/:id' => 'reports#generate_by_building', as: 'generate_by_building'
@@ -98,8 +99,6 @@ Rails.application.routes.draw do
   post 'allocations/create' => 'allocations#create' , :as => 'allocations_create'
   get 'allocations/destroy/:id', controller: 'allocations', action: 'destroy', as: 'allocations_destroy'
   get 'allocations/room_allocations_by_day' => 'allocations#room_allocations_by_day', :as => 'room_allocations_by_day'
-  get 'allocations/destroy_all_allocation_date/:id', controller: 'allocations', action: 'destroy_all_allocation_date', as: 'allocations_destroy_all_allocation_date'
-  get 'allocations/destroy_all_allocations/:id' => 'allocations#destroy_all_allocations', as: 'allocations_destroy_all_allocations'
 
   # allocation_extension
   get 'allocation_extensions/new' => 'allocation_extensions#new' , :as => 'allocation_extensions_new'
