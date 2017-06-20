@@ -31,7 +31,7 @@ RSpec.describe SolicitationsController, type: :controller do
       get :adjustment_period, params: {school_room_id: @school_room1.id}
       expect(response).to have_http_status(302)
     end
-    
+
     it 'should create new solicitation' do
       post :save_allocation_period, params: {solicitation: {school_room_id: @school_room1.id, departments: @department1.id, justify: 'texto qualquer'}, segunda: {'12': '1'}}
       expect(Solicitation.all.count).to eq(1)
@@ -63,6 +63,25 @@ RSpec.describe SolicitationsController, type: :controller do
       post :save_allocation_period, params: {solicitation: {school_room_id: @school_room1.id, departments: @department1.id, justify: 'texto qualquer'}, segunda: {'12': '1'}}
       expect(flash[:error]).to eq('Acesso negado.')
     end
+    it 'should open index page' do
+      get :index
+      expect(response).to have_http_status(200)
+    end
+    it 'should check assigns with status = 0' do
+      @solicitation = Solicitation.create(justify: 'aaaa', status: 0, request_date: '10-01-2018', requester_id: @user1.id, school_room_id: @school_room1.id)
+      @room_solicitation = RoomSolicitation.create(solicitation_id: @solicitation.id,start: '10-01-2018 12:00:00',final: '10-01-2018 13:00:00',day: "segunda",department_id: @department1.id)
+      get :index
+      expect(assigns(:room_solicitations)).not_to be_empty
+      expect(assigns(:solicitations)).not_to be_empty
+    end
+
+    it 'should check assigns with status != 0' do
+      @solicitation = Solicitation.create(justify: 'aaaa', status: 2, request_date: '10-01-2018', requester_id: @user1.id, school_room_id: @school_room1.id)
+      @room_solicitation = RoomSolicitation.create(solicitation_id: @solicitation.id,start: '10-01-2018 12:00:00',final: '10-01-2018 13:00:00',day: "segunda",department_id: @department1.id)
+      get :index
+      expect(assigns(:room_solicitations)).not_to be_empty
+      expect(assigns(:solicitations)).to eq([nil])
+    end
   end
 
   describe 'Solicitation allocation in adjustment period' do
@@ -89,7 +108,7 @@ RSpec.describe SolicitationsController, type: :controller do
       @room = Room.create(code: 'S10', name: 'Superior 10', capacity: 50,
                           active: true, time_grid_id: 1, building: @building, department: @department1)
       @allocation = Allocation.create(user_id: @user1.id,room_id: @room.id, school_room_id: @school_room1.id, day: "Segunda", start_time: '16:00:00', final_time: '17:00:00')
-      
+
       sign_in(@user1)
     end
 
@@ -115,7 +134,7 @@ RSpec.describe SolicitationsController, type: :controller do
       get :allocation_period, params: {school_room_id: @school_room1.id}
       expect(response).to have_http_status(302)
     end
-    
+
     it 'should create new solicitation wing' do
       post :save_adjustment_period, params: {solicitation: {school_room_id: @school_room1.id, justify: 'texto qualquer'},
                                              segunda: {'12': '1'},

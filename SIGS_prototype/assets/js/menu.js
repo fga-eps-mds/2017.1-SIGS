@@ -4,6 +4,16 @@ $(document).ready(function () {
   addItem("Cadastros Pendentes", "cadastros_pendentes", "Usuários", "col1");
   addItem("Usuários Registrados", "usuarios_registrados", "Usuários", "col1");
   menuDropdown("Salas");
+
+  addItem("Salas", "salas", "Salas");
+  addItem("Categorias", "categorias", "Salas");
+  menuDropdown("Alocações");
+  addItem("Solicitações Pendentes", "visualizar_solicitacoes", "Alocações");
+  addItem("Graduação", "home", "Alocações")
+  addItem("Extensão", "home", "Alocações")
+  addItem("Solicitar(alocacao)", "solicitar1", "Alocações")
+  addItem("Solicitar(ajuste)", "solicitar2", "Alocações")
+
   menuDropdown("Relatórios");
   addItem("Salas", "salas", "Salas", "col1");
   addItem("Categorias", "categorias", "Salas", "col1");
