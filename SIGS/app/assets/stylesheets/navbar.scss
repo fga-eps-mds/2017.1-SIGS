@@ -1,99 +1,90 @@
-/* navbar */
-.navbar-default.myNav {
-  background-color: #1c1c20;
-  border-color: #1c1c20;
-  padding: 10px;
+/*nav bar*/
+.myNavBar {
+    background-color: #000000;
+    border-color: #e7e7e7;
+}
+
+.myNavBar .navbar-nav>li>a {
+    color: #ffffff;
+}
+
+.myNavBar .myNav>li>a:focus, .myNavBar .myNav>li>a:hover {
+    text-decoration: none;
+    background-color: #5FBB46;
+}
+
+.myNavBar .myNav .open>a, .myNavBar .myNav .open>a:focus, .myNavBar .myNav .open>a:hover {
+    background-color: #5FBB46;
+    border-color: #337ab7;
+}
+
+.myNavBar .myBrand {
+  color: #5FBB46;
+  font-weight: bold;
+}
+
+.navbar-toggle .icon-bar {
+  background-color: #5FBB46;
+}
+
+@media (max-width: 767px) {
+  .navbar-nav .open .dropdown-menu>li>a {
+    color: #ffffff;
+  }
+  .navbar-nav .open .dropdown-menu>li>a:focus, .navbar-nav .open .dropdown-menu>li>a:hover {
+    color: #262626;
+  }
+}
+
+.welcomeUser {
+  margin-bottom: 50px;
+  text-align: right;
+}
+
+/* Sticky footer */
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 124px !important;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
   width: 100%;
-  display: table;
-
-  .logo img,
-  .unbLogo img {
-    max-height:80px;
-    width:auto;
-  }
-
-  .logo {
-    float: left;
-  }
-
-  .unbLogo {
-    display: none;
-  }
-
+  /* Set the fixed height of the footer here */
+  height: 124px;
+  background-color: #000000;
+  color: #ffffff;
 }
 
-.navbar-default .nav.navbar-nav {
-  display: none;
-  font-family: 'Sawasdee';
-  font-size: 16pt;
-  text-align:left;
+.footer .myLogo {
+  margin: 15px 0;
 }
 
-.navbar-default .nav.navbar-nav .dropdown ul {
-  list-style: none;
+.footer .myList {
+  margin-top: 15px;
+  list-style-type: none;
+  text-align: right;
+}
+.footer .myList li {
+  margin-top: 3px;
 }
 
-.navbar-default .nav.navbar-nav > li > a {
-  color: #FFF;
+.footer .myList li a {
+  color: #ffffff;
 }
 
-.navbar-default .nav.navbar-nav > li > a:hover {
-  color: #37c945;
-  background: #18181b;
+.footer .myList li a:hover {
+  color: #5FBB46;
 }
 
-.navbar-default .nav.navbar-nav .dropdown li > a {
-  font-size: 14pt;
-  text-decoration: none;
+.footer .container {
+  background-color: #000000;
 }
-
-@media (min-width: 768px){
-  .navbar-default .navbar-toggle {
-      display: inline-block;
-  }
-}
-
-@media only screen and (min-width:840px){
-
-  .navbar-default.myNav {
-    height: 100vh;
-    width: 350px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position:fixed;
-    top: 0;
-    left: 0;
-    text-align: center;
-    padding-top: 50px;
-
-    .logo img {
-      max-height: 180px;
-      margin:auto;
-    }
-
-    .unbLogo {
-      display: block;
-    }
-  }
-
-  .mainConteiner {
-    margin-left:350px;
-    padding: 40px;
-  }
-
-  .logo,
-  .unbLogo {
-    float: none;
-  }
-
-  .navbar-default .navbar-toggle {
-    display: none;
-    background:yellow;
-  }
-
-  .navbar-default .nav.navbar-nav {
-    display: flex;
-    flex-direction: column;
-  }
-}
+/*Sticky footer END*/

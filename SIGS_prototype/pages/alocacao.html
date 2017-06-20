@@ -10,7 +10,6 @@
     <meta name="description" content="Sistema de Alocação de Salas Inteligente da UnB.">
     <link rel="stylesheet" media="all" href="../assets/css/bootstrap.min.css" />
     <link rel="stylesheet" media="all" href="../assets/css/style.css" />
-    <link rel="stylesheet" media="all" href="../assets/css/navbar.css" />
     <link rel="stylesheet" media="all" href="../assets/css/alocacao.css" />
     <script src="../assets/js/jquery-1.12.4.min.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
@@ -18,31 +17,35 @@
     <script src="../assets/js/menu.js"></script>
   </head>
   <body>
-    <div class="container container-fluid myContainer ativoMenu">
-      <header class="navbar-default myNav">
-        <img src="../assets/img/remove-button.png" alt="" id="remove_menu" class="remove-menu">
-        <figure class="logo">
-          <img src="../assets/img/sigs_logo.png" alt="SIGS Logos" />
-        </figure>
 
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-        
-        <ul class="nav navbar-nav" id="myNavBar"></ul>
+    <nav class="navbar myNavBar">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myNavBarCollapse" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand myBrand" href="home.html">SIGS</a>
+        </div>
 
-        <figure class="unbLogo">
-          <a href="http://www.unb.br" target="_blank">
-            <img src="../assets/img/rodape_unb.png" alt="SIGS Logos" />
-          </a>
-        </figure>
-      </header>
-      <main class="mainConteiner">
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="myNavBarCollapse">
+          <ul class="nav navbar-nav myNav" id="myNav">
+          </ul>
+          <ul class="nav navbar-nav navbar-right myNav">
+            <li><a href="minha_conta.html">Minha Conta</a></li>
+            <li><a href="../index.html">Sair</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
 
-        <h1><img src="../assets/img/plus.png" alt="" id="add_menu" class="none">&nbsp;&nbsp;Realizar Alocação</h1>
+    <main class="mainConteiner">
+      <div class="container">
+        <h1>Realizar Alocação</h1>
 
         <form class="alocacao_index">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -365,19 +368,38 @@
             <input type="submit" name="commit" value="Realizar Alocação" class="btn btn-lg btn-success"/>
           </div>
         </form>
-      </main>
-    </div>
-    <script>
-      $("#remove_menu").click(function(event){
-          $(".myNav").removeClass('ativo', 'slow').addClass('none', 'slow');
-          $("#add_menu").removeClass('none', 'slow').addClass('ativo', 'slow');
-          $(".mainConteiner").css("margin-left", "10px");
-      })
-      $("#add_menu").click(function(event){
-        $(".myNav").addClass('ativo').removeClass('none');
-        $("#add_menu").removeClass('ativo').addClass('none');
-        $(".mainConteiner").css("margin-left", "350px");
-      })
-    </script>
+        <br><br>
+      </div><!-- /.container -->
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-3">
+            <img src="../assets/img/sigs_small_logo.png" alt="SIGS Logos" class="myLogo"/>
+          </div>
+          <div class="col-sm-3" id="col1">
+            <ul class="myList">
+            </ul>
+          </div>
+          <div class="col-sm-3" id="col2">
+            <ul class="myList">
+            </ul>
+          </div>
+          <div class="col-sm-3">
+            <ul class="myList">
+              <li><a href="minha_conta.html">Minha Conta</a></li>
+              <li><a href="../index.html">Sair</a></li>
+            </ul>
+            <div class="text-right">
+              <a href="http://www.unb.br" target="_blank">
+                <img src="../assets/img/rodape_unb.png" alt="SIGS Logos" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
   </body>
 </html>
