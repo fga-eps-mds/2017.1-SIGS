@@ -98,6 +98,8 @@ Rails.application.routes.draw do
   post 'allocations/create' => 'allocations#create' , :as => 'allocations_create'
   get 'allocations/destroy/:id', controller: 'allocations', action: 'destroy', as: 'allocations_destroy'
   get 'allocations/room_allocations_by_day' => 'allocations#room_allocations_by_day', :as => 'room_allocations_by_day'
+  get 'allocations/destroy_all_allocation_date/:id', controller: 'allocations', action: 'destroy_all_allocation_date', as: 'allocations_destroy_all_allocation_date'
+  get 'allocations/destroy_all_allocations/:id' => 'allocations#destroy_all_allocations', as: 'allocations_destroy_all_allocations'
 
   # allocation_extension
   get 'allocation_extensions/new' => 'allocation_extensions#new' , :as => 'allocation_extensions_new'

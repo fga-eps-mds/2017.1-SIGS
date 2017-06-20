@@ -1,5 +1,5 @@
 When (/^click on link 'Período'$/) do
-  click_link('Período')
+  first(:link,'Período').click
 end
 
 Then (/^the 'Período' page should load with periods information$/) do

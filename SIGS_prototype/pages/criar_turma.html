@@ -10,7 +10,6 @@
     <meta name="description" content="Sistema de Alocação de Salas Inteligente da UnB.">
     <link rel="stylesheet" media="all" href="../assets/css/bootstrap.min.css" />
     <link rel="stylesheet" media="all" href="../assets/css/style.css" />
-    <link rel="stylesheet" media="all" href="../assets/css/navbar.css" />
     <link rel="stylesheet" media="all" href="../assets/css/form.css" />
     <script src="../assets/js/jquery-1.12.4.min.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
@@ -18,66 +17,107 @@
     <script src="../assets/js/menu.js"></script>
   </head>
   <body>
-    <div class="container container-fluid myContainer">
-      <header class="navbar-default myNav">
-        <figure class="logo">
-          <img src="../assets/img/sigs_logo.png" alt="SIGS Logos" />
-        </figure>
 
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
+    <nav class="navbar myNavBar">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myNavBarCollapse" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand myBrand" href="home.html">SIGS</a>
+        </div>
 
-        <ul class="nav navbar-nav" id="myNavBar"></ul>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="myNavBarCollapse">
+          <ul class="nav navbar-nav myNav" id="myNav">
+          </ul>
+          <ul class="nav navbar-nav navbar-right myNav">
+            <li><a href="minha_conta.html">Minha Conta</a></li>
+            <li><a href="../index.html">Sair</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
 
-        <figure class="unbLogo">
-          <a href="http://www.unb.br" target="_blank">
-            <img src="../assets/img/rodape_unb.png" alt="SIGS Logos" />
-          </a>
-        </figure>
-      </header>
-      <main class="mainConteiner">
+    <main class="mainConteiner">
+      <div class="container">
         <h1>Nova Turma</h1>
-        <form id="school_room">
-          <label>Disciplina</label>
-          <select>
-            <option>Cálculo 1</option>
-            <option>História da Arte</option>
-            <option>Matemática Discreta</option>
-          </select>
-          <div class="short_input">
-            <label>Nome</label>
-            <input type="text" class="form-control">
-            <label>Capacidade</label>
-            <input type="number" class="form-control">
+        <div class="row">
+          <div class="col-sm-8">
+            <form id="school_room">
+              <label>Disciplina</label>
+                <select>
+                  <option>Cálculo 1</option>
+                  <option>História da Arte</option>
+                  <option>Matemática Discreta</option>
+                </select>
+                <div class="short_input">
+                  <label>Nome</label>
+                  <input type="text" class="form-control">
+                  <label>Capacidade</label>
+                  <input type="number" class="form-control">
+                </div>
+              <br>
+              <p>Cursos Preferenciais</p>
+              <div class="checkbox-group">
+                <input type="checkbox">
+                <label class="myLabel">Engenharia de Software</label>
+                <input type="checkbox">
+                <label class="myLabel">Engenharia Eletrônica</label>
+                <input type="checkbox">
+                <label class="myLabel">Medicina</label>
+                <input type="checkbox">
+                <label class="myLabel">Design</label>
+              </div>
+              <br>
+              <p>Categorias</p>
+              <div class="checkbox-group">
+                <input type="checkbox">
+                <label class="myLabel">Retroprojetor</label>
+                <input type="checkbox">
+                <label class="myLabel">Laboratório Químico</label>
+              </div>
+              <br>
+              <a href="visualizar_turmas.html" class="btn btn-danger" role="button">Voltar</a>
+              <input type="submit" value="Criar Turma" class="btn btn-default btn-success" />
+            </form>
           </div>
-          <br>
-          <p>Cursos Preferenciais</p>
-          <div class="checkbox-group">
-            <input type="checkbox">
-            <label>Engenharia de Software</label>
-            <input type="checkbox">
-            <label>Engenharia Eletrônica</label>
-            <input type="checkbox">
-            <label>Medicina</label>
-            <input type="checkbox">
-            <label>Design</label>
-          </div>
-          <br>
-          <p>Categorias</p>
-          <div class="checkbox-group">
-            <input type="checkbox">
-            <label>Retroprojetor</label>
-            <input type="checkbox">
-            <label>Laboratório Químico</label>
-          </div>
+        </div>
+      </div><!-- /.container -->
+    </main>
 
-          <input type="submit" value="Criar Turma" class="btn btn-default btn-success" />
-        </form>
-      </main>
-    </div>
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-3">
+            <img src="../assets/img/sigs_small_logo.png" alt="SIGS Logos" class="myLogo"/>
+          </div>
+          <div class="col-sm-3" id="col1">
+            <ul class="myList">
+            </ul>
+          </div>
+          <div class="col-sm-3" id="col2">
+            <ul class="myList">
+            </ul>
+          </div>
+          <div class="col-sm-3">
+            <ul class="myList">
+              <li><a href="minha_conta.html">Minha Conta</a></li>
+              <li><a href="../index.html">Sair</a></li>
+            </ul>
+            <div class="text-right">
+              <a href="http://www.unb.br" target="_blank">
+                <img src="../assets/img/rodape_unb.png" alt="SIGS Logos" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
   </body>
 </html>
