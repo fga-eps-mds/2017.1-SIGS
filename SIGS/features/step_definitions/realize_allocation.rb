@@ -1,11 +1,3 @@
-And (/^click on link 'Alocações'$/) do
-  click_link('Alocações')
-end
-
-And (/^click on link 'Graduação'$/) do
-  click_link('Graduação')
-end
-
 And (/^click on button 'Alocar' to 'Cálculo 1'$/) do
   first(:link, 'Icon alloc').click
 end

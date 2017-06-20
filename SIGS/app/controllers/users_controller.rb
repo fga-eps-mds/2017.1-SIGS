@@ -2,6 +2,7 @@
 
 # class that controller the actions of a user
 class UsersController < ApplicationController
+  require_relative '../../lib/modules/user_module.rb'
   before_action :logged_in?, except: [:new, :create]
 
   def new
@@ -13,6 +14,10 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @school_room_count = school_rooms_by_user.count
+    @school_rooms_allocated_count = school_rooms_allocated_count
+    @periods = Period.all
+    @solicitation_count = Solicitation.where("requester_id='#{current_user.id}'").count
     return unless @user.id != current_user.id && permission[:level] != 2
     redirect_to_current_user
   end

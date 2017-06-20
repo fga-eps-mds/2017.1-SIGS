@@ -6,7 +6,6 @@ Feature: Manager User
   Scenario: Change name and password both valid of a user
     Given I am logged in as assistant administrative
     When click on link 'Minha Conta'
-    And I fill in 'name' with 'Wallcy Francisco'
     And I fill in 'password-user' with '654321'
     And I fill in 'confirm_password' with '654321'
     When I press 'Salvar' button
@@ -15,7 +14,6 @@ Feature: Manager User
   Scenario: Change name and password both invalid of a user
     Given I am logged in as assistant administrative
     When click on link 'Minha Conta'
-    And I fill in 'name' with 'Ana'
     And I fill in 'password-user' with '654'
     And I fill in 'confirm_password' with '654'
     When I press 'Salvar' button
