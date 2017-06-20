@@ -1,5 +1,5 @@
 <h1>Solicitar Alocação</h1>
-<p class="subtitle">Período de Ajuste</p>
+<p class="subtitleRequest">Período de Ajuste</p>
 
 <%= render partial: "school_rooms/show", locals: {school_room: @school_room} %>
 
@@ -136,7 +136,7 @@
 
   function containsCategory(room_categories) {
     var categories = $("#school_room_ressources").html().trim().split('<br>');
-    
+
     if(categories.length == 1 && categories[0] == "") {
       return true;
     }

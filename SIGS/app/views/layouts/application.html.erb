@@ -16,95 +16,134 @@
 
   <body>
 
+    <div class="alertContainer">
+      <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+      <% end %>
+    </div>
+
     <% if current_user %>
-      <div class="container container-fluid myContainer">
-        <header class="navbar-default myNav">
-          <figure class="logo"><%=link_to image_tag("sigs_logo.png"), root_path %></figure>
 
+      <nav class="navbar myNavBar">
+        <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myNavBarCollapse" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <%= link_to "SIGS", root_path, class: "navbar-brand myBrand" %>
+          </div>
 
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-
-          <ul class="nav navbar-nav">
-            <li><%= link_to "Minha Conta", user_edit_path(current_user) %></li>
-            <li><%= link_to 'Logout', sign_out_path, method: "delete" %></li>
-            <% if permission[:level] == 2 %>
-              <li class="dropdown">
-                <a data-toggle="collapse" href="#salas">Salas
-                  <ul class="collapse" id="salas">
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="myNavBarCollapse">
+            <ul class="nav navbar-nav myNav" id="myNav">
+              <% if permission[:level] == 2 %>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Salas <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
                     <li><%= link_to 'Salas', room_index_path %></li>
                     <li><%= link_to "Categorias", categories_index_path %></li>
                   </ul>
                 </li>
-            <% else %>
-              <li><%= link_to 'Salas', room_index_path %></li>
-            <% end %>
-            <% if permission[:level] == 2 %>
-              <li class="dropdown">
-                <a data-toggle="collapse" href="#demo">Usuários
-                  <ul class="collapse" id="demo">
+              <% else %>
+                <li><%= link_to 'Salas', room_index_path %></li>
+              <% end %>
+              <% if permission[:level] == 2 %>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuários <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
                     <li><%= link_to "Cadastros Pendentes", registration_request_path %></li>
                     <li><%= link_to "Usuários Registrados", user_index_path %></li>
                   </ul>
-              </li>
-              <li><%= link_to "Período", period_index_path %> </li>
-            <% elsif permission[:level] == 1 %>
+                </li>
+                <li><%= link_to "Período", period_index_path %></li>
+              <% elsif permission[:level] == 1 %>
+                <li><%= link_to "Alocar", school_rooms_index_path %></li>
+              <%  else %>
+                <li><%= link_to 'Turmas', school_rooms_index_path %></li>
+              <% end %>
+              <li><%= link_to "Solicitações", solicitations_index_path %></li>
               <li class="dropdown">
-                <a data-toggle="collapse" href="#demo">Turmas
-                  <ul class="collapse" id="demo">
-                    <li><%= link_to "Nova Turma", school_rooms_new_path %></li>
-                    <li><%= link_to "Meu Departamento", school_rooms_index_path %></li>
-                  </ul>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Relatórios <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to "Disciplinas", reports_by_discipline_path %></li>
+                  <li><%= link_to "Salas", reports_by_room_path %></li>
+                  <li><%= link_to "Turmas",reports_school_room_path%></li>
+                  <li><%= link_to "Prédios", reports_by_building_path %></li>
+                </ul>
               </li>
-            <%  else %>
-              <li><%= link_to 'Turmas', school_rooms_index_path %></li>
-            <% end %>
-            <% if permission[:level] == 1 %>
-              <li class="dropdown">
-                <a data-toggle="collapse" href="#alocar">Alocações</a>
-                  <ul class="collapse" id="alocar">
-                    <li><%= link_to "Graduação", school_rooms_index_path %></a></li>
-                    <li><a href="#">Extensão</a></li>
-                  </ul>
-              </li>
-            <% end %>
-             <li class="dropdown">
-                <a data-toggle="collapse" href="#relatorios">Relatórios
-                  <ul class="collapse" id="relatorios">
-                    <li><%= link_to "Disciplinas", reports_by_discipline_path %></li>
-                    <li><%= link_to "Salas", reports_by_room_path %></li>
-                    <li><%= link_to "Turmas",reports_school_room_path%></li>
-                    <li><%= link_to "Prédios", reports_by_building_path %></li>
-                  </ul>
-              </li>
-          </ul>
+            </ul>
+            <ul class="nav navbar-nav navbar-right myNav">
+              <li><%= link_to "Minha Conta", user_edit_path(current_user) %></li>
+              <li><%= link_to 'Logout', sign_out_path, method: "delete" %></li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
 
-
-          <figure class="unbLogo"><a href="http://www.unb.br"><%= image_tag("rodape_unb.png") %></a></figure>
-        </header>
-        <div class="alertContainer">
-          <% flash.each do |key, value| %>
-            <div class="alert alert-<%= key %>"><%= value %></div>
-          <% end %>
-        </div>
-        <main class="mainConteiner">
+      <main class="mainConteiner">
+        <div class="container">
           <%= yield %>
-        </main>
-      </div>
+        </div><!-- /.container -->
+      </main>
+
+      <br><br>
+      <footer class="footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-3">
+              <%= image_tag("sigs_small_logo.png", class: "myLogo") %>
+            </div>
+            <div class="col-sm-3">
+              <ul class="myList">
+                <li><%= link_to 'Salas', room_index_path %></li>
+                <% if permission[:level] == 2 %>
+                  <li><%= link_to "Categorias", categories_index_path %></li>
+                <% end %>
+                <% if permission[:level] == 2 %>
+                  <li><%= link_to "Cadastros Pendentes", registration_request_path %></li>
+                  <li><%= link_to "Usuários Registrados", user_index_path %></li>
+                  <li><%= link_to "Período", period_index_path %></li>
+                <% elsif permission[:level] == 1 %>
+                  <li><%= link_to "Alocar", school_rooms_index_path %></li>
+                <%  else %>
+                  <li><%= link_to 'Turmas', school_rooms_index_path %></li>
+                <% end %>
+                <li><%= link_to "Solicitações", solicitations_index_path %></li>
+              </ul>
+            </div>
+            <div class="col-sm-3">
+              <ul class="myList">
+                <li><%= link_to "Relatório por Disciplinas", reports_by_discipline_path %></li>
+                <li><%= link_to "Relatório por Salas", reports_by_room_path %></li>
+                <li><%= link_to "Relatório por Turmas",reports_school_room_path%></li>
+                <li><%= link_to "Relatório por Prédios", reports_by_building_path %></li>
+              </ul>
+            </div>
+            <div class="col-sm-3">
+              <ul class="myList">
+                <li><%= link_to "Minha Conta", user_edit_path(current_user) %></li>
+                <li><%= link_to 'Logout', sign_out_path, method: "delete" %></li>
+              </ul>
+              <div class="text-right">
+                <a href="http://www.unb.br" target="_blank">
+                  <%= image_tag("rodape_unb.png") %>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+
     <% else %>
+
       <main class="container container-fluid myContainer" id="signIn">
         <%= yield %>
       </main>
 
-      <div class="alertContainer">
-        <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>"><%= value %></div>
-        <% end %>
-      </div>
     <% end %>
 
   </body>

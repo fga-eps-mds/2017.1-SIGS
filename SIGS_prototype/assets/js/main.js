@@ -36,4 +36,8 @@ $(document).ready(function(){
     $(".sala1").hide(800);
   });
 
+  $(".btnRecuse").on("click", function(){
+    $(".solicitacao1").hide(800);
+  });
+
 });

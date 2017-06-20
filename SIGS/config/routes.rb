@@ -96,6 +96,7 @@ Rails.application.routes.draw do
   # Allocation
   get 'allocations/new/:school_room_id' => 'allocations#new' , :as => 'allocations_new'
   post 'allocations/create' => 'allocations#create' , :as => 'allocations_create'
+  post 'allocations/allocation_by_solicitation' => 'allocations#allocation_by_solicitation' , :as => 'allocation_by_solicitation'
   get 'allocations/destroy/:id', controller: 'allocations', action: 'destroy', as: 'allocations_destroy'
   get 'allocations/room_allocations_by_day' => 'allocations#room_allocations_by_day', :as => 'room_allocations_by_day'
   get 'allocations/destroy_all_allocation_date/:id', controller: 'allocations', action: 'destroy_all_allocation_date', as: 'allocations_destroy_all_allocation_date'
@@ -114,6 +115,8 @@ Rails.application.routes.draw do
   post 'solicitations/save_allocation_period' => 'solicitations#save_allocation_period', :as => 'save_allocation_period'
   post 'solicitations/save_adjustment_period' => 'solicitations#save_adjustment_period', :as => 'save_adjustment_period'
   get 'solicitations/avaliable_rooms_by_department' => 'solicitations#avaliable_rooms_by_department', :as => 'avaliable_rooms_by_department'
+  get 'solicitations/index' => 'solicitations#index', :as => 'solicitations_index'
+  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end

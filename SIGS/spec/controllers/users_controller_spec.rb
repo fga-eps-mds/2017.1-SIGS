@@ -101,11 +101,19 @@ RSpec.describe UsersController, type: :controller do
       @user = User.create(name: 'joao silva', email: 'joaosilva@unb.br',
         password: '123456', registration:'1100061', cpf:'05601407380', active: true)
       @department = Department.create(name: 'Departamento de Computação')
+      @discipline = Discipline.create(code: '876', name: 'Cálculo 3', department: @department)
       @course = Course.create(name: 'Engenharia de Software', department: @department)
       @coordinator = Coordinator.create(user: @user, course: @course)
       @user_adm = User.create(name: 'Luiz Guilherme', email: 'luiz@unb.br',
         password: '123456', registration:'1103061', cpf:'05601407350', active: true)
+      @category = Category.create(name: 'Retroprojetor')
+      @room = Room.create(code: '124325', name: 'S10', capacity: 50, active: true, time_grid_id: 1, department: @department, building: @building, category_ids: [@category.id])
       @administrative_assistant = AdministrativeAssistant.create(user_id: @user_adm.id)
+      @school_room = SchoolRoom.create(name:'A', discipline: @discipline, vacancies: 40, course_ids: [@course.id])
+      @school_room2 = SchoolRoom.create(name:'B', discipline: @discipline, vacancies: 40, course_ids: [@course.id])
+      @allocation = Allocation.create(room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: true, user: @user )
+      @allocation2 = Allocation.create(room_id:@room.id,school_room_id:@school_room2.id, day:"Quarta",start_time:"12:00",final_time:"14:00", active: true, user: @user )
+
     end
 
     it 'should return current user show' do
@@ -137,6 +145,9 @@ RSpec.describe UsersController, type: :controller do
       get :index
       expect(response).to redirect_to(current_user)
     end
+
+    
+
   end
 
 
@@ -194,7 +205,8 @@ RSpec.describe UsersController, type: :controller do
 
     it "should update a user" do
       sign_in(@user)
-      post :update, params:{id: @user.id,user: {name: 'Wallacy Braz'}}
+      post :update, params:{id: @user.id,user: {sname: 'Francisco Wallacy',
+                                                password:123456}}
       expect(flash.now[:success]).to eq('Dados atualizados com sucesso')
     end
 

@@ -1,24 +1,22 @@
-<main class="mainConteiner">
-  <h1 class="title-report">Relatório por Turmas</h1>
-  <form class="report_school">
-    <input type="radio" name="relatorio" id="to_all" class="all_reports_school_room" checked>
-    <label class="school_room_reports">Todas</label>
+<h1 class="title-report">Relatório por Turmas</h1>
+<form class="report_school">
+  <input type="radio" name="relatorio" id="to_all" class="all_reports_school_room" checked>
+  <label class="school_room_reports">Todas</label>
 
-    <input type="radio" name="relatorio" id="to_allocations" class="allocations_reports_school_room">
-    <label class="school_room_reports">Alocadas</label>
+  <input type="radio" name="relatorio" id="to_allocations" class="allocations_reports_school_room">
+  <label class="school_room_reports">Alocadas</label>
 
-    <input type="radio" name="relatorio" id="to_not_allocations" class="no_all_reports_school_room">
-    <label class="school_room_reports">Não Alocadas</label>
-    
-  </form>
-  <div class="btn_relatorio_schoolroom">
-    <%= link_to "Gerar Relatório Todas as turmas", reports_school_room_all_path(format: :pdf), class:"btn btn-danger reports_all" %>
-    <%= link_to "Gerar Relatório de Turmas Alocadas", reports_school_room_allocated_path(format: :pdf), class:"btn btn-danger reports_allocation display_none" %>
-     <%= link_to "Gerar Relatório de turmas não Alocadas",reports_school_room_not_allocated_path(format: :pdf), class:"btn btn-danger reports_no_all display_none" %>
+  <input type="radio" name="relatorio" id="to_not_allocations" class="no_all_reports_school_room">
+  <label class="school_room_reports">Não Alocadas</label>
 
-    <br>
-  </div>
-</main>
+</form>
+<div class="btn_relatorio_schoolroom">
+  <%= link_to "Gerar Relatório Todas as turmas", reports_school_room_all_path(format: :pdf), class:"btn btn-danger reports_all" %>
+  <%= link_to "Gerar Relatório de Turmas Alocadas", reports_school_room_allocated_path(format: :pdf), class:"btn btn-danger reports_allocation display_none" %>
+   <%= link_to "Gerar Relatório de turmas não Alocadas",reports_school_room_not_allocated_path(format: :pdf), class:"btn btn-danger reports_no_all display_none" %>
+
+  <br>
+</div>
 
 <script type="text/javascript">
 
