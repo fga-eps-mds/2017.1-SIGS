@@ -46,26 +46,15 @@ class SolicitationsController < ApplicationController
   def index
     coordinator = Coordinator.find_by(user_id: current_user.id)
     @room_solicitations = RoomSolicitation.where(department:
-                                                 coordinator.course.department)
+                                                 coordinator.course.department).group(:solicitation_id)
     @solicitations = []
     @room_solicitations.each do |room_solicitation|
       @solicitations << Solicitation.find_by(id:
-                                             room_solicitation.solicitation.id,
-                                             status: 0)
+                                           room_solicitation.solicitation.id,
+                                           status: 0)
     end
   end
-
-  def show
-    if allocation_period?
-      @period = true
-    else
-      @period = false
-    end  
-    @solicitation = Solicitation.find(params[:id])
-    @room_solicitations = RoomSolicitation.where(solicitation_id:
-                                                 @solicitation.id)
-  end
-
+  
   private
 
   def avaliable_rooms
