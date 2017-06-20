@@ -67,12 +67,20 @@ RSpec.describe SolicitationsController, type: :controller do
       get :index
       expect(response).to have_http_status(200)
     end
-    it 'should check assigns' do
+    it 'should check assigns with status = 0' do
       @solicitation = Solicitation.create(justify: 'aaaa', status: 0, request_date: '10-01-2018', requester_id: @user1.id, school_room_id: @school_room1.id)
-      @room_solicitation = RoomSolicitation.create(solicitation_id: @solicitation.id,start: '12-00-00',final: '13-00-00',day: "segunda",department_id: @department1.id)
+      @room_solicitation = RoomSolicitation.create(solicitation_id: @solicitation.id,start: '10-01-2018 12:00:00',final: '10-01-2018 13:00:00',day: "segunda",department_id: @department1.id)
       get :index
-      expect(assigns(:room_solicitations)).not_to be_nil
-      expect(assigns(:solicitations)).not_to be_nil
+      expect(assigns(:room_solicitations)).not_to be_empty
+      expect(assigns(:solicitations)).not_to be_empty
+    end
+
+    it 'should check assigns with status != 0' do
+      @solicitation = Solicitation.create(justify: 'aaaa', status: 2, request_date: '10-01-2018', requester_id: @user1.id, school_room_id: @school_room1.id)
+      @room_solicitation = RoomSolicitation.create(solicitation_id: @solicitation.id,start: '10-01-2018 12:00:00',final: '10-01-2018 13:00:00',day: "segunda",department_id: @department1.id)
+      get :index
+      expect(assigns(:room_solicitations)).not_to be_empty
+      expect(assigns(:solicitations)).to eq([nil])
     end
   end
 
