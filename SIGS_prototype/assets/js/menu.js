@@ -12,8 +12,10 @@ $(document).ready(function () {
   addItem("Extensão", "home", "Alocações")
   addItem("Solicitar(alocacao)", "solicitar1", "Alocações")
   addItem("Solicitar(ajuste)", "solicitar2", "Alocações")
-  menuDropdown("Usuários");
+
   menuDropdown("Relatórios");
+  addItem("Salas", "salas", "Salas", "col1");
+  addItem("Categorias", "categorias", "Salas", "col1");
   addItem("Relatório por Disciplina", "relatorio_por_disciplina", "Relatórios", "col2");
   addItem("Relatório por Sala", "relatorio_por_sala", "Relatórios", "col2");
   addItem("Relatório por Prédio", "relatorio_por_predio", "Relatórios", "col2");
