@@ -6,7 +6,6 @@ class AllocationsController < ApplicationController
   before_action :logged_in?
   before_action :authenticate_coordinator?
 
-
   def new
     @allocations = []
     84.times do

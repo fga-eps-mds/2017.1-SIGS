@@ -109,7 +109,7 @@ Rails.application.routes.draw do
   post 'extensions/create' => 'extensions#create' , :as => 'extensions_create'
 
   # Solicitation
-  get 'solicitations/index' => 'solicitations#index', :as => 'solicitation_index'
+  get 'solicitations/index' => 'solicitations#index', :as => 'solicitations_index'
   get 'solicitations/show/:id' => 'solicitations#show', as: 'solicitations_show'
   get 'solicitations/allocation_period/:school_room_id' => 'solicitations#allocation_period', :as => 'allocation_period'
   get 'solicitations/adjustment_period/:school_room_id' => 'solicitations#adjustment_period', :as => 'adjustment_period'

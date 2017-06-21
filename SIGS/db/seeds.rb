@@ -76,7 +76,6 @@ period_2 = Period.create(period_type:'Ajuste', initial_date: '23-02-2018', final
 period_3 = Period.create(period_type:'Letivo', initial_date: '08-03-2018', final_date: '14-07-2018')
 
 # Allocations
-<<<<<<< af3f48bf9581b0d5090c31fb2dcdf3648856eea7
 allocation = Allocation.create(user_id: user.id, room_id: room.id, school_room_id: school_room_2.id, day: "Segunda", start_time: '14:00:00', final_time: '16:00:00')
 allocation_2 = Allocation.create(user_id: user.id, room_id: room_2.id, school_room_id: school_room_2.id, day: "Quarta", start_time: '14:00:00', final_time: '16:00:00')
 allocation_3 = Allocation.create(user_id: user.id, room_id: room_2.id, school_room_id: school_room_2.id, day: "Sexta", start_time: '14:00:00', final_time: '16:00:00')
@@ -104,6 +103,6 @@ SECRET_3 ||= '$2a$10$OzJkJBid71H2SRlVxv71buTP2hHoDFe4dIqIV9QjWebYy222W4Uoa'
 TOKEN_3 ||= 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiTWF0aGV1cyBGcmFuY2lzY28gZG9zIFNhbnRvcyIsImVtYWlsIjoibWF0aGV1cy1mcmFuY2lzY29AeWFob28uY29tIn0.-z3L4M7C5-7JYNeKv_UrKaRhEVtdtsP5ho3w66Xl6PM'
 
 # API Users
-api_user = ApiUser.create(name: 'Ana Paula Chaves', email: 'anapaula.chaves@gmail.com', secret: SECRET, token: TOKEN, user: user)
-api_user_2 = ApiUser.create(name: 'Gustavo Freire Oliveira', email: 'freire.oliveira@hotmail.com', secret: SECRET_2, token: TOKEN_2, user: user)
-api_user_3 = ApiUser.create(name: 'Matheus Francisco dos Santos', email: 'matheus-francisco@yahoo.com', secret: SECRET_3, token: TOKEN_3, user: user_5)
+api_user = ApiUser.create(name: 'Ana Paula Chaves', email: 'anapaula.chaves@gmail.com', secret: SECRET, token: TOKEN, user: user_5)
+api_user_2 = ApiUser.create(name: 'Gustavo Freire Oliveira', email: 'freire.oliveira@hotmail.com', secret: SECRET_2, token: TOKEN_2, user: user_5)
+api_user_3 = ApiUser.create(name: 'Matheus Francisco dos Santos', email: 'matheus-francisco@yahoo.com', secret: SECRET_3, token: TOKEN_3, user: user)
