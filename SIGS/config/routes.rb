@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   root 'sessions#new'
 
   # Categories
-  get 'categories/new' => 'categories#new' , :as => 'categories_new'
-  post 'categories/create' => 'categories#create' , :as => 'categories_create'
-  get 'categories/index' => 'categories#index' , :as => 'categories_index'
+  get 'categories/new' => 'categories#new' , as: 'categories_new'
+  post 'categories/create' => 'categories#create' , as: 'categories_create'
+  get 'categories/index' => 'categories#index' , as: 'categories_index'
   get 'categories/edit/:id' => 'categories#edit', as: 'categories_edit'
   patch 'categories/update/:id', controller: 'categories', action: 'update', as: 'categories_update'
   get 'categories/destroy/:id', controller: 'categories', action: 'destroy', as: 'categories_destroy'
@@ -17,10 +17,10 @@ Rails.application.routes.draw do
   delete 'sign_out' => 'sessions#destroy'
 
   # User
-  get 'users/index' => 'users#index', :as => 'user_index'
-  get 'users/new' => 'users#new' , :as => 'user_new'
-  post 'users/new' => 'users#create' , :as =>'user_create'
-  get '/users/:id' => 'users#show', :as => 'user'
+  get 'users/index' => 'users#index', as: 'user_index'
+  get 'users/new' => 'users#new' , as: 'user_new'
+  post 'users/new' => 'users#create' , as:'user_create'
+  get '/users/:id' => 'users#show', as: 'user'
   get 'users/edit/:id' => 'users#edit', as: 'user_edit'
   patch 'users/update/:id', controller: 'users', action: 'update', as: 'user_update'
   get 'users/destroy/:id', controller: 'users', action: 'destroy', as: 'user_destroy'
@@ -44,7 +44,7 @@ Rails.application.routes.draw do
   get 'rooms/json_of_categories_by_school_room' => 'rooms#json_of_categories_by_school_room'
 
   # Course
-  get 'courses/courses_by_user' => 'courses#courses_by_user', :as => 'courses_by_user'
+  get 'courses/courses_by_user' => 'courses#courses_by_user', as: 'courses_by_user'
 
   #SchoolRooms
   get 'school_rooms/index' => 'school_rooms#index', as: 'school_rooms_index'
@@ -58,7 +58,7 @@ Rails.application.routes.draw do
   # Parsers
   post "/upload_buildings", controller: 'parsers', action: 'upload_buildings'
   post "/upload", controller: 'parsers', action: 'upload_rooms'
-  get "/parsers", controller: 'parsers', action: 'index', :as => "index_parser"
+  get "/parsers", controller: 'parsers', action: 'index', as: "index_parser"
   post "/upload_department", controller: 'parsers', action: 'upload_departments'
   post "/upload_courses", controller: 'parsers', action: 'upload_courses'
   post "/upload_disciplines", controller: 'parsers', action: 'upload_disciplines'
@@ -93,44 +93,45 @@ Rails.application.routes.draw do
   post 'reports_disciplines/by_discipline' => 'reports_disciplines#by_discipline', as: 'reports_by_discipline_post'
 
   # Allocation
-  get 'allocations/new/:school_room_id' => 'allocations#new' , :as => 'allocations_new'
-  post 'allocations/create' => 'allocations#create' , :as => 'allocations_create'
-  post 'allocations/allocation_by_solicitation' => 'allocations#allocation_by_solicitation' , :as => 'allocation_by_solicitation'
+  get 'allocations/new/:school_room_id' => 'allocations#new' , as: 'allocations_new'
+  post 'allocations/create' => 'allocations#create' , as: 'allocations_create'
+  post 'allocations/allocation_by_solicitation' => 'allocations#allocation_by_solicitation' , as: 'allocation_by_solicitation'
   get 'allocations/destroy/:id', controller: 'allocations', action: 'destroy', as: 'allocations_destroy'
-  get 'allocations/room_allocations_by_day' => 'allocations#room_allocations_by_day', :as => 'room_allocations_by_day'
+  get 'allocations/room_allocations_by_day' => 'allocations#room_allocations_by_day', as: 'room_allocations_by_day'
   get 'allocations/destroy_all_allocation_date/:id', controller: 'allocations', action: 'destroy_all_allocation_date', as: 'allocations_destroy_all_allocation_date'
   get 'allocations/destroy_all_allocations/:id' => 'allocations#destroy_all_allocations', as: 'allocations_destroy_all_allocations'
 
   # allocation_extension
-  get 'allocation_extensions/new' => 'allocation_extensions#new' , :as => 'allocation_extensions_new'
-  post 'allocation_extensions/create' => 'allocation_extensions#create' , :as => 'allocation_extensions_create'
+  get 'allocation_extensions/new' => 'allocation_extensions#new' , as: 'allocation_extensions_new'
+  post 'allocation_extensions/create' => 'allocation_extensions#create' , as: 'allocation_extensions_create'
 
   # Extension
-  post 'extensions/create' => 'extensions#create' , :as => 'extensions_create'
+  post 'extensions/create' => 'extensions#create' , as: 'extensions_create'
 
   # Solicitation
-  get 'solicitations/index' => 'solicitations#index', :as => 'solicitations_index'
+  get 'solicitations/index' => 'solicitations#index', as: 'solicitations_index'
   get 'solicitations/show/:id' => 'solicitations#show', as: 'solicitations_show'
-  get 'solicitations/allocation_period/:school_room_id' => 'solicitations#allocation_period', :as => 'allocation_period'
-  get 'solicitations/adjustment_period/:school_room_id' => 'solicitations#adjustment_period', :as => 'adjustment_period'
-  post 'solicitations/save_allocation_period' => 'solicitations#save_allocation_period', :as => 'save_allocation_period'
-  post 'solicitations/save_adjustment_period' => 'solicitations#save_adjustment_period', :as => 'save_adjustment_period'
-  get 'solicitations/avaliable_rooms_by_department' => 'solicitations#avaliable_rooms_by_department', :as => 'avaliable_rooms_by_department'
+  get 'solicitations/allocation_period/:school_room_id' => 'solicitations#allocation_period', as: 'allocation_period'
+  get 'solicitations/adjustment_period/:school_room_id' => 'solicitations#adjustment_period', as: 'adjustment_period'
+  post 'solicitations/save_allocation_period' => 'solicitations#save_allocation_period', as: 'save_allocation_period'
+  post 'solicitations/save_adjustment_period' => 'solicitations#save_adjustment_period', as: 'save_adjustment_period'
+  get 'solicitations/avaliable_rooms_by_department' => 'solicitations#avaliable_rooms_by_department', as: 'avaliable_rooms_by_department'
 
   # API Users
-  get 'api_users/index' => 'api_users#index', :as => 'api_users_index'
-  get 'api_users/new' => 'api_users#new', :as => 'api_users_new'
-  post 'api_users/create' => 'api_users#create', :as => 'api_users_create'
-  get 'api_users/edit/:id' => 'api_users#edit', :as => 'api_users_edit'
-  put 'api_users/update/:id' => 'api_users#update', :as => 'api_users_update'
-  get 'api_users/show/:id' => 'api_users#show', :as => 'api_users_show'
-  get 'api_users/destroy/:id' => 'api_users#destroy', :as => 'api_users_destroy'
+  get 'api_users/index' => 'api_users#index', as: 'api_users_index'
+  get 'api_users/new' => 'api_users#new', as: 'api_users_new'
+  post 'api_users/create' => 'api_users#create', as: 'api_users_create'
+  get 'api_users/edit/:id' => 'api_users#edit', as: 'api_users_edit'
+  put 'api_users/update/:id' => 'api_users#update', as: 'api_users_update'
+  get 'api_users/show/:id' => 'api_users#show', as: 'api_users_show'
+  get 'api_users/destroy/:id' => 'api_users#destroy', as: 'api_users_destroy'
 
 
   # API
   namespace :api, default: { format: :json }, path: '/api' do
     get 'all_rooms' => 'apis#all_rooms'
     get 'department_allocations/:code' => 'apis#department_allocations'
+    get 'discipline_allocations/:code' => 'apis#discipline_allocations'
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

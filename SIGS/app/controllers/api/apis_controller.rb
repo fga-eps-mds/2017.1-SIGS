@@ -19,6 +19,12 @@ module Api
       department_allocations_to_json(@allocations)
     end
 
+    def discipline_allocations
+      @school_rooms = Discipline.find_by(code: params[:code]).school_rooms
+      @allocations = Allocation.where(school_room: @school_rooms)
+      discipline_allocations_to_json(@allocations, params[:code])
+    end
+
     private
 
     def authenticate?
@@ -51,6 +57,26 @@ module Api
         }
       end
       render json: { rooms_code: hash }
+    end
+
+    def discipline_allocations_to_json(allocations, code)
+      hash = {}
+      allocations.each do |allocation|
+        hash[code] = {
+          building_name: allocation.room.building.name,
+          department_name: allocation.room.department.name,
+          department_code: allocation.room.department.code,
+          room_name: allocation.room.name,
+          room_code: allocation.room.code,
+          room_capacity: allocation.room.capacity,
+          school_room_name: allocation.school_room.name,
+          school_room_vacancies: allocation.school_room.vacancies,
+          allocation_day: allocation.day,
+          allocation_start_time: allocation.start_time.strftime('%H:%M'),
+          allocation_final_time: allocation.final_time.strftime('%H:%M')
+        }
+      end
+      render json: { discipline_code: hash }
     end
   end
 end
