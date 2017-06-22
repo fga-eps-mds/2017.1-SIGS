@@ -117,6 +117,8 @@ Rails.application.routes.draw do
   post 'solicitations/save_allocation_period' => 'solicitations#save_allocation_period', :as => 'save_allocation_period'
   post 'solicitations/save_adjustment_period' => 'solicitations#save_adjustment_period', :as => 'save_adjustment_period'
   get 'solicitations/avaliable_rooms_by_department' => 'solicitations#avaliable_rooms_by_department', :as => 'avaliable_rooms_by_department'
+  get 'solicitations/recuse_solicitation/:id' => 'solicitations#recuse_solicitation', as: 'solicitations_recuse_solicitation'
+  get 'solicitations/approve_solicitation/:id' => 'solicitations#approve_solicitation', as: 'solicitations_approve_solicitation'
 
   # API Users
   get 'api_users/index' => 'api_users#index', :as => 'api_users_index'

@@ -22,6 +22,8 @@ user = User.create(name: 'Caio Filipe', email: 'caio@unb.br', cpf: '05012345678'
 coordinator = Coordinator.create(user: user, course: course_2)
 user_2 = User.create(name: 'João Busche', email: 'joao@unb.br', cpf: '05044448888', registration: '1234544', active: 0, password: '123456')
 coordinator_2 = Coordinator.create(user: user_2, course: course_4)
+user_3 = User.create(name: 'Daniel Marques', email: 'denes@unb.br', cpf: '05044348888', registration: '1234546', active: 1, password: '123456')
+coordinator_3 = Coordinator.create(user: user_3, course: course_4)
 
 # Users - Deg
 user_3 = User.create(name: 'João Pedro', email: 'pedro@unb.br', cpf: '05012349999', registration: '1234599', active: 1, password: '123456')

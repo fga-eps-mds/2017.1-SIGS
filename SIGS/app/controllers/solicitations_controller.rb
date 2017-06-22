@@ -62,6 +62,36 @@ class SolicitationsController < ApplicationController
     end
   end
 
+  def show
+    # if allocation_period?
+    #   @period = true
+    # else
+    #   @period = false
+    # end
+    @allocation = Allocation.new
+    @rooms = Room.where(department_id:
+                        current_user.coordinator.course.department.id)
+    @solicitation = Solicitation.find(params[:id])
+    @room_solicitations = RoomSolicitation.where(solicitation_id:
+                                                 @solicitation.id)
+  end
+
+  def recuse_solicitation
+    @solicitation = Solicitation.find(params[:id])
+    @solicitation.status = 2
+    @solicitation.save
+    flash[:success] = 'Solicitação recusada com successo'
+    redirect_to current_user
+  end
+
+  def approve_solicitation
+    @solicitation = Solicitation.find(params[:id])
+    @solicitation.status = 1
+    @solicitation.save
+    flash[:success] = 'Solicitação aprovada com successo'
+    redirect_to solicitations_show_path(@solicitation.id)
+  end
+
   private
 
   def avaliable_rooms

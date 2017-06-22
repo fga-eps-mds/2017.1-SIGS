@@ -1,0 +1,59 @@
+<h1>Solicitação</h1>
+<table class="table">
+<tr>
+ <th>Data</th>
+ <th>Turma</th>
+ <th>Disciplina</th>
+ <th>Departamento</th>
+ <th>Autor</th>
+</tr>
+<tr>
+ <td><%= @solicitation.request_date%></td>
+ <td><%= @solicitation.school_room.name%></td>
+ <td><%= @solicitation.school_room.discipline.name %></td>
+ <td><%= @solicitation.school_room.discipline.department.name %></td>
+ <td><%= @solicitation.requester.name %></td>
+</tr>
+</table>
+
+<h2>Justificativa<h2>
+<%= @solicitation.justify %>
+<br>
+<%= link_to image_tag("recuse.png"), solicitations_recuse_solicitation_path(@solicitation.id) %>
+<%= link_to image_tag("approve.png"), solicitations_approve_solicitation_path(@solicitation.id) %>
+
+<h2>Solicitações</h2>
+
+<table class="table">
+ <tr>
+   <th>Hora de inicio</th>
+   <th>Hora de fim</th>
+   <th>Dia</th>
+
+ </tr>
+ <% @room_solicitations.each do |room_solicitation| %>
+ <tr>
+   <td><%= room_solicitation.start.strftime('%H')%>H</td>
+   <td><%= room_solicitation.final.strftime('%H')%>H</td>
+   <td><%= room_solicitation.day %></td>
+
+   <td style="text-align:center"><%= form_for @allocation, url: allocation_by_solicitation_path do |allocation| %>
+
+         <input type='hidden' name='allocation[active]' value='1' />
+         <input type='hidden' name='allocation[school_room_id]' value='<%= room_solicitation.solicitation.school_room_id %>' />
+         <input type='hidden' name='allocation[day]' value='<%= room_solicitation.day %>' />
+         <input type='hidden' name='allocation[start_time]' value='<%= room_solicitation.start.strftime("%H") %>' />
+         <input type='hidden' name='allocation[final_time]' value='<%= room_solicitation.final.strftime("%H") %>' />
+         <!-- <% if @period == true %> -->
+           <label>Sala<lebel>
+           <%= allocation.collection_select(:room_id,@rooms,:id,:name, include_blank: true)%>
+         <!-- <% else %> -->
+           <%= room_solicitation.room.name %><br>
+           <%= allocation.hidden_field :room_id, value: room_solicitation.room_id%>
+         <!-- <% end %> -->
+         <br><br><%= allocation.submit "Alocar", class: 'pull-right btn btn-default btn-success' %>
+       <% end %>
+   </td>
+ </tr>
+ <% end %>
+</table>
