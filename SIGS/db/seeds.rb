@@ -18,21 +18,21 @@ course_3 = Course.create(code: '12', name: 'Engenharia Automotiva', department: 
 course_4 = Course.create(code: '09', name: 'Artes Visuais', department: department_3, shift: 2)
 
 # Users - Coordinator
-user = User.create(name: 'Caio Filipe', email: 'caio@unb.br', cpf: '05012345678', registration: '1234567', active: true, password: '123456')
+user = User.create(name: 'Caio Filipe', email: 'caio@unb.br', cpf: '05012345678', registration: '1234567', active: 1, password: '123456')
 coordinator = Coordinator.create(user: user, course: course_2)
-user_2 = User.create(name: 'João Busche', email: 'joao@unb.br', cpf: '05044448888', registration: '1234544', active: false, password: '123456')
+user_2 = User.create(name: 'João Busche', email: 'joao@unb.br', cpf: '05044448888', registration: '1234544', active: 0, password: '123456')
 coordinator_2 = Coordinator.create(user: user_2, course: course_4)
 
 # Users - Deg
-user_3 = User.create(name: 'João Pedro', email: 'pedro@unb.br', cpf: '05012349999', registration: '1234599', active: true, password: '123456')
+user_3 = User.create(name: 'João Pedro', email: 'pedro@unb.br', cpf: '05012349999', registration: '1234599', active: 1, password: '123456')
 department_assistant = Deg.create(user: user_3)
-user_4 = User.create(name: 'Ateldy Brasil', email: 'ateldy@unb.br', cpf: '05022446688', registration: '1234333', active: false, password: '123456')
+user_4 = User.create(name: 'Ateldy Brasil', email: 'ateldy@unb.br', cpf: '05022446688', registration: '1234333', active: 0, password: '123456')
 department_assistant_2 = Deg.create(user: user_4)
 
 # Users - AdministrativeAssistant
-user_5 = User.create(name: 'Wallacy Braz', email: 'wallacy@unb.br', cpf: '05012348888', registration: '1234588', active: true, password: '123456')
+user_5 = User.create(name: 'Wallacy Braz', email: 'wallacy@unb.br', cpf: '05012348888', registration: '1234588', active: 1, password: '123456')
 administrative_assistant = AdministrativeAssistant.create(user: user_5)
-user_6 = User.create(name: 'Carlos Aragon', email: 'carlos@unb.br', cpf: '05022248811', registration: '2224588', active: false, password: '123456')
+user_6 = User.create(name: 'Carlos Aragon', email: 'carlos@unb.br', cpf: '05022248811', registration: '2224588', active: 0, password: '123456')
 administrative_assistant_2 = AdministrativeAssistant.create(user: user_6)
 
 # Buildings

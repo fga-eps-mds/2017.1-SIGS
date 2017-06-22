@@ -19,7 +19,7 @@
   <div id="form-new-user">
 
     <%= form_for @user, url: user_create_path,  :html => {:role => 'form'} do |f| %>
-      <%= f.hidden_field :active, :value => 'false' %>
+      <%= f.hidden_field :active, :value => '0' %>
 
       <div class="blockForm">
         <%= f.label :name, "Nome Completo " %>
