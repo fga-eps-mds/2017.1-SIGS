@@ -1,0 +1,20 @@
+<h1>Editar Usuário de API</h1>
+
+<ul id="erro-message">
+  <% @api_user.errors.messages.values.each do |msg| %>
+    <% msg.each do |m| %>
+      <li><%= m %></li>
+    <%end %>
+  <% end %>
+</ul>
+
+<%= form_for @api_user,url: api_users_update_path , method: :put do |api_user| %>
+  <%= api_user.label :name, "Nome: " %>
+  <%= api_user.text_field :name, class: "form-control", placeholder: "Digite seu nome"%><br>
+
+  <%= api_user.label :email, "E-mail" %>
+  <%= api_user.text_field :email, class: "form-control", placeholder: "Digite seu email"%>
+  <div class="actions">
+    <%= api_user.submit "Salvar", class: "pull-right btn btn-default btn-success" %>
+  </div>
+<%end%>

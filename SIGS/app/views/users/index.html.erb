@@ -10,6 +10,7 @@
       <th>Email</th>
       <th>CPF</th>
       <th>Matricula</th>
+      <th></th>
     </tr>
     <% @users.each do |user| %>
     <tr>
@@ -17,7 +18,6 @@
       <td><%= user.email%></td>
       <td><%= user.cpf %></td>
       <td><%= user.registration %></td>
-      <td><%= link_to image_tag("icon_edit.png") , user_edit_path(user.id), confirm: "Tem certeza?" %></td>
       <td><%= link_to image_tag("icon_trash.png") , destroy_users_path(user.id), data: {confirm: "Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?"}%> </td>
     </tr>
     <% end %>

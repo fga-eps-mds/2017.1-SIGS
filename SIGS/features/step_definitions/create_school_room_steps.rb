@@ -41,12 +41,8 @@ And (/^I check 'Retroprojetor'$/) do
 	find(:css, "#school_room_category_ids_1").set(true)
 end
 
-And (/^I check 'Engenharia Eletronica'$/) do
-   find(:css, "#school_room_course_ids_2").set(true)
-end
-
-And (/^I check 'Engenharia Automotiva'$/) do
-   find(:css, "#school_room_course_ids_3").set(true)
+And (/^I search 10 in courses$/) do
+   find(:css, "input[id$='input-search-courses']").set("10")
 end
 
 Then (/^notice message 'Turma criada'$/) do

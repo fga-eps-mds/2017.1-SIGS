@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable ClassLength
 # Class to manager allocation solicitation
 class SolicitationsController < ApplicationController
   include Schedule
@@ -45,13 +46,19 @@ class SolicitationsController < ApplicationController
 
   def index
     coordinator = Coordinator.find_by(user_id: current_user.id)
-    @room_solicitations = RoomSolicitation.where(department:
-                                                 coordinator.course.department).group(:solicitation_id)
+    department = if coordinator.nil?
+                   Department.find_by(name: 'PRC')
+                 else
+                   coordinator.course.department
+                 end
+
+    @room_solicitations = RoomSolicitation.where(department: department)
+                                          .group(:solicitation_id)
     @solicitations = []
     @room_solicitations.each do |room_solicitation|
       @solicitations << Solicitation.find_by(id:
-                                           room_solicitation.solicitation.id,
-                                           status: 0)
+                                             room_solicitation.solicitation.id,
+                                             status: 0)
     end
   end
 
@@ -135,3 +142,4 @@ class SolicitationsController < ApplicationController
             end
   end
 end
+# rubocop:enable ClassLength

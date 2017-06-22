@@ -1,0 +1,24 @@
+<h1>Usuários de API</h1>
+  <p><%= link_to 'Criar Usuário de API', api_users_new_path, class: 'btn btn-default btn-success' %></p><br>
+<% if @api_users.count == 0 %>
+  <h2>Não há usuários de API registrados em seu nome.</h2>
+<% else %>
+  <table class="table table-hover">
+    <tr>
+      <td>Nome</td>
+      <td>E-mail</td>
+      <td style="text-align:center">Visualizar</td>
+      <td style="text-align:center">Alterar</td>
+      <td style="text-align:center">Excluir</td>
+    </tr>
+    <% @api_users.each do |api_user| %>
+      <tr>
+        <td><%= api_user.name %></td>
+        <td><%= api_user.email %></td>
+        <td style="text-align:center"><%= link_to image_tag("icon_view.png"), api_users_show_path(api_user.id) %></td>
+        <td style="text-align:center"><%= link_to image_tag("icon_edit.png"), api_users_edit_path(api_user.id) %></td>
+        <td style="text-align:center"><%= link_to image_tag("icon_trash.png"), api_users_destroy_path(api_user.id), data: {confirm: "Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?"} %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

@@ -47,3 +47,16 @@
   padding-right: 20px !important;
   margin-top: -7px !important;
 }
+
+.search-result-block {
+  align-items: start;
+  justify-content: flex-start !important;
+}
+
+.search-result-block > div {
+  margin-right: 100px;
+}
+
+.fa {
+  padding-right: 10px;
+}

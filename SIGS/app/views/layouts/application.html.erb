@@ -60,6 +60,7 @@
                   </ul>
                 </li>
                 <li><%= link_to "Período", period_index_path %></li>
+                <li><%= link_to "API", api_users_index_path %></li>
               <% elsif permission[:level] == 1 %>
                 <li><%= link_to "Alocar", school_rooms_index_path %></li>
               <%  else %>
@@ -83,7 +84,6 @@
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
       </nav>
-
       <main class="mainConteiner">
         <div class="container">
           <%= yield %>

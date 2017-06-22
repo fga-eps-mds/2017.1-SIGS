@@ -26,7 +26,7 @@ class SessionsController < ApplicationController
   end
 
   def active(user)
-    if user.active == true
+    if user.active == 1
       sign_in(user)
       redirect_to current_user, notice: 'Login realizado com sucesso'
     else

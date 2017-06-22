@@ -4,9 +4,8 @@ $(document).ready(function () {
   addItem("Cadastros Pendentes", "cadastros_pendentes", "Usuários", "col1");
   addItem("Usuários Registrados", "usuarios_registrados", "Usuários", "col1");
   menuDropdown("Salas");
-
-  addItem("Salas", "salas", "Salas");
-  addItem("Categorias", "categorias", "Salas");
+  addItem("Salas", "salas", "Salas", "col1");
+  addItem("Categorias", "categorias", "Salas", "col1");
   menuDropdown("Alocações");
   addItem("Solicitações Pendentes", "visualizar_solicitacoes", "Alocações");
   addItem("Graduação", "home", "Alocações")
