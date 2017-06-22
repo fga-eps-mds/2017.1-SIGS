@@ -14,7 +14,7 @@ module Api
     end
 
     def department_allocations
-      @rooms = Department.find_by(params[:code]).rooms
+      @rooms = Department.find_by(code: params[:code]).rooms
       @allocations = Allocation.where(room: @rooms)
       department_allocations_to_json(@allocations)
     end
@@ -50,8 +50,7 @@ module Api
           allocation_final_time: allocation.final_time.strftime('%H:%M')
         }
       end
-      hash = { rooms_code: hash }
-      render json: hash
+      render json: { rooms_code: hash }
     end
   end
 end
