@@ -229,7 +229,7 @@ ActiveRecord::Schema.define(version: 20170616032538) do
     t.string   "email"
     t.string   "cpf"
     t.string   "registration"
-    t.boolean  "active"
+    t.integer  "active"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "password_digest"
