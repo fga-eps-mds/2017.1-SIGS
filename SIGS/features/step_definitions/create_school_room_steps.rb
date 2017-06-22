@@ -5,8 +5,8 @@ Given (/^I am logged in as coordinator$/) do
   	click_button('Entrar')
 end
 
-And (/^click on link 'Nova Turma'$/) do
-	click_link ('Nova Turma')
+And (/^click on link 'Criar Nova Turma'$/) do
+	click_link ('Criar Nova Turma')
 end
 
 And (/^I select '1' in 'discipline_id'$/) do
@@ -41,12 +41,8 @@ And (/^I check 'Retroprojetor'$/) do
 	find(:css, "#school_room_category_ids_1").set(true)
 end
 
-And (/^I check 'Engenharia Eletronica'$/) do
-   find(:css, "#school_room_course_ids_2").set(true)
-end
-
-And (/^I check 'Engenharia Automotiva'$/) do
-   find(:css, "#school_room_course_ids_3").set(true)
+And (/^I search 10 in courses$/) do
+   find(:css, "input[id$='input-search-courses']").set("10")
 end
 
 Then (/^notice message 'Turma criada'$/) do

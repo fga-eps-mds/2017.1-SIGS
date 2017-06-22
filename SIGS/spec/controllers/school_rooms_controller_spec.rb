@@ -72,6 +72,11 @@ RSpec.describe SchoolRoomsController, type: :controller do
       expect(flash[:error]).to eq('Turma com nome já cadastrado')
     end
 
+    it 'should return course in json format' do
+      get :search_courses, params:{code: 10}
+      expect(response).to have_http_status(200)
+    end
+
     it 'not should create school room with null discipline' do
       post :create, params:{school_room: {name: 'AA',  vacancies: 200, discipline: '', course_ids: [@course1.id, @course3.id]}}
       expect(flash[:error]).to include('Disciplina não pode ser vazia')

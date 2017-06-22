@@ -7,7 +7,7 @@ Given (/^I am logged in as assistant administrative$/) do
 end
 
 When (/^click on link 'Minha Conta'$/) do
-  click_link('Minha Conta')
+  first(:link,'Minha Conta').click
   expect(page).to have_content('E-mail')
 end
 
@@ -61,7 +61,7 @@ Then (/^the initial page should load with notice message 'Não é possível excl
 end
 
 And (/^click on link 'Usuários Registrados'$/) do
-  click_link('Usuários Registrados')
+  first(:link,'Usuários Registrados').click
 end
 
 And (/^I delete all the allocations of this user$/) do

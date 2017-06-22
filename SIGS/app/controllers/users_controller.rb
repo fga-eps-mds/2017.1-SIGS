@@ -2,6 +2,7 @@
 
 # class that controller the actions of a user
 class UsersController < ApplicationController
+  require_relative '../../lib/modules/user_module.rb'
   before_action :logged_in?, except: [:new, :create]
 
   def new
@@ -13,12 +14,16 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @school_room_count = school_rooms_by_user.count
+    @school_rooms_allocated_count = school_rooms_allocated_count
+    @periods = Period.all
+    @solicitation_count = Solicitation.where("requester_id='#{current_user.id}'").count
     return unless @user.id != current_user.id && permission[:level] != 2
     redirect_to_current_user
   end
 
   def index
-    @users = User.where('id != ? and active != false', current_user.id)
+    @users = User.where('id != ? and active = 1', current_user.id)
     return unless permission[:level] != 2
     redirect_to_current_user
   end
@@ -63,7 +68,7 @@ class UsersController < ApplicationController
         flash[:error] = 'Não é possível excluir o único Assistente Administrativo'
         redirect_to current_user
       else
-        @user.destroy
+        @user.update(active: 2)
         flash[:success] = 'Usuário excluído com sucesso'
         redirect_to sign_in_path
       end

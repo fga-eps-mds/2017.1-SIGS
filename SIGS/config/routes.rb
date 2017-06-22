@@ -53,6 +53,7 @@ Rails.application.routes.draw do
   patch 'school_rooms/update/:id', controller: 'school_rooms', action: 'update', as: 'school_rooms_update'
   post 'school_rooms/search_disciplines' => 'school_rooms#search_disciplines', as: 'search_disciplines'
   get 'school_rooms/destroy/:id', controller: 'school_rooms', action: 'destroy', as: 'destroy_school_room'
+  get 'school_rooms/search_courses/:code' => 'school_rooms#search_courses', as: 'search_courses'
 
   # Parsers
   post "/upload_buildings", controller: 'parsers', action: 'upload_buildings'
@@ -94,6 +95,7 @@ Rails.application.routes.draw do
   # Allocation
   get 'allocations/new/:school_room_id' => 'allocations#new' , :as => 'allocations_new'
   post 'allocations/create' => 'allocations#create' , :as => 'allocations_create'
+  post 'allocations/allocation_by_solicitation' => 'allocations#allocation_by_solicitation' , :as => 'allocation_by_solicitation'
   get 'allocations/destroy/:id', controller: 'allocations', action: 'destroy', as: 'allocations_destroy'
   get 'allocations/room_allocations_by_day' => 'allocations#room_allocations_by_day', :as => 'room_allocations_by_day'
   get 'allocations/destroy_all_allocation_date/:id', controller: 'allocations', action: 'destroy_all_allocation_date', as: 'allocations_destroy_all_allocation_date'
@@ -107,6 +109,8 @@ Rails.application.routes.draw do
   post 'extensions/create' => 'extensions#create' , :as => 'extensions_create'
 
   # Solicitation
+  get 'solicitations/index' => 'solicitations#index', :as => 'solicitations_index'
+  get 'solicitations/show/:id' => 'solicitations#show', as: 'solicitations_show'
   get 'solicitations/allocation_period/:school_room_id' => 'solicitations#allocation_period', :as => 'allocation_period'
   get 'solicitations/adjustment_period/:school_room_id' => 'solicitations#adjustment_period', :as => 'adjustment_period'
   post 'solicitations/save_allocation_period' => 'solicitations#save_allocation_period', :as => 'save_allocation_period'
@@ -129,7 +133,6 @@ Rails.application.routes.draw do
     get 'school_rooms/school_rooms_of_room/:code' => 'apis#school_rooms_of_room', as: 'school_rooms_of_room'
     # get 'school_rooms/rooms_allocations_to_json' => 'apis#rooms_allocations_to_json', as: 'rooms_allocations_to_json'
   end
-
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end

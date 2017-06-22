@@ -1,6 +1,6 @@
 <h1>Relatório por Sala</h1>
 
-<%= form_for :reports_by_room, url: generate_by_room_path do |f| %>
+<%= form_for :reports_by_room, url: generate_by_room_path, :html => { :onsubmit => "return valid()" }  do |f| %>
 	<%=f.label :departments, 'Departamento:' %>
 	<%=f.select :departments, @departments.collect {|d| [d.name, d.id] }, class: 'form-control' %>
 
@@ -9,31 +9,40 @@
 	<br>
 	<br>
 	<%=f.label :filter, 'Filtrar salas pelo código:' %>
-	<span style="color: red;"></span>
+	<span style="color: red;" class="returnMsg"></span>
 	<%=f.text_field :filter, class: 'form-control', placeholder: 'Digite o código da sala' %>
 
 	<%=f.label :room_code, 'Código da sala:' %>
-	<span style="color: red;"></span>
+	<span style="color: red;" class="returnMsg" id="fill"></span><br>
 	<%=f.select :room_code, @rooms.collect {|d| [d.name, d.id] }, class: 'form-control' %>
 
-  <%= f.submit "Gerar", class: 'pull-right btn btn-default btn-success' %>
+  <%= f.submit "Gerar", class: 'pull-right btn btn-default btn-success', data: { disable_with: false } %>
 
 <% end %>
 
 <script type="text/javascript">
-
+	function valid(){
+		if (document.getElementById('reports_by_room_room_code').value == "" &&
+					!document.getElementById('reports_by_room_all_rooms').checked){
+			$("#fill").html("Sala não encontrada");
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
   $('input:checkbox').click(function (){
     $("#reports_by_room_filter").prop('disabled', $(this).prop('checked'));
     $("#reports_by_room_room_code").prop('disabled', $(this).prop('checked'));
     if($(this).prop('checked')){
-      $("span").html("Campo desativado");
-      
+      $(".returnMsg").html("Campo desativado");
+
     }else {
-      $("span").html("");
+      $(".returnMsg").html("");
     }
   });
 
-  $('#reports_by_room_departments').change(function(){	
+  $('#reports_by_room_departments').change(function(){
   	ajax('json_of_rooms_by_department?department_code=' + $(this).val());
   });
 

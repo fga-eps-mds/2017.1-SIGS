@@ -43,7 +43,7 @@ class User < ApplicationRecord
 
   validates :password, length: { minimum: 6, maximum: 20,
                                  message: INVALID_LENGHT_PASSWORD },
-                       confirmation: true, on: :create
+                       confirmation: true
 
   # Cpf
   VALID_CPF_REGEX = /\A[0-9]{3}?[0-9]{3}?[0-9]{3}?[0-9]{2}\z/i

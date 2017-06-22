@@ -3,7 +3,7 @@ And (/^click on link 'Usuários'$/) do
 end
 
 And (/^click on link 'Cadastros Pendentes'$/) do
-	click_link ('Cadastros Pendentes')
+	first(:link,'Cadastros Pendentes').click
 end
 
 When (/^I press 'Approve' button$/) do
