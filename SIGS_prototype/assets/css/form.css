@@ -28,9 +28,15 @@
   margin: 20px auto;
 }
 
-.myContainer .checkbox-group label{
+.myContainer .checkbox-group label {
   margin-left: 10px;
   width: 100%;
+}
+
+.myContainer .checkbox-group label.myLabel {
+  margin-left: 0;
+  margin-right: 10px;
+  width: auto;
 }
 
 .actions {

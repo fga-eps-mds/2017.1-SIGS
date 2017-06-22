@@ -8,7 +8,7 @@ end
 When (/^click on link 'Salas'$/) do
   #first(:link, 'Salas').click
   #visit 'http://192.168.2.15:3000/rooms/index'
-  find("a[href='/rooms/index']").click
+  first('.myList').click_link('Salas')
 end
 
 And (/^I press 'Icon edit' button$/) do
@@ -19,16 +19,16 @@ And (/^I press 'Icon view' button$/) do
   first(:link, 'Icon view').click
 end
 
-And (/^I fill in 'code' with '45632'$/) do
-  fill_in('room[code]', :with=> '45632')
+And (/^I fill in 'code' with '987655'$/) do
+  fill_in('room[code]', :with=> '987655')
 end
 
 And (/^I fill in 'code' with ''$/) do
   fill_in('room[code]', :with=> '')
 end
 
-And (/^I fill in 'name' with 'I10'$/) do
-  fill_in('room[name]', :with=> 'I10')
+And (/^I fill in 'name' with 'S9'$/) do
+  fill_in('room[name]', :with=> 'S9')
 end
 
 And (/^I fill in 'name' with ''$/) do
@@ -51,8 +51,8 @@ And (/^I fill in 'capacity' with '2'$/) do
   fill_in('room[capacity]', :with=> '2')
 end
 
-And (/^I fill in 'capacity' with '980'$/) do
-  fill_in('room[capacity]', :with=> '980')
+And (/^I fill in 'capacity' with '900'$/) do
+  fill_in('room[capacity]', :with=> '900')
 end
 
 When (/^I delete all rooms$/) do
@@ -91,9 +91,9 @@ And (/^the 'Alterar Sala' page should load with a error message of capacity fiel
 end
 
 Then (/^the 'Visualizar Sala' page should load with informations of that room$/) do
-  expect(page).to have_content('Sala: S10')
-  expect(page).to have_content('Código: 124325')
-  expect(page).to have_content('Capacidade: 50')
-  expect(page).to have_content('Status: Ativo')
-  expect(page).to have_content('Prédio: Pavilhão Anísio Teixeira')
+  expect(page).to have_content('Sala: S9')
+  expect(page).to have_content('Código: 987655')
+  expect(page).to have_content('Capacidade: 40')
+  expect(page).to have_content('Status: Inativo')
+  expect(page).to have_content('Prédio: Bloco de Salas da Ala Sul')
 end

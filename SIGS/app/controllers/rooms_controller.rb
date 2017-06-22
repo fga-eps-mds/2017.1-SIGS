@@ -5,7 +5,13 @@ class RoomsController < ApplicationController
   before_action :logged_in?
 
   def index
-    @rooms = Room.all
+    user = Coordinator.find_by(user_id: current_user)
+    if user.nil?
+      department = Department.find_by(name: 'PRC')
+      @rooms = Room.where(department: department)
+    else
+      @rooms = Room.where(department: user.course.department)
+    end
   end
 
   def edit

@@ -207,6 +207,19 @@ RSpec.describe AllocationsController, type: :controller do
       expect(final_allocations).to eq(inital_allocations + total_mondays)
     end
 
+    it "should retrieve school room count" do
+      sign_in(@user)
+      post :create, params: {
+        Segunda: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: 1}},
+        Terça: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Terça",start_time:"12:00",final_time:"14:00", active: 0}},
+        Quarta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Quarta",start_time:"12:00",final_time:"14:00", active: 0}},
+        Quinta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Quinta",start_time:"12:00",final_time:"14:00", active: 0}},
+        Sexta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Sexta",start_time:"12:00",final_time:"14:00", active: 0}},
+        Sábado: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Sábado",start_time:"12:00",final_time:"14:00", active: 0}}
+      }
+      expect(school_rooms_allocated_count).to equal(1)
+    end
+
     # Destroy
 
     it "should return destroy view" do

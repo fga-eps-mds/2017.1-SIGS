@@ -5,6 +5,7 @@ RSpec.describe ApiUsersController, type: :controller do
 	describe 'User new and create methods for user API' do
 		before(:each) do
 			@user = User.create(name: 'joao silva', email: 'joaosilva@unb.br', password: '123456', registration:'1100061', cpf:'05601407380', active: true)
+			administrative_assistant = AdministrativeAssistant.create(user: @user)
 		 	sign_in(@user)
 		 	#@user_api = ApiUser.create(name: "gesie", email: 'gesiel.freitas@unb.br', secret: "akjsdbnhfidsaknfjksdaj", token: "aksdhjfnajsdnfkjnd")
 		end
@@ -35,6 +36,7 @@ RSpec.describe ApiUsersController, type: :controller do
 	describe 'Show methods' do
     before(:each) do
     	@user = User.create(name: 'joao silva', email: 'joaosilva@unb.br', password: '123456', registration:'1100061', cpf:'05601407380', active: true)
+			administrative_assistant = AdministrativeAssistant.create(user: @user)
 			sign_in(@user)
      	@user_api = ApiUser.create(name: "Gesiel Freitas", email: 'gesiel.freitas@unb.br', secret: "asdjbfjand", user_id: @user.id, token: "asdnfjasndf")
     end
@@ -54,6 +56,7 @@ RSpec.describe ApiUsersController, type: :controller do
     before(:each) do
    		@user = User.create(name: 'joao silva', email: 'joaosilva@unb.br',
      	password: '123456', registration:'1100061', cpf:'05601407380', active: true)
+			administrative_assistant = AdministrativeAssistant.create(user: @user)
      	sign_in(@user)
    		@user_api = ApiUser.create(name: 'Gesiel Freitas', email: 'gesiel.freitas@unb.br', secret: "asdjbfjand", user_id: @user.id, token: "asdnfjasndf")
   	end
@@ -63,7 +66,7 @@ RSpec.describe ApiUsersController, type: :controller do
     	expect(response).to have_http_status(200)
   	end
 
-    
+
     it "should update a user api" do
       put :update, params:{id: @user_api.id,api_user: {name: 'Wallacy Braz', email: @user_api.email}}
       expect(response).to redirect_to(api_users_show_path(@user_api.id))
@@ -82,9 +85,11 @@ RSpec.describe ApiUsersController, type: :controller do
     	@user = User.create(name: 'joao silva', email: 'joaosilva@unb.br',
        	                	password: '123456', registration:'1100061',
        	                	cpf:'05601407380', active: true)
+      administrative_assistant = AdministrativeAssistant.create(user: @user)
     	@user_1 = User.create(name: 'pedro panda', email: 'panda@unb.br',
        	                		password: '123456', registration:'1101361',
        	                		cpf:'73827077680', active: true)
+	    AdministrativeAssistant.create(user: @user_1)
       @user_api = ApiUser.create(name: 'Gesiel Freitas', email: 'gesiel.freitas@unb.br',
 																 secret: "asdjbfjand", user_id: @user.id,
 																 token: "asdnfjasndf")

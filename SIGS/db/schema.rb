@@ -179,9 +179,11 @@ ActiveRecord::Schema.define(version: 20170616032538) do
     t.date     "response_date"
     t.integer  "responder_id"
     t.integer  "room_id"
+    t.integer  "department_id"
     t.integer  "solicitation_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.index ["department_id"], name: "index_room_solicitations_on_department_id", using: :btree
     t.index ["responder_id"], name: "index_room_solicitations_on_responder_id", using: :btree
     t.index ["room_id"], name: "index_room_solicitations_on_room_id", using: :btree
     t.index ["solicitation_id"], name: "index_room_solicitations_on_solicitation_id", using: :btree

@@ -5,7 +5,7 @@ Feature: Update school room
 
 	Scenario: change school room with valid attributes
 		Given I am logged in as coordinator
-		And click on link 'Meu Departamento'
+		And click on link 'Alocar'
 		And click on edit first
 		And I select '1' in 'discipline_id'
 		And I fill in 'vacancies' with '50'
@@ -14,7 +14,7 @@ Feature: Update school room
 
 	Scenario: change school room with low vacancies
 		Given I am logged in as coordinator
-		And click on link 'Meu Departamento'
+		And click on link 'Alocar'
 		And click on edit first
 		And I select '1' in 'discipline_id'
 		And I fill in 'vacancies' with '1'
@@ -23,7 +23,7 @@ Feature: Update school room
 
 	Scenario: change school room with high vacancies
 		Given I am logged in as coordinator
-		And click on link 'Meu Departamento'
+		And click on link 'Alocar'
 		And click on edit first
 		And I select '1' in 'discipline_id'
 		And I fill in 'vacancies' with '800'
@@ -32,7 +32,7 @@ Feature: Update school room
 
 	Scenario: change school room with null vacancies
 		Given I am logged in as coordinator
-		And click on link 'Meu Departamento'
+		And click on link 'Alocar'
 		And click on edit first
 		And I select '1' in 'discipline_id'
 		And I fill in 'vacancies' with null

@@ -35,39 +35,46 @@ RSpec.describe RoomsController, type: :controller do
       @coordinator = Coordinator.create(user: @user_2, course: @course)
 
       @allocation = Allocation.create(user: @user,room: @room, school_room: @school_room, day: "Segunda", start_time: '14:00:00', final_time: '16:00:00')
-
-
-      
-
-      sign_in(@user)
     end
 
-    it 'should return all room' do
+    it 'should return all room prc' do
+      sign_in(@user)
+      get :index
+      expect(response).to have_http_status(200)
+    end
+
+    it 'should return all room coordinator' do
+      sign_in(@user_2)
       get :index
       expect(response).to have_http_status(200)
     end
 
     it 'should return edit room' do
+      sign_in(@user)
       get :edit, params:{id: @room.id}
       expect(response).to have_http_status(200)
     end
 
     it 'should return one room' do
+      sign_in(@user)
       get :show, params:{id: @room.id}
       expect(response).to have_http_status(200)
     end
 
     it 'should update room' do
+      sign_in(@user)
       get :update, params:{id: @room.id, room: {code: 'S11ew0', name: 'Superior 10', capacity: 50,
        active: true, time_grid_id: 1, building_id: @building.id}}
       expect(flash.now[:success]).to eq('Dados da sala atualizados com sucesso')
     end
 
     it 'should not update room because code is nil' do
+      sign_in(@user)
       get :update, params:{id: @room.id, room: {name: 'Novo Nome', code: ''}}
       expect(flash.now[:error]).to eq('Dados não foram atualizados')
     end
     it 'should not update room because code exists' do
+      sign_in(@user)
       Room.create(code: 'S110', name: 'Superior 10', capacity: 50,
        active: true, time_grid_id: 1, department: @department, building: @building)
       get :update, params:{id: @room.id, room: {code: 'S110'}}
@@ -75,45 +82,52 @@ RSpec.describe RoomsController, type: :controller do
     end
 
     it 'should not update room because name has one character' do
+      sign_in(@user)
       get :update, params:{id: @room.id, room: {name: 'S'}}
       expect(flash.now[:error]).to eq('Dados não foram atualizados')
     end
 
     it 'should not update room because name is long' do
+      sign_in(@user)
       get :update, params:{id: @room.id, room: {name: '012345678901234567890123456789012345678901234567890'}}
       expect(flash.now[:error]).to eq('Dados não foram atualizados')
     end
 
     it 'should not update room because capacity is less than 5' do
+      sign_in(@user)
       get :update, params:{id: @room.id, room: {capacity: 2}}
       expect(flash.now[:error]).to eq('Dados não foram atualizados')
     end
 
     it 'should not update room because capacity is more than 500' do
+      sign_in(@user)
       get :update, params:{id: @room.id, room: {capacity: 800}}
       expect(flash.now[:error]).to eq('Dados não foram atualizados')
     end
 
     it 'should delete the room from the database, by coordinator' do
+      sign_in(@user)
       get :destroy, params:{id: @room_2.id}
       expect(flash[:success]).to eq('Sala excluida com sucesso')
       expect(response).to redirect_to(room_index_path)
     end
 
     it 'should delete the room from the database, by administrative assistant' do
-    sign_in(@user_2)
+      sign_in(@user_2)
       get :destroy, params:{id: @room.id}
       expect(flash[:success]).to eq('Sala excluida com sucesso')
       expect(response).to redirect_to(room_index_path)
     end
 
     it 'should not delete the room from the databasebecause the room belongs to another department' do
+      sign_in(@user)
       get :destroy, params:{id: @room.id}
       expect(flash[:error]).to eq('Não possui permissão para excluir sala')
       expect(response).to redirect_to(room_index_path)
     end
 
     it 'should get json response' do
+      sign_in(@user)
       get :json_of_categories_by_school_room, params: {school_room_id: @school_room.id}, :format => :json
       expect(response).to have_http_status(200)
     end
