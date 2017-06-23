@@ -33,7 +33,7 @@ module Api
       end
       hash
     end
-    
+
     def all_school_rooms
       @school_rooms = SchoolRoom.all
       render json: @school_rooms
