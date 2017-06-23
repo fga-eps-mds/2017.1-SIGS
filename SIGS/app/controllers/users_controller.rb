@@ -39,6 +39,9 @@ class UsersController < ApplicationController
       redirect_to sign_in_path
       flash[:notice] = 'Solicitação de cadastro efetuado com sucesso!'
     else
+      @user.build_deg
+      @user.build_coordinator
+      @user.build_administrative_assistant
       render :new
     end
   end

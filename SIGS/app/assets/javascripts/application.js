@@ -86,4 +86,7 @@ $(document).ready(function(){
 
   $('.label-check').empty();
 
+  //remove 'can't be blank' error mensage from registration pg when password is send empty
+  $('#erro-message').find('li:contains("can\'t be blank")').remove();
+
 });
