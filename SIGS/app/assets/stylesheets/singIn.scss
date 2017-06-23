@@ -118,9 +118,11 @@
     text-align: left;
     padding: 10px;
     column-count: 2;
-    list-style: none;
+    list-style-position: inside;
+    // list-style: none;
     font-style: italic;
     border-bottom: 1px red;
+    height: 130px;
   }
 
   #erro-message > li {
@@ -128,16 +130,22 @@
 
   #dropdown-group,
   #dropdown-group > div {
-    min-height: 30px;
+    height: 70px;
     z-index: 100;
   }
+
+  .dropText {
+    text-align: left;
+    color: #ffffff;
+  }
+
   @media only screen and (min-width:840px){
     .login {
       position: absolute;
       right: 0;
     }
     .singUp form {
-      display: flex;
+      // display: flex;
       justify-content: space-between;
     }
     .singUp {
