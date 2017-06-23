@@ -131,6 +131,7 @@ Rails.application.routes.draw do
   # API
   namespace :api, default: { format: :json }, path: '/api' do
     get 'rooms/all_rooms' => 'apis#all_rooms', :as => 'all_rooms'
+    get 'school_rooms/all' => 'apis#all_school_room'
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
