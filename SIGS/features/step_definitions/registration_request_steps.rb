@@ -63,7 +63,7 @@ Then (/^the initial page should load with notice message 'O Nome deve ter no mí
 end
 
 Then (/^the initial page should load with notice message 'Insira um Cpf válido'$/) do
-	expect(page).to have_content('Insira um Cpf válido')
+	expect(page).to have_content('Insira um CPF válido')
 end
 
 Then (/^the initial page should load with notice message 'E-mail não pode ser vazio'$/) do

@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   patch 'categories/update/:id', controller: 'categories', action: 'update', as: 'categories_update'
   get 'categories/destroy/:id', controller: 'categories', action: 'destroy', as: 'categories_destroy'
 
-
   # Sessions
   get 'sign_in' => 'sessions#new'
   post 'sign_in' => 'sessions#create'
@@ -129,10 +128,12 @@ Rails.application.routes.draw do
   get 'api_users/show/:id' => 'api_users#show', :as => 'api_users_show'
   get 'api_users/destroy/:id' => 'api_users#destroy', :as => 'api_users_destroy'
 
-
   # API
   namespace :api, default: { format: :json }, path: '/api' do
-    get 'rooms/all_rooms' => 'apis#all_rooms', :as => 'all_rooms'
+    get 'rooms/all_rooms' => 'apis#all_rooms', :as => 'api_all_rooms'
+    get 'school_rooms/all_school_rooms' => 'apis#all_school_rooms', as: 'api_all_school_rooms'
+    get 'school_rooms/school_rooms_of_room/:code' => 'apis#school_rooms_of_room', as: 'school_rooms_of_room'
+    # get 'school_rooms/rooms_allocations_to_json' => 'apis#rooms_allocations_to_json', as: 'rooms_allocations_to_json'
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
