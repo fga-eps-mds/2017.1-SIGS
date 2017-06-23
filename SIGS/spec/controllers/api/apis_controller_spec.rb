@@ -13,7 +13,12 @@ RSpec.describe Api::ApisController, type: :controller do
 			@category = Category.create(name: 'Laboratório Químico')
 			@building = Building.create(code: 'pjc', name: 'Pavilhão João Calmon', wing: 'NORTE')
 			@room = Room.create(code: '124325', name: 'S10', capacity: 50, active: true, time_grid_id: 1, department: @department, building: @building, category_ids: [@category.id])
-		end
+			@discipline = Discipline.create(name: 'Análise Combinatória', code: '123', department: @department)
+			@course = Course.create(name:'Matemática', code: '009', department: @department)
+			@school_room = SchoolRoom.create(name:"YY", vacancies: 50, discipline: @discipline, course_ids: [@course.id])
+			@allocation = Allocation.create(active: true, start_time: '14:00', final_time: '16:00', day: 'Segunda',user: @user, room: @room, school_room: @school_room)
+      		@allocation2 = Allocation.create(active: true, start_time: '12:00', final_time: '14:00', day: 'Terça',user: @user, room: @room, school_room: @school_room)
+      	end
 
 		it 'should return the all rooms json' do
 			@request.env['HTTP_ACCEPT'] = 'application/vnd.api+json'
@@ -28,6 +33,23 @@ RSpec.describe Api::ApisController, type: :controller do
 			@request.env['HTTP_AUTHORIZATION'] = 'Token ' + TOKEN_2
 			get :all_rooms, params: { default: { format: :json } }
 			expect(response).to have_http_status(401)
+		end
+
+		it 'should return allocations by discipline' do
+			@request.env['HTTP_ACCEPT'] = 'application/vnd.api+json'
+			@request.env['HTTP_AUTHORIZATION'] = 'Token ' + @api_user.token
+			get :discipline_allocations, params: { default: { format: :json }, code: @discipline.code }
+			allocations = [@allocation, @allocation2]
+			expect(response).to have_http_status(200)
+			expect(JSON.parse(response.body)) == allocations.to_json
+		end
+
+		it 'should not find discipline' do
+			@request.env['HTTP_ACCEPT'] = 'application/vnd.api+json'
+			@request.env['HTTP_AUTHORIZATION'] = 'Token ' + @api_user.token
+			get :discipline_allocations, params: { default: { format: :json }, code: '456' }
+			expect(response).to have_http_status(200)
+			expect(response) == 'Nenhuma disciplina encontrada com esse código.'
 		end
 	end
 end
