@@ -20,9 +20,13 @@ module Api
     end
 
     def discipline_allocations
-      @school_rooms = Discipline.find_by(code: params[:code]).school_rooms
-      @allocations = Allocation.where(school_room: @school_rooms)
-      discipline_allocations_to_json(@allocations, params[:code])
+      @discipline = Discipline.find_by(code: params[:code])
+      unless @discipline.nil?
+        @allocations = Allocation.where(school_room: @discipline.school_rooms, active: true)
+        discipline_allocations_to_json(@allocations, params[:code])
+      else
+        render json: 'Nenhuma disciplina encontrada com esse código.'
+      end
     end
 
     private
