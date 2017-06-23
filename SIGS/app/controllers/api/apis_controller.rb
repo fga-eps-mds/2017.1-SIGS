@@ -14,7 +14,7 @@ module Api
     end
 
     def buildings
-      building = Building.find(params[:id])
+      building = Building.find_by_code(params[:code])
       rooms = Room.where('building' => building.id)
       allocation = Allocation.where('room' => rooms.ids)
       @building_allocation = generate_return_building(building, allocation)
