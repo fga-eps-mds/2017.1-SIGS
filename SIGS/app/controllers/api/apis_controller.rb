@@ -26,10 +26,10 @@ module Api
       allocations.each do |allocation|
         hash[allocation.id] = {
           building_name: building.name,
-          building_code: building.code, 
+          building_code: building.code,
           room_name: allocation.room.name,
           room_capacity: allocation.room.capacity,
-          discipline_name: allocation.school_room.discipline,
+          discipline_name: allocation.school_room.discipline.name,
           discipline_code: allocation.school_room.discipline.code,
           school_room_name: allocation.school_room.name,
           school_room_vacancies: allocation.school_room.vacancies,
@@ -38,7 +38,7 @@ module Api
           allocation_final_time: allocation.final_time.strftime('%H:%M')
         }
       end
-      return hash
+      hash
     end
 
     private
