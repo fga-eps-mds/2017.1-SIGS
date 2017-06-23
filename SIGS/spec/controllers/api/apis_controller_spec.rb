@@ -39,12 +39,12 @@ RSpec.describe Api::ApisController, type: :controller do
 			expect(response).to have_http_status(401)
 		end
 
-		it 'should return all school room in allocations' do
+		it 'should return buildings in allocations' do
 			get :buildings, params: { id: @building.id, default: { format: :json} }
 			expect(response).to have_http_status(200)
 		end
 
-		it 'should return HTTP Token denied for all school room' do
+		it 'should return HTTP Token denied for buildings' do
 			@request.env['HTTP_AUTHORIZATION'] = 'Token ' + TOKEN_2
 			get :buildings, params: { id: @building.id, default: { format: :json} }
 			expect(response).to have_http_status(401)
