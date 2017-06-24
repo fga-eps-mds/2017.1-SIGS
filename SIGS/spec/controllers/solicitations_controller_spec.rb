@@ -23,7 +23,7 @@ RSpec.describe SolicitationsController, type: :controller do
       expect(response).to have_http_status(200)
     end
 
-    it 'should open index page coordinator' do
+    it 'should open index page prc' do
       sign_in(@user2)
       get :index
       expect(response).to have_http_status(200)
@@ -45,6 +45,7 @@ end
       @discipline1 = Discipline.create(name: 'Anãlise Combinatória', code: '123', department: @department1)
       @coordinator1 = Coordinator.create(user: @user1, course: @course1)
       @coordinator2 = Coordinator.create(user: @user2, course: @course2)
+      @deg = Deg.create(user: @user3)
       @school_room1 = SchoolRoom.create(name:"YY", vacancies: 50, discipline: @discipline1, course_ids: [@course1.id])
       @school_room2 = SchoolRoom.create(name:"YY", vacancies: 50, discipline: @discipline1, course_ids: [@course2.id])
       @period = Period.create(period_type:'Alocação', initial_date: Date.current - 5.days, final_date: Date.current + 5.days)
@@ -90,7 +91,7 @@ end
     it 'should not create new solicitation because user is not a coordinator' do
       sign_in(@user3)
       post :save_allocation_period, params: {solicitation: {school_room_id: @school_room1.id, departments: @department1.id, justify: 'texto qualquer'}, segunda: {'12': '1'}}
-      expect(flash[:error]).to eq('Acesso negado.')
+      expect(flash[:error]).to eq('Acesso Negado')
     end
 
     it 'should check assigns with status = 0' do
@@ -127,6 +128,7 @@ end
       @discipline2 = Discipline.create(name: 'Combinatória', code: '447', department: @department2)
       @coordinator1 = Coordinator.create(user: @user1, course: @course1)
       @coordinator2 = Coordinator.create(user: @user2, course: @course2)
+      @deg = Deg.create(user: @user3)
       @school_room1 = SchoolRoom.create(name:"YY", vacancies: 50, discipline: @discipline1, course_ids: [@course1.id, @course3.id])
       @school_room2 = SchoolRoom.create(name:"YY", vacancies: 50, discipline: @discipline2, course_ids: [@course2.id])
       @period = Period.create(period_type:'Alocação', initial_date: Date.current - 10.days, final_date: Date.current - 5.days)
@@ -201,7 +203,7 @@ end
       post :save_adjustment_period, params: {solicitation: {school_room_id: @school_room1.id, justify: 'texto qualquer'},
                                              segunda: {'12': '1'},
                                              rooms: [@room.id]}
-      expect(flash[:error]).to eq('Acesso negado.')
+      expect(flash[:error]).to eq('Acesso Negado')
     end
 
     it 'should not create new solicitation because no select rooms' do

@@ -61,7 +61,9 @@
         <th>Nome</th>
         <th>Ativo</th>
         <th>Prédio</th>
-        <th style="text-align:center">Alterar</th>
+        <% if permission[:level] != 0 %>
+          <th style="text-align:center">Alterar</th>
+        <% end %>
         <th style="text-align:center">Visualizar</th>
       </tr>
     </thead>
@@ -72,7 +74,9 @@
           <td><%= room.name %></td>
           <td id="active_room"><%=  ((room.active) ? 'Sim' : 'Não')  %></td>
           <td><%= room.building.name %></td>
-          <td style="text-align:center"><%= link_to image_tag("icon_edit.png"), room_edit_path(room.id) %></td>
+          <% if permission[:level] != 0 %>
+            <td style="text-align:center"><%= link_to image_tag("icon_edit.png"), room_edit_path(room.id) %></td>
+          <% end %>  
           <td style="text-align:center"><%= link_to image_tag("icon_view.png"), room_path(room.id) %></td>
         </tr>
       <% end %>

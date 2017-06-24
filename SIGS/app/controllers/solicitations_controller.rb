@@ -6,7 +6,9 @@ class SolicitationsController < ApplicationController
   include Schedule
   include PrepareSolicitationsToSave
   before_action :logged_in?
-  before_action :authenticate_coordinator?
+  before_action :authenticate_not_deg?
+  before_action :authenticate_coordinator?, except: [:index,
+                                                     :avaliable_rooms_by_department]
 
   def allocation_period
     school_room_id = params[:school_room_id]

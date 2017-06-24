@@ -17,10 +17,7 @@ class Solicitation < ApplicationRecord
   def validate_school_room_department
     coordinator = Coordinator.find_by(user: requester)
 
-    if coordinator.nil?
-      errors.add(:requester, 'Acesso negado.')
-    elsif coordinator.course.department != school_room.discipline.department
-      errors.add(:requester, 'Você não tem permissão para alocar essa turma')
-    end
+    return unless coordinator.course.department != school_room.discipline.department
+    errors.add(:requester, 'Você não tem permissão para alocar essa turma')
   end
 end
