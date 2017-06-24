@@ -56,8 +56,8 @@ When (/^I delete another assistant administrative$/) do
   @user.destroy
 end
 
-Then (/^the initial page should load with notice message 'Não é possível excluir o único Assistente Administrativo'$/) do
-  expect(page).to have_content('Não é possível excluir o único Assistente Administrativo')
+Then (/^the initial page should load with notice message 'Não é possível excluir o único assistante Administrativo'$/) do
+  expect(page).to have_content('Não é possível excluir o único assistante Administrativo')
 end
 
 And (/^click on link 'Usuários Registrados'$/) do

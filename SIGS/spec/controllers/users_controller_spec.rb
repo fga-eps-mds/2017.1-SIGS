@@ -191,7 +191,7 @@ RSpec.describe UsersController, type: :controller do
     it 'should not destroy administrative user when it is unique' do
       sign_in(@user_adm)
       get :destroy, params:{id: @user_adm.id}
-      expect(flash[:error]).to eq('Não é possível excluir o único Assistente Administrativo')
+      expect(flash[:error]).to eq('Não é possível excluir o único assistante Administrativo')
       expect(response).to redirect_to(current_user)
     end
   end

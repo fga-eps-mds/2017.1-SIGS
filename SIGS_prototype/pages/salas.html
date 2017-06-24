@@ -69,15 +69,6 @@
                 <input type="number" name="quantity" min="1" max="300" class="number">
               </label>
               <br><br>
-              <label class="checkbox_space left_zero">Categorias:
-                <!-- <br> -->
-                <input type="checkbox" name="category1" value="Retroprojetor">Retroprojetor
-                <input type="checkbox" name="category2" value="Ar_condicionado">Ar condicionado
-                <input type="checkbox" name="category3" value="Sala_de_informatica">Sala de informática
-                <input type="checkbox" name="category4" value="Laboratorio_Quimico">Laboratório Químico
-                <input type="checkbox" name="category5" value="Auditorio">Auditório
-              </label>
-              <br><br>
               <label class="checkbox_space left_zero">Funcionamento:
                 <input type="checkbox" name="category1" value="Retroprojetor">Ativa
                 <input type="checkbox" name="category2" value="Ar_condicionado">Inativa
@@ -85,7 +76,6 @@
           </form>
         </div>
         <button type="button" class="btn btn-success button_align">Pesquisar</button>
-
         <br><br>
         <table class="table">
           <tr>
@@ -93,16 +83,18 @@
             <td>Nome</td>
             <td>Ativo</td>
             <td>Prédio</td>
-            <td style="text-align:center">Alterar</td>
             <td style="text-align:center">Visualizar</td>
+            <td style="text-align:center">Alterar</td>
+            <td style="text-align:center">Excluir</td>
           </tr>
-          <tr>
+          <tr class="sala1">
             <td>S10</td>
             <td>Superior 10</td>
             <td>Sim</td>
             <td>Pavilhão João Calmon</td>
-            <td style="text-align:center"><a href="alterar_sala.html"><img src="../assets/img/icon_edit.png" alt="alterar"></a></td>
             <td style="text-align:center"><a href="mostrar_sala.html"><img src="../assets/img/icon_view.png" alt="visualizar"></a></td>
+            <td style="text-align:center"><a href="alterar_sala.html"><img src="../assets/img/icon_edit.png" alt="alterar"></a></td>
+            <td style="text-align:center"><a href="#!" data-toggle="modal" data-target=".modalDelete"><img src="../assets/img/icon_trash.png" alt="excluir"></a></td>
           </tr>
         </table>
 

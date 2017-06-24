@@ -7,7 +7,7 @@ Feature: Room Edit and show
     Given I am logged in as assistant administrative
     When click on link 'Salas'
     And I press 'Icon edit' button
-    And I fill in 'code' with '987655'
+    And I fill in 'code' with '676767'
     And I fill in 'name' with 'S9'
     And I fill in 'capacity' with '60'
     When I press 'Salvar' button

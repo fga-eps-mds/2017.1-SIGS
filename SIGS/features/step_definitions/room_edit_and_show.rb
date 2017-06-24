@@ -16,6 +16,10 @@ And (/^I fill in 'code' with '987655'$/) do
   fill_in('room[code]', :with=> '987655')
 end
 
+And (/^I fill in 'code' with '676767'$/) do
+  fill_in('room[code]', :with=> '676767')
+end
+
 And (/^I fill in 'code' with ''$/) do
   fill_in('room[code]', :with=> '')
 end
@@ -84,9 +88,9 @@ And (/^the 'Alterar Sala' page should load with a error message of capacity fiel
 end
 
 Then (/^the 'Visualizar Sala' page should load with informations of that room$/) do
-  expect(page).to have_content('Sala: S9')
-  expect(page).to have_content('Código: 987655')
-  expect(page).to have_content('Capacidade: 40')
-  expect(page).to have_content('Status: Inativo')
-  expect(page).to have_content('Prédio: Bloco de Salas da Ala Sul')
+  expect(page).to have_content('Sala: S10')
+  expect(page).to have_content('Código: 124325')
+  expect(page).to have_content('Capacidade: 50')
+  expect(page).to have_content('Status: Ativo')
+  expect(page).to have_content('Prédio: Pavilhão Anísio Teixeira')
 end
