@@ -6,76 +6,44 @@ class RoomsController < ApplicationController
 
   def index
     @rooms = Room.all
-    @buildings = Building.all
-
     if params[:name].present? || params[:code].present? ||
        params[:capacity].present? || params[:building_id].present? ||
        params[:wing].present? || params[:category].present?
-
-      filter_by_name_and_code
+      filter_by_name
+      filter_by_code
       filter_by_capacity
-      filter_by_wings
       filter_by_buildings
-      filter_by_category
-    else
-      @rooms = Room.all
+      filter_by_wings
     end
   end
 
   def filter_by_capacity
     if params[:capacity].present?
-      #@rooms = @rooms.where(capacity: params[:capacity].to_s)
-      @rooms = @rooms.where('capacity >= ?', params[:capacity]) if params[:capacity]
-    else
-      @rooms
+      @rooms = @rooms.where('capacity >= ?', params[:capacity])
     end
   end
 
   def filter_by_buildings
     if params[:building_id].present?
-      @rooms = @rooms.where(building_id: params[:building_id].to_s)
-    else
-      @rooms
+      @rooms = @rooms.where(building_id: params[:building_id])
     end
   end
 
   def filter_by_wings
     if params[:wing].present?
-      @rooms = []
-      buildings = Building.where(wing: params[:wing]).load
-      buildings.each do |building|
-        building_rooms = Room.where(building_id: building.id)
-        @rooms = @rooms + building_rooms
-      end
-    else
-      #@rooms = Room.all
+      @rooms = @rooms.joins(:building).where(buildings: { wing: params[:wing] })
     end
-    return @rooms
   end
 
-  def filter_by_category
-    if params[:category_ids].present?
-      @rooms = []
-      #categories = Category.where(category_id: params[:category_ids]).load
-      @rooms.each do |room_category|
-        category_rooms = Room.where(category_ids: room_category.id)
-        @rooms = @rooms + category_rooms
-      end
-    else
-      puts "nao deu certo"
+  def filter_by_name
+    if params[:name].present?
+      @rooms = @rooms.where('rooms.name' => params[:name])
     end
-    return @rooms
   end
 
-  def filter_by_name_and_code
-    if params[:name].present? || params[:code].present?
-      @rooms.columns.each do |attr|
-        if params[:"#{attr.name}"].present?
-          @rooms = @rooms.where("#{attr.name} like ?", "%#{params[attr.name]}%")
-        end
-      end
-    else
-      @rooms
+  def filter_by_code
+    if params[:code].present?
+      @rooms = @rooms.where('rooms.code' => params[:code])
     end
   end
 

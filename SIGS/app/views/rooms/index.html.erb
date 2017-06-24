@@ -24,41 +24,35 @@
     </td>
     <td>
       <%= label_tag("Prédio") %>
-      <%= select_tag 'building_id', options_from_collection_for_select(@buildings, "id", "name"), include_blank: true %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <%= label_tag("Categorias") %>
-      <div class="checkbox-group">
-        <% Category.all.each do |category| %>
-          <%= check_box_tag 'category_ids', category.id -%>
-          <%= category.name -%>
-        <% end %>
-      </div>
+      <%= select_tag 'building_id', options_for_select(@buildings.map{ |building| [building.name, building.id, { 'data-wing' => building.wing }] }), include_blank: true %>
     </td>
   </tr>
 
   <tr>
-    <td><b>Funcionamento:</b></td>
-    <td class="select_active">
-    <%= label_tag(:active_ativa, "Ativa") %>
-      <%= radio_button_tag(:ativo, "ativa", :id => "id_active") %>
-    </td>
     <td>
-    <%= label_tag(:active_inativa, "Inativa") %>
-      <%= radio_button_tag(:ativo, "inativa", :id => "id_anative") %>
+      <br>
+      <%= submit_tag "Pesquisar", class: "btn btn-success" %>
     </td>
-  </tr>
-  <tr>
-    <td><%= submit_tag "Pesquisar"%></td>
+    <td colspan="2">
+      <br>
+      <%= link_to "Limpar Filtros", room_index_path, class: "btn btn-primary pull-right" %>
+    </td>
   </tr>
 
-</table>
 <% end %>
 
+</table>
+
+  <p>
+    <b>Funcionamento:&nbsp;</b>
+    <%= label_tag(:id_active, "Ativa") %>
+    <%= radio_button_tag(:ativo, "ativa", false, :id => "id_active") %>&nbsp;&nbsp;
+    <%= label_tag(:id_anative, "Inativa") %>
+    <%= radio_button_tag(:ativo, "inativa", false, :id => "id_anative") %>
+  </p>
+
   <% if @rooms.count == 0 %>
-    <h3>Não há salas registradas no momento.</h3>
+    <h3>Nenhuma sala encontrada.</h3>
   <% else %>
     <table class="table">
     <thead>
@@ -90,18 +84,18 @@
   var active;
   var bool;
 
-  $("input:radio").click(function(){
+  $("input:radio").on('click', function() {
+    $(".show_room").empty();
     active = $(this).attr("value");
-    if(active == "ativa"){
-        bool = true;
-    }else{
+    if (active == "ativa")
+      bool = true;
+    else
       bool = false;
-    }
 
-    if(bool){
+    if (bool) {
       <% @rooms.each do |room| %>
-        if (<%=room.active%>) {
-          $(".show_room").html(
+        if (<%= room.active %>) {
+          $(".show_room").append(
             "<tr>"
               + "<td><%=room.code%></td>"
               + "<td><%= room.name %></td>"
@@ -110,25 +104,32 @@
               + '<td style="text-align:center"><%= link_to image_tag("icon_edit.png"), room_edit_path(room.id) %></td>'
               + '<td style="text-align:center"><%= link_to image_tag("icon_view.png"), room_path(room.id) %></td>'
             + "</tr>"
-          )
-      }
-    <%end%>
-  }else{
-     <% @rooms.each do |room| %>
-          $(".show_room").html(
-            "<tr>"
-              + "<td><%=room.code%></td>"
-              + "<td><%= room.name %></td>"
-              + "<td id='active_room'><%=  ((room.active) ? 'Sim' : 'Não')  %></td>"
-              + "<td><%= room.building.name %></td>"
-              + '<td style="text-align:center"><%= link_to image_tag("icon_edit.png"), room_edit_path(room.id) %></td>'
-              + '<td style="text-align:center"><%= link_to image_tag("icon_view.png"), room_path(room.id) %></td>'
-            + "</tr>"
-          )
-    <%end%>
+          );
+        }
+      <%end%>
+    } else {
+       <% @rooms.each do |room| %>
+         if (!<%= room.active %>) {
+            $(".show_room").append(
+              "<tr>"
+                + "<td><%=room.code%></td>"
+                + "<td><%= room.name %></td>"
+                + "<td id='active_room'><%=((room.active) ? 'Sim' : 'Não')  %></td>"
+                + "<td><%= room.building.name %></td>"
+                + '<td style="text-align:center"><%= link_to image_tag("icon_edit.png"), room_edit_path(room.id) %></td>'
+                + '<td style="text-align:center"><%= link_to image_tag("icon_view.png"), room_path(room.id) %></td>'
+              + "</tr>"
+            );
+          }
+      <%end%>
+    }
 
-  }
+  });
 
+  $('select#wing').on('change', function() {
+    var selected = $(this).val();
+    $('select#building_id').find('option').removeClass('hide');
+    $('select#building_id').find('option').not('option[data-wing="' + selected + '"]').addClass('hide');
   });
 
 
