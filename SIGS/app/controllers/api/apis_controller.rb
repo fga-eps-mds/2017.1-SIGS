@@ -14,9 +14,13 @@ module Api
     end
 
     def department_allocations
-      @rooms = Department.find_by(code: params[:code]).rooms
-      @allocations = Allocation.where(room: @rooms)
-      department_allocations_to_json(@allocations)
+      @department = Department.find_by(code: params[:code])
+      if !@department.nil?
+        @allocations = Allocation.where(room: @department.rooms, active: true)
+        department_allocations_to_json(@allocations)
+      else
+        render json: 'Nenhuma departamento encontrado com esse código.'
+      end
     end
 
     def discipline_allocations
@@ -28,11 +32,6 @@ module Api
       else
         render json: 'Nenhuma disciplina encontrada com esse código.'
       end
-    end
-
-    def all_school_rooms
-      @school_rooms = SchoolRoom.all
-      render json: @school_rooms
     end
 
     def school_rooms_of_room

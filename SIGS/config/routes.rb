@@ -128,12 +128,10 @@ Rails.application.routes.draw do
 
   # API
   namespace :api, default: { format: :json }, path: '/api' do
+    get 'all_rooms' => 'apis#all_rooms'
     get 'department_allocations/:code' => 'apis#department_allocations'
     get 'discipline_allocations/:code' => 'apis#discipline_allocations'
-    get 'rooms/all_rooms' => 'apis#all_rooms', :as => 'api_all_rooms'
-    get 'school_rooms/all_school_rooms' => 'apis#all_school_rooms', as: 'api_all_school_rooms'
-    get 'school_rooms/school_rooms_of_room/:code' => 'apis#school_rooms_of_room', as: 'school_rooms_of_room'
-    # get 'school_rooms/rooms_allocations_to_json' => 'apis#rooms_allocations_to_json', as: 'rooms_allocations_to_json'
+    get 'school_rooms_of_room/:code' => 'apis#school_rooms_of_room'
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
