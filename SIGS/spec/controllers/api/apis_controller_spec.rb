@@ -14,6 +14,8 @@ RSpec.describe Api::ApisController, type: :controller do
 			@building = Building.create(code: 'pjc', name: 'Pavilhão João Calmon', wing: 'NORTE')
 			@room = Room.create(code: '124325', name: 'S10', capacity: 50, active: true, time_grid_id: 1, department: @department, building: @building, category_ids: [@category.id])
 			@room2 = Room.create(code: '124325', name: 'S9', capacity: 50, active: true, time_grid_id: 1, department: @department, building: @building, category_ids: [@category.id])
+			@discipline = Discipline.create(name: 'Análise Combinatória', code: '123', department: @department)
+			@course = Course.create(name:'Matemática', code: '009', department: @department)
 			@course_2 = Course.create(code: '12', name: 'Engenharia Eletrônica', department: @department, shift: 1)
 			@discipline = Discipline.create(code: '876', name: 'Cálculo 3', department: @department)
 			@school_room = SchoolRoom.create(name:'A', discipline: @discipline, vacancies: 40, courses: [@course_2])
@@ -31,26 +33,35 @@ RSpec.describe Api::ApisController, type: :controller do
 		end
 
 		it 'should return HTTP Token denied' do
-			@request.env['HTTP_ACCEPT'] = 'application/vnd.api+json'
 			@request.env['HTTP_AUTHORIZATION'] = 'Token ' + TOKEN_2
 			get :all_rooms, params: { default: { format: :json } }
 			expect(response).to have_http_status(401)
 		end
 
-		it 'should return all schoom room in allocations' do
-			get :all_school_room, params: { default: { format: :json} }
+		it 'should return allocations by discipline' do
+			get :discipline_allocations, params: { default: { format: :json }, code: @discipline.code }
+			allocations = [@allocation, @allocation2]
 			expect(response).to have_http_status(200)
+			expect(JSON.parse(response.body)) == allocations.to_json
 		end
 
-		it 'should return HTTP Token denied for all school room' do
-			@request.env['HTTP_AUTHORIZATION'] = 'Token ' + TOKEN_2
-			get :all_school_room, params: { default: { format: :json} }
-			expect(response).to have_http_status(401)
-    end
+		it 'should not find discipline' do
+			get :discipline_allocations, params: { default: { format: :json }, code: '456' }
+			expect(response).to have_http_status(200)
+			expect(response) == 'Nenhuma disciplina encontrada com esse código.'
+		end
 
-		it 'should get json response all scholl_rooms' do
-		  get :all_school_rooms, params: { default: { format: :json } }
-		  expect(response).to have_http_status(200)
+		it 'should return allocations by department' do
+			get :department_allocations, params: { default: { format: :json }, code: '789' }
+			allocations = [@allocation, @allocation2]
+			expect(response).to have_http_status(200)
+			expect(JSON.parse(response.body)) == allocations.to_json
+		end
+
+		it 'should not find allocations by department' do
+			get :department_allocations, params: { default: { format: :json }, code: '456' }
+			expect(response).to have_http_status(200)
+			expect(response) == 'Nenhuma departamento encontrado com esse código.'
 		end
 
 		it 'should get json response school_rooms_of_room' do
