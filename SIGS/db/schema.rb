@@ -172,17 +172,18 @@ ActiveRecord::Schema.define(version: 20170616032538) do
   end
 
   create_table "room_solicitations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.datetime "start",           null: false
-    t.datetime "final",           null: false
-    t.string   "day",             null: false
+    t.datetime "start",                       null: false
+    t.datetime "final",                       null: false
+    t.string   "day",                         null: false
     t.string   "justify"
     t.date     "response_date"
     t.integer  "responder_id"
     t.integer  "room_id"
     t.integer  "department_id"
+    t.integer  "status",          default: 0, null: false
     t.integer  "solicitation_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.index ["department_id"], name: "index_room_solicitations_on_department_id", using: :btree
     t.index ["responder_id"], name: "index_room_solicitations_on_responder_id", using: :btree
     t.index ["room_id"], name: "index_room_solicitations_on_room_id", using: :btree

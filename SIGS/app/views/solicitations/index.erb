@@ -15,7 +15,7 @@
 
     </tr>
     <% @solicitations.each do |solicitation| %>
-      <% solicitation.room_solicitation.group(:room_id).each do |room_solicitation| %>
+      <% solicitation.room_solicitation.where(status: 0).group(:room_id).each do |room_solicitation| %>
         <% room = room_solicitation.room %>
         <tr>
           <td><%= solicitation.request_date%></td>
