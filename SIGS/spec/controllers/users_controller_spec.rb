@@ -128,7 +128,7 @@ RSpec.describe UsersController, type: :controller do
       expect(response).to have_http_status(200)
     end
 
-    it 'should return current user show if show user id differ current user and current user isn\'t administrative asssistant' do
+    it 'should return current user show if show user id differ current user and current user isn\'t administrative assistant' do
       sign_in(@user)
       get :show, params:{id: @user_adm.id}
       expect(response).to redirect_to(current_user)
