@@ -46,7 +46,7 @@ class SolicitationsController < ApplicationController
 
   def index
     department = return_department_owner
-
+    @department_rooms = Room.where(department: department)
     room_solicitations = RoomSolicitation.where(department: department)
                                          .group(:solicitation_id)
     @solicitations = []
@@ -81,12 +81,13 @@ class SolicitationsController < ApplicationController
     @room_solicitations = RoomSolicitation.where(solicitation_id:
                                                  @solicitation.id)
     @room_solicitations.each do |room_solicitation|
+      room_solicitation.update(responder_id: current_user,
+                               response_date: Date.today, status: 1)
       @allocation = Allocation.new(user_id: current_user.id,
                                    school_room_id: @solicitation.school_room_id,
                                    day: room_solicitation.day,
                                    start_time: room_solicitation.start,
-                                   final_time: room_solicitation.final,
-                                   active: true)
+                                   final_time: room_solicitation.final, active: true)
       @allocation.room_id = validade_room_for_approve(@room, room_solicitation)
       pass_to_all_allocation_dates_aux(@allocation)
       @allocation.save
@@ -243,7 +244,7 @@ class SolicitationsController < ApplicationController
       if room_solicitation.room.nil?
         update_room_status(room_solicitation)
         pending_requests -= 1
-      elsif room_solicitation.room.id == params[:room]
+      elsif room_solicitation.room.id.to_s == params[:room]
         update_room_status(room_solicitation)
         pending_requests -= 1
       end

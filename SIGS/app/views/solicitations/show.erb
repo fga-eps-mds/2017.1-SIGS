@@ -34,7 +34,7 @@
 
         <% else %>
           <%= room_solicitation.room.name %><br>
-          <%= allocation.hidden_field :room_id, value: room_solicitation.room_id%>
+          <%= hidden_field_tag :room_id, room_solicitation.room_id, readonly: true%>
         <% end %>
       </td>
     </tr>
@@ -74,7 +74,7 @@
 <script type="text/javascript">
 
   function recusa() {
-    location.href = 'recuse_solicitation?justification='+ $('#justification').val()+'&id=<%= @solicitation.id %>&room=';
+    location.href = 'recuse_solicitation?justification='+ $('#justification').val()+'&id=<%= @solicitation.id %>&room=<%= params[:room]%>';
   }
 
   $(document).ready(function(){

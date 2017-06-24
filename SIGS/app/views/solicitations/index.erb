@@ -17,6 +17,7 @@
     <% @solicitations.each do |solicitation| %>
       <% solicitation.room_solicitation.where(status: 0).group(:room_id).each do |room_solicitation| %>
         <% room = room_solicitation.room %>
+        <% next unless @department_rooms.include? room %>
         <tr>
           <td><%= solicitation.request_date%></td>
           <td><%= solicitation.school_room.name%></td>

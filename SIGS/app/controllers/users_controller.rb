@@ -18,12 +18,12 @@ class UsersController < ApplicationController
     @school_rooms_allocated_count = school_rooms_allocated_count
     @periods = Period.all
     department = return_department_owner
-    room_solicitations = RoomSolicitation.where(department: department)
+    room_solicitations = RoomSolicitation.where(department: department, status: 0)
                                          .group(:solicitation_id)
     @solicitation_count = []
     room_solicitations.each do |room_solicitation|
       solicitation_validade = Solicitation.find_by(id: room_solicitation.solicitation
-                                              .id, status: 0)
+                                                                        .id, status: 0)
       next if solicitation_validade.nil?
       @solicitation_count << solicitation_validade
     end
