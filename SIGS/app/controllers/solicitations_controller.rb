@@ -64,9 +64,12 @@ class SolicitationsController < ApplicationController
     @school_room = @solicitation.school_room
     @department = return_department_owner
     return_wing
-
+    my_rooms = Room.where(department: return_department_owner)
     @room_solicitations = RoomSolicitation.where(solicitation_id:
                                                  @solicitation.id)
+    @room_solicitations = @room_solicitations.where(room: my_rooms) unless @room_solicitations[0].room.nil?
+
+    byebug
     @allocation = ''
     @room_solicitations.each do |room_solicitation|
       @allocation += "allocations[]=#{room_solicitation.day}"
@@ -75,11 +78,12 @@ class SolicitationsController < ApplicationController
   end
 
   def recuse_solicitation
-    @solicitation = Solicitation.find(params[:id])
-    @solicitation.status = 2
-    @solicitation.save
-    flash[:success] = 'Solicitação recusada com successo'
-    redirect_to current_user
+    render inline: "hhhh"
+    # @solicitation = Solicitation.find(params[:id])
+    # @solicitation.status = 2
+    # @solicitation.save
+    # flash[:success] = 'Solicitação recusada com successo'
+    # redirect_to current_user
   end
 
   def approve_solicitation

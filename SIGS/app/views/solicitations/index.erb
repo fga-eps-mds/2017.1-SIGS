@@ -9,6 +9,7 @@
       <th>Turma</th>
       <th>Disciplina</th>
       <th>Departmento</th>
+      <th>Sala Solicitada</th>
       <th>Autor</th>
       <th style="text-align:center">Visualizar</th>
 
@@ -19,6 +20,7 @@
       <td><%= solicitation.school_room.name%></td>
       <td><%= solicitation.school_room.discipline.name %></td>
       <td><%= solicitation.school_room.discipline.department.name %></td>
+      <td></td>
       <td><%= solicitation.requester.name %></td>
       <td style="text-align:center"><%= link_to image_tag("icon_view.png"), solicitations_show_path(solicitation.id) %></td>
 

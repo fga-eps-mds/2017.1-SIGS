@@ -45,15 +45,38 @@
   <div id="rooms-list"></div>
 <% end %>
 
-<div style="text-align: center;">
+<div>
 
-<%= link_to "Recusar", solicitations_recuse_solicitation_path(@solicitation.id), class: 'pull-right btn btn-default btn-danger' %>
+<button type="button" class="btn pull-right btn btn-default btn-danger" data-toggle="modal" data-target="#myModal" style="margin-left:1%;">Recusar</button>
 <%= allocation.submit "Aprovar", class: 'pull-right btn btn-default btn-success' %>
 </div>
 <% end %>
 
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+  <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h4 class="modal-title">Justificativa da Recusa</h4>
+      </div>
+      <div class="modal-body">
+        <label>Escreva a justificativa para a recusa</labe>
+		    <textarea name="justification" id="justification" style="width:100%;"></textarea>
+        <button type="button" class="btn pull-right btn btn-default btn-danger" onclick="recusa()">Recusar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <script type="text/javascript">
+
+  function recusa() {
+    location.href = '../recuse_solicitation?justification='+ $('#justification').val()+'&solicitation=<%= @solicitation.id %>&room=';
+  }
+
   $(document).ready(function(){
     $.getJSON('../avaliable_rooms_by_department?department=<%= @department.id %>' +
       '&school_room=<%= @school_room.id %>&<%= @allocation %>',
