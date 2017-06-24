@@ -65,6 +65,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'cucumber-rails', :require => false
   gem 'launchy'
+  gem 'rspec'
   gem 'rspec-rails'
   gem 'rails-controller-testing'
   #gem 'capybara'
