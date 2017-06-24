@@ -78,26 +78,28 @@ class SolicitationsController < ApplicationController
   def approve_solicitation
     @solicitation = Solicitation.find(params[:id])
     @room = Room.find_by(id: params[:room])
-    @room_solicitations = RoomSolicitation.where(solicitation_id:
-                                                 @solicitation.id)
+    @room_solicitations = RoomSolicitation.where(solicitation_id: @solicitation.id)
     @room_solicitations.each do |room_solicitation|
       room_solicitation.update(responder_id: current_user,
-                               response_date: Date.today, status: 1)
+                               response_date: Date.today)
       @allocation = Allocation.new(user_id: current_user.id,
                                    school_room_id: @solicitation.school_room_id,
                                    day: room_solicitation.day,
                                    start_time: room_solicitation.start,
-                                   final_time: room_solicitation.final,
-                                   active: true)
-      if @room == nil &&  !room_solicitation.room_id.nil? || @room == true
-        room_solicitation.status = 1
-      end
+                                   final_time: room_solicitation.final, active: true)
+      room_solicitation.update(status: validate_status_room(room_solicitation))
       @allocation.room_id = validade_room_for_approve(@room, room_solicitation)
       pass_to_all_allocation_dates_aux(@allocation)
-      @allocation.save
-      room_solicitation.save
     end
     validate_for_save_solicitation(@solicitation)
+  end
+
+  def validate_status_room(room_solicitation)
+    if !room_solicitation.room_id.nil?
+      1
+    else
+      0
+    end
   end
 
   def validade_room_for_approve(room, room_solicitation)
@@ -130,6 +132,7 @@ class SolicitationsController < ApplicationController
       end
       date += 1
     end
+    allocation.save
   end
 
   private

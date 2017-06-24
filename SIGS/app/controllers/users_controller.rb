@@ -18,16 +18,16 @@ class UsersController < ApplicationController
     @school_rooms_allocated_count = school_rooms_allocated_count
     @periods = Period.all
     department = return_department_owner
-    room_solicitations = RoomSolicitation.where(department: department, status: 0)
-                                         .group(:solicitation_id)
-    @solicitation_count = []
-    room_solicitations.each do |room_solicitation|
-      solicitation_validade = Solicitation.find_by(id: room_solicitation.solicitation
-                                                                        .id, status: 0)
-      next if solicitation_validade.nil?
-      @solicitation_count << solicitation_validade
-    end
-    @solicitation_count = @solicitation_count.count
+    @solicitation_count = RoomSolicitation.where(department: department)
+                                          .where(status: 0)
+                                          .group(:solicitation_id, :room_id).size
+    # @solicitation_count = RoomSolicitation.joins(:solicitation)
+    #                                       .where(department: department)
+    #                                       .where('solicitations.status = 0')
+    #                                       .where('room_solicitations.status = 0')
+    #                                       .select('count(*)')
+    #                                       .group(:solicitation_id).size
+
     return unless @user.id != current_user.id && permission[:level] != 2
     redirect_to_current_user
   end
