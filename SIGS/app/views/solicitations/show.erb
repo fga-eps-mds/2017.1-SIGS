@@ -1,9 +1,9 @@
 <h1>Solicitação</h1>
 <%= render partial: "school_rooms/show", locals: {school_room: @solicitation.school_room} %>
 <%= hidden_field_tag :solicitation_wing, @wing, readonly: true %>
-<%= form_for @allocation, url: allocation_by_solicitation_path do |allocation| %>
 
-
+<%= form_for @allocation, url: solicitations_approve_solicitation_path do |allocation| %>
+<%= hidden_field_tag :id, @solicitation.id, readonly: true %>
 <hr>
 
 <h3>Justificativa:</h3>
@@ -31,7 +31,7 @@
 
       <td>
         <% if has_rooms %>
-        
+
         <% else %>
           <%= room_solicitation.room.name %><br>
           <%= allocation.hidden_field :room_id, value: room_solicitation.room_id%>
@@ -47,8 +47,8 @@
 
 <div style="text-align: center;">
 
-<%= link_to "Recusar", solicitations_recuse_solicitation_path(@solicitation.id), class: 'pull-right btn btn-default btn-danger' %> 
-<%= link_to "Aprovar", solicitations_approve_solicitation_path(@solicitation.id), class: 'pull-right btn btn-default btn-success' %> 
+<%= link_to "Recusar", solicitations_recuse_solicitation_path(@solicitation.id), class: 'pull-right btn btn-default btn-danger' %>
+<%= allocation.submit "Aprovar", class: 'pull-right btn btn-default btn-success' %>
 </div>
 <% end %>
 
@@ -88,7 +88,7 @@ function listDepartmentRooms(department_id, data) {
         far = "far-room";
       }
 
-      list += "<tr class='" + far + "'><td><input type='checkbox' name='rooms[]' value='" +
+      list += "<tr class='" + far + "'><td><input type='radio' name='room' value='" +
         data[i][0].id + "'></td>" +
         "<td>" + data[i][0].name + "</td>" +
         "<td>" + data[i][1].name + "</td>" +

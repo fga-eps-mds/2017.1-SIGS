@@ -83,11 +83,15 @@ class SolicitationsController < ApplicationController
   end
 
   def approve_solicitation
-    @solicitation = Solicitation.find(params[:id])
-    @solicitation.status = 1
-    @solicitation.save
-    flash[:success] = 'Solicitação aprovada com successo'
-    redirect_to solicitations_show_path(@solicitation.id)
+    # params[:room] vai trazer o id da sala marcada
+    # params[:id] vai trazer o id da solicitation
+    # lembre que o parametro da sala só existe se for solicitacao sem sala
+    render inline: "Sala:#{params[:room]} <br>Solicitação:#{params[:id]}"
+    # @solicitation = Solicitation.find(params[:id])
+    # @solicitation.status = 1
+    # @solicitation.save
+    # flash[:success] = 'Solicitação aprovada com successo'
+    # redirect_to solicitations_show_path(@solicitation.id)
   end
 
   private
