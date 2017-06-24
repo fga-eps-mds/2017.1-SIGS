@@ -6,6 +6,7 @@ class SolicitationsController < ApplicationController
   include Schedule
   include PrepareSolicitationsToSave
   before_action :logged_in?
+  before_action :authenticate_coordinator?
 
   def allocation_period
     school_room_id = params[:school_room_id]
