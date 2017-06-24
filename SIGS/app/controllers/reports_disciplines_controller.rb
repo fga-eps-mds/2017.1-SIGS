@@ -8,12 +8,7 @@ class ReportsDisciplinesController < ApplicationController
     @disciplines = Discipline.all
 
     if params[:name].present?
-      @disciplines.columns.each do |attr|
-        if params[:"#{attr.name}"].present?
-          @disciplines = @disciplines.where("#{attr.name} like ?",
-                                            "%#{params[attr.name]}%")
-        end
-      end
+      @disciplines = @disciplines.where('disciplines.name LIKE ?', "%#{params[:name]}%")
     else
       @disciplines = Discipline.all
     end
