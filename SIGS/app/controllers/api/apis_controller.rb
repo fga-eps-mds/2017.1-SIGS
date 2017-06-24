@@ -14,6 +14,14 @@ module Api
       render json: @rooms
     end
 
+    def buildings
+      building = Building.find_by_code(params[:code])
+      rooms = Room.where('building' => building.id)
+      allocation = Allocation.where('room' => rooms.ids)
+      @building_allocation = generate_return_building(building, allocation)
+      render json: @building_allocation
+    end
+
     def all_school_room
       allocations = Allocation.all
       @school_room = AuxApis.generate_school_room(allocations)
@@ -26,7 +34,7 @@ module Api
         @allocations = Allocation.where(room: @department.rooms, active: true)
         render json: AuxApis.department_allocations_to_json(@allocations)
       else
-        render json: 'Nenhuma departamento encontrado com esse código.'
+        render json: 'Nenhum departamento encontrado com esse código.'
       end
     end
 
@@ -48,6 +56,26 @@ module Api
     end
 
     private
+
+    def generate_return_building(building, allocations)
+      hash = {}
+      allocations.each do |allocation|
+        hash[allocation.id] = {
+          building_name: building.name,
+          building_code: building.code,
+          room_name: allocation.room.name,
+          room_capacity: allocation.room.capacity,
+          discipline_name: allocation.school_room.discipline.name,
+          discipline_code: allocation.school_room.discipline.code,
+          school_room_name: allocation.school_room.name,
+          school_room_vacancies: allocation.school_room.vacancies,
+          allocation_day: allocation.day,
+          allocation_start_time: allocation.start_time.strftime('%H:%M'),
+          allocation_final_time: allocation.final_time.strftime('%H:%M')
+        }
+      end
+      hash
+    end
 
     def authenticate?
       authenticate_or_request_with_http_token do |token, _options|
