@@ -36,11 +36,13 @@ Rails.application.routes.draw do
 
   # Room
   get 'rooms/index' => 'rooms#index', as: 'room_index'
+  post 'rooms/index' => 'rooms#index', as: 'room_index_post'
   get 'rooms/edit/:id' => 'rooms#edit', as: 'room_edit'
   patch 'rooms/update/:id' => 'rooms#update'
   get 'rooms/show/:id' => 'rooms#show', as: 'room'
   get 'room/destroy/:id', controller: 'rooms', action: 'destroy', as: 'destroy_room'
   get 'rooms/json_of_categories_by_school_room' => 'rooms#json_of_categories_by_school_room'
+  post 'rooms/filter_rooms' => 'rooms#filter_rooms', as: 'rooms_filter'
 
   # Course
   get 'courses/courses_by_user' => 'courses#courses_by_user', as: 'courses_by_user'
@@ -130,6 +132,7 @@ Rails.application.routes.draw do
   namespace :api, default: { format: :json }, path: '/api' do
     get 'all_rooms' => 'apis#all_rooms'
     get 'building/:code' => 'apis#buildings'
+    get 'school_rooms/all' => 'apis#all_school_room'
     get 'department_allocations/:code' => 'apis#department_allocations'
     get 'discipline_allocations/:code' => 'apis#discipline_allocations'
     get 'school_rooms/all_school_rooms' => 'apis#all_school_rooms', as: 'api_all_school_rooms'

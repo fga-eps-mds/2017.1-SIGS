@@ -89,5 +89,11 @@ RSpec.describe Api::ApisController, type: :controller do
 			teste = [@allocation, @allocation2]
 			expect(JSON.parse(response.body)) == teste.to_json
 		end
+
+		it 'should get allocations of all school_room' do
+			get :all_school_room, params: { default: { format: :json } }
+			expect(response).to have_http_status(200)
+			#expect(JSON.parse(response.body)) == teste.to_json
+		end
 	end
 end
