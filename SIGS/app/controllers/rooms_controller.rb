@@ -6,45 +6,37 @@ class RoomsController < ApplicationController
 
   def index
     @rooms = Room.all
-    if params[:name].present? || params[:code].present? ||
-       params[:capacity].present? || params[:building_id].present? ||
-       params[:wing].present? || params[:category].present?
-      filter_by_name
-      filter_by_code
-      filter_by_capacity
-      filter_by_buildings
-      filter_by_wings
-    end
+    @buildings = Building.all
+    filter_by_name
+    filter_by_code
+    filter_by_capacity
+    filter_by_buildings
+    filter_by_wings
   end
 
   def filter_by_capacity
-    if params[:capacity].present?
-      @rooms = @rooms.where('capacity >= ?', params[:capacity])
-    end
+    return unless params[:capacity].present?
+    @rooms = @rooms.where('capacity >= ?', params[:capacity])
   end
 
   def filter_by_buildings
-    if params[:building_id].present?
-      @rooms = @rooms.where(building_id: params[:building_id])
-    end
+    return unless params[:building_id].present?
+    @rooms = @rooms.where(building_id: params[:building_id])
   end
 
   def filter_by_wings
-    if params[:wing].present?
-      @rooms = @rooms.joins(:building).where(buildings: { wing: params[:wing] })
-    end
+    return unless params[:wing].present?
+    @rooms = @rooms.joins(:building).where(buildings: { wing: params[:wing] })
   end
 
   def filter_by_name
-    if params[:name].present?
-      @rooms = @rooms.where('rooms.name' => params[:name])
-    end
+    return unless params[:name].present?
+    @rooms = @rooms.where('rooms.name LIKE ?', "%#{params[:name]}%")
   end
 
   def filter_by_code
-    if params[:code].present?
-      @rooms = @rooms.where('rooms.code' => params[:code])
-    end
+    return unless params[:code].present?
+    @rooms = @rooms.where('rooms.code' => params[:code])
   end
 
   def edit
