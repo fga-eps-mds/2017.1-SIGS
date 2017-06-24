@@ -101,9 +101,13 @@ class SolicitationsController < ApplicationController
                                    start_time: room_solicitation.start,
                                    final_time: room_solicitation.final,
                                    active: true)
+      if @room == nil &&  !room_solicitation.room_id.nil? || @room == true
+        room_solicitation.status = 1
+      end
       @allocation.room_id = validade_room_for_approve(@room, room_solicitation)
       pass_to_all_allocation_dates_aux(@allocation)
       @allocation.save
+      room_solicitation.save
     end
     validate_for_save_solicitation(@solicitation)
   end
