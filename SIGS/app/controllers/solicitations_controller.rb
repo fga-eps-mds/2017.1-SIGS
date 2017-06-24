@@ -45,12 +45,7 @@ class SolicitationsController < ApplicationController
   end
 
   def index
-    coordinator = Coordinator.find_by(user_id: current_user.id)
-    department = if coordinator.nil?
-                   Department.find_by(name: 'PRC')
-                 else
-                   coordinator.course.department
-                 end
+    department = return_department_owner
 
     @room_solicitations = RoomSolicitation.where(department: department)
                                           .group(:solicitation_id)
@@ -63,17 +58,20 @@ class SolicitationsController < ApplicationController
   end
 
   def show
-    # if allocation_period?
-    #   @period = true
-    # else
-    #   @period = false
-    # end
     @allocation = Allocation.new
-    @rooms = Room.where(department_id:
-                        current_user.coordinator.course.department.id)
+    @rooms = Room.where(department_id: return_department_owner)
     @solicitation = Solicitation.find(params[:id])
+    @school_room = @solicitation.school_room
+    @department = return_department_owner
+    return_wing
+
     @room_solicitations = RoomSolicitation.where(solicitation_id:
                                                  @solicitation.id)
+    @allocation = ''
+    @room_solicitations.each do |room_solicitation|
+      @allocation += "allocations[]=#{room_solicitation.day}"
+      @allocation += "[#{room_solicitation.start.strftime('%H')}]"
+    end
   end
 
   def recuse_solicitation
@@ -95,17 +93,21 @@ class SolicitationsController < ApplicationController
   private
 
   def avaliable_rooms
-    avaliable_rooms = []
     reservations = convert_params_to_hash(params[:allocations])
     reservations = group_solicitation(reservations)
 
     rooms = filter_rooms_for_school_room(params[:school_room], params[:department])
 
+    department_room(rooms, reservations)
+  end
+
+  def department_room(rooms, reservations)
+    avaliable_rooms_hash = []
     rooms.each do |room|
       next unless avaliable_room_day(reservations, room)
-      avaliable_rooms.push [room, room.building, room.department, room.category]
+      avaliable_rooms_hash.push [room, room.building, room.department, room.category]
     end
-    avaliable_rooms
+    avaliable_rooms_hash
   end
 
   def allocation_period?
@@ -170,6 +172,15 @@ class SolicitationsController < ApplicationController
             else
               @school_room.courses[0].department.wing
             end
+  end
+
+  def return_department_owner
+    coordinator = Coordinator.find_by(user_id: current_user.id)
+    if coordinator.nil?
+      Department.find_by(name: 'PRC')
+    else
+      coordinator.course.department
+    end
   end
 end
 # rubocop:enable ClassLength

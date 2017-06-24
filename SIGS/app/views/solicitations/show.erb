@@ -1,59 +1,135 @@
 <h1>Solicitação</h1>
-<table class="table">
-<tr>
- <th>Data</th>
- <th>Turma</th>
- <th>Disciplina</th>
- <th>Departamento</th>
- <th>Autor</th>
-</tr>
-<tr>
- <td><%= @solicitation.request_date%></td>
- <td><%= @solicitation.school_room.name%></td>
- <td><%= @solicitation.school_room.discipline.name %></td>
- <td><%= @solicitation.school_room.discipline.department.name %></td>
- <td><%= @solicitation.requester.name %></td>
-</tr>
-</table>
+<%= render partial: "school_rooms/show", locals: {school_room: @solicitation.school_room} %>
+<%= hidden_field_tag :solicitation_wing, @wing, readonly: true %>
+<%= form_for @allocation, url: allocation_by_solicitation_path do |allocation| %>
 
-<h2>Justificativa<h2>
-<%= @solicitation.justify %>
-<br>
-<%= link_to image_tag("recuse.png"), solicitations_recuse_solicitation_path(@solicitation.id) %>
-<%= link_to image_tag("approve.png"), solicitations_approve_solicitation_path(@solicitation.id) %>
+
+<hr>
+
+<h3>Justificativa:</h3>
+<p><%= @solicitation.justify %></p>
+
+<hr>
 
 <h2>Solicitações</h2>
 
 <table class="table">
- <tr>
-   <th>Hora de inicio</th>
-   <th>Hora de fim</th>
-   <th>Dia</th>
+  <tr>
+    <th>Hora de inicio</th>
+    <th>Hora de fim</th>
+    <th>Dia</th>
+    <th></th>
 
- </tr>
- <% @room_solicitations.each do |room_solicitation| %>
- <tr>
-   <td><%= room_solicitation.start.strftime('%H')%>H</td>
-   <td><%= room_solicitation.final.strftime('%H')%>H</td>
-   <td><%= room_solicitation.day %></td>
+  </tr>
+  <% has_rooms = nil %>
+  <% @room_solicitations.each_with_index do |room_solicitation, index| %>
+    <% has_rooms = room_solicitation.room.nil? %>
+    <tr>
+      <td><%= room_solicitation.start.strftime('%H')%>H</td>
+      <td><%= room_solicitation.final.strftime('%H')%>H</td>
+      <td><%= room_solicitation.day %></td>
 
-   <td style="text-align:center"><%= form_for @allocation, url: allocation_by_solicitation_path do |allocation| %>
-
-         <input type='hidden' name='allocation[active]' value='1' />
-         <input type='hidden' name='allocation[school_room_id]' value='<%= room_solicitation.solicitation.school_room_id %>' />
-         <input type='hidden' name='allocation[day]' value='<%= room_solicitation.day %>' />
-         <input type='hidden' name='allocation[start_time]' value='<%= room_solicitation.start.strftime("%H") %>' />
-         <input type='hidden' name='allocation[final_time]' value='<%= room_solicitation.final.strftime("%H") %>' />
-         <!-- <% if @period == true %> -->
-           <label>Sala<lebel>
-           <%= allocation.collection_select(:room_id,@rooms,:id,:name, include_blank: true)%>
-         <!-- <% else %> -->
-           <%= room_solicitation.room.name %><br>
-           <%= allocation.hidden_field :room_id, value: room_solicitation.room_id%>
-         <!-- <% end %> -->
-         <br><br><%= allocation.submit "Alocar", class: 'pull-right btn btn-default btn-success' %>
-       <% end %>
-   </td>
- </tr>
- <% end %>
+      <td>
+        <% if has_rooms %>
+        
+        <% else %>
+          <%= room_solicitation.room.name %><br>
+          <%= allocation.hidden_field :room_id, value: room_solicitation.room_id%>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
 </table>
+<% if has_rooms %>
+  <h2>Salas Disponíveis</h2>
+  <div id="rooms-list"></div>
+<% end %>
+
+<div style="text-align: center;">
+
+<%= link_to "Recusar", solicitations_recuse_solicitation_path(@solicitation.id), class: 'pull-right btn btn-default btn-danger' %> 
+<%= link_to "Aprovar", solicitations_approve_solicitation_path(@solicitation.id), class: 'pull-right btn btn-default btn-success' %> 
+</div>
+<% end %>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $.getJSON('../avaliable_rooms_by_department?department=<%= @department.id %>' +
+      '&school_room=<%= @school_room.id %>&<%= @allocation %>',
+      { format: 'json'
+    }).success(function(data){
+      console.log(data);
+      if (data.length > 0){
+        listDepartmentRooms(<%= @department.id %>, data);
+      }
+    }).error(function(){
+      alert("Falha no Processamento");
+    });
+  });
+
+function listDepartmentRooms(department_id, data) {
+    var list = "<div id='department_rooms_" + department_id + "'>";
+
+    list += "<h2>" + data[0][2].name + "</h2><table class='table'>";
+    list += "<tr>" +
+      "<th></th>" +
+      "<th>Sala</th>" +
+      "<th>Prédio</th>" +
+      "<th>Ala</th>" +
+      "<th>Capacidade</th>" +
+      "<th>Recursos</th>" +
+      "<th></th>" +
+      "</tr>";
+    for(var i = 0; i < data.length; i++) {
+      var far = "near-room";
+      if ($("#solicitation_wing").val() != data[i][1].wing) {
+        console.log($("#solicitation_wing").val())
+        far = "far-room";
+      }
+
+      list += "<tr class='" + far + "'><td><input type='checkbox' name='rooms[]' value='" +
+        data[i][0].id + "'></td>" +
+        "<td>" + data[i][0].name + "</td>" +
+        "<td>" + data[i][1].name + "</td>" +
+        "<td>" + data[i][1].wing + "</td>" +
+        "<td>" + data[i][0].capacity + "</td><td>";
+        var broken = false;
+        for(var j = 0; j < data[i][3].length; j++){
+          list +=  data[i][3][j].name + "<br>";
+        }
+        list +=  "</td><td>";
+        if(!containsCategory(data[i][3]))
+          list += '<a href="#" data-toggle="tooltip" data-placement="top" title="Não possui todos os recursos"><span class="glyphicon glyphicon-exclamation-sign"></span></a>';
+        list += "</td></tr>";
+    }
+    list += "</table></div>";
+    $("#rooms-list").append(list);
+  }
+
+  function containsCategory(room_categories) {
+    var categories = $("#school_room_ressources").html().trim().split('<br>');
+
+    if(categories.length == 1 && categories[0] == "") {
+      return true;
+    }
+
+    for(var j = 0; j < categories.length; j++){
+      var exists = false;
+      for (var i = 0; i < room_categories.length; i++) {
+        if(categories[j].includes(room_categories[i].name)){
+          console.log("existe " + room_categories[i].name + " " + categories[j]);
+          exists = true;
+          break;
+        }
+      }
+
+      if(!exists) {
+        return false;
+      }
+
+    }
+    return true;
+  }
+
+</script>
