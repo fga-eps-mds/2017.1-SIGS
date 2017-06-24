@@ -49,7 +49,7 @@ RSpec.describe Api::ApisController, type: :controller do
 		end
 
 		it 'should get json response all scholl_rooms' do
-		  get :all_school_rooms, params: { default: { format: :json } }
+		  get :all_school_room, params: { default: { format: :json } }
 		  expect(response).to have_http_status(200)
 		end
 
