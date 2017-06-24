@@ -35,6 +35,8 @@ RSpec.describe RoomsController, type: :controller do
       @coordinator = Coordinator.create(user: @user_2, course: @course)
 
       @allocation = Allocation.create(user: @user,room: @room, school_room: @school_room, day: "Segunda", start_time: '14:00:00', final_time: '16:00:00')
+      
+      sign_in(@user)
     end
 
     it 'should return all room prc' do
