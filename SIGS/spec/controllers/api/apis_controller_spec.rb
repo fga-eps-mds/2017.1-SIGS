@@ -51,6 +51,7 @@ RSpec.describe Api::ApisController, type: :controller do
 		it 'should get json response all scholl_rooms' do
 		  get :all_school_rooms, params: { default: { format: :json } }
 		  expect(response).to have_http_status(200)
+		end
 
 		it 'should return allocations by discipline' do
 			get :discipline_allocations, params: { default: { format: :json }, code: @discipline.code }

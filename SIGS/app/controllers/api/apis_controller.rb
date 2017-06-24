@@ -21,30 +21,10 @@ module Api
       render json: @building_allocation
     end
 
-    def generate_return_building(building, allocations)
-      hash = {}
-      allocations.each do |allocation|
-        hash[allocation.id] = {
-          building_name: building.name,
-          building_code: building.code,
-          room_name: allocation.room.name,
-          room_capacity: allocation.room.capacity,
-          discipline_name: allocation.school_room.discipline.name,
-          discipline_code: allocation.school_room.discipline.code,
-          school_room_name: allocation.school_room.name,
-          school_room_vacancies: allocation.school_room.vacancies,
-          allocation_day: allocation.day,
-          allocation_start_time: allocation.start_time.strftime('%H:%M'),
-          allocation_final_time: allocation.final_time.strftime('%H:%M')
-        }
-      end
-      hash
-    end
-
     def all_school_rooms
       @school_rooms = SchoolRoom.all
       render json: @school_rooms
-    end 
+    end
 
     def department_allocations
       @department = Department.find_by(code: params[:code])
@@ -74,6 +54,26 @@ module Api
     end
 
     private
+
+    def generate_return_building(building, allocations)
+      hash = {}
+      allocations.each do |allocation|
+        hash[allocation.id] = {
+          building_name: building.name,
+          building_code: building.code,
+          room_name: allocation.room.name,
+          room_capacity: allocation.room.capacity,
+          discipline_name: allocation.school_room.discipline.name,
+          discipline_code: allocation.school_room.discipline.code,
+          school_room_name: allocation.school_room.name,
+          school_room_vacancies: allocation.school_room.vacancies,
+          allocation_day: allocation.day,
+          allocation_start_time: allocation.start_time.strftime('%H:%M'),
+          allocation_final_time: allocation.final_time.strftime('%H:%M')
+        }
+      end
+      hash
+    end
 
     def rooms_allocations_to_json(allocations)
       count = 0

@@ -24,7 +24,7 @@ RSpec.describe ApiUsersController, type: :controller do
     it 'should not create a new user for api (wrong name)' do
       post :create, params:{api_user: {name: '', email: 'gesiel@unb.br'}}
       expect(ApiUser.count).to be(0)
-     end
+    end
 
     it 'should not create a new user (invalid unb email)' do
       post :create, params:{api_user: {name: 'Gesiel Freitas', email: 'gesiel@gmail'}}
