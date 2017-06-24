@@ -19,7 +19,7 @@ RSpec.describe RoomsController, type: :controller do
       @room = Room.create(code: 'S10', name: 'Superior 10', capacity: 50,
        active: true, time_grid_id: 1, building: @building, department: @department, category: [@category])
 
-      @room_2 = Room.create(code: 'S9', name: 'Superior 9', capacity: 50,
+      @room_2 = Room.create(code: 'S9', name: 'Superior 9', capacity: 20,
        active: true, time_grid_id: 1, building: @building, department: @department_2, category: [@category])
 
       @user = User.create(name: 'joao silva', email: 'joaosilva@unb.br',
@@ -28,6 +28,9 @@ RSpec.describe RoomsController, type: :controller do
       @user_2 = User.create(name: 'joao silva', email: 'joaferrera@unb.br',
         password: '123456', registration:'1100069', cpf:'04601407380', active: true)
 
+      @user_3 = User.create(name: 'joao silva', email: 'jsilva@unb.br',
+        password: '123456', registration:'1100065', cpf:'04616585123', active: true)
+
       @administrative_assistant = AdministrativeAssistant.create(user: @user)
 
       @school_room = SchoolRoom.create(name:'A', vacancies: 40, courses: [@course], discipline: @discipline)
@@ -35,6 +38,10 @@ RSpec.describe RoomsController, type: :controller do
       @coordinator = Coordinator.create(user: @user_2, course: @course)
 
       @allocation = Allocation.create(user: @user,room: @room, school_room: @school_room, day: "Segunda", start_time: '14:00:00', final_time: '16:00:00')
+
+      @deg = Deg.create(user: @user_3)
+      
+      sign_in(@user)
     end
 
     it 'should return all room prc' do
@@ -53,6 +60,12 @@ RSpec.describe RoomsController, type: :controller do
       sign_in(@user)
       get :edit, params:{id: @room.id}
       expect(response).to have_http_status(200)
+    end
+
+    it 'shoudl denied the acess' do
+      sign_in(@user_3)
+      get :edit, params:{id: @room.id}
+      expect(flash[:error]).to eq('Acesso Negado')
     end
 
     it 'should return one room' do
@@ -130,6 +143,36 @@ RSpec.describe RoomsController, type: :controller do
       sign_in(@user)
       get :json_of_categories_by_school_room, params: {school_room_id: @school_room.id}, :format => :json
       expect(response).to have_http_status(200)
+    end
+
+    it 'should filter by capacity' do
+      get :index , params: {capacity: 25}
+      rooms_report = [@room]
+      expect(assigns[:rooms]).to eq(rooms_report)
+    end
+
+    it 'should filter by buildings' do
+      get :index , params: {building_id: @building.id}
+      buildings_report = [@room, @room_2]
+      expect(assigns[:rooms]).to eq(buildings_report)
+    end
+
+    it 'should filter by wing' do
+      get :index , params: {wing: @building.wing}
+      buildings_report = [@room, @room_2]
+      expect(assigns[:rooms]).to eq(buildings_report)
+    end
+
+    it 'should filter by name' do
+      get :index , params: {name: @room.name}
+      room_report = [@room]
+      expect(assigns[:rooms]).to eq(room_report)
+    end
+
+    it 'should filter by code' do
+      get :index , params: {code: @room.code}
+      room_report = [@room]
+      expect(assigns[:rooms]).to eq(room_report)
     end
   end
 end

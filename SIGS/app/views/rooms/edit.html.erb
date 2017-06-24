@@ -23,9 +23,11 @@
     <%= room.label :active, 'Ativo' %>
     <%= room.check_box :active, class: 'form-control',style: 'text-align:left; width: auto' %><br>
 
-    <p> Categorias</p>
+    <p> <b> Categorias </b> </p>
     <div class="checkbox-group">
-      <%= room.collection_check_boxes(:category_ids,all_categories,:id,:name, include_blank: true)%>
+      <%= room.collection_check_boxes(:category_ids,all_categories,:id,:name, include_blank: true) do |box| %>
+        <%= box.check_box %>  <%= box.text %> <br>
+      <% end %>
     </div>
 
     <div class='actions'>

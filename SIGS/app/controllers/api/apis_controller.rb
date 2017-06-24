@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 # Module de API
+require 'api/aux_apis'
 module Api
   # Controller de API
   class ApisController < ApplicationController
@@ -13,36 +14,40 @@ module Api
       render json: @rooms
     end
 
-    def all_school_rooms
-      @school_rooms = SchoolRoom.all
-      render json: @school_rooms
+    def all_school_room
+      allocations = Allocation.all
+      @school_room = AuxApis.generate_school_room(allocations)
+      render json: @school_room
+    end
+
+    def department_allocations
+      @department = Department.find_by(code: params[:code])
+      if !@department.nil?
+        @allocations = Allocation.where(room: @department.rooms, active: true)
+        render json: AuxApis.department_allocations_to_json(@allocations)
+      else
+        render json: 'Nenhuma departamento encontrado com esse código.'
+      end
+    end
+
+    def discipline_allocations
+      @discipline = Discipline.find_by(code: params[:code])
+      if !@discipline.nil?
+        @allocations = Allocation.where(school_room: @discipline.school_rooms,
+                                        active: true)
+        render json: AuxApis.discipline_allocations_to_json(@allocations, params[:code])
+      else
+        render json: 'Nenhuma disciplina encontrada com esse código.'
+      end
     end
 
     def school_rooms_of_room
       @room = Room.find_by(code: params[:code])
       @allocations = Allocation.where(room: @room, active: true)
-      rooms_allocations_to_json(@allocations)
+      render json: AuxApis.rooms_allocations_to_json(@allocations)
     end
 
     private
-
-    def rooms_allocations_to_json(allocations)
-      count = 0
-      hash = []
-      allocations.each do |allocation|
-        hash[count] = {
-          discipline_name: allocation.school_room.discipline.name,
-          discipline_code: allocation.school_room.discipline.code,
-          school_room_name: allocation.school_room.name,
-          school_room_vacancies: allocation.school_room.vacancies,
-          allocation_day: allocation.day,
-          allocation_start_time: allocation.start_time.strftime('%H:%M'),
-          allocation_final_time: allocation.final_time.strftime('%H:%M')
-        }
-        count += 1
-      end
-      render json: hash
-    end
 
     def authenticate?
       authenticate_or_request_with_http_token do |token, _options|

@@ -6,6 +6,11 @@ class SolicitationsController < ApplicationController
   include Schedule
   include PrepareSolicitationsToSave
   before_action :logged_in?
+  before_action :authenticate_not_deg?
+  before_action :authenticate_coordinator?, except: [:index, :show,
+                                                     :avaliable_rooms_by_department,
+                                                     :approve_solicitation,
+                                                     :recuse_solicitation]
 
   def allocation_period
     school_room_id = params[:school_room_id]
@@ -94,6 +99,8 @@ class SolicitationsController < ApplicationController
     validate_for_save_solicitation(@solicitation)
   end
 
+  private
+
   def validate_status_room(room_solicitation)
     if !room_solicitation.room_id.nil?
       1
@@ -134,8 +141,6 @@ class SolicitationsController < ApplicationController
     end
     allocation.save
   end
-
-  private
 
   def update_room_status(room_solicitation)
     room_solicitation.update(justify: params[:justification],

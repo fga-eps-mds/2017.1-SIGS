@@ -78,7 +78,7 @@ class UsersController < ApplicationController
     if @user.id == current_user.id
       if permission[:level] == 2 &&
          AdministrativeAssistant.joins(:user).where(users: { active: true }).count == 1
-        flash[:error] = 'Não é possível excluir o único Assistente Administrativo'
+        flash[:error] = 'Não é possível excluir o único assistante Administrativo'
         redirect_to current_user
       else
         @user.update(active: 2)

@@ -22,18 +22,20 @@
       <!-- /.info-box-content -->
     </div>
   </div>
-  <div class="col-md-4 col-sm-6 col-xs-12">
-    <div class="info-box">
-      <span class="info-box-icon bg-yellow"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></span>
-
-      <div class="info-box-content">
-        <span class="info-box-text">Solicitações Recebidas</span>
-        <span class="info-box-number"><%= @solicitation_count.count %></span>
+  <% if permission[:level] != 0 %>
+    <div class="col-md-4 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon bg-yellow"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></span>
+        <div class="info-box-content">
+          <span class="info-box-text">Solicitações Recebidas</span>
+          <span class="info-box-number"><%= @solicitation_count.count %></span>
+        </div>
+        <!-- /.info-box-content -->
       </div>
-      <!-- /.info-box-content -->
     </div>
-  </div>
+  <% end %>
 </div><!-- /.row -->
+
 <h2>Calendário</h2>
 <div class="row">
   <div class="col-sm-8">

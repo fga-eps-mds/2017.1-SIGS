@@ -226,6 +226,10 @@ GEM
       codeclimate-engine-rb (~> 0.4.0)
       parser (>= 2.4.0.0, < 2.5)
       rainbow (~> 2.0)
+    rspec (3.5.0)
+      rspec-core (~> 3.5.0)
+      rspec-expectations (~> 3.5.0)
+      rspec-mocks (~> 3.5.0)
     rspec-core (3.5.4)
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)
@@ -347,6 +351,7 @@ DEPENDENCIES
   rails (~> 5.0.2)
   rails-controller-testing
   rails_12factor
+  rspec
   rspec-rails
   rubocop (~> 0.48.1)
   rubycritic
