@@ -46,7 +46,7 @@
 
     period = <%= @school_room.courses[0].shift %>;
     start = (period == 1) ? 6 : 18
-    final = (period == 1) ? 18 : 24
+    final = (period == 1) ? 18 : 23
     for (var row = start; row < final; row++) {
       table +="<tr>";
       table += "<td>" + row + ":00</td>";
