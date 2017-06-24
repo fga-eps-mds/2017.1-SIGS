@@ -216,4 +216,52 @@ end
                                                   }
     end
   end
+  describe 'approve_solicitation' do
+    before(:each) do
+      @department = Department.create(code: '789', name: 'Engenharia', wing: 'SUL')
+      @department_3 = Department.create(code: '156', name: 'Artes', wing: 'NORTE')
+      @course_2 = Course.create(code: '12', name: 'Engenharia Eletrônica', department: @department, shift: 1)
+      @course_4 = Course.create(code: '09', name: 'Artes Visuais', department: @department_3, shift: 2)
+      @user = User.create(name: 'Caio Filipe', email: 'caio@unb.br', cpf: '05012345678', registration: '1234567', active: 1, password: '123456')
+      @coordinator = Coordinator.create(user: @user, course: @course_2)
+      @user_3 = User.create(name: 'Daniel Marques', email: 'denes@unb.br', cpf: '05044348888', registration: '1234546', active: 1, password: '123456')
+      @coordinator_3 = Coordinator.create(user: @user_3, course: @course_4)
+      @buildings = Building.create([
+        {code: 'pjc', name: 'Pavilhão João Calmon', wing: 'NORTE'},
+        {code: 'PAT', name: 'Pavilhão Anísio Teixeira', wing: 'NORTE'},
+        {code: 'BSAS', name: 'Bloco de Salas da Ala Sul', wing: 'SUL'},
+        {code: 'BSAN', name: 'Bloco de Salas da Ala Norte', wing: 'NORTE'}
+        ])
+      @category = Category.create(name: 'Laboratório Químico')
+      @category_2 = Category.create(name: 'Retroprojetor')
+      @room_4 = Room.create(code: '987654', name: 'S8', capacity: 80, active: true, time_grid_id: 1, department: @department, building: @buildings[1], category_ids: [@category.id])
+      @discipline_4 = Discipline.create(code: '774', name: 'Artes Visuais', department: @department_3)
+      @school_room_5 = SchoolRoom.create(name:'AA', discipline: @discipline_4, vacancies: 40, course_ids: [@course_4.id])
+      @period = Period.create(period_type:'Alocação', initial_date: '10-01-2018', final_date: '01-02-2018')
+      @period_2 = Period.create(period_type:'Ajuste', initial_date: '23-02-2018', final_date: '01-03-2018')
+      @period_3 = Period.create(period_type:'Letivo', initial_date: '08-03-2018', final_date: '14-07-2018')
+    end
+
+    it 'should save allocation, when permit, in AllAllocationDate table in letive period' do
+      @solicitation = Solicitation.create(justify: 'aaaa', status: 0, request_date: '10-01-2018', requester_id: @user_3.id, school_room_id: @school_room_5.id)
+      @room_solicitation = RoomSolicitation.create(solicitation_id: @solicitation.id,start: '10-01-2018 18:00:00',final: '10-01-2018 20:00:00',day: "sabado",department_id: @department_3.id)
+      sign_in(@user)
+      post :approve_solicitation, params: {id: @solicitation.id, room: @room_4.id}
+      allocations_date = AllAllocationDate.count
+      allocations = Allocation.count
+      expect(allocations_date).to eq(18)
+      expect(allocations).to eq(1)
+    end
+
+    it 'should save allocation, when permit, in AllAllocationDate table in adjustment period' do
+      @solicitation = Solicitation.create(justify: 'aaaa', status: 0, request_date: '10-01-2018', requester_id: @user_3.id, school_room_id: @school_room_5.id)
+      @room_solicitation = RoomSolicitation.create(room_id: @room_4.id, solicitation_id: @solicitation.id,start: '10-01-2018 18:00:00',final: '10-01-2018 20:00:00',day: "sabado",department_id: @department_3.id)
+      sign_in(@user)
+      post :approve_solicitation, params: {id: @solicitation.id}
+      allocations_date = AllAllocationDate.count
+      allocations = Allocation.count
+      expect(allocations_date).to eq(18)
+      expect(allocations).to eq(1)
+    end
+  end
 end
