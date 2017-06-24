@@ -1,10 +1,3 @@
-Given (/^I am logged in as asssistant administrative$/) do
-  visit 'http://192.168.2.15:3000'
-  fill_in('session[email]', :with=> 'wallacy@unb.br')
-  fill_in('session[password]', :with=> '123456')
-  click_button('Entrar')
-end
-
 When (/^click on link 'Salas'$/) do
   #first(:link, 'Salas').click
   #visit 'http://192.168.2.15:3000/rooms/index'
@@ -83,7 +76,7 @@ And (/^the 'Alterar Sala' page should load with errors messages of empty fields$
 end
 
 Then (/^the 'Salas' page should load with notice message 'Não há salas registradas no momento.'$/) do
-  expect(page).to have_content('Não há salas registradas no momento.')
+  expect(page).to have_content('Nenhuma sala encontrada.')
 end
 
 And (/^the 'Alterar Sala' page should load with a error message of capacity field$/) do
