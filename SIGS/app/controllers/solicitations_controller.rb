@@ -51,9 +51,13 @@ class SolicitationsController < ApplicationController
                                           .group(:solicitation_id)
     @solicitations = []
     @room_solicitations.each do |room_solicitation|
-      @solicitations << Solicitation.find_by(id:
-                                             room_solicitation.solicitation.id,
-                                             status: 0)
+      solicitation_validade = Solicitation.find_by(id:
+                                                   room_solicitation
+                                                   .solicitation.id,
+                                                   status:
+                                                   0)
+      next if solicitation_validade.nil?
+      @solicitations << solicitation_validade
     end
   end
 
@@ -83,15 +87,54 @@ class SolicitationsController < ApplicationController
   end
 
   def approve_solicitation
-    # params[:room] vai trazer o id da sala marcada
-    # params[:id] vai trazer o id da solicitation
-    # lembre que o parametro da sala só existe se for solicitacao sem sala
-    render inline: "Sala:#{params[:room]} <br>Solicitação:#{params[:id]}"
-    # @solicitation = Solicitation.find(params[:id])
-    # @solicitation.status = 1
-    # @solicitation.save
-    # flash[:success] = 'Solicitação aprovada com successo'
-    # redirect_to solicitations_show_path(@solicitation.id)
+    @solicitation = Solicitation.find(params[:id])
+    @room = Room.find_by(id: params[:room])
+    @room_solicitations = RoomSolicitation.where(solicitation_id:
+                                                 @solicitation.id)
+    @room_solicitations.each do |room_solicitation|
+      @allocation = Allocation.new(user_id: current_user.id,
+                                   school_room_id: @solicitation.school_room_id,
+                                   day: room_solicitation.day,
+                                   start_time: room_solicitation.start,
+                                   final_time: room_solicitation.final,
+                                   active: true)
+      @allocation.room_id = validade_room_for_approve(@room, room_solicitation)
+      pass_to_all_allocation_dates_aux(@allocation)
+      @allocation.save
+    end
+    validate_for_save_solicitation(@solicitation)
+  end
+
+  def validade_room_for_approve(room, room_solicitation)
+    if room_solicitation.room_id.nil?
+      room.id
+    else
+      room_solicitation.room_id
+    end
+  end
+
+  def validate_for_save_solicitation(solicitation)
+    solicitation.status = 1
+    return unless solicitation.save
+    flash[:success] = 'Solicitação aprovada com successo'
+    redirect_to solicitations_index_path
+  end
+
+  def pass_to_all_allocation_dates_aux(allocation)
+    period = Period.find_by(period_type: 'Letivo')
+    date = period.initial_date
+    while date != period.final_date
+      all_allocation_date = AllAllocationDate.new
+      all_allocation_date.allocation_id = allocation.id
+
+      %w[segunda terca quarta quinta sexta sabado].each_with_index do |day, index|
+        next unless allocation.day == day && date.wday == index + 1
+        all_allocation_date.day = date
+        all_allocation_date.save
+        all_allocation_date = nil
+      end
+      date += 1
+    end
   end
 
   private

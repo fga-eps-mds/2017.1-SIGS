@@ -106,7 +106,7 @@ end
       @room_solicitation = RoomSolicitation.create(solicitation_id: @solicitation.id,start: '10-01-2018 12:00:00',final: '10-01-2018 13:00:00',day: "segunda",department_id: @department1.id)
       get :index
       expect(assigns(:room_solicitations)).not_to be_empty
-      expect(assigns(:solicitations)).to eq([nil])
+      expect(assigns(:solicitations)).to eq([])
     end
   end
 
