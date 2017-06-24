@@ -78,7 +78,7 @@
   }
 
   $(document).ready(function(){
-    $.getJSON('../avaliable_rooms_by_department?department=<%= @department.id %>' +
+    $.getJSON('avaliable_rooms_by_department?department=<%= @department.id %>' +
       '&school_room=<%= @school_room.id %>&<%= @allocation %>',
       { format: 'json'
     }).success(function(data){

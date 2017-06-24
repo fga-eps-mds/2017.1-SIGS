@@ -110,7 +110,7 @@ Rails.application.routes.draw do
 
   # Solicitation
   get 'solicitations/index' => 'solicitations#index', :as => 'solicitations_index'
-  get 'solicitations/show/:id' => 'solicitations#show', as: 'solicitations_show'
+  get 'solicitations/show/' => 'solicitations#show', as: 'solicitations_show'
   get 'solicitations/allocation_period/:school_room_id' => 'solicitations#allocation_period', :as => 'allocation_period'
   get 'solicitations/adjustment_period/:school_room_id' => 'solicitations#adjustment_period', :as => 'adjustment_period'
   post 'solicitations/save_allocation_period' => 'solicitations#save_allocation_period', :as => 'save_allocation_period'

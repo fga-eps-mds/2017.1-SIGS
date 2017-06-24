@@ -15,16 +15,23 @@
 
     </tr>
     <% @solicitations.each do |solicitation| %>
-    <tr>
-      <td><%= solicitation.request_date%></td>
-      <td><%= solicitation.school_room.name%></td>
-      <td><%= solicitation.school_room.discipline.name %></td>
-      <td><%= solicitation.school_room.discipline.department.name %></td>
-      <td></td>
-      <td><%= solicitation.requester.name %></td>
-      <td style="text-align:center"><%= link_to image_tag("icon_view.png"), solicitations_show_path(solicitation.id) %></td>
+      <% solicitation.room_solicitation.group(:room_id).each do |room_solicitation| %>
+        <% room = room_solicitation.room %>
+        <tr>
+          <td><%= solicitation.request_date%></td>
+          <td><%= solicitation.school_room.name%></td>
+          <td><%= solicitation.school_room.discipline.name %></td>
+          <td><%= solicitation.school_room.discipline.department.name %></td>
+          <td><%= room.nil? ? '---' : room.name %></td>
+          <td><%= solicitation.requester.name %></td>
+          <% if room.nil? %>
+            <td style="text-align:center"><%= link_to image_tag("icon_view.png"), solicitations_show_path(id: solicitation.id) %></td>
+          <% else %>
+          <td style="text-align:center"><%= link_to image_tag("icon_view.png"), solicitations_show_path(id: solicitation.id, room: room.id) %></td>
 
-    </tr>
+          <% end %>
+        </tr>
+      <% end %>
     <% end %>
   </table>
 <% end %>

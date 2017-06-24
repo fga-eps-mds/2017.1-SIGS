@@ -47,10 +47,10 @@ class SolicitationsController < ApplicationController
   def index
     department = return_department_owner
 
-    @room_solicitations = RoomSolicitation.where(department: department)
-                                          .group(:solicitation_id)
+    room_solicitations = RoomSolicitation.where(department: department)
+                                         .group(:solicitation_id)
     @solicitations = []
-    @room_solicitations.each do |room_solicitation|
+    room_solicitations.each do |room_solicitation|
       solicitation_validade = Solicitation.find_by(id:
                                                    room_solicitation
                                                    .solicitation.id,
@@ -68,25 +68,24 @@ class SolicitationsController < ApplicationController
     @school_room = @solicitation.school_room
     @department = return_department_owner
     return_wing
-    my_rooms = Room.where(department: return_department_owner)
-    @room_solicitations = RoomSolicitation.where(solicitation_id:
+    room = params[:room].nil?
+    @rooms_solicity = RoomSolicitation.where(solicitation_id:
                                                  @solicitation.id)
-    @room_solicitations = @room_solicitations.where(room: my_rooms) unless @room_solicitations[0].room.nil?
+    @rooms_solicity = @rooms_solicity.where(room: params[:room]) unless room
 
-    byebug
     @allocation = ''
-    @room_solicitations.each do |room_solicitation|
+    @rooms_solicity.each do |room_solicitation|
       @allocation += "allocations[]=#{room_solicitation.day}"
       @allocation += "[#{room_solicitation.start.strftime('%H')}]"
     end
   end
 
   def recuse_solicitation
-    render inline: "hhhh"
+    render inline: 'ok'
     # @solicitation = Solicitation.find(params[:id])
     # @solicitation.status = 2
     # @solicitation.save
-    # flash[:success] = 'Solicitação recusada com successo'
+    # flash[:success] = 'Solicitacao recusada com successo'
     # redirect_to current_user
   end
 
