@@ -17,7 +17,17 @@ class UsersController < ApplicationController
     @school_room_count = school_rooms_by_user.count
     @school_rooms_allocated_count = school_rooms_allocated_count
     @periods = Period.all
-    @solicitation_count = Solicitation.where("requester_id='#{current_user.id}'").count
+    department = return_department_owner
+    @solicitation_count = RoomSolicitation.where(department: department)
+                                          .where(status: 0)
+                                          .group(:solicitation_id, :room_id).size
+    # @solicitation_count = RoomSolicitation.joins(:solicitation)
+    #                                       .where(department: department)
+    #                                       .where('solicitations.status = 0')
+    #                                       .where('room_solicitations.status = 0')
+    #                                       .select('count(*)')
+    #                                       .group(:solicitation_id).size
+
     return unless @user.id != current_user.id && permission[:level] != 2
     redirect_to_current_user
   end
@@ -39,6 +49,9 @@ class UsersController < ApplicationController
       redirect_to sign_in_path
       flash[:notice] = 'Solicitação de cadastro efetuado com sucesso!'
     else
+      @user.build_deg
+      @user.build_coordinator
+      @user.build_administrative_assistant
       render :new
     end
   end
@@ -65,7 +78,7 @@ class UsersController < ApplicationController
     if @user.id == current_user.id
       if permission[:level] == 2 &&
          AdministrativeAssistant.joins(:user).where(users: { active: true }).count == 1
-        flash[:error] = 'Não é possível excluir o único Assistente Administrativo'
+        flash[:error] = 'Não é possível excluir o único assistante Administrativo'
         redirect_to current_user
       else
         @user.update(active: 2)

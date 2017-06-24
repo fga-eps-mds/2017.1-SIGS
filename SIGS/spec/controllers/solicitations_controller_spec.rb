@@ -23,7 +23,7 @@ RSpec.describe SolicitationsController, type: :controller do
       expect(response).to have_http_status(200)
     end
 
-    it 'should open index page coordinator' do
+    it 'should open index page prc' do
       sign_in(@user2)
       get :index
       expect(response).to have_http_status(200)
@@ -45,6 +45,7 @@ end
       @discipline1 = Discipline.create(name: 'Anãlise Combinatória', code: '123', department: @department1)
       @coordinator1 = Coordinator.create(user: @user1, course: @course1)
       @coordinator2 = Coordinator.create(user: @user2, course: @course2)
+      @deg = Deg.create(user: @user3)
       @school_room1 = SchoolRoom.create(name:"YY", vacancies: 50, discipline: @discipline1, course_ids: [@course1.id])
       @school_room2 = SchoolRoom.create(name:"YY", vacancies: 50, discipline: @discipline1, course_ids: [@course2.id])
       @period = Period.create(period_type:'Alocação', initial_date: Date.current - 5.days, final_date: Date.current + 5.days)
@@ -90,14 +91,13 @@ end
     it 'should not create new solicitation because user is not a coordinator' do
       sign_in(@user3)
       post :save_allocation_period, params: {solicitation: {school_room_id: @school_room1.id, departments: @department1.id, justify: 'texto qualquer'}, segunda: {'12': '1'}}
-      expect(flash[:error]).to eq('Acesso negado.')
+      expect(flash[:error]).to eq('Acesso Negado')
     end
 
     it 'should check assigns with status = 0' do
       @solicitation = Solicitation.create(justify: 'aaaa', status: 0, request_date: '10-01-2018', requester_id: @user1.id, school_room_id: @school_room1.id)
       @room_solicitation = RoomSolicitation.create(solicitation_id: @solicitation.id,start: '10-01-2018 12:00:00',final: '10-01-2018 13:00:00',day: "segunda",department_id: @department1.id)
       get :index
-      expect(assigns(:room_solicitations)).not_to be_empty
       expect(assigns(:solicitations)).not_to be_empty
     end
 
@@ -105,8 +105,7 @@ end
       @solicitation = Solicitation.create(justify: 'aaaa', status: 2, request_date: '10-01-2018', requester_id: @user1.id, school_room_id: @school_room1.id)
       @room_solicitation = RoomSolicitation.create(solicitation_id: @solicitation.id,start: '10-01-2018 12:00:00',final: '10-01-2018 13:00:00',day: "segunda",department_id: @department1.id)
       get :index
-      expect(assigns(:room_solicitations)).not_to be_empty
-      expect(assigns(:solicitations)).to eq([nil])
+      expect(assigns(:solicitations)).to eq([])
     end
   end
 
@@ -127,6 +126,7 @@ end
       @discipline2 = Discipline.create(name: 'Combinatória', code: '447', department: @department2)
       @coordinator1 = Coordinator.create(user: @user1, course: @course1)
       @coordinator2 = Coordinator.create(user: @user2, course: @course2)
+      @deg = Deg.create(user: @user3)
       @school_room1 = SchoolRoom.create(name:"YY", vacancies: 50, discipline: @discipline1, course_ids: [@course1.id, @course3.id])
       @school_room2 = SchoolRoom.create(name:"YY", vacancies: 50, discipline: @discipline2, course_ids: [@course2.id])
       @period = Period.create(period_type:'Alocação', initial_date: Date.current - 10.days, final_date: Date.current - 5.days)
@@ -201,7 +201,7 @@ end
       post :save_adjustment_period, params: {solicitation: {school_room_id: @school_room1.id, justify: 'texto qualquer'},
                                              segunda: {'12': '1'},
                                              rooms: [@room.id]}
-      expect(flash[:error]).to eq('Acesso negado.')
+      expect(flash[:error]).to eq('Acesso Negado')
     end
 
     it 'should not create new solicitation because no select rooms' do
@@ -216,6 +216,111 @@ end
                                                    school_room: @school_room1.id,
                                                    allocations: ['segunda[16]', 'segunda[17]']
                                                   }
+    end
+  end
+
+  describe 'approve_solicitation' do
+    before(:each) do
+      @department = Department.create(code: '789', name: 'Engenharia', wing: 'SUL')
+      @department_3 = Department.create(code: '156', name: 'Artes', wing: 'NORTE')
+      @course_2 = Course.create(code: '12', name: 'Engenharia Eletrônica', department: @department, shift: 1)
+      @course_4 = Course.create(code: '09', name: 'Artes Visuais', department: @department_3, shift: 2)
+      @user = User.create(name: 'Caio Filipe', email: 'caio@unb.br', cpf: '05012345678', registration: '1234567', active: 1, password: '123456')
+      @coordinator = Coordinator.create(user: @user, course: @course_2)
+      @user_3 = User.create(name: 'Daniel Marques', email: 'denes@unb.br', cpf: '05044348888', registration: '1234546', active: 1, password: '123456')
+      @coordinator_3 = Coordinator.create(user: @user_3, course: @course_4)
+      @buildings = Building.create([
+        {code: 'pjc', name: 'Pavilhão João Calmon', wing: 'NORTE'},
+        {code: 'PAT', name: 'Pavilhão Anísio Teixeira', wing: 'NORTE'},
+        {code: 'BSAS', name: 'Bloco de Salas da Ala Sul', wing: 'SUL'},
+        {code: 'BSAN', name: 'Bloco de Salas da Ala Norte', wing: 'NORTE'}
+        ])
+      @category = Category.create(name: 'Laboratório Químico')
+      @category_2 = Category.create(name: 'Retroprojetor')
+      @room_4 = Room.create(code: '987654', name: 'S8', capacity: 80, active: true, time_grid_id: 1, department: @department, building: @buildings[1], category_ids: [@category.id])
+      @discipline_4 = Discipline.create(code: '774', name: 'Artes Visuais', department: @department_3)
+      @school_room_5 = SchoolRoom.create(name:'AA', discipline: @discipline_4, vacancies: 40, course_ids: [@course_4.id])
+      @period = Period.create(period_type:'Alocação', initial_date: '10-01-2018', final_date: '01-02-2018')
+      @period_2 = Period.create(period_type:'Ajuste', initial_date: '23-02-2018', final_date: '01-03-2018')
+      @period_3 = Period.create(period_type:'Letivo', initial_date: '08-03-2018', final_date: '14-07-2018')
+      @solicitation = Solicitation.create(justify: 'aaaa', status: 0, request_date: '10-01-2018', requester_id: @user_3.id, school_room_id: @school_room_5.id)
+    end
+
+    it 'should save allocation, when permit, in AllAllocationDate table in letive period' do
+      @room_solicitation = RoomSolicitation.create(solicitation_id: @solicitation.id,start: '10-01-2018 18:00:00',final: '10-01-2018 20:00:00',day: "sabado",department_id: @department_3.id)
+      sign_in(@user)
+      post :approve_solicitation, params: {id: @solicitation.id, room: @room_4.id}
+      allocations_date = AllAllocationDate.count
+      allocations = Allocation.count
+      expect(allocations_date).to eq(18)
+      expect(allocations).to eq(1)
+    end
+
+    it 'should save allocation, when permit, in AllAllocationDate table in adjustment period' do
+      @room_solicitation = RoomSolicitation.create(room_id: @room_4.id, solicitation_id: @solicitation.id,start: '10-01-2018 18:00:00',final: '10-01-2018 20:00:00',day: "sabado",department_id: @department_3.id)
+      sign_in(@user)
+      post :approve_solicitation, params: {id: @solicitation.id}
+      allocations_date = AllAllocationDate.count
+      allocations = Allocation.count
+      expect(allocations_date).to eq(18)
+      expect(allocations).to eq(1)
+    end
+  end
+
+  describe 'recuse solicitation' do
+    before(:each) do
+      @department = Department.create(code: '789', name: 'Engenharia', wing: 'SUL')
+      @department_3 = Department.create(code: '156', name: 'Artes', wing: 'NORTE')
+      @course_2 = Course.create(code: '12', name: 'Engenharia Eletrônica', department: @department, shift: 1)
+      @course_4 = Course.create(code: '09', name: 'Artes Visuais', department: @department_3, shift: 2)
+      @user = User.create(name: 'Caio Filipe', email: 'caio@unb.br', cpf: '05012345678', registration: '1234567', active: 1, password: '123456')
+      @coordinator = Coordinator.create(user: @user, course: @course_2)
+      @user_3 = User.create(name: 'Daniel Marques', email: 'denes@unb.br', cpf: '05044348888', registration: '1234546', active: 1, password: '123456')
+      @coordinator_3 = Coordinator.create(user: @user_3, course: @course_4)
+      @buildings = Building.create([
+        {code: 'pjc', name: 'Pavilhão João Calmon', wing: 'NORTE'},
+        {code: 'PAT', name: 'Pavilhão Anísio Teixeira', wing: 'NORTE'},
+        {code: 'BSAS', name: 'Bloco de Salas da Ala Sul', wing: 'SUL'},
+        {code: 'BSAN', name: 'Bloco de Salas da Ala Norte', wing: 'NORTE'}
+        ])
+      @category = Category.create(name: 'Laboratório Químico')
+      @category_2 = Category.create(name: 'Retroprojetor')
+      @room_4 = Room.create(code: '987654', name: 'S8', capacity: 80, active: true, time_grid_id: 1, department: @department, building: @buildings[1], category_ids: [@category.id])
+      @discipline_4 = Discipline.create(code: '774', name: 'Artes Visuais', department: @department_3)
+      @school_room_5 = SchoolRoom.create(name:'AA', discipline: @discipline_4, vacancies: 40, course_ids: [@course_4.id])
+      @period = Period.create(period_type:'Alocação', initial_date: '10-01-2018', final_date: '01-02-2018')
+      @period_2 = Period.create(period_type:'Ajuste', initial_date: '23-02-2018', final_date: '01-03-2018')
+      @period_3 = Period.create(period_type:'Letivo', initial_date: '08-03-2018', final_date: '14-07-2018')
+      @solicitation = Solicitation.create(justify: 'aaaa', status: 0, request_date: '10-01-2018', requester_id: @user_3.id, school_room_id: @school_room_5.id)
+      sign_in(@user)
+    end
+
+    it 'should load page with id only' do
+      get :show, params: {id: @solicitation.id, room: @room_4.id}
+      expect(response).to have_http_status(200)
+    end
+
+    it 'should load page with id and room' do
+      get :show, params: {id: @solicitation.id}
+      expect(response).to have_http_status(200)
+    end
+
+    it 'should recuse solicitation without room' do
+      @room_solicitation = RoomSolicitation.create(room_id: nil, solicitation_id: @solicitation.id,start: '10-01-2018 18:00:00',final: '10-01-2018 20:00:00',day: "sabado",department_id: @department_3.id)
+      get :recuse_solicitation, params: {justification: 'justificativa', id: @solicitation.id, room: ''}
+      expect(flash[:success]).to eq('Solicitacao recusada com successo')
+    end
+
+    it 'should recuse solicitation with room' do
+      @room_solicitation = RoomSolicitation.create(room_id: @room_4.id, solicitation_id: @solicitation.id,start: '10-01-2018 18:00:00',final: '10-01-2018 20:00:00',day: "sabado",department_id: @department_3.id)
+      get :recuse_solicitation, params: {justification: 'justificativa', id: @solicitation.id, room:  @room_4.id}
+      expect(flash[:success]).to eq('Solicitacao recusada com successo')
+    end
+
+    it 'should not recuse solicitation because no has justification' do
+      @room_solicitation = RoomSolicitation.create(room_id: @room_4.id, solicitation_id: @solicitation.id,start: '10-01-2018 18:00:00',final: '10-01-2018 20:00:00',day: "sabado",department_id: @department_3.id)
+      get :recuse_solicitation, params: {justification: '', id: @solicitation.id, room: ''}
+      expect(flash[:error]).to eq('Justificativa é obrigatória')
     end
   end
 end

@@ -113,7 +113,8 @@ RSpec.describe UsersController, type: :controller do
       @school_room2 = SchoolRoom.create(name:'B', discipline: @discipline, vacancies: 40, course_ids: [@course.id])
       @allocation = Allocation.create(room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: true, user: @user )
       @allocation2 = Allocation.create(room_id:@room.id,school_room_id:@school_room2.id, day:"Quarta",start_time:"12:00",final_time:"14:00", active: true, user: @user )
-
+      @solicitation = Solicitation.create(justify: 'aaaa', status: 0, request_date: '10-01-2018', requester_id: @user.id, school_room_id: @school_room.id)
+      @room_solicitation = RoomSolicitation.create(solicitation_id: @solicitation.id,start: '10-01-2018 18:00:00',final: '10-01-2018 20:00:00',day: "sabado",department_id: @department.id)
     end
 
     it 'should return current user show' do
@@ -128,7 +129,7 @@ RSpec.describe UsersController, type: :controller do
       expect(response).to have_http_status(200)
     end
 
-    it 'should return current user show if show user id differ current user and current user isn\'t administrative asssistant' do
+    it 'should return current user show if show user id differ current user and current user isn\'t administrative assistant' do
       sign_in(@user)
       get :show, params:{id: @user_adm.id}
       expect(response).to redirect_to(current_user)
@@ -191,7 +192,7 @@ RSpec.describe UsersController, type: :controller do
     it 'should not destroy administrative user when it is unique' do
       sign_in(@user_adm)
       get :destroy, params:{id: @user_adm.id}
-      expect(flash[:error]).to eq('Não é possível excluir o único Assistente Administrativo')
+      expect(flash[:error]).to eq('Não é possível excluir o único assistante Administrativo')
       expect(response).to redirect_to(current_user)
     end
   end

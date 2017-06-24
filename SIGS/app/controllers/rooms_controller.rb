@@ -3,15 +3,41 @@
 # Classe responsavel pelos metodos controladores de sala
 class RoomsController < ApplicationController
   before_action :logged_in?
+  before_action :authenticate_not_deg?, except: [:index, :show]
 
   def index
-    user = Coordinator.find_by(user_id: current_user)
-    if user.nil?
-      department = Department.find_by(name: 'PRC')
-      @rooms = Room.where(department: department)
-    else
-      @rooms = Room.where(department: user.course.department)
-    end
+    @rooms = Room.all
+    @buildings = Building.all
+    filter_by_name
+    filter_by_code
+    filter_by_capacity
+    filter_by_buildings
+    filter_by_wings
+  end
+
+  def filter_by_capacity
+    return unless params[:capacity].present?
+    @rooms = @rooms.where('capacity >= ?', params[:capacity])
+  end
+
+  def filter_by_buildings
+    return unless params[:building_id].present?
+    @rooms = @rooms.where(building_id: params[:building_id])
+  end
+
+  def filter_by_wings
+    return unless params[:wing].present?
+    @rooms = @rooms.joins(:building).where(buildings: { wing: params[:wing] })
+  end
+
+  def filter_by_name
+    return unless params[:name].present?
+    @rooms = @rooms.where('rooms.name LIKE ?', "%#{params[:name]}%")
+  end
+
+  def filter_by_code
+    return unless params[:code].present?
+    @rooms = @rooms.where('rooms.code' => params[:code])
   end
 
   def edit
@@ -83,7 +109,7 @@ class RoomsController < ApplicationController
       :capacity,
       :active,
       :time_grid_id,
-      :build_id,
+      :building_id,
       category_ids: []
     )
   end

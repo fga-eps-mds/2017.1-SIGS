@@ -1,7 +1,7 @@
 <div class="singUp">
 
   <div class="flexContainer">
-    <figure class="logo"><%= image_tag("sigs_logo.png") %></figure>
+    <figure class="logo"><%= link_to image_tag("sigs_logo.png"), root_path %></figure>
     <div>
       <h1>Novo Usuário</h1>
     </div>
@@ -21,34 +21,35 @@
     <%= form_for @user, url: user_create_path,  :html => {:role => 'form'} do |f| %>
       <%= f.hidden_field :active, :value => '0' %>
 
-      <div class="blockForm">
-        <%= f.label :name, "Nome Completo " %>
-        <%= f.text_field :name, class: 'form-control' %>
+      <div class="row">
 
-        <%= f.label :email, "E-mail " %>
-        <%= f.text_field :email, class: 'form-control', placeholder: 'exemplo@unb.br' %>
+        <div class="col-md-6">
+          <%= f.label :name, "Nome Completo " %>
+          <%= f.text_field :name, class: 'form-control' %>
 
-        <%= f.label :cpf, "CPF " %>
-        <%= f.text_field :cpf, class: 'form-control'%>
+          <%= f.label :email, "E-mail " %>
+          <%= f.text_field :email, class: 'form-control', placeholder: 'exemplo@unb.br' %>
 
-        <fieldset id="type">
-          <div class="radioButton">
-            <input type="radio" name="type" value="administrative_assistant" id="adm_as" checked>
-            <label>Assistente Administrativo</label>
-          </div>
-          <div class="radioButton">
-            <input type="radio" name="type" value="deg" id="deg_user">
-            <label>DEG</label>
-          </div>
-          <div class="radioButton">
-            <input type="radio" name="type" value="coordinator" id="coord">
-            <label>Coordenador de curso</label>
-          </div>
-        </fieldset>
-      </div>
+          <%= f.label :cpf, "CPF " %>
+          <%= f.text_field :cpf, class: 'form-control'%>
 
-      <div class="blockForm flexContainer flexColumn">
-        <div>
+          <fieldset id="type">
+            <div class="radioButton">
+              <input type="radio" name="type" value="administrative_assistant" id="adm_as" checked>
+              <label>assistante Administrativo</label>
+            </div>
+            <div class="radioButton">
+              <input type="radio" name="type" value="deg" id="deg_user">
+              <label>DEG</label>
+            </div>
+            <div class="radioButton">
+              <input type="radio" name="type" value="coordinator" id="coord">
+              <label>Coordenador de curso</label>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="col-md-6">
           <%= f.label :registration, "Registro UnB: " %>
           <%= f.text_field :registration, class: 'form-control' %>
 
@@ -58,21 +59,23 @@
           <%= f.label :password, "Confirmar senha: " %>
           <%= f.password_field :password_confirmation, class: 'form-control'%>
 
-        <div id="dropdown-group">
-          <div id="dropdown-coordinator">
-            <%= f.fields_for :coordinator do |ff| %>
-              <p> Curso </p>
-              <%=ff.collection_select(:course_id,Course.all,:id,:name, include_blank: true)%>
-            <% end %>
+          <div id="dropdown-group">
+            <div id="dropdown-coordinator">
+              <%= f.fields_for :coordinator do |ff| %>
+                <p class="dropText">Curso</p>
+                <%=ff.collection_select(:course_id,Course.all,:id,:name, include_blank: true)%>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="actions">
+            <%= f.submit "Enviar", class: 'pull-right btn btn-default btn-success' %>
           </div>
         </div>
-
-        <div class="actions">
-          <%= f.submit "Enviar", class: 'pull-right btn btn-default btn-success' %>
-        </div>
-    </div>
+      </div> <!-- ./row -->
     <% end %>
-  </div>
+
+  </div><!--  #/form-new-user-->
 
   <div>
     <figure><a href="http://www.unb.br"><%= image_tag("rodape_unb.png") %></a></figure>
