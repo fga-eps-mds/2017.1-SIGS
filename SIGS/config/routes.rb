@@ -111,13 +111,15 @@ Rails.application.routes.draw do
   post 'extensions/create' => 'extensions#create' , as: 'extensions_create'
 
   # Solicitation
-  get 'solicitations/index' => 'solicitations#index', as: 'solicitations_index'
-  get 'solicitations/show/:id' => 'solicitations#show', as: 'solicitations_show'
-  get 'solicitations/allocation_period/:school_room_id' => 'solicitations#allocation_period', as: 'allocation_period'
-  get 'solicitations/adjustment_period/:school_room_id' => 'solicitations#adjustment_period', as: 'adjustment_period'
-  post 'solicitations/save_allocation_period' => 'solicitations#save_allocation_period', as: 'save_allocation_period'
-  post 'solicitations/save_adjustment_period' => 'solicitations#save_adjustment_period', as: 'save_adjustment_period'
-  get 'solicitations/avaliable_rooms_by_department' => 'solicitations#avaliable_rooms_by_department', as: 'avaliable_rooms_by_department'
+  get 'solicitations/index' => 'solicitations#index', :as => 'solicitations_index'
+  get 'solicitations/show/' => 'solicitations#show', as: 'solicitations_show'
+  get 'solicitations/allocation_period/:school_room_id' => 'solicitations#allocation_period', :as => 'allocation_period'
+  get 'solicitations/adjustment_period/:school_room_id' => 'solicitations#adjustment_period', :as => 'adjustment_period'
+  post 'solicitations/save_allocation_period' => 'solicitations#save_allocation_period', :as => 'save_allocation_period'
+  post 'solicitations/save_adjustment_period' => 'solicitations#save_adjustment_period', :as => 'save_adjustment_period'
+  get 'solicitations/avaliable_rooms_by_department' => 'solicitations#avaliable_rooms_by_department', :as => 'avaliable_rooms_by_department'
+  get 'solicitations/recuse_solicitation' => 'solicitations#recuse_solicitation', as: 'solicitations_recuse_solicitation'
+  post 'solicitations/approve_solicitation' => 'solicitations#approve_solicitation', as: 'solicitations_approve_solicitation'
 
   # API Users
   get 'api_users/index' => 'api_users#index', as: 'api_users_index'

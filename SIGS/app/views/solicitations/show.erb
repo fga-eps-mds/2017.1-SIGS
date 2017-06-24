@@ -1,0 +1,158 @@
+<h1>Solicitação</h1>
+<%= render partial: "school_rooms/show", locals: {school_room: @solicitation.school_room} %>
+<%= hidden_field_tag :solicitation_wing, @wing, readonly: true %>
+
+<%= form_for @allocation, url: solicitations_approve_solicitation_path do |allocation| %>
+<%= hidden_field_tag :id, @solicitation.id, readonly: true %>
+<hr>
+
+<h3>Justificativa:</h3>
+<p><%= @solicitation.justify %></p>
+
+<hr>
+
+<h2>Solicitações</h2>
+
+<table class="table">
+  <tr>
+    <th>Hora de inicio</th>
+    <th>Hora de fim</th>
+    <th>Dia</th>
+    <th></th>
+
+  </tr>
+  <% has_rooms = nil %>
+  <% @rooms_solicity.each_with_index do |room_solicitation, index| %>
+    <% has_rooms = room_solicitation.room.nil? %>
+    <tr>
+      <td><%= room_solicitation.start.strftime('%H')%>H</td>
+      <td><%= room_solicitation.final.strftime('%H')%>H</td>
+      <td><%= room_solicitation.day %></td>
+
+      <td>
+        <% if has_rooms %>
+
+        <% else %>
+          <%= room_solicitation.room.name %><br>
+          <%= hidden_field_tag :room_id, room_solicitation.room_id, readonly: true%>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+<% if has_rooms %>
+  <h2>Salas Disponíveis</h2>
+  <div id="rooms-list"></div>
+<% end %>
+
+<div>
+
+<button type="button" class="btn pull-right btn btn-default btn-danger" data-toggle="modal" data-target="#myModal" style="margin-left:1%;">Recusar</button>
+<%= allocation.submit "Aprovar", class: 'pull-right btn btn-default btn-success' %>
+</div>
+<% end %>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+  <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h4 class="modal-title">Justificativa da Recusa</h4>
+      </div>
+      <div class="modal-body">
+        <label>Escreva a justificativa para a recusa</labe>
+		    <textarea name="justification" id="justification" style="width:100%;"></textarea>
+        <button type="button" class="btn pull-right btn btn-default btn-danger" onclick="recusa()">Recusar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+
+  function recusa() {
+    location.href = 'recuse_solicitation?justification='+ $('#justification').val()+'&id=<%= @solicitation.id %>&room=<%= params[:room]%>';
+  }
+
+  $(document).ready(function(){
+    $.getJSON('avaliable_rooms_by_department?department=<%= @department.id %>' +
+      '&school_room=<%= @solicitation.school_room.id %>&<%= @allocation %>',
+      { format: 'json'
+    }).success(function(data){
+      console.log(data);
+      if (data.length > 0){
+        listDepartmentRooms(<%= @department.id %>, data);
+      }
+    }).error(function(){
+      alert("Falha no Processamento");
+    });
+  });
+
+function listDepartmentRooms(department_id, data) {
+    var list = "<div id='department_rooms_" + department_id + "'>";
+
+    list += "<h2>" + data[0][2].name + "</h2><table class='table'>";
+    list += "<tr>" +
+      "<th></th>" +
+      "<th>Sala</th>" +
+      "<th>Prédio</th>" +
+      "<th>Ala</th>" +
+      "<th>Capacidade</th>" +
+      "<th>Recursos</th>" +
+      "<th></th>" +
+      "</tr>";
+    for(var i = 0; i < data.length; i++) {
+      var far = "near-room";
+      if ($("#solicitation_wing").val() != data[i][1].wing) {
+        console.log($("#solicitation_wing").val())
+        far = "far-room";
+      }
+
+      list += "<tr class='" + far + "'><td><input type='radio' name='room' value='" +
+        data[i][0].id + "'></td>" +
+        "<td>" + data[i][0].name + "</td>" +
+        "<td>" + data[i][1].name + "</td>" +
+        "<td>" + data[i][1].wing + "</td>" +
+        "<td>" + data[i][0].capacity + "</td><td>";
+        var broken = false;
+        for(var j = 0; j < data[i][3].length; j++){
+          list +=  data[i][3][j].name + "<br>";
+        }
+        list +=  "</td><td>";
+        if(!containsCategory(data[i][3]))
+          list += '<a href="#" data-toggle="tooltip" data-placement="top" title="Não possui todos os recursos"><span class="glyphicon glyphicon-exclamation-sign"></span></a>';
+        list += "</td></tr>";
+    }
+    list += "</table></div>";
+    $("#rooms-list").append(list);
+  }
+
+  function containsCategory(room_categories) {
+    var categories = $("#school_room_ressources").html().trim().split('<br>');
+
+    if(categories.length == 1 && categories[0] == "") {
+      return true;
+    }
+
+    for(var j = 0; j < categories.length; j++){
+      var exists = false;
+      for (var i = 0; i < room_categories.length; i++) {
+        if(categories[j].includes(room_categories[i].name)){
+          console.log("existe " + room_categories[i].name + " " + categories[j]);
+          exists = true;
+          break;
+        }
+      }
+
+      if(!exists) {
+        return false;
+      }
+
+    }
+    return true;
+  }
+
+</script>
