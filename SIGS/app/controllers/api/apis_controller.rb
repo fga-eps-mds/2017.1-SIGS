@@ -13,6 +13,27 @@ module Api
       render json: @rooms
     end
 
+    def all_school_room
+      allocations = Allocation.all
+      @school_room = generate_school_room(allocations)
+      render json: @school_room
+    end
+
+    def generate_school_room(allocations)
+      hash = {}
+      allocations.each do |allocation|
+        hash[allocation.id] = {
+          discipline_name: allocation.school_room.discipline.name,
+          discipline_code: allocation.school_room.discipline.code,
+          school_room_name: allocation.school_room.name,
+          school_room_vacancies: allocation.school_room.vacancies,
+          room_name: allocation.room.name,
+          room_capacity: allocation.room.capacity
+        }
+      end
+      hash
+    end
+
     def all_school_rooms
       @school_rooms = SchoolRoom.all
       render json: @school_rooms

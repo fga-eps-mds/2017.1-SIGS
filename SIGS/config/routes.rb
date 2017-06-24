@@ -128,6 +128,7 @@ Rails.application.routes.draw do
 
   # API
   namespace :api, default: { format: :json }, path: '/api' do
+    get 'school_rooms/all' => 'apis#all_school_room'
     get 'rooms/all_rooms' => 'apis#all_rooms', :as => 'api_all_rooms'
     get 'school_rooms/all_school_rooms' => 'apis#all_school_rooms', as: 'api_all_school_rooms'
     get 'school_rooms/school_rooms_of_room/:code' => 'apis#school_rooms_of_room', as: 'school_rooms_of_room'

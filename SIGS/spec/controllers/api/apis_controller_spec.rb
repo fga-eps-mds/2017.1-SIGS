@@ -37,6 +37,17 @@ RSpec.describe Api::ApisController, type: :controller do
 			expect(response).to have_http_status(401)
 		end
 
+		it 'should return all schoom room in allocations' do
+			get :all_school_room, params: { default: { format: :json} }
+			expect(response).to have_http_status(200)
+		end
+
+		it 'should return HTTP Token denied for all school room' do
+			@request.env['HTTP_AUTHORIZATION'] = 'Token ' + TOKEN_2
+			get :all_school_room, params: { default: { format: :json} }
+			expect(response).to have_http_status(401)
+    end
+
 		it 'should get json response all scholl_rooms' do
 		  get :all_school_rooms, params: { default: { format: :json } }
 		  expect(response).to have_http_status(200)
@@ -52,7 +63,5 @@ RSpec.describe Api::ApisController, type: :controller do
 			teste = [@allocation, @allocation2]
 			expect(JSON.parse(response.body)) == teste.to_json
 		end
-
-
 	end
 end
