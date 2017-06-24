@@ -38,25 +38,3 @@ Feature: Update school room
 		And I fill in 'vacancies' with null
 		When I press 'Alterar' button
 		Then notice message 'Capacidade não pode ser vazia'
-
-	Scenario: change school room with zero courses
-		Given I am logged in as coordinator
-		And click on link 'Alocar'
-		And click on edit first
-		And I select '1' in 'discipline_id'
-		And I fill in 'vacancies' with '50'
-		And I uncheck 'Engenharia Automotiva'
-		And I uncheck 'Artes Visuais'
-		When I press 'Alterar' button
-		Then notice message 'Turma deve haver pelo menos um curso'
-
-	Scenario: change school room with coures in differents periods
-		Given I am logged in as coordinator
-		And click on link 'Alocar'
-		And click on edit first
-		And I select '1' in 'discipline_id'
-		And I check 'Engenharia Eletronica'
-		And I check 'Engenharia Automotiva'
-		And I fill in 'vacancies' with '50'
-		When I press 'Alterar' button
-		Then notice message 'Cursos devem ser do mesmo período'

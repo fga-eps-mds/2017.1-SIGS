@@ -27,7 +27,7 @@
       <span class="info-box-icon bg-yellow"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></span>
 
       <div class="info-box-content">
-        <span class="info-box-text">Solicitações</span>
+        <span class="info-box-text">Solicitações Recebidas</span>
         <span class="info-box-number"><%=@solicitation_count%></span>
       </div>
       <!-- /.info-box-content -->
@@ -52,7 +52,7 @@
           <td><%=@periods.first.final_date.strftime('%d/%m/%Y')%></td>
         </tr>
         <tr>
-          <th><%=@periods.second.period_type%></th>
+          <th><%=@periods.second.period_type%> de Alocação</th>
           <td><%=@periods.second.initial_date.strftime('%d/%m/%Y')%></td>
           <td><%=@periods.second.final_date.strftime('%d/%m/%Y')%></td>
         </tr>

@@ -6,13 +6,12 @@ class AdministrativeAssistantsController < ApplicationController
   before_action :authenticate_administrative_assistant?
 
   def registration_request
-    @users = User.where(active: false)
-    @users
+    @users = User.where(active: 0)
   end
 
   def enable_registration
     @user = User.find(params[:id])
-    if @user.update_attribute(:active, true)
+    if @user.update_attribute(:active, 1)
       flash[:success] = 'Usuário aprovado com sucesso'
     end
     redirect_to registration_request_path
@@ -30,7 +29,7 @@ class AdministrativeAssistantsController < ApplicationController
   def destroy_users
     @user = User.find(params[:id])
     return unless @user
-    @user.destroy
-    redirect_to user_index_path, flash: { sucess: 'Usuário excluído com sucesso' }
+    @user.update_attribute('active', 2)
+    redirect_to user_index_path, flash: { success: 'Usuário excluído com sucesso' }
   end
 end

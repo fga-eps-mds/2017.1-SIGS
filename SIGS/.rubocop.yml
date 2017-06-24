@@ -17,7 +17,6 @@ AllCops:
     - 'test/**/*'
     - 'lib/**/*'
     - 'script/*'
-    - 'app/controllers/solicitations_controller.rb'
 
 Style/Encoding:
   EnforcedStyle: never

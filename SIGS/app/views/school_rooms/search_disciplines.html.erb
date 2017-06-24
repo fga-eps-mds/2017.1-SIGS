@@ -23,7 +23,6 @@
       <th>Cursos</th>
       <th>Nº de Vagas</th>
       <th style="text-align:center">Alocar</th>
-      <th style="text-align:center">Desalocar</th>
       <th style="text-align:center">Solicitar Alocação</th>
       <th style="text-align:center">Desalocar</th>
       <th style="text-align:center">Alterar</th>
@@ -40,7 +39,6 @@
         </td>
         <td><%= school_room.vacancies %></td>
         <td style="text-align:center"><%= link_to image_tag("icon_alloc.png"), allocations_new_path(school_room.id) %></td>
-        <td style="text-align:center"><%= link_to image_tag("icon_alloc_red.png"), allocations_destroy_path(school_room.id) %></td>
         <td style="text-align:center"><%= link_to image_tag("icon_request_alloc.png"), allocation_period_path(school_room.id) %></td>
         <td style="text-align:center"><%= link_to image_tag("icon_alloc_red.png"), allocations_destroy_path(school_room.id) %></td>
         <td style="text-align:center"><%= link_to image_tag("icon_edit.png"), school_rooms_edit_path(school_room.id) %></td>
