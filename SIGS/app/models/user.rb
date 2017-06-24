@@ -17,15 +17,13 @@ class User < ApplicationRecord
   has_secure_password
 
   # Nome
-  CHARACTERS_MINIMUM_FOR_THE_NAME_EXCEPTION = 'O Nome deve ter
-                                               no mínimo 7 caracteres'.freeze
-  CHARACTERS_MAXIMUM_FOR_THE_NAME_EXCEPTION = 'Nome deve ter
-                                               no máximo 100 caracters'.freeze
+  CHARS_MIN_FOR_THE_NAME_EXCEPTION = 'O Nome deve ter no mínimo 7 caracteres'.freeze
+  CHARS_MAX_FOR_THE_NAME_EXCEPTION = 'Nome deve ter no máximo 100 caracters'.freeze
 
   validates_length_of :name,
                       within: 7..100,
-                      too_short: CHARACTERS_MINIMUM_FOR_THE_NAME_EXCEPTION,
-                      too_long: CHARACTERS_MAXIMUM_FOR_THE_NAME_EXCEPTION
+                      too_short: CHARS_MIN_FOR_THE_NAME_EXCEPTION,
+                      too_long: CHARS_MAX_FOR_THE_NAME_EXCEPTION
 
   # Email
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@unb.br\z/i
@@ -38,18 +36,17 @@ class User < ApplicationRecord
                     format: { with: VALID_EMAIL_REGEX, message: INVALID_EMAIL }
 
   # Senha
-  INVALID_LENGHT_PASSWORD = 'Senha deve possuir no mínimo 6 e
-                             no máximo de 20 caracteres'.freeze
+  PASSWORD = 'Senha deve possuir um mínimo de 6 e um máximo de 20 caracteres'.freeze
 
   validates :password, length: { minimum: 6, maximum: 20,
-                                 message: INVALID_LENGHT_PASSWORD },
+                                 message: PASSWORD },
                        confirmation: true
 
   # Cpf
   VALID_CPF_REGEX = /\A[0-9]{3}?[0-9]{3}?[0-9]{3}?[0-9]{2}\z/i
-  CPF_EXISTS = 'Cpf já cadastrado no sistema'.freeze
-  NULL_CPF = 'Cpf nao pode ser vazio'.freeze
-  INVALID_CPF = 'Insira um Cpf válido'.freeze
+  CPF_EXISTS = 'CPF já cadastrado no sistema'.freeze
+  NULL_CPF = 'CPF não pode ser vazio'.freeze
+  INVALID_CPF = 'Insira um CPF válido'.freeze
 
   validates :cpf, presence: { message: NULL_CPF },
                   uniqueness: { message: CPF_EXISTS },
@@ -57,9 +54,9 @@ class User < ApplicationRecord
 
   # Matricula
   VALID_REGISTRATION_REGEX = /\A[0-9]{7}\z/i
-  REGISTRATION_EXISTS = 'Matricula já cadastrado no sistema'.freeze
-  NULL_REGISTRATION = 'Matricula nao pode ser vazio'.freeze
-  INVALID_REGISTRATION = 'Insira uma matricula válida'.freeze
+  REGISTRATION_EXISTS = 'Registro UnB já cadastrado no sistema'.freeze
+  NULL_REGISTRATION = 'Registro UnB não pode ser vazio'.freeze
+  INVALID_REGISTRATION = 'Insira um Registro UnB válido'.freeze
 
   validates :registration, presence: { message: NULL_REGISTRATION },
                            format: { with: VALID_REGISTRATION_REGEX,
