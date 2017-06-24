@@ -36,11 +36,13 @@ Rails.application.routes.draw do
 
   # Room
   get 'rooms/index' => 'rooms#index', as: 'room_index'
+  post 'rooms/index' => 'rooms#index', as: 'room_index_post'
   get 'rooms/edit/:id' => 'rooms#edit', as: 'room_edit'
   patch 'rooms/update/:id' => 'rooms#update'
   get 'rooms/show/:id' => 'rooms#show', as: 'room'
   get 'room/destroy/:id', controller: 'rooms', action: 'destroy', as: 'destroy_room'
   get 'rooms/json_of_categories_by_school_room' => 'rooms#json_of_categories_by_school_room'
+  post 'rooms/filter_rooms' => 'rooms#filter_rooms', as: 'rooms_filter'
 
   # Course
   get 'courses/courses_by_user' => 'courses#courses_by_user', as: 'courses_by_user'

@@ -128,7 +128,7 @@ RSpec.describe UsersController, type: :controller do
       expect(response).to have_http_status(200)
     end
 
-    it 'should return current user show if show user id differ current user and current user isn\'t administrative asssistant' do
+    it 'should return current user show if show user id differ current user and current user isn\'t administrative assistant' do
       sign_in(@user)
       get :show, params:{id: @user_adm.id}
       expect(response).to redirect_to(current_user)
@@ -191,7 +191,7 @@ RSpec.describe UsersController, type: :controller do
     it 'should not destroy administrative user when it is unique' do
       sign_in(@user_adm)
       get :destroy, params:{id: @user_adm.id}
-      expect(flash[:error]).to eq('Não é possível excluir o único Assistente Administrativo')
+      expect(flash[:error]).to eq('Não é possível excluir o único assistante Administrativo')
       expect(response).to redirect_to(current_user)
     end
   end
