@@ -22,7 +22,7 @@
 
   </tr>
   <% has_rooms = nil %>
-  <% @room_solicitations.each_with_index do |room_solicitation, index| %>
+  <% @rooms_solicity.each_with_index do |room_solicitation, index| %>
     <% has_rooms = room_solicitation.room.nil? %>
     <tr>
       <td><%= room_solicitation.start.strftime('%H')%>H</td>
@@ -34,7 +34,7 @@
 
         <% else %>
           <%= room_solicitation.room.name %><br>
-          <%= allocation.hidden_field :room_id, value: room_solicitation.room_id%>
+          <%= hidden_field_tag :room_id, room_solicitation.room_id, readonly: true%>
         <% end %>
       </td>
     </tr>
@@ -74,12 +74,12 @@
 <script type="text/javascript">
 
   function recusa() {
-    location.href = '../recuse_solicitation?justification='+ $('#justification').val()+'&solicitation=<%= @solicitation.id %>&room=';
+    location.href = 'recuse_solicitation?justification='+ $('#justification').val()+'&id=<%= @solicitation.id %>&room=<%= params[:room]%>';
   }
 
   $(document).ready(function(){
     $.getJSON('avaliable_rooms_by_department?department=<%= @department.id %>' +
-      '&school_room=<%= @school_room.id %>&<%= @allocation %>',
+      '&school_room=<%= @solicitation.school_room.id %>&<%= @allocation %>',
       { format: 'json'
     }).success(function(data){
       console.log(data);

@@ -17,7 +17,17 @@ class UsersController < ApplicationController
     @school_room_count = school_rooms_by_user.count
     @school_rooms_allocated_count = school_rooms_allocated_count
     @periods = Period.all
-    @solicitation_count = Solicitation.where("requester_id='#{current_user.id}'").count
+    department = return_department_owner
+    room_solicitations = RoomSolicitation.where(department: department, status: 0)
+                                         .group(:solicitation_id)
+    @solicitation_count = []
+    room_solicitations.each do |room_solicitation|
+      solicitation_validade = Solicitation.find_by(id: room_solicitation.solicitation
+                                                                        .id, status: 0)
+      next if solicitation_validade.nil?
+      @solicitation_count << solicitation_validade
+    end
+    @solicitation_count = @solicitation_count.count
     return unless @user.id != current_user.id && permission[:level] != 2
     redirect_to_current_user
   end

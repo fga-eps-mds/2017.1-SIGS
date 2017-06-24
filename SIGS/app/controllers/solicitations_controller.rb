@@ -21,7 +21,7 @@ class SolicitationsController < ApplicationController
     @school_room = SchoolRoom.find(params[:school_room_id])
     @departments = Department.all
 
-    return_wing
+    return_wing(@school_room)
   end
 
   def save_allocation_period
@@ -46,7 +46,7 @@ class SolicitationsController < ApplicationController
 
   def index
     department = return_department_owner
-
+    @department_rooms = Room.where(department: department)
     room_solicitations = RoomSolicitation.where(department: department)
                                          .group(:solicitation_id)
     @solicitations = []
@@ -62,31 +62,17 @@ class SolicitationsController < ApplicationController
   end
 
   def show
-    @allocation = Allocation.new
-    @rooms = Room.where(department_id: return_department_owner)
-    @solicitation = Solicitation.find(params[:id])
-    @school_room = @solicitation.school_room
-    @department = return_department_owner
-    return_wing
-    room = params[:room].nil?
-    @rooms_solicity = RoomSolicitation.where(solicitation_id:
-                                                 @solicitation.id)
-    @rooms_solicity = @rooms_solicity.where(room: params[:room]) unless room
-
-    @allocation = ''
-    @rooms_solicity.each do |room_solicitation|
-      @allocation += "allocations[]=#{room_solicitation.day}"
-      @allocation += "[#{room_solicitation.start.strftime('%H')}]"
-    end
+    render_params
   end
 
   def recuse_solicitation
-    render inline: 'ok'
-    # @solicitation = Solicitation.find(params[:id])
-    # @solicitation.status = 2
-    # @solicitation.save
-    # flash[:success] = 'Solicitacao recusada com successo'
-    # redirect_to current_user
+    render_params
+    if params[:justification].empty?
+      flash[:error] = 'Justificativa é obrigatória'
+      render :show
+    else
+      recuse
+    end
   end
 
   def approve_solicitation
@@ -95,6 +81,8 @@ class SolicitationsController < ApplicationController
     @room_solicitations = RoomSolicitation.where(solicitation_id:
                                                  @solicitation.id)
     @room_solicitations.each do |room_solicitation|
+      room_solicitation.update(responder_id: current_user,
+                               response_date: Date.today, status: 1)
       @allocation = Allocation.new(user_id: current_user.id,
                                    school_room_id: @solicitation.school_room_id,
                                    day: room_solicitation.day,
@@ -145,6 +133,13 @@ class SolicitationsController < ApplicationController
   end
 
   private
+
+  def update_room_status(room_solicitation)
+    room_solicitation.update(justify: params[:justification],
+                             responder_id: current_user,
+                             response_date: Date.today,
+                             status: 2)
+  end
 
   def avaliable_rooms
     reservations = convert_params_to_hash(params[:allocations])
@@ -212,10 +207,10 @@ class SolicitationsController < ApplicationController
                      school_room_id: params[:solicitation][:school_room_id])
   end
 
-  def return_wing
+  def return_wing(school_room)
     north = south = 0
 
-    @school_room.courses.each do |course|
+    school_room.courses.each do |course|
       north += 1 if course.department.wing == 'NORTE'
       south += 1 if course.department.wing == 'SUL'
     end
@@ -224,17 +219,44 @@ class SolicitationsController < ApplicationController
             elsif north > south
               'NORTE'
             else
-              @school_room.courses[0].department.wing
+              school_room.courses[0].department.wing
             end
   end
 
-  def return_department_owner
-    coordinator = Coordinator.find_by(user_id: current_user.id)
-    if coordinator.nil?
-      Department.find_by(name: 'PRC')
-    else
-      coordinator.course.department
+  def render_params
+    @allocation = Allocation.new
+    @rooms = Room.where(department_id: return_department_owner)
+    @solicitation = Solicitation.find(params[:id])
+    @department = return_department_owner
+    return_wing(@solicitation.school_room)
+    room = params[:room].nil? || params[:room].empty?
+    @rooms_solicity = RoomSolicitation.where(solicitation_id:
+                                                 @solicitation.id)
+    @rooms_solicity = @rooms_solicity.where(room: params[:room]) unless room
+
+    @allocation = ''
+    @rooms_solicity.each do |room_solicitation|
+      @allocation += "allocations[]=#{room_solicitation.day}"
+      @allocation += "[#{room_solicitation.start.strftime('%H')}]"
     end
+  end
+
+  def recuse
+    solicitation = Solicitation.find(params[:id])
+    pending_requests = 0
+    solicitation.room_solicitation.each do |room_solicitation|
+      pending_requests += 1
+      if room_solicitation.room.nil?
+        update_room_status(room_solicitation)
+        pending_requests -= 1
+      elsif room_solicitation.room.id.to_s == params[:room]
+        update_room_status(room_solicitation)
+        pending_requests -= 1
+      end
+    end
+    solicitation.update_attribute('status', 2) if pending_requests.zero?
+    flash[:success] = 'Solicitacao recusada com successo'
+    redirect_to current_user
   end
 end
 # rubocop:enable ClassLength

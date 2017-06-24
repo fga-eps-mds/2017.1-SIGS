@@ -10,4 +10,13 @@ class ApplicationController < ActionController::Base
       flash[:error] = messages.join(', ')
     end
   end
+
+  def return_department_owner
+    coordinator = Coordinator.find_by(user_id: current_user.id)
+    if coordinator.nil?
+      Department.find_by(name: 'PRC')
+    else
+      coordinator.course.department
+    end
+  end
 end
