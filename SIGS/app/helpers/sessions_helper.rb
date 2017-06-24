@@ -39,6 +39,12 @@ module SessionsHelper
     redirect_to current_user
   end
 
+  def authenticate_not_deg?
+    return unless permission[:level].zero?
+    flash[:error] = 'Acesso Negado'
+    redirect_to current_user
+  end
+
   def sign_out
     session.delete(:user_id)
     @current_user = nil

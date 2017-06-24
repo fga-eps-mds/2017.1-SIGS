@@ -28,6 +28,9 @@ RSpec.describe RoomsController, type: :controller do
       @user_2 = User.create(name: 'joao silva', email: 'joaferrera@unb.br',
         password: '123456', registration:'1100069', cpf:'04601407380', active: true)
 
+      @user_3 = User.create(name: 'joao silva', email: 'jsilva@unb.br',
+        password: '123456', registration:'1100065', cpf:'04616585123', active: true)
+
       @administrative_assistant = AdministrativeAssistant.create(user: @user)
 
       @school_room = SchoolRoom.create(name:'A', vacancies: 40, courses: [@course], discipline: @discipline)
@@ -35,6 +38,8 @@ RSpec.describe RoomsController, type: :controller do
       @coordinator = Coordinator.create(user: @user_2, course: @course)
 
       @allocation = Allocation.create(user: @user,room: @room, school_room: @school_room, day: "Segunda", start_time: '14:00:00', final_time: '16:00:00')
+
+      @deg = Deg.create(user: @user_3)
       
       sign_in(@user)
     end
@@ -55,6 +60,12 @@ RSpec.describe RoomsController, type: :controller do
       sign_in(@user)
       get :edit, params:{id: @room.id}
       expect(response).to have_http_status(200)
+    end
+
+    it 'shoudl denied the acess' do
+      sign_in(@user_3)
+      get :edit, params:{id: @room.id}
+      expect(flash[:error]).to eq('Acesso Negado')
     end
 
     it 'should return one room' do

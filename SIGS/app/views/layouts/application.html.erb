@@ -65,7 +65,9 @@
               <%  else %>
                 <li><%= link_to 'Turmas', school_rooms_index_path %></li>
               <% end %>
-              <li><%= link_to "Solicitações", solicitations_index_path %></li>
+              <% if permission[:level] != 0 %>
+                <li><%= link_to "Solicitações", solicitations_index_path %></li>
+              <% end %>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Relatórios <span class="caret"></span></a>
                 <ul class="dropdown-menu">
@@ -101,8 +103,6 @@
                 <li><%= link_to 'Salas', room_index_path %></li>
                 <% if permission[:level] == 2 %>
                   <li><%= link_to "Categorias", categories_index_path %></li>
-                <% end %>
-                <% if permission[:level] == 2 %>
                   <li><%= link_to "Cadastros Pendentes", registration_request_path %></li>
                   <li><%= link_to "Usuários Registrados", user_index_path %></li>
                   <li><%= link_to "Período", period_index_path %></li>
@@ -111,7 +111,9 @@
                 <%  else %>
                   <li><%= link_to 'Turmas', school_rooms_index_path %></li>
                 <% end %>
-                <li><%= link_to "Solicitações", solicitations_index_path %></li>
+                <% if permission[:level] != 0 %>
+                  <li><%= link_to "Solicitações", solicitations_index_path %></li>
+                <% end %>
               </ul>
             </div>
             <div class="col-sm-3">
