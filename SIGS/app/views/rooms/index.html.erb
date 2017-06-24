@@ -1,45 +1,137 @@
 <h1>Salas</h1>
-<% if @rooms.count == 0 %>
-  <h3>Não há salas registradas no momento.</h3>
-<% else %>
-  <table class="table table-hover">
-    <tr>
-      <td>Código</td>
-      <td>Nome</td>
-      <td>Ativo</td>
-      <td>Prédio</td>
-      <td style="text-align:center">Visualizar</td>
-      <td style="text-align:center">Alterar</td>
-      <td style="text-align:center">Excluir</td>
-    </tr>
-    <% @rooms.each do |room| %>
-      <tr>
-        <td><%= room.code %></td>
-        <td><%= room.name %></td>
-        <td><%=  ((room.active) ? 'Sim' : 'Não')  %></td>
-        <td><%= room.building.name %></td>
-        <td style="text-align:center"><%= link_to image_tag("icon_view.png"), room_path(room.id) %></td>
-        <td style="text-align:center"><%= link_to image_tag("icon_edit.png"), room_edit_path(room.id) %></td>
-        <td style="text-align:center"><%= link_to image_tag("icon_trash.png"), destroy_room_path(room.id), data: {confirm: "Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?"} %></td>
-      </tr>
-    <% end %>
+<table class="table">
+  <tr>
+  <%= form_tag(room_index_post_path, :method => :post) do %>
+    <td>
+      <%= label_tag("Nome") %>
+      <%= text_field_tag 'name', nil, placeholder: 'Digite o nome da sala...', size: '40', class: 'form-control' %>
+    </td>
+    <td>
+      <%= label_tag("Código") %>
+      <%= text_field_tag 'code', nil, placeholder: 'Digite o código da sala...', size: '25', class: 'form-control' %>
+    </td>
+    <td>
+      <%= label_tag("Capacidade") %>
+      <%= number_field_tag 'capacity', nil, placeholder: 'Insira a quantidade...', size: '500', class: 'form-control' %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <%= label_tag("Ala") %>
+      <% itens = [["NORTE"], ["CENTRAL"], ["SUL"]] %>
+      <%= select_tag 'wing', options_for_select(itens, " "), include_blank: true %>
+    </td>
+    <td>
+      <%= label_tag("Prédio") %>
+      <%= select_tag 'building_id', options_for_select(@buildings.map{ |building| [building.name, building.id, { 'data-wing' => building.wing }] }), include_blank: true %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <br>
+      <%= submit_tag "Pesquisar", class: "btn btn-success" %>
+    </td>
+    <td colspan="2">
+      <br>
+      <%= link_to "Limpar Filtros", room_index_path, class: "btn btn-primary pull-right" %>
+    </td>
+  </tr>
+
 <% end %>
+
 </table>
-<!-- <div class="modal fade modalDelete" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Excluir Sala</h4>
-      </div>
-      <div class="modal-body">
-        <p>Tem certeza que deseja excluir essa sala?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-success btnDelete" data-dismiss="modal">Confirmar</button>
-      </div>
-    </div>
-  </div>
-</div>
- -->
+
+  <p>
+    <b>Funcionamento:&nbsp;</b>
+    <%= label_tag(:id_active, "Ativa") %>
+    <%= radio_button_tag(:ativo, "ativa", false, :id => "id_active") %>&nbsp;&nbsp;
+    <%= label_tag(:id_anative, "Inativa") %>
+    <%= radio_button_tag(:ativo, "inativa", false, :id => "id_anative") %>
+  </p>
+
+  <% if @rooms.count == 0 %>
+    <h3>Nenhuma sala encontrada.</h3>
+  <% else %>
+    <table class="table">
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Nome</th>
+        <th>Ativo</th>
+        <th>Prédio</th>
+        <th style="text-align:center">Alterar</th>
+        <th style="text-align:center">Visualizar</th>
+      </tr>
+    </thead>
+    <tbody class="show_room">
+      <% @rooms.each do |room| %>
+        <tr>
+          <td><%= room.code %></td>
+          <td><%= room.name %></td>
+          <td id="active_room"><%=  ((room.active) ? 'Sim' : 'Não')  %></td>
+          <td><%= room.building.name %></td>
+          <td style="text-align:center"><%= link_to image_tag("icon_edit.png"), room_edit_path(room.id) %></td>
+          <td style="text-align:center"><%= link_to image_tag("icon_view.png"), room_path(room.id) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+    </table>
+  <% end %>
+
+<script>
+  var active;
+  var bool;
+
+  $("input:radio").on('click', function() {
+    $(".show_room").empty();
+    active = $(this).attr("value");
+    if (active == "ativa")
+      bool = true;
+    else
+      bool = false;
+
+    if (bool) {
+      <% @rooms.each do |room| %>
+        if (<%= room.active %>) {
+          $(".show_room").append(
+            "<tr>"
+              + "<td><%=room.code%></td>"
+              + "<td><%= room.name %></td>"
+              + "<td id='active_room'><%=((room.active) ? 'Sim' : 'Não')  %></td>"
+              + "<td><%= room.building.name %></td>"
+              + '<td style="text-align:center"><%= link_to image_tag("icon_edit.png"), room_edit_path(room.id) %></td>'
+              + '<td style="text-align:center"><%= link_to image_tag("icon_view.png"), room_path(room.id) %></td>'
+            + "</tr>"
+          );
+        }
+      <%end%>
+    } else {
+       <% @rooms.each do |room| %>
+         if (!<%= room.active %>) {
+            $(".show_room").append(
+              "<tr>"
+                + "<td><%=room.code%></td>"
+                + "<td><%= room.name %></td>"
+                + "<td id='active_room'><%=((room.active) ? 'Sim' : 'Não')  %></td>"
+                + "<td><%= room.building.name %></td>"
+                + '<td style="text-align:center"><%= link_to image_tag("icon_edit.png"), room_edit_path(room.id) %></td>'
+                + '<td style="text-align:center"><%= link_to image_tag("icon_view.png"), room_path(room.id) %></td>'
+              + "</tr>"
+            );
+          }
+      <%end%>
+    }
+
+  });
+
+  $('select#wing').on('change', function() {
+    var selected = $(this).val();
+    $('select#building_id').find('option').removeClass('hide');
+    $('select#building_id').find('option').not('option[data-wing="' + selected + '"]').addClass('hide');
+  });
+
+
+
+</script>
