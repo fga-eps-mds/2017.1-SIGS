@@ -71,21 +71,7 @@ RSpec.describe AllocationsController, type: :controller do
         Sábado: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Sábado",start_time:"12:00",final_time:"14:00", active: 1}}
       }
       expect(response).to redirect_to(allocations_new_path(@school_room.id))
-      expect(flash[:error]).to eq('Falha ao realizar alocação')
-    end
-
-    it 'should not create an allocation with invalid time' do
-      sign_in(@user)
-      post :create, params: {
-        Segunda: {"11": {room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"11:00",final_time:"11:00", active: 1}},
-        Terça: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Terça",start_time:"12:00",final_time:"14:00", active: 1}},
-        Quarta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Quarta",start_time:"12:00",final_time:"14:00", active: 1}},
-        Quinta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Quinta",start_time:"12:00",final_time:"14:00", active: 1}},
-        Sexta: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Sexta",start_time:"12:00",final_time:"14:00", active: 1}},
-        Sábado: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Sábado",start_time:"12:00",final_time:"14:00", active: 1}}
-      }
-      expect(response).to redirect_to(allocations_new_path(@school_room.id))
-      expect(flash[:error]).to eq('Horário inválido')
+      expect(flash[:error]).to eq('Informe a Sala')
     end
 
     it "should not create an allocation with invalid shift" do
@@ -115,11 +101,12 @@ RSpec.describe AllocationsController, type: :controller do
       }
       expect(response).to redirect_to(allocations_new_path(@school_room.id))
       expect(flash[:error]).to eq('Alocação com horário não vago ou capacidade da sala cheia')
+
     end
 
     it "should not create an allocation if already exists an allocation with the same time and school_room" do
       sign_in(@user)
-      @allocation = Allocation.create(room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: true, user: @user )
+      @allocation = Allocation.create(room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: true, user_id: @user.id )
       post :create, params: {
         Segunda: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: 1}},
         Terça: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Terça",start_time:"12:00",final_time:"14:00", active: 1}},
@@ -129,13 +116,13 @@ RSpec.describe AllocationsController, type: :controller do
         Sábado: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Sábado",start_time:"12:00",final_time:"14:00", active: 1}}
       }
       expect(response).to redirect_to(allocations_new_path(@school_room.id))
-      expect(flash[:error]).to eq('Alocação com horário não vago ou capacidade da sala cheia')
+      expect(flash[:error]).to include('Turma já alocada neste horário')
     end
 
     it "should not create an allocation if already exists an allocation
     with the same time,discipline and different school_room and capacity of room is above the permitted" do
       sign_in(@user)
-      @allocation = Allocation.create(room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: true, user: @user )
+      @allocation = Allocation.create(room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: true, user_id: @user.id )
       post :create, params: {
         Segunda: {"12": {room_id:@room.id,school_room_id:@school_room2.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: 1}},
         Terça: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Terça",start_time:"12:00",final_time:"14:00", active: 1}},
@@ -150,7 +137,7 @@ RSpec.describe AllocationsController, type: :controller do
 
     it "should create an allocation if already exists an allocation with the same time and discipline and different school_room" do
       sign_in(@user)
-      @allocation = Allocation.create(room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: true, user: @user )
+      @allocation = Allocation.create(room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: true, user_id: @user.id )
       post :create, params: {
         Segunda: {"12": {room_id:@room.id,school_room_id:@school_room4.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: 1}},
         Terça: {"12": {room_id:@room.id,school_room_id:@school_room.id, day:"Terça",start_time:"12:00",final_time:"14:00", active: 1}},
@@ -180,7 +167,7 @@ RSpec.describe AllocationsController, type: :controller do
 
     it 'should get json response' do
       sign_in(@user)
-      Allocation.create(room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: true, user: @user )
+      Allocation.create(room_id:@room.id,school_room_id:@school_room.id, day:"Segunda",start_time:"12:00",final_time:"14:00", active: true, user_id: @user.id )
       get :room_allocations_by_day, params: { Segunda: @room.id, Terça: @room.id, Quarta: @room.id, Quinta: @room.id, Sexta: @room.id, Sabado: @room.id, school_room: @school_room.id}, :format => :json
       expect(response).to have_http_status(200)
     end

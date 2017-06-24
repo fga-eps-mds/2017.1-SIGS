@@ -15,74 +15,14 @@ class AllocationsController < ApplicationController
     @coordinator_rooms = current_user.coordinator.course.department.rooms
   end
 
-  # rubocop:disable Metrics/MethodLength, Metrics/BlockLength, Metrics/AbcSize
-  # rubocop:disable Metrics/LineLength
-  # rubocop:disable Style/WordArray, Style/MultilineArrayBraceLayout
   def create
-    group_allocation = []
-    valid = []
-    [:Segunda, :Terça, :Quarta, :Quinta, :Sexta, :Sábado].each do |day_of_week|
-      exist = false
-
-      ['6',
-       '7',
-       '8',
-       '9',
-       '10',
-       '11',
-       '12',
-       '13',
-       '14',
-       '15',
-       '16',
-       '17',
-       '18',
-       '19',
-       '20',
-       '21',
-       '22',
-       '23'
-       ].each do |index|
-
-        next if params[day_of_week][index].nil?
-
-        if params[day_of_week][index][:active] == '1' && !exist
-          group_allocation.push params[day_of_week][index]
-          valid.push index
-          valid.push day_of_week
-          exist = true
-        elsif params[day_of_week][index][:active] == '1'
-          group_allocation.last[:final_time] = params[day_of_week][index][:final_time]
-        else
-          exist = false
-        end
-      end
+    allocations_params = get_valid_allocations_params(params)
+    allocations_params.each do |allocation_param|
+      save_allocation(allocation_param)
     end
-    group_allocation.each do |allocation|
-      save_allocation(allocation)
-    end
-    redirect_to allocations_new_path(params[valid[1]][valid[0]][:school_room_id])
+    school_room_id = allocations_params.first[:school_room_id]
+    redirect_to allocations_new_path(school_room_id)
   end
-
-  def save_allocation(allocation)
-    new_allocation = Allocation.new(allocations_params(allocation))
-    return unless new_allocation.active
-    new_allocation.user_id = current_user.id
-
-    if time_invalid(new_allocation)
-      flash[:error] = 'Horário inválido'
-    elsif verify_time_shock_room_day(new_allocation) && !super_allocation(new_allocation)
-      flash[:error] = 'Alocação com horário não vago ou capacidade da sala cheia'
-    elsif new_allocation.save
-      pass_to_all_allocation_dates(new_allocation)
-      flash[:success] = 'Alocação feita com sucesso'
-    else
-      flash[:error] = 'Falha ao realizar alocação'
-    end
-  end
-  # rubocop:enable Metrics/MethodLength, Metrics/BlockLength, Metrics/AbcSize
-  # rubocop:enable Metrics/LineLength
-  # rubocop:enable Style/WordArray, Style/MultilineArrayBraceLayout
 
   def destroy
     @allocation_all_date_user = []
@@ -92,6 +32,22 @@ class AllocationsController < ApplicationController
       @allocation_all_date_user += AllAllocationDate.where(allocation_id: allocation.id)
     end
   end
+
+  def save_allocation(allocation)
+    new_allocation = Allocation.new(allocations_params(allocation))
+    return unless new_allocation.active
+    new_allocation.user_id = current_user.id
+
+    if new_allocation.save
+      pass_to_all_allocation_dates(new_allocation)
+      flash[:success] = 'Alocação feita com sucesso'
+    else
+      ocurred_errors(new_allocation)
+    end
+  end
+  # rubocop:enable Metrics/MethodLength, Metrics/BlockLength, Metrics/AbcSize
+  # rubocop:enable Metrics/LineLength
+  # rubocop:enable Style/WordArray, Style/MultilineArrayBraceLayout
 
   def destroy_all_allocations
     school_room_id = SchoolRoom.find(params[:id]).id
@@ -115,7 +71,7 @@ class AllocationsController < ApplicationController
     require 'json'
 
     data = []
-    (6..24).each do |hour|
+    (6..23).each do |hour|
       data << make_rows(hour)
     end
     render inline: data.to_json
@@ -123,30 +79,24 @@ class AllocationsController < ApplicationController
 
   private
 
-  def time_invalid(allocation)
-    range = final_time_to_int(allocation) - start_time_to_int(allocation)
-    (range < 1) || (range > 3) || invalid_shift(allocation)
-  end
-
-  def super_allocation(allocation)
-    allocations_room = Allocation.where(room_id: allocation.room_id,
-                                        day: allocation.day,
-                                        start_time: allocation.start_time,
-                                        final_time: allocation.final_time)
-
-    verify_equals_disciplines(allocation, allocations_room)
-  end
-
-  def verify_equals_disciplines(allocation, allocations_room)
-    discipline = allocation.school_room.discipline
-    vacancies = allocation.school_room.vacancies
-    allocations_room.each do |allocation_room|
-      return false unless discipline == allocation_room.school_room.discipline
-      return false unless allocation.school_room != allocation_room.school_room
-
-      vacancies += allocation_room.school_room.vacancies
+  def get_valid_allocations_params(params, group_allocation = [], valid = [])
+    [:Segunda, :Terça, :Quarta, :Quinta, :Sexta, :Sábado].each do |day_of_week|
+      exist = false
+      ('6'..'22').to_a.each do |index|
+        next if params[day_of_week][index].nil?
+        if params[day_of_week][index][:active] == '1' && !exist
+          group_allocation.push params[day_of_week][index]
+          valid.push index
+          valid.push day_of_week
+          exist = true
+        elsif params[day_of_week][index][:active] == '1'
+          group_allocation.last[:final_time] = params[day_of_week][index][:final_time]
+        else
+          exist = false
+        end
+      end
     end
-    vacancies <= allocation.room.capacity
+    group_allocation
   end
 
   def pass_to_all_allocation_dates(allocation)
@@ -212,44 +162,6 @@ class AllocationsController < ApplicationController
     @row << data_allocation
   end
 
-  def start_time_to_int(allocation)
-    allocation.start_time.strftime('%H').to_i
-  end
-
-  def final_time_to_int(allocation)
-    allocation.final_time.strftime('%H').to_i
-  end
-
-  def time_in_range?(hour, allocation)
-    start_interval = start_time_to_int(allocation)
-    final_interval = final_time_to_int(allocation)
-    hour >= start_interval && hour <= final_interval
-  end
-
-  def verify_time_shock(new_allocation, allocation_room)
-    start = start_time_to_int(new_allocation)
-    final = final_time_to_int(new_allocation)
-    time_in_range?(start, allocation_room) || time_in_range?(final, allocation_room)
-  end
-
-  def verify_time_shock_room_day(allocation)
-    allocations_room = Allocation.where(day: allocation.day, room_id: allocation.room_id)
-    allocations_room.each do |allocation_room|
-      return true if verify_time_shock(allocation, allocation_room)
-    end
-    false
-  end
-
-  def get_allocation_shift(allocation)
-    allocation.school_room.courses.first.shift
-  end
-
-  def invalid_shift(allocation)
-    shift = get_allocation_shift(allocation)
-    final = final_time_to_int(allocation)
-    start = start_time_to_int(allocation)
-    (shift == 1 && final > 18) || (shift == 2 && start < 18)
-  end
   # rubocop:enable Metrics/MethodLength, Metrics/BlockLength, Metrics/AbcSize
   # rubocop:enable Metrics/CyclomaticComplexity, Metrics/LineLength
 end
