@@ -62,9 +62,14 @@ To see the license of the project [Click Here](https://github.com/fga-gpp-mds/20
 
 * Open the internet browser in http://192.168.2.15:3000.
 
-* Login with the DEG user.
+* Login with the DEG user or the Coordinator user.
 
+      DEG User
       e-mail: "wallacy@unb.br"
+      password: "123456"
+
+      Coordinator User
+      e-mail: "caio@unb.br"
       password: "123456"
 
 For more install and configurate informations, access the [Tutorial](https://github.com/fga-gpp-mds/2017.1-SIGS/wiki/Comandos-de-Instala%C3%A7%C3%A3o-do-Ambiente).
