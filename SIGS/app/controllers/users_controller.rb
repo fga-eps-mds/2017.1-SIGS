@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.where('id != ? and active != false', current_user.id)
+    @users = User.where('id != ? and active = 1', current_user.id)
     return unless permission[:level] != 2
     redirect_to_current_user
   end
@@ -39,6 +39,9 @@ class UsersController < ApplicationController
       redirect_to sign_in_path
       flash[:notice] = 'Solicitação de cadastro efetuado com sucesso!'
     else
+      @user.build_deg
+      @user.build_coordinator
+      @user.build_administrative_assistant
       render :new
     end
   end
@@ -68,7 +71,7 @@ class UsersController < ApplicationController
         flash[:error] = 'Não é possível excluir o único Assistente Administrativo'
         redirect_to current_user
       else
-        @user.destroy
+        @user.update(active: 2)
         flash[:success] = 'Usuário excluído com sucesso'
         redirect_to sign_in_path
       end

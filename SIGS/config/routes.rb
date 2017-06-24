@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   patch 'categories/update/:id', controller: 'categories', action: 'update', as: 'categories_update'
   get 'categories/destroy/:id', controller: 'categories', action: 'destroy', as: 'categories_destroy'
 
-
   # Sessions
   get 'sign_in' => 'sessions#new'
   post 'sign_in' => 'sessions#create'
@@ -54,6 +53,7 @@ Rails.application.routes.draw do
   patch 'school_rooms/update/:id', controller: 'school_rooms', action: 'update', as: 'school_rooms_update'
   post 'school_rooms/search_disciplines' => 'school_rooms#search_disciplines', as: 'search_disciplines'
   get 'school_rooms/destroy/:id', controller: 'school_rooms', action: 'destroy', as: 'destroy_school_room'
+  get 'school_rooms/search_courses/:code' => 'school_rooms#search_courses', as: 'search_courses'
 
   # Parsers
   post "/upload_buildings", controller: 'parsers', action: 'upload_buildings'
@@ -126,12 +126,12 @@ Rails.application.routes.draw do
   get 'api_users/show/:id' => 'api_users#show', as: 'api_users_show'
   get 'api_users/destroy/:id' => 'api_users#destroy', as: 'api_users_destroy'
 
-
   # API
   namespace :api, default: { format: :json }, path: '/api' do
     get 'all_rooms' => 'apis#all_rooms'
     get 'department_allocations/:code' => 'apis#department_allocations'
     get 'discipline_allocations/:code' => 'apis#discipline_allocations'
+    get 'school_rooms_of_room/:code' => 'apis#school_rooms_of_room'
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
