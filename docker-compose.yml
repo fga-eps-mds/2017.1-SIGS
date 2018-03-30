@@ -1,0 +1,21 @@
+version: '3'
+services:
+  db:
+    image: mysql
+    ports:
+      - "5432:5432"
+    environment:
+      - MYSQL_DATABASE=SIGS_development
+      - MYSQL_ALLOW_EMPTY_PASSWORD='yes'
+
+  web:
+    build: .
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    volumes:
+      - ./SIGS:/SIGS-MES
+    ports:
+      - "3000:3000"
+    links:
+      - db:mysql
+    depends_on:
+      - db
