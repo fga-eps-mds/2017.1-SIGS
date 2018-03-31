@@ -12,14 +12,14 @@
 
 ActiveRecord::Schema.define(version: 20170616032538) do
 
-  create_table "administrative_assistants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "administrative_assistants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_administrative_assistants_on_user_id", using: :btree
   end
 
-  create_table "all_allocation_dates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "all_allocation_dates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.date     "day"
     t.integer  "allocation_id"
     t.integer  "allocation_extension_id"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20170616032538) do
     t.index ["allocation_id"], name: "index_all_allocation_dates_on_allocation_id", using: :btree
   end
 
-  create_table "allocation_extensions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "allocation_extensions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "extension_id"
     t.integer  "user_id"
     t.integer  "room_id"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20170616032538) do
     t.index ["user_id"], name: "index_allocation_extensions_on_user_id", using: :btree
   end
 
-  create_table "allocations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "allocations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.boolean  "active"
     t.time     "start_time"
     t.time     "final_time"
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 20170616032538) do
     t.index ["user_id"], name: "index_allocations_on_user_id", using: :btree
   end
 
-  create_table "api_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "api_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
     t.string   "email"
     t.string   "secret"
@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 20170616032538) do
     t.index ["user_id"], name: "index_api_users_on_user_id", using: :btree
   end
 
-  create_table "buildings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "buildings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "code"
     t.string   "name"
     t.string   "wing"
@@ -79,27 +79,27 @@ ActiveRecord::Schema.define(version: 20170616032538) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "categories_rooms", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "categories_rooms", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "category_id", null: false
     t.integer "room_id",     null: false
     t.index ["category_id", "room_id"], name: "index_categories_rooms_on_category_id_and_room_id", using: :btree
     t.index ["room_id", "category_id"], name: "index_categories_rooms_on_room_id_and_category_id", using: :btree
   end
 
-  create_table "categories_school_rooms", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "categories_school_rooms", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "category_id",    null: false
     t.integer "school_room_id", null: false
     t.index ["category_id", "school_room_id"], name: "index_categories_school_rooms_on_category_id_and_school_room_id", using: :btree
     t.index ["school_room_id", "category_id"], name: "index_categories_school_rooms_on_school_room_id_and_category_id", using: :btree
   end
 
-  create_table "coordinators", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "coordinators", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "course_id"
     t.integer  "user_id"
     t.datetime "created_at", null: false
@@ -108,7 +108,7 @@ ActiveRecord::Schema.define(version: 20170616032538) do
     t.index ["user_id"], name: "index_coordinators_on_user_id", using: :btree
   end
 
-  create_table "courses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "courses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "code"
     t.string   "name"
     t.integer  "shift"
@@ -118,21 +118,21 @@ ActiveRecord::Schema.define(version: 20170616032538) do
     t.index ["department_id"], name: "index_courses_on_department_id", using: :btree
   end
 
-  create_table "courses_school_rooms", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "courses_school_rooms", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "course_id",      null: false
     t.integer "school_room_id", null: false
     t.index ["course_id", "school_room_id"], name: "index_courses_school_rooms_on_course_id_and_school_room_id", using: :btree
     t.index ["school_room_id", "course_id"], name: "index_courses_school_rooms_on_school_room_id_and_course_id", using: :btree
   end
 
-  create_table "degs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "degs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_degs_on_user_id", using: :btree
   end
 
-  create_table "departments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "departments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "code"
     t.string   "name"
     t.string   "wing"
@@ -141,7 +141,7 @@ ActiveRecord::Schema.define(version: 20170616032538) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "disciplines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "disciplines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "code"
     t.string   "name"
     t.integer  "department_id"
@@ -150,7 +150,7 @@ ActiveRecord::Schema.define(version: 20170616032538) do
     t.index ["department_id"], name: "index_disciplines_on_department_id", using: :btree
   end
 
-  create_table "extensions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "extensions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
     t.string   "responsible"
     t.integer  "vacancies"
@@ -158,12 +158,12 @@ ActiveRecord::Schema.define(version: 20170616032538) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "parsers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "parsers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "periods", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "periods", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.date     "initial_date"
     t.date     "final_date"
     t.string   "period_type"
@@ -171,7 +171,7 @@ ActiveRecord::Schema.define(version: 20170616032538) do
     t.datetime "updated_at",   null: false
   end
 
-  create_table "room_solicitations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "room_solicitations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.datetime "start",                       null: false
     t.datetime "final",                       null: false
     t.string   "day",                         null: false
@@ -190,7 +190,7 @@ ActiveRecord::Schema.define(version: 20170616032538) do
     t.index ["solicitation_id"], name: "index_room_solicitations_on_solicitation_id", using: :btree
   end
 
-  create_table "rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "code"
     t.string   "name"
     t.integer  "capacity"
@@ -204,7 +204,7 @@ ActiveRecord::Schema.define(version: 20170616032538) do
     t.index ["department_id"], name: "index_rooms_on_department_id", using: :btree
   end
 
-  create_table "school_rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "school_rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
     t.integer  "vacancies"
     t.integer  "discipline_id"
@@ -213,7 +213,7 @@ ActiveRecord::Schema.define(version: 20170616032538) do
     t.index ["discipline_id"], name: "index_school_rooms_on_discipline_id", using: :btree
   end
 
-  create_table "solicitations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "solicitations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "justify",                    null: false
     t.integer  "status",         default: 0, null: false
     t.date     "request_date",               null: false
@@ -225,7 +225,7 @@ ActiveRecord::Schema.define(version: 20170616032538) do
     t.index ["school_room_id"], name: "index_solicitations_on_school_room_id", using: :btree
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
     t.string   "email"
     t.string   "cpf"
