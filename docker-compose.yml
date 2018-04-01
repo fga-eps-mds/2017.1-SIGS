@@ -3,7 +3,7 @@ services:
   db:
     image: mysql
     ports:
-      - "5432:5432"
+      - "5432"
     environment:
       - MYSQL_DATABASE=SIGS_development
       - MYSQL_ALLOW_EMPTY_PASSWORD='yes'
