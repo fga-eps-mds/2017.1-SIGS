@@ -21,7 +21,6 @@ rvm:
     slack: sigs-gces:IISF1PsHHYEWEMomYPJ7KWsi
 branches:
   only:
-  - master
   - /.*/
 deploy:
   provider: heroku
