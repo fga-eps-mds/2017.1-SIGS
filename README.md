@@ -3,6 +3,7 @@
 <p align="center"><img width="300" src="https://raw.githubusercontent.com/wiki/fga-gpp-mds/2017.1-SIGS/images/logo/cerebro_black.png"></p>
 
 [![BuildStatus](https://travis-ci.org/fga-gpp-mds/2017.1-SIGS.svg?branch=master)](https://travis-ci.org/fga-gpp-mds/2017.1-SIGS)
+<a href="https://codeclimate.com/github/MatheusRich/SIGS-GCES/maintainability"><img src="https://api.codeclimate.com/v1/badges/c4b080ae0993346dad94/maintainability" /></a>
 ![Coverage Status](https://coveralls.io/repos/github/fga-gpp-mds/2017.1-SIGS/badge.svg?branch=development)
 [![Ruby](https://img.shields.io/badge/ruby-2.3.1-blue.svg)](https://www.ruby-lang.org)
 [![Rails](https://img.shields.io/badge/rails-5.0.2-blue.svg)](http://rubyonrails.org/)
