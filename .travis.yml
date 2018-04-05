@@ -17,25 +17,10 @@ after_sucess:
 - coveralls push
 rvm:
 - 2.3.1
-notifications:
-  email:
-    recipients:
-    - gesiel.was.f@gmail.com
-    - vinisilvacar@gmail.com
-    - viny.pinheiro.1995@gmail.com
-    - caiofelipe147@gmail.com
-    - lucasandradeunb@gmail.com
-    - joaopaulo.busche@gmail.com
-    - danielmarques7@hotmail.com
-    - wallacy.braz@live.com
-    - mendesiasmin96@gmail.com
-    - brunomatiascasas@hotmail.com
-    - carlosaragon3@hotmail.com
-    - ateldybfilho@gmail.com
-    - rodrigodadamos@gmail.com
+ notifications:
+    slack: sigs-gces:IISF1PsHHYEWEMomYPJ7KWsi
 branches:
   only:
-  - master
   - /.*/
 deploy:
   provider: heroku
