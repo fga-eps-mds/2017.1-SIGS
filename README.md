@@ -24,6 +24,36 @@ To see the license of the project [Click Here](https://github.com/fga-gpp-mds/20
 
 ## Getting Started
 
+There are 2 ways to set up your environment. You can use Docker to simulate isolate containers that has only the software dependencies, or you can run a virtual machine and simulate a whole system using Vagrant. To each case, you can follow the instructions below.
+
+### Set up using Docker
+
+* Install Docker
+
+  - [Download docker](https://docs.docker.com/engine/installation/)
+
+* Install Docker Compose
+
+  - [Download docker-compose](https://docs.docker.com/compose/install/)
+
+* Build the container image
+
+      $ docker-compose build
+
+* Run the container
+
+      $ docker-compose up -d
+
+* Set up the Database
+
+  To create the database, run the migration and populate it with fictional data
+
+      $ docker-compose run web rails db:create db:migrate db:seed
+
+* Open the internet browser in http://localhost:3000/.
+
+
+### Set up using Vagrant
 * Install the virtual machine software [VirtualBox](https://www.virtualbox.org).
 
       $ sudo apt-get install virtualbox
@@ -61,6 +91,9 @@ To see the license of the project [Click Here](https://github.com/fga-gpp-mds/20
       $ rails s -b 192.168.2.15
 
 * Open the internet browser in http://192.168.2.15:3000.
+
+
+### Using the application
 
 * Login with the DEG user or the Coordinator user.
 
