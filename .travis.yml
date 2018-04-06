@@ -19,6 +19,9 @@ rvm:
 - 2.3.1
  notifications:
     slack: sigs-gces:IISF1PsHHYEWEMomYPJ7KWsi
+branches:
+  only:
+  - /.*/
 deploy:
   provider: heroku
   app: sigs-unb
