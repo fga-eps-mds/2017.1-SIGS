@@ -2,9 +2,9 @@
 
 <p align="center"><img width="300" src="https://raw.githubusercontent.com/wiki/fga-gpp-mds/2017.1-SIGS/images/logo/cerebro_black.png"></p>
 
-[![BuildStatus](https://travis-ci.org/fga-gpp-mds/2017.1-SIGS.svg?branch=master)](https://travis-ci.org/fga-gpp-mds/2017.1-SIGS)
+[![BuildStatus](https://travis-ci.org/MatheusRich/SIGS-GCES.svg?branch=master)](https://travis-ci.org/MatheusRich/SIGS-GCES)
 <a href="https://codeclimate.com/github/MatheusRich/SIGS-GCES/maintainability"><img src="https://api.codeclimate.com/v1/badges/c4b080ae0993346dad94/maintainability" /></a>
-![Coverage Status](https://coveralls.io/repos/github/fga-gpp-mds/2017.1-SIGS/badge.svg?branch=development)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/c4b080ae0993346dad94/test_coverage)](https://codeclimate.com/github/MatheusRich/SIGS-GCES/test_coverage)
 [![Ruby](https://img.shields.io/badge/ruby-2.3.1-blue.svg)](https://www.ruby-lang.org)
 [![Rails](https://img.shields.io/badge/rails-5.0.2-blue.svg)](http://rubyonrails.org/)
 [![MIT License](https://img.shields.io/badge/license-MIT%20License-blue.svg)](https://opensource.org/licenses/MIT)
