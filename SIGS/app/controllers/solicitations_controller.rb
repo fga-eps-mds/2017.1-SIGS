@@ -64,10 +64,9 @@ class SolicitationsController < ApplicationController
       next if solicitation_validade.nil?
       @solicitations << solicitation_validade
     end
-    # Solicitation.all apenas para fins de uso local, devido à regra de negócio
-    # onde apenas o dono do departamento pode acessar as solicitações
+    # Solicitation.all apenas para fins de uso local, devido a regra de negocio
+    # onde apenas o dono do departamento pode acessar as solicitacoes
     # @solicitations = Solicitation.all
-
   end
 
   def show
