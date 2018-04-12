@@ -14,6 +14,10 @@ COPY SIGS/Gemfile.lock /SIGS-MES/Gemfile.lock
 RUN bundle install
 
 COPY . /SIGS-MES
+RUN pwd
+RUN ls
+
+RUN chmod +x start-dev.sh
 
 EXPOSE  3000
 CMD ["rails", "server", "-b", "0.0.0.0"]
