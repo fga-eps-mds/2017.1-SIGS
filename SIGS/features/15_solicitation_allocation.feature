@@ -4,7 +4,8 @@ Feature: Solicitation an allocation to other department
   I would like to create a new allocation solicitation
 
   Scenario: request allocation in allocation period without schedule
-    Given I am logged in as coordinator
+    Given I am logged in as coordinator 
+    Given I am in the allocation period
     And click on link 'Alocar'
     When click in solicitation link
     Then expected 'Período de Alocação'
