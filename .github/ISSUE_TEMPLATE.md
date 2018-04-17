@@ -1,16 +1,16 @@
-## Problem Description
+## Descrição do Problema
 
 
-## Expected Behavior
+## Comportamento Esperado
 
 
-## Actual Behavior
+## Comportamento Atual 
 
 
-## Steps to Reproduce the Problem
+## Passos Para Reproduzir o Problema
 
   1.
   2.
 
 
-## Snapshots
+## Screenshots
