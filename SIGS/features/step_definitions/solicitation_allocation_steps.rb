@@ -29,3 +29,7 @@ end
 Then(/^I expect 'Selecione o horário que deseja'$/) do
   expect(page).to have_content('Selecione o horário que deseja')
 end
+
+Given(/^I am in the allocation period$/) do
+  Period.find_by(period_type:'Alocação').update(initial_date: Date.current - 5.days, final_date: Date.current + 1.days)
+end
