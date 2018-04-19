@@ -45,10 +45,12 @@
 
   <p>
     <b>Funcionamento:&nbsp;</b>
+    <%= label_tag(:id_all , "Todas") %>
+    <%= radio_button_tag(:room_status_filter, "all", true, :id => "id_all") %>
     <%= label_tag(:id_active, "Ativa") %>
-    <%= radio_button_tag(:ativo, "ativa", false, :id => "id_active") %>&nbsp;&nbsp;
-    <%= label_tag(:id_anative, "Inativa") %>
-    <%= radio_button_tag(:ativo, "inativa", false, :id => "id_anative") %>
+    <%= radio_button_tag(:room_status_filter, "active", false, :id => "id_active") %>
+    <%= label_tag(:id_anactive, "Inativa") %>
+    <%= radio_button_tag(:room_status_filter, "inactive", false, :id => "id_anactive") %>
   </p>
 
   <% if @rooms.count == 0 %>
@@ -85,18 +87,11 @@
   <% end %>
 
 <script>
-  var active;
-  var bool;
-
   $("input:radio").on('click', function() {
     $(".show_room").empty();
-    active = $(this).attr("value");
-    if (active == "ativa")
-      bool = true;
-    else
-      bool = false;
+    var roomStatus = $(this).attr("value");
 
-    if (bool) {
+    if (roomStatus === "active") {
       <% @rooms.each do |room| %>
         if (<%= room.active %>) {
           $(".show_room").append(
@@ -111,7 +106,7 @@
           );
         }
       <%end%>
-    } else {
+    } else if (roomStatus === "inactive") {
        <% @rooms.each do |room| %>
          if (!<%= room.active %>) {
             $(".show_room").append(
@@ -126,6 +121,20 @@
             );
           }
       <%end%>
+    } else {
+      // roomStatus === all
+      <% @rooms.each do |room| %>
+        $(".show_room").append(
+          "<tr>"
+            + "<td><%=room.code%></td>"
+            + "<td><%= room.name %></td>"
+            + "<td id='active_room'><%=((room.active) ? 'Sim' : 'Não')  %></td>"
+            + "<td><%= room.building.name %></td>"
+            + '<td style="text-align:center"><%= link_to image_tag("icon_edit.png"), room_edit_path(room.id) %></td>'
+            + '<td style="text-align:center"><%= link_to image_tag("icon_view.png"), room_path(room.id) %></td>'
+          + "</tr>"
+        );
+      <%end%>
     }
 
   });
@@ -135,7 +144,4 @@
     $('select#building_id').find('option').removeClass('hide');
     $('select#building_id').find('option').not('option[data-wing="' + selected + '"]').addClass('hide');
   });
-
-
-
 </script>
