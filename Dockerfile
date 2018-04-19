@@ -14,8 +14,6 @@ COPY SIGS/Gemfile.lock /SIGS-MES/Gemfile.lock
 RUN bundle install
 
 COPY . /SIGS-MES
-RUN pwd
-RUN ls
 
 RUN chmod +x start-dev.sh
 
