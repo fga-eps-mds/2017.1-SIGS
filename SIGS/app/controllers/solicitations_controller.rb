@@ -53,7 +53,7 @@ class SolicitationsController < ApplicationController
     department = return_department_owner
     @department_rooms = Room.where(department: department)
     room_solicitations = RoomSolicitation.where(department: department)
-                                         .group(:solicitation_id)
+
     @solicitations = []
     room_solicitations.each do |room_solicitation|
       solicitation_validade = Solicitation.find_by(id:
@@ -64,6 +64,9 @@ class SolicitationsController < ApplicationController
       next if solicitation_validade.nil?
       @solicitations << solicitation_validade
     end
+    # Solicitation.all apenas para fins de uso local, devido a regra de negocio
+    # onde apenas o dono do departamento pode acessar as solicitacoes
+    # @solicitations = Solicitation.all
   end
 
   def show

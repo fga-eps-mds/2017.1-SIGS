@@ -15,22 +15,19 @@
 
     </tr>
     <% @solicitations.each do |solicitation| %>
-      <% solicitation.room_solicitation.where(status: 0).group(:room_id).each do |room_solicitation| %>
-        <%= room = room_solicitation.room %>
-        <% unless room.nil? %>
-          <% next unless @department_rooms.include? room %>
-        <% end %>
+      <% solicitation.room_solicitation.where(status: 0).each do |room_solicitation| %>
+        
         <tr>
           <td><%= solicitation.request_date%></td>
           <td><%= solicitation.school_room.name%></td>
           <td><%= solicitation.school_room.discipline.name %></td>
           <td><%= solicitation.school_room.discipline.department.name %></td>
-          <td><%= room.nil? ? '---' : room.name %></td>
+          <td><%= room_solicitation.room.nil? ? '---' : room_solicitation.room.name %></td>
           <td><%= solicitation.requester.name %></td>
-          <% if room.nil? %>
+          <% if room_solicitation.room.nil? %>
             <td style="text-align:center"><%= link_to image_tag("icon_view.png"), solicitations_show_path(id: solicitation.id) %></td>
           <% else %>
-          <td style="text-align:center"><%= link_to image_tag("icon_view.png"), solicitations_show_path(id: solicitation.id, room: room.id) %></td>
+          <td style="text-align:center"><%= link_to image_tag("icon_view.png"), solicitations_show_path(id: solicitation.id, room: room_solicitation.room.id) %></td>
 
           <% end %>
         </tr>
