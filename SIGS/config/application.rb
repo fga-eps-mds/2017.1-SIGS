@@ -16,5 +16,8 @@ module SIGS
     config.assets.paths << "#{Rails.root}/app/assets/fonts"
     config.active_record.time_zone_aware_types = [:datetime, :time]
 
+    # Makes exception_handler gem available in dev environment
+    config.exception_handler = { dev: true }
+
   end
 end
