@@ -56,6 +56,9 @@ gem 'data-confirm-modal', '~> 1.1', '>= 1.1.1'
 # Icons
 gem 'font-awesome-sass'
 
+#Handler for 4xx/5xx Exceptions
+gem 'exception_handler', '~> 0.7.7.0'
+
 group :production do
   gem 'rails_12factor'
 end
