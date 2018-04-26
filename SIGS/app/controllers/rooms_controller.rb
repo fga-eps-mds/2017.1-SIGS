@@ -8,11 +8,18 @@ class RoomsController < ApplicationController
   def index
     @rooms = Room.all
     @buildings = Building.all
+    @department = Department.all
     filter_by_name
     filter_by_code
     filter_by_capacity
     filter_by_buildings
     filter_by_wings
+    filter_by_department
+  end
+
+  def filter_by_department
+    return unless params[:department_id].present?
+    @rooms = @rooms.where(department_id: params[:department_id])
   end
 
   def filter_by_capacity
@@ -77,12 +84,8 @@ class RoomsController < ApplicationController
     result = []
     allocations = Allocation.where(school_room_id: school_room_id)
     allocations.each do |allocation|
-      result.push [
-        allocation.start_time,
-        allocation.final_time,
-        allocation.day,
-        allocation.room.name
-      ]
+      result.push [allocation.start_time, allocation.final_time,
+                   allocation.day, allocation.room.name]
     end
     render inline: result.to_json
   end
@@ -110,6 +113,7 @@ class RoomsController < ApplicationController
       :active,
       :time_grid_id,
       :building_id,
+      :department,
       category_ids: []
     )
   end
