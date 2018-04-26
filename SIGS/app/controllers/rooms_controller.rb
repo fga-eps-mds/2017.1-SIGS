@@ -9,13 +9,22 @@ class RoomsController < ApplicationController
     @rooms = Room.all
     @buildings = Building.all
     @department = Department.all
-    @user_department = current_user.coordinator.course.department
+    @user_department = find_user_department
+    puts(@user_department)
     filter_by_name
     filter_by_code
     filter_by_capacity
     filter_by_buildings
     filter_by_wings
     filter_by_department
+  end
+
+  def find_user_department
+    if current_user.coordinator.nil?
+      nil
+    else
+      current_user.coordinator.course.department
+    end
   end
 
   def filter_by_department
