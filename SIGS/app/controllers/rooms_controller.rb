@@ -9,6 +9,7 @@ class RoomsController < ApplicationController
     @rooms = Room.all
     @buildings = Building.all
     @department = Department.all
+    @user_department = current_user.coordinator.course.department
     filter_by_name
     filter_by_code
     filter_by_capacity
