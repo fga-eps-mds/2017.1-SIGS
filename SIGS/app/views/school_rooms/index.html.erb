@@ -49,21 +49,21 @@
         <% if permission[:level] == 1 %>  
           </td>
             <td style="text-align:center">
-              <% if !is_allocated? school_room.id %>
+              <% if !allocated? school_room.id %>
                 <%= link_to image_tag("icon_alloc.png"), allocations_new_path(school_room.id) %>
               <% else %>
                 <%= image_tag("disabled.png") %>
               <% end %>
             </td>
             <td style="text-align:center">
-              <% if !is_allocated? school_room.id %>
+              <% if !allocated? school_room.id %>
                 <%= link_to image_tag("icon_request_alloc.png"), allocation_period_path(school_room.id) %>
               <% else %>
                 <%= image_tag("disabled.png") %>
               <% end %>
             </td>
             <td style="text-align:center">
-              <% if is_allocated? school_room.id %>
+              <% if allocated? school_room.id %>
                 <%= link_to image_tag("icon_alloc_red.png"), allocations_destroy_path(school_room.id) %>
               <% else %>
                 <%= image_tag("disabled.png") %>
