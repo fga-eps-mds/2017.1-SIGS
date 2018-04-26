@@ -29,4 +29,8 @@ module SchoolRoomsHelper
   def get_categories(id)
     SchoolRoom.find_by(id: id).category
   end
+
+  def is_allocated?(id)
+    !Allocation.find_by(school_room_id: id).nil?
+  end
 end
