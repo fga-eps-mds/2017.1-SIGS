@@ -47,6 +47,3 @@ Metrics/ModuleLength:
   Exclude:
     - 'spec/**/*.rb'
 
-Metrics/ClassLength:
-  Exclude:
-    - "app/controllers/rooms_controller.rb"

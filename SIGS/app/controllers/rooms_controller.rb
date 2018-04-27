@@ -10,7 +10,6 @@ class RoomsController < ApplicationController
     @buildings = Building.all
     @department = Department.all
     @user_department = find_user_department
-    puts(@user_department)
     filter_by_name
     filter_by_code
     filter_by_capacity
@@ -25,36 +24,6 @@ class RoomsController < ApplicationController
     else
       current_user.coordinator.course.department
     end
-  end
-
-  def filter_by_department
-    return unless params[:department_id].present?
-    @rooms = @rooms.where(department_id: params[:department_id])
-  end
-
-  def filter_by_capacity
-    return unless params[:capacity].present?
-    @rooms = @rooms.where('capacity >= ?', params[:capacity])
-  end
-
-  def filter_by_buildings
-    return unless params[:building_id].present?
-    @rooms = @rooms.where(building_id: params[:building_id])
-  end
-
-  def filter_by_wings
-    return unless params[:wing].present?
-    @rooms = @rooms.joins(:building).where(buildings: { wing: params[:wing] })
-  end
-
-  def filter_by_name
-    return unless params[:name].present?
-    @rooms = @rooms.where('rooms.name LIKE ?', "%#{params[:name]}%")
-  end
-
-  def filter_by_code
-    return unless params[:code].present?
-    @rooms = @rooms.where('rooms.code' => params[:code])
   end
 
   def edit
@@ -94,8 +63,10 @@ class RoomsController < ApplicationController
     result = []
     allocations = Allocation.where(school_room_id: school_room_id)
     allocations.each do |allocation|
-      result.push [allocation.start_time, allocation.final_time,
-                   allocation.day, allocation.room.name]
+      result.push [allocation.start_time,
+                   allocation.final_time,
+                   allocation.day,
+                   allocation.room.name]
     end
     render inline: result.to_json
   end
