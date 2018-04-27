@@ -38,6 +38,7 @@ class SchoolRoomsController < ApplicationController
     else
       @my_school_rooms = SchoolRoom.all
     end
+    sort_school_rooms_by_allocation
   end
 
   def search_disciplines
@@ -64,8 +65,8 @@ class SchoolRoomsController < ApplicationController
     @school_room = SchoolRoom.find(params[:id])
     @all_courses = Course.all
     if @school_room.update_attributes(school_rooms_params_update)
-      success_mesage = 'A turma foi alterada com sucesso'
-      redirect_to school_rooms_index_path, flash: { success: success_mesage }
+      success_message = 'A turma foi alterada com sucesso'
+      redirect_to school_rooms_index_path, flash: { success: success_message }
     else
       ocurred_errors(@school_room)
       render :edit
@@ -104,15 +105,5 @@ class SchoolRoomsController < ApplicationController
       course_ids: [],
       category_ids: []
     )
-  end
-
-  def school_rooms_of_disciplines(disciplines)
-    SchoolRoom.where(discipline: disciplines).order(:name)
-  end
-
-  def department_by_coordinator
-    coordinator = Coordinator.find_by(user: current_user.id)
-    course = Course.find(coordinator.course_id)
-    Department.find(course.department_id)
   end
 end
