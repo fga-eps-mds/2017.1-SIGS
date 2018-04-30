@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   include UserHelper
   include SchoolRoomsHelper
+  include RoomsHelper
 
   def ocurred_errors(object)
     object.errors.messages.each do |_attrib, messages|
