@@ -49,10 +49,7 @@ test: &test
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: SIGS_production
-  username: SIGS
-  password: <%= ENV['SIGS_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
 
 cucumber:
   <<: *test
