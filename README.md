@@ -17,7 +17,7 @@ To see the features of the project [Click Here](https://github.com/fga-gpp-mds/2
 
 ## Heroku Deploy
 
-To View Application Deploy [Click Here](https://sigs-unb.herokuapp.com)
+To View Application Deploy [Click Here](https://sigsunb.herokuapp.com)
 
 ## License
 
