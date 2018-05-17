@@ -16,10 +16,9 @@ class ReportsController < ApplicationController
   def by_building
     @buildings = if params[:search]
                    Building.search(params[:search])
-                   Building.order("name")
                  else
                    Building.all
-                   Building.order("name")
+                   Building.order('name')
                  end
   end
 

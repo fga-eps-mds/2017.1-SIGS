@@ -89,7 +89,7 @@ RSpec.describe ReportsController, type: :controller do
 
     it 'should return all buildings' do
       get :by_building
-      buildings = [@building, @building2]
+      buildings = [@building2, @building]
       expect(assigns(:buildings)).to eq(buildings)
     end
 
@@ -100,10 +100,10 @@ RSpec.describe ReportsController, type: :controller do
 
     it 'should return all buildings' do
       get :by_building
-      buildings = [@building, @building2]
+      buildings = [@building2, @building]
       expect(assigns(:buildings)).to eq(buildings)
     end
-    
+
     it 'should return a specific building' do
       get :by_building, params:{search: "F"}
       building = [@building2]
