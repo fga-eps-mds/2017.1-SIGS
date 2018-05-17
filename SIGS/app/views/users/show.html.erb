@@ -1,5 +1,6 @@
 <div class="row">
   <div class="col-sm-12 welcomeUser">Bem-vindo(a), <%= @user.name  %>.</div>
+  <a href="/reports_school_rooms/school_room/">
   <div class="col-md-4 col-sm-6 col-xs-12">
     <div class="info-box">
       <span class="info-box-icon bg-aqua"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></span>
@@ -11,6 +12,8 @@
       <!-- /.info-box-content -->
     </div>
   </div>
+  </a>
+  <a href="/reports_school_rooms/school_room/">
   <div class="col-md-4 col-sm-6 col-xs-12">
     <div class="info-box">
       <span class="info-box-icon bg-red"><span class="glyphicon glyphicon-book" aria-hidden="true"></span></span>
@@ -22,7 +25,9 @@
       <!-- /.info-box-content -->
     </div>
   </div>
+  </a>
   <% if permission[:level] != 0 %>
+  <a href="/solicitations/index">
     <div class="col-md-4 col-sm-6 col-xs-12">
       <div class="info-box">
         <span class="info-box-icon bg-yellow"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></span>
@@ -33,6 +38,7 @@
         <!-- /.info-box-content -->
       </div>
     </div>
+  </a>
   <% end %>
 </div><!-- /.row -->
 
