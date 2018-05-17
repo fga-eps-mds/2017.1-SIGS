@@ -23,6 +23,8 @@
 <% if @my_school_rooms.count == 0 %>
   <h3>Não há turmas cadastradas no momento.</h3>
 <% else %>
+<%= will_paginate @my_school_rooms %>
+
   <table class="table table-hover">
     <tr>
       <th>Disciplina</th>
@@ -35,7 +37,7 @@
         <th style="text-align:center">Desalocar</th>
         <th style="text-align:center">Alterar</th>
         <th style="text-align:center">Excluir</th>
-      <% end %> 
+      <% end %>
     </tr>
     <% @my_school_rooms.each do |school_room| %>
       <tr>
@@ -46,7 +48,7 @@
             <%= course.name %> <br>
           <% end %>
         <td><%= school_room.vacancies %></td>
-        <% if permission[:level] == 1 %>  
+        <% if permission[:level] == 1 %>
           </td>
             <td style="text-align:center">
               <% if !allocated? school_room.id %>
@@ -69,7 +71,7 @@
                 <%= image_tag("disabled.png") %>
               <% end %>
             </td>
-            
+
             <td style="text-align:center">
               <%= link_to image_tag("icon_edit.png"), school_rooms_edit_path(school_room.id) %>
             </td>
@@ -82,4 +84,5 @@
       </tr>
     <% end %>
   </table>
+
 <% end %>

@@ -35,10 +35,13 @@ class SchoolRoomsController < ApplicationController
       @disciplines = discipline_of_department(department_by_coordinator)
                      .order(:name)
                      .map(&:name)
+
     else
       @my_school_rooms = SchoolRoom.all
     end
-    sort_school_rooms_by_allocation
+    @my_school_rooms = @my_school_rooms.paginate(:page => params[:page], :per_page => 10)
+    # needs refactoring
+    # sort_school_rooms_by_allocation
   end
 
   def search_disciplines
