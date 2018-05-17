@@ -33,3 +33,10 @@ end
 Given(/^I am in the allocation period$/) do
   Period.find_by(period_type:'Alocação').update(initial_date: Date.current - 5.days, final_date: Date.current + 1.days)
 end
+
+Then(/^expected all periods available for allocation$/) do
+  for i in 6..23
+    time = i.to_s << ":00"
+    page.has_content?(time) == true
+  end
+end

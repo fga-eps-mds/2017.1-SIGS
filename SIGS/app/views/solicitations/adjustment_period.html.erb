@@ -45,9 +45,9 @@
     week = ["segunda", "terca","quarta","quinta","sexta", "sabado"]
 
     period = <%= @school_room.courses[0].shift %>;
-    start = (period == 1) ? 6 : 18
-    final = (period == 1) ? 18 : 23
-    for (var row = start; row < final; row++) {
+    start_time = 6
+    final_time = 23
+    for (var row = start_time; row < final_time; row++) {
       table +="<tr>";
       table += "<td>" + row + ":00</td>";
       for (var col = 0; col < 6; col++) {
