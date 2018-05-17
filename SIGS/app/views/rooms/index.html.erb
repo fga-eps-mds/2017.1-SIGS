@@ -26,6 +26,14 @@
       <%= label_tag("Prédio") %>
       <%= select_tag 'building_id', options_for_select(@buildings.map{ |building| [building.name, building.id, { 'data-wing' => building.wing }] }), include_blank: true %>
     </td>
+    <td>
+      <%= label_tag("Departamento") %>
+      <% if @user_department == nil%>
+        <%= select_tag 'department_id', options_for_select(@department.map{ |department| [department.name, department.id ]}), include_blank: true %>
+      <% else %>
+        <%= select_tag 'department_id', options_for_select(@department.map{ |department| [department.name, department.id ]}, selected: @user_department.id), include_blank: true %>
+      <% end %>
+      </td>
   </tr>
 
   <tr>
@@ -49,8 +57,8 @@
     <%= radio_button_tag(:room_status_filter, "all", true, :id => "id_all") %>
     <%= label_tag(:id_active, "Ativa") %>
     <%= radio_button_tag(:room_status_filter, "active", false, :id => "id_active") %>
-    <%= label_tag(:id_anactive, "Inativa") %>
-    <%= radio_button_tag(:room_status_filter, "inactive", false, :id => "id_anactive") %>
+    <%= label_tag(:id_inactive, "Inativa") %>
+    <%= radio_button_tag(:room_status_filter, "inactive", false, :id => "id_inactive") %>
   </p>
 
   <% if @rooms.count == 0 %>

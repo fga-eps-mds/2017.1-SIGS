@@ -26,3 +26,6 @@
 .gitignore
 SIGS/coverage
 SIGS/script/dbScript
+
+# Ignore script generated file
+/SIGS/start-dev.sh

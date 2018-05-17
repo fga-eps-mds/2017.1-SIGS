@@ -20,4 +20,11 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  #hello: "Hello world"
+  exception_handler:
+    not_found:
+      " 
+        <h1>A página que você estava procurando não existe.</h1>
+        <h4>Você pode ter digitado o endereço incorretamente ou a página pode ter sido movida.</h4>
+      "
+    unauthorized: "<h1>Você precisa estar logado para acessar esta página.</h1>"
