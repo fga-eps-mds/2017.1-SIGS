@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   get 'administrative_assistants/destroy_users/:id' => 'administrative_assistants#destroy_users', as: 'destroy_users'
 
   # Room
-  get 'rooms/index' => 'rooms#index', as: 'room_index'
+  get 'rooms/index/' => 'rooms#index', as: 'room_index'
   post 'rooms/index' => 'rooms#index', as: 'room_index_post'
   get 'rooms/edit/:id' => 'rooms#edit', as: 'room_edit'
   patch 'rooms/update/:id' => 'rooms#update'

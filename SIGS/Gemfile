@@ -13,6 +13,8 @@ gem 'prawn-rails'
 
 gem 'prawn-table'
 
+gem 'will_paginate', '~> 3.1.0'
+
 gem 'rails-controller-testing'
 
 gem 'rubocop', '~> 0.48.1', require: false
