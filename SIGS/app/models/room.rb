@@ -37,5 +37,4 @@ class Room < ApplicationRecord
                             message: MAXIMUM_FOR_THE_CAPACITY_EXCEPTION
 
   self.per_page = 10
-
 end
