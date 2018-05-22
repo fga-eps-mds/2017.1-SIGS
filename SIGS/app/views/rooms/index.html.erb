@@ -78,6 +78,7 @@
       </tr>
     </thead>
     <tbody class="show_room">
+      <%= will_paginate @rooms %>
       <% @rooms.each do |room| %>
         <tr>
           <td><%= room.code %></td>
@@ -86,7 +87,7 @@
           <td><%= room.building.name %></td>
           <% if permission[:level] != 0 %>
             <td style="text-align:center"><%= link_to image_tag("icon_edit.png"), room_edit_path(room.id) %></td>
-          <% end %>  
+          <% end %>
           <td style="text-align:center"><%= link_to image_tag("icon_view.png"), room_path(room.id) %></td>
         </tr>
       <% end %>
