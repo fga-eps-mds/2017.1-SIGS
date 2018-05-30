@@ -50,7 +50,7 @@ class SolicitationsController < ApplicationController
   end
 
   def index
-    department = return_department_owner
+    department = current_user_department
     @department_rooms = Room.where(department: department)
     room_solicitations = RoomSolicitation.where(department: department)
 
@@ -236,9 +236,9 @@ class SolicitationsController < ApplicationController
 
   def render_params
     @allocation = Allocation.new
-    @rooms = Room.where(department_id: return_department_owner)
+    @rooms = Room.where(department_id: current_user_department)
     @solicitation = Solicitation.find(params[:id])
-    @department = return_department_owner
+    @department = current_user_department
     return_wing(@solicitation.school_room)
     room = params[:room].nil? || params[:room].empty?
     @rooms_solicity = RoomSolicitation.where(solicitation_id:
