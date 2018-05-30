@@ -17,7 +17,7 @@ class SolicitationsController < ApplicationController
     redirect_to adjustment_period_path(school_room_id) unless allocation_period?
 
     @school_room = SchoolRoom.find(params[:school_room_id])
-    @departments = Department.all
+    @departments = Department.where.not(id: current_user_department)
   end
 
   def adjustment_period
