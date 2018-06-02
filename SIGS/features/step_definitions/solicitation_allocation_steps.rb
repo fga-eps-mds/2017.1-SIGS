@@ -40,3 +40,7 @@ Then(/^expected all periods available for allocation$/) do
     page.has_content?(time) == true
   end
 end
+
+Then(/^I should not see my department as an option$/) do
+  expect(page).not_to have_selector('option[1]')
+end
