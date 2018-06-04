@@ -27,6 +27,15 @@ module SessionsHelper
     render 'sessions/new'
   end
 
+  def current_user_department
+    coordinator = Coordinator.find_by(user_id: current_user.id)
+    if coordinator.nil?
+      Department.find_by(name: 'PRC')
+    else
+      coordinator.course.department
+    end
+  end
+
   def authenticate_coordinator?
     return unless permission[:level] != 1
     flash[:error] = 'Acesso Negado'
