@@ -39,11 +39,15 @@
   <tr>
     <td>
       <br>
-      <%= submit_tag "Pesquisar", class: "btn btn-success" %>
+      <%= button_tag(type: 'submit', class: "btn btn-success") do %>
+        <span class="fa fa-search"></span> Pesquisar
+      <% end %>
     </td>
     <td colspan="2">
       <br>
-      <%= link_to "Limpar Filtros", room_index_path, class: "btn btn-primary pull-right" %>
+      <%= link_to room_index_path, class: "btn btn-primary pull-right" do %>
+        <span class="fa fa-eraser"></span> Limpar Filtros
+      <% end %>
     </td>
   </tr>
 
@@ -86,9 +90,19 @@
           <td id="active_room"><%=  ((room.active) ? 'Sim' : 'Não')  %></td>
           <td><%= room.building.name %></td>
           <% if permission[:level] != 0 %>
-            <td style="text-align:center"><%= link_to image_tag("icon_edit.png"), room_edit_path(room.id) %></td>
+            <td style="text-align:center">
+              <%= link_to room_edit_path(room.id) do %>
+                <i class="fa fa-edit edit-allocation"></i>
+              <% end %>
+            </td>
           <% end %>
-          <td style="text-align:center"><%= link_to image_tag("icon_view.png"), room_path(room.id) %></td>
+          <td style="text-align:center">
+
+            <%= link_to room_path(room.id) do %>
+              <i class="fa fa-eye edit-allocation"></i>
+            <% end %>
+
+          </td>
         </tr>
       <% end %>
     </tbody>
