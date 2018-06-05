@@ -56,7 +56,7 @@ gem 'autoprefixer-rails'
 gem 'data-confirm-modal', '~> 1.1', '>= 1.1.1'
 
 # Icons
-gem 'font-awesome-sass'
+gem 'font-awesome-sass', '>= 5.0'
 
 #Handler for 4xx/5xx Exceptions
 gem 'exception_handler', '~> 0.7.7.0'
