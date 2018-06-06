@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Class t save requester solicitation
+# Class to save requester solicitation
 class Solicitation < ApplicationRecord
   has_many :room_solicitation
   belongs_to :requester, class_name: 'User'

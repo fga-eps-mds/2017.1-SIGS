@@ -13,6 +13,8 @@ gem 'prawn-rails'
 
 gem 'prawn-table'
 
+gem 'will_paginate', '~> 3.1.0'
+
 gem 'rails-controller-testing'
 
 gem 'rubocop', '~> 0.48.1', require: false
@@ -54,7 +56,10 @@ gem 'autoprefixer-rails'
 gem 'data-confirm-modal', '~> 1.1', '>= 1.1.1'
 
 # Icons
-gem 'font-awesome-sass'
+gem 'font-awesome-sass', '>= 5.0'
+
+#Handler for 4xx/5xx Exceptions
+gem 'exception_handler', '~> 0.7.7.0'
 
 group :production do
   gem 'rails_12factor'

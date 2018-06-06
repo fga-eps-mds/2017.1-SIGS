@@ -1,9 +1,16 @@
 language: ruby
+rvm:
+- 2.3.1
 services:
 - mysql
 before_script:
 - cp SIGS/config/database.yml.travis SIGS/config/database.yml
 - mysql -e 'create database myapp_test;' -uroot
+notifications:
+  slack: sigs-gces:IISF1PsHHYEWEMomYPJ7KWsi
+branches:
+  only:
+  - "/.*/"
 script:
 - cd SIGS
 - bundle install
@@ -15,32 +22,11 @@ script:
 - rubocop
 after_sucess:
 - coveralls push
-rvm:
-- 2.3.1
-notifications:
-  email:
-    recipients:
-    - gesiel.was.f@gmail.com
-    - vinisilvacar@gmail.com
-    - viny.pinheiro.1995@gmail.com
-    - caiofelipe147@gmail.com
-    - lucasandradeunb@gmail.com
-    - joaopaulo.busche@gmail.com
-    - danielmarques7@hotmail.com
-    - wallacy.braz@live.com
-    - mendesiasmin96@gmail.com
-    - brunomatiascasas@hotmail.com
-    - carlosaragon3@hotmail.com
-    - ateldybfilho@gmail.com
-    - rodrigodadamos@gmail.com
-branches:
-  only:
-  - master
-  - /.*/
 deploy:
   provider: heroku
-  app: sigs-unb
+  app: sigsunb
   api_key:
-    secure: e+1/WyespltJmI44gFyRZNe9m+DQQT5iQK0M7E+FbULG7Dx8YBmLyPYLN4rQFnhS3OnbGiyYyNJ7GHjjFb4setWwNNRpdL2eIYfBpclZ/RFYQNuh/dKSYFqWsbmdtlkvdOoqWDTaEcwyr8hIKxP3NGHHD+X1wFeDTgb4hF/1ULrqmSC382FyMl9/5IAkv3JRz93j3qpc6uOHkJ5IM7Gnt+POnF5mEyQwbPl9wdCKBaLQT7ZMBQ+vZK1Dts9iBv/1F4Xv4ot+8ttQGMgRJvRWahYrcpKEjxhFsvZ2Emj/ZcK6Fy+sKEGJ3bcL499iavpt9TRwOHFouGle6hWZAIIgqSaSliowfhAXbCM7QE3cm2+HPO9sgY+rFvurC0QFMmPtfUNbkSS7wvVVHK3yRC2LUw7uxvuCojH65VF/ryFiGOym5Rrq72HkQGVxLG7q8f/acGr9X5/x83yRuYBc1DgceZqLH4xnT6OR7hsmLtdVq6BDJWwWT0fa89zbufNooHu4c/sydIxdGPwHHogZWrOfNu69ITJNhD0XnPvIMOw405L0uIehSMWmJOJwV1xw3JxPX/r7pSNF8YWEH1qgjEZZVV1wYnGOwxpHzCTu4479/ilJIvRADeysJEGWgU8qHIaoqoCvAswy/jWLTV3LTESldSOTyXM9MI62SrMrX1KEPO4=
+    secure: Yxxp3xzQ3Vcktw4OOS94+TQkOaSS5fK1nTrNBbInYcqkwZGMfM3kXo0JbrrcJtRolqvr9DETzbC8o8ZJjrdYR51J7mlgaoBEsHNCpuTdzSUXmSBGuHy/8OQgOwebxqJXjx75l3BOmvaMgt+PjNrVCRSDPr9L2qStqBTF94omBz8TXGgfAfcQgVlhp5Obb13pW60ND3dRSI9tWIfs4eBVa0InMjTEOirV2xZ894sh97pVdnxyk4hLItkcWZ/p8UH3mQU4PPhpn157m2eB7ApLW4vtUxmgv3PO742F8ow0U6ZhO0bkBDjdGV80GcP0CsAdx1C6V4P6X/TC862j0nyJPW6JVqiO8t5xBs74l9vn+7a8C2wB3mcWgAxVF6gqQOBPO0lV5Jk6PZSuQyFx3zrJtvVFA8ZV/oaJBNAJsyY6PMvAXcrSfC2O8xCBmKztCC63iGWxVQ2mMKFCy2leqGiB4ZdOjnwBt6WNcNe6PN701y3Xs+6kTIrxTCfKVN6nEemOg/xz5tvPDJyPl7eC5bjPfU7HASIWCNVn/3gzk23FTozqRunbXW6quqpYPNw9P6cSb6VK8h1IAjYFd/2F8TIkHlXwroXuPKT3tdxQZs6Z/70MMRBt28bZr/795uu7CSvrC0wL6yPpPh4V+FrMnvuFQ/pom4NZ7dZyRapjt/OLe2g=
   on:
-     branch: master
+    branch: master
+  run: "rails db:seed"

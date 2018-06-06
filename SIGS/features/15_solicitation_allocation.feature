@@ -20,3 +20,17 @@ Feature: Solicitation an allocation to other department
     When click in solicitation link
     Then expected 'Período de Ajuste'
     And I fill justification
+
+  Scenario: request allocation and see time options of all shifts
+    Given I am logged in as coordinator
+    And change date of allocation period
+    And click on link 'Alocar'
+    When click in solicitation link
+    Then expected all periods available for allocation
+  
+  Scenario: requesting an allocation should not display the current user department as an option
+    Given I am logged in as coordinator
+    And change date of allocation period
+    And click on link 'Alocar'
+    When click in solicitation link
+    Then I should not see my department as an option

@@ -32,7 +32,11 @@
 	        <td><%= building.code %></td>
 	        <td><%= building.name %></td>
 	        <td><%= building.wing %></td>
-			<td><%= link_to image_tag("icon_pdf.png"), generate_by_building_path(building.id) %></td>
+			<td>
+				<%= link_to generate_by_building_path(building.id) do %>
+					<i class="fa fa-file-pdf pdf-icon"></i>
+				<% end %>
+			</td>
 	      </tr>
 	    <% end %>
 		</tbody>

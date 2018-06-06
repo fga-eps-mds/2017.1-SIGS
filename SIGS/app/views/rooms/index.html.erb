@@ -26,16 +26,28 @@
       <%= label_tag("Prédio") %>
       <%= select_tag 'building_id', options_for_select(@buildings.map{ |building| [building.name, building.id, { 'data-wing' => building.wing }] }), include_blank: true %>
     </td>
+    <td>
+      <%= label_tag("Departamento") %>
+      <% if @user_department == nil%>
+        <%= select_tag 'department_id', options_for_select(@department.map{ |department| [department.name, department.id ]}), include_blank: true %>
+      <% else %>
+        <%= select_tag 'department_id', options_for_select(@department.map{ |department| [department.name, department.id ]}, selected: @user_department.id), include_blank: true %>
+      <% end %>
+      </td>
   </tr>
 
   <tr>
     <td>
       <br>
-      <%= submit_tag "Pesquisar", class: "btn btn-success" %>
+      <%= button_tag(type: 'submit', class: "btn btn-success") do %>
+        <span class="fa fa-search"></span> Pesquisar
+      <% end %>
     </td>
     <td colspan="2">
       <br>
-      <%= link_to "Limpar Filtros", room_index_path, class: "btn btn-primary pull-right" %>
+      <%= link_to room_index_path, class: "btn btn-primary pull-right" do %>
+        <span class="fa fa-eraser"></span> Limpar Filtros
+      <% end %>
     </td>
   </tr>
 
@@ -49,8 +61,8 @@
     <%= radio_button_tag(:room_status_filter, "all", true, :id => "id_all") %>
     <%= label_tag(:id_active, "Ativa") %>
     <%= radio_button_tag(:room_status_filter, "active", false, :id => "id_active") %>
-    <%= label_tag(:id_anactive, "Inativa") %>
-    <%= radio_button_tag(:room_status_filter, "inactive", false, :id => "id_anactive") %>
+    <%= label_tag(:id_inactive, "Inativa") %>
+    <%= radio_button_tag(:room_status_filter, "inactive", false, :id => "id_inactive") %>
   </p>
 
   <% if @rooms.count == 0 %>
@@ -70,6 +82,7 @@
       </tr>
     </thead>
     <tbody class="show_room">
+      <%= will_paginate @rooms %>
       <% @rooms.each do |room| %>
         <tr>
           <td><%= room.code %></td>
@@ -77,9 +90,19 @@
           <td id="active_room"><%=  ((room.active) ? 'Sim' : 'Não')  %></td>
           <td><%= room.building.name %></td>
           <% if permission[:level] != 0 %>
-            <td style="text-align:center"><%= link_to image_tag("icon_edit.png"), room_edit_path(room.id) %></td>
-          <% end %>  
-          <td style="text-align:center"><%= link_to image_tag("icon_view.png"), room_path(room.id) %></td>
+            <td style="text-align:center">
+              <%= link_to room_edit_path(room.id) do %>
+                <i class="fa fa-edit edit-allocation"></i>
+              <% end %>
+            </td>
+          <% end %>
+          <td style="text-align:center">
+
+            <%= link_to room_path(room.id) do %>
+              <i class="fa fa-eye edit-allocation"></i>
+            <% end %>
+
+          </td>
         </tr>
       <% end %>
     </tbody>

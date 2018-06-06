@@ -7,37 +7,25 @@ class RoomsController < ApplicationController
 
   def index
     @rooms = Room.all
+    @rooms = @rooms.paginate(page: params[:page], per_page: 10)
+
     @buildings = Building.all
+    @department = Department.all
+    @user_department = find_user_department
     filter_by_name
     filter_by_code
     filter_by_capacity
     filter_by_buildings
     filter_by_wings
+    filter_by_department
   end
 
-  def filter_by_capacity
-    return unless params[:capacity].present?
-    @rooms = @rooms.where('capacity >= ?', params[:capacity])
-  end
-
-  def filter_by_buildings
-    return unless params[:building_id].present?
-    @rooms = @rooms.where(building_id: params[:building_id])
-  end
-
-  def filter_by_wings
-    return unless params[:wing].present?
-    @rooms = @rooms.joins(:building).where(buildings: { wing: params[:wing] })
-  end
-
-  def filter_by_name
-    return unless params[:name].present?
-    @rooms = @rooms.where('rooms.name LIKE ?', "%#{params[:name]}%")
-  end
-
-  def filter_by_code
-    return unless params[:code].present?
-    @rooms = @rooms.where('rooms.code' => params[:code])
+  def find_user_department
+    if current_user.coordinator.nil?
+      nil
+    else
+      current_user.coordinator.course.department
+    end
   end
 
   def edit
@@ -47,8 +35,8 @@ class RoomsController < ApplicationController
   def update
     @room = Room.find(params[:id])
     if @room.update_attributes(room_params)
-      success_mesage = 'Dados da sala atualizados com sucesso'
-      redirect_to room_index_path(@room.id), flash: { success: success_mesage }
+      success_message = 'Dados da sala atualizados com sucesso'
+      redirect_to room_index_path(@room.id), flash: { success: success_message }
     else
       flash[:error] = 'Dados não foram atualizados'
       render :edit
@@ -77,12 +65,10 @@ class RoomsController < ApplicationController
     result = []
     allocations = Allocation.where(school_room_id: school_room_id)
     allocations.each do |allocation|
-      result.push [
-        allocation.start_time,
-        allocation.final_time,
-        allocation.day,
-        allocation.room.name
-      ]
+      result.push [allocation.start_time,
+                   allocation.final_time,
+                   allocation.day,
+                   allocation.room.name]
     end
     render inline: result.to_json
   end
@@ -110,6 +96,7 @@ class RoomsController < ApplicationController
       :active,
       :time_grid_id,
       :building_id,
+      :department,
       category_ids: []
     )
   end

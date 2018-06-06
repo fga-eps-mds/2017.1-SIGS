@@ -3,53 +3,54 @@
 <%= hidden_field_tag :solicitation_wing, @wing, readonly: true %>
 
 <%= form_for @allocation, url: solicitations_approve_solicitation_path do |allocation| %>
-<%= hidden_field_tag :id, @solicitation.id, readonly: true %>
-<hr>
+  <%= hidden_field_tag :id, @solicitation.id, readonly: true %>
+  <hr>
 
-<h3>Justificativa:</h3>
-<p><%= @solicitation.justify %></p>
+  <h3>Justificativa:</h3>
+  <p><%= @solicitation.justify %></p>
 
-<hr>
+  <hr>
 
-<h2>Solicitações</h2>
+  <h2>Solicitações</h2>
 
-<table class="table">
-  <tr>
-    <th>Hora de inicio</th>
-    <th>Hora de fim</th>
-    <th>Dia</th>
-    <th></th>
-
-  </tr>
-  <% has_rooms = nil %>
-  <% @rooms_solicity.each_with_index do |room_solicitation, index| %>
-    <% has_rooms = room_solicitation.room.nil? %>
+  <table class="table">
     <tr>
-      <td><%= room_solicitation.start.strftime('%H')%>H</td>
-      <td><%= room_solicitation.final.strftime('%H')%>H</td>
-      <td><%= room_solicitation.day %></td>
+      <th>Hora de inicio</th>
+      <th>Hora de fim</th>
+      <th>Dia</th>
+      <th></th>
 
-      <td>
-        <% if has_rooms %>
-
-        <% else %>
-          <%= room_solicitation.room.name %><br>
-          <%= hidden_field_tag :room_id, room_solicitation.room_id, readonly: true%>
-        <% end %>
-      </td>
     </tr>
+    <% has_rooms = nil %>
+    <% @rooms_solicity.each_with_index do |room_solicitation, index| %>
+      <% has_rooms = room_solicitation.room.nil? %>
+      <tr>
+        <td><%= room_solicitation.start.strftime('%H')%>H</td>
+        <td><%= room_solicitation.final.strftime('%H')%>H</td>
+        <td><%= room_solicitation.day %></td>
+
+        <td>
+          <% if has_rooms %>
+
+          <% else %>
+            <%= room_solicitation.room.name %><br>
+            <%= hidden_field_tag :room_id, room_solicitation.room_id, readonly: true%>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <% if has_rooms %>
+    <h2>Salas Disponíveis</h2>
+    <div id="rooms-list"></div>
   <% end %>
-</table>
-<% if has_rooms %>
-  <h2>Salas Disponíveis</h2>
-  <div id="rooms-list"></div>
-<% end %>
 
-<div>
-
-<button type="button" class="btn pull-right btn btn-default btn-danger" data-toggle="modal" data-target="#myModal" style="margin-left:1%;">Recusar</button>
-<%= allocation.submit "Aprovar", class: 'pull-right btn btn-default btn-success' %>
-</div>
+  <% unless current_user == @solicitation.requester %>
+    <div>
+      <button type="button" class="btn pull-right btn btn-default btn-danger" data-toggle="modal" data-target="#myModal" style="margin-left:1%;">Recusar</button>
+      <%= allocation.submit "Aprovar", class: 'pull-right btn btn-default btn-success' %>
+    </div>
+  <% end %>
 <% end %>
 
 <!-- Modal -->

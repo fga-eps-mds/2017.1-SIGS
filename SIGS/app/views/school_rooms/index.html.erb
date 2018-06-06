@@ -23,6 +23,8 @@
 <% if @my_school_rooms.count == 0 %>
   <h3>Não há turmas cadastradas no momento.</h3>
 <% else %>
+<%= will_paginate @my_school_rooms %>
+
   <table class="table table-hover">
     <tr>
       <th>Disciplina</th>
@@ -30,13 +32,13 @@
       <th>Cursos</th>
       <th>Nº de Vagas</th>
       <% if permission[:level] == 1 %>
-        <th style="text-align:center">Alocar</th>
-        <th style="text-align:center">Solicitar Alocação</th>
-        <th style="text-align:center">Desalocar</th>
+        <th style="text-align:center">Alocar / desalocar</th>
+        <th style="text-align:center">Solicitar alocação</th>
         <th style="text-align:center">Alterar</th>
         <th style="text-align:center">Excluir</th>
-      <% end %> 
+      <% end %>
     </tr>
+
     <% @my_school_rooms.each do |school_room| %>
       <tr>
         <td><%= school_room.discipline.name %></td>
@@ -46,16 +48,45 @@
             <%= course.name %> <br>
           <% end %>
         <td><%= school_room.vacancies %></td>
-        <% if permission[:level] == 1 %>  
+        <% if permission[:level] == 1 %>
           </td>
-            <td style="text-align:center"><%= link_to image_tag("icon_alloc.png"), allocations_new_path(school_room.id) %></td>
-            <td style="text-align:center"><%= link_to image_tag("icon_request_alloc.png"), allocation_period_path(school_room.id) %></td>
-            <td style="text-align:center"><%= link_to image_tag("icon_alloc_red.png"), allocations_destroy_path(school_room.id) %></td>
-            <td style="text-align:center"><%= link_to image_tag("icon_edit.png"), school_rooms_edit_path(school_room.id) %></td>
-            <td style="text-align:center"><%= link_to image_tag("icon_trash.png"), destroy_school_room_path(school_room.id), data: {confirm: "Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?"} %></td>
+            <td style="text-align:center">
+              <% if !allocated? school_room.id %>
+                <%= link_to allocations_new_path(school_room.id) do %>
+                <i class="fa fa-plus allocate-plus"></i>
+                <% end %>
+              <% else %>
+                <%= link_to allocations_destroy_path(school_room.id) do %>
+                  <i class="fa fa-minus allocate-minus"></i>
+                  <% end %>
+              <% end %>
+            </td>
+            <td style="text-align:center">
+              <% if !allocated? school_room.id %>
+                <%= link_to allocation_period_path(school_room.id) do %>
+                  <i class="fa fa-handshake solicitation"></i>
+                <% end %>
+              <% else %>
+                <i class="fa fa-handshake already-allocate-plus"></i>
+              <% end %>
+            </td>
+
+            <td style="text-align:center">
+              <%= link_to school_rooms_edit_path(school_room.id) do %>
+                <i class="fa fa-edit edit-allocation"></i>
+              <% end %>
+
+            </td>
+            <td style="text-align:center">
+              <%= link_to destroy_school_room_path(school_room.id),
+                          data: {confirm: "Esta ação não poderá mais ser desfeita. Tem certeza que deseja continuar?"} do %>
+                <i class="fa fa-trash-alt edit-allocation"></i>
+              <% end %>
+            </td>
           </td>
         <% end %>
       </tr>
     <% end %>
   </table>
+
 <% end %>

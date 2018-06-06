@@ -17,7 +17,7 @@ class SolicitationsController < ApplicationController
     redirect_to adjustment_period_path(school_room_id) unless allocation_period?
 
     @school_room = SchoolRoom.find(params[:school_room_id])
-    @departments = Department.all
+    @departments = Department.where.not(id: current_user_department)
   end
 
   def adjustment_period
@@ -50,10 +50,10 @@ class SolicitationsController < ApplicationController
   end
 
   def index
-    department = return_department_owner
+    department = current_user_department
     @department_rooms = Room.where(department: department)
     room_solicitations = RoomSolicitation.where(department: department)
-                                         .group(:solicitation_id)
+
     @solicitations = []
     room_solicitations.each do |room_solicitation|
       solicitation_validade = Solicitation.find_by(id:
@@ -64,6 +64,9 @@ class SolicitationsController < ApplicationController
       next if solicitation_validade.nil?
       @solicitations << solicitation_validade
     end
+    # Solicitation.all apenas para fins de uso local, devido a regra de negocio
+    # onde apenas o dono do departamento pode acessar as solicitacoes
+    # @solicitations = Solicitation.all
   end
 
   def show
@@ -233,9 +236,9 @@ class SolicitationsController < ApplicationController
 
   def render_params
     @allocation = Allocation.new
-    @rooms = Room.where(department_id: return_department_owner)
+    @rooms = Room.where(department_id: current_user_department)
     @solicitation = Solicitation.find(params[:id])
-    @department = return_department_owner
+    @department = current_user_department
     return_wing(@solicitation.school_room)
     room = params[:room].nil? || params[:room].empty?
     @rooms_solicity = RoomSolicitation.where(solicitation_id:

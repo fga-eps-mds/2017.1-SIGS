@@ -4,6 +4,7 @@
 
 /*dashboard*/
 .info-box {
+    color: #090909;
     display: block;
     min-height: 90px;
     background: #ECF0F5;
@@ -11,6 +12,12 @@
     box-shadow: 0 1px 1px rgba(0,0,0,0.1);
     border-radius: 2px;
     margin-bottom: 15px;
+}
+
+.info-box:hover {
+    color: #428bca;
+    background: #D4D8DC;
+    text-decoration: none;
 }
 
 .bg-aqua {
@@ -45,6 +52,9 @@
 .info-box-content {
     padding: 5px 10px;
     margin-left: 90px;
+}
+.info-box-icon-padding {
+  padding-right: 0px;
 }
 
 .info-box-text {

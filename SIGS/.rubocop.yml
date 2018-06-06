@@ -46,3 +46,4 @@ Metrics/BlockLength:
 Metrics/ModuleLength:
   Exclude:
     - 'spec/**/*.rb'
+

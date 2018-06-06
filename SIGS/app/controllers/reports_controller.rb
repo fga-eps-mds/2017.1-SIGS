@@ -18,6 +18,7 @@ class ReportsController < ApplicationController
                    Building.search(params[:search])
                  else
                    Building.all
+                   Building.order('name')
                  end
   end
 

@@ -35,4 +35,6 @@ class Room < ApplicationRecord
   validates_numericality_of :capacity,
                             less_than_or_equal_to: 500,
                             message: MAXIMUM_FOR_THE_CAPACITY_EXCEPTION
+
+  self.per_page = 10
 end
